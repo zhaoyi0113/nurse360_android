@@ -13,6 +13,7 @@ import {
 import {HomeContainer} from '../features/home';
 import {PatientContainer} from '../features/patients';
 import {UserContainer} from '../features/user';
+import {LoginContainer} from '../features/login';
 
 export default class App extends Component {
 
@@ -43,11 +44,9 @@ export default class App extends Component {
   }
 
   render() {
-    const routes = [
-      {title: 'First Scene', index: 0},
-      {title: 'Second Scene', index: 1},
-      {title: 'Third Scene', index: 2},
-    ];
+    if (!this.props.token) {
+      return <LoginContainer/>
+    }
     return (
       <View style={styles.container}>
         <View style={styles.center_view}>
@@ -71,6 +70,10 @@ export default class App extends Component {
     )
   }
 }
+
+App.propTypes = {}
+
+App.defaultProps = {}
 
 const styles = StyleSheet.create({
   container: {

@@ -6,7 +6,7 @@ import {
   View
 } from 'react-native';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
-import { Provider } from 'react-redux';
+import { Provider, connect } from 'react-redux';
 import thunk from 'redux-thunk';
 import App from '../components';
 import * as reducers from '../reducers';
@@ -19,8 +19,9 @@ export default class AppContainer extends Component {
   render() {
     return (
       <Provider store={store}>
-        <App />
+        <App token={store.token}/>
       </Provider>
     );
   }
 }
+
