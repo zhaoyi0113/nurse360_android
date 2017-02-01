@@ -5,15 +5,28 @@ import {
   Text,
   View
 } from 'react-native';
-import { createStore, applyMiddleware, combineReducers } from 'redux';
-import { Provider, connect } from 'react-redux';
+import {createStore, applyMiddleware, combineReducers, compose} from 'redux';
+import {Provider, connect} from 'react-redux';
 import thunk from 'redux-thunk';
 import App from '../components';
 import * as reducers from '../reducers';
+import createLogger from 'redux-logger';
+import axios from 'axios';
+import axiosMiddleware from 'redux-axios-middleware';
 
-const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
+const client = axios.create({ //all axios can be used, shown in axios documentation
+  baseURL: 'https://www.nurse-go.cn:9100/nurse360',
+  responseType: 'json'
+});
+
+const middlewares = [];
+middlewares.push(thunk);
+middlewares.push(axiosMiddleware(client));
+middlewares.push(createLogger());
 const reducer = combineReducers(reducers);
-const store = createStoreWithMiddleware(reducer);
+const store = compose(
+  applyMiddleware(...middlewares),
+)(createStore)(reducer)
 
 export default class AppContainer extends Component {
   render() {

@@ -3,6 +3,11 @@ import {View, Text, StyleSheet, Image, TextInput, Button} from 'react-native';
 
 export default class Login extends React.Component {
 
+  constructor(props){
+    super(props);
+    this.state={};
+  }
+
   render() {
     return (<View style={styles.container}>
       <View style={styles.login_view}>
@@ -17,7 +22,8 @@ export default class Login extends React.Component {
                    onChangeText={(text)=>this.setState({password: text})}/>
       </View>
       <View style={styles.login_button}>
-        <Button title="登录" onPress={()=>this.props.login(this.state.mobile, this.state.password)}/>
+        <Button title="登录" onPress={()=>this.props.login(this.state.mobile, this.state.password)}
+                disabled={!this.state.mobile || !this.state.password}/>
       </View>
       <View style={styles.text_view}>
         <Text>没有账号？去注册</Text>
