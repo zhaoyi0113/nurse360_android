@@ -130,7 +130,9 @@ android {
         abortOnError false
     }
 }
-
+repositories {
+    maven { url 'https://github.com/500px/500px-android-blur/raw/master/releases/' }
+}
 dependencies {
     compile fileTree(dir: "libs", include: ["*.jar"])
     compile "com.android.support:appcompat-v7:23.0.1"
@@ -138,6 +140,7 @@ dependencies {
     debugCompile 'com.facebook.stetho:stetho:1.4.2'
     debugCompile 'com.facebook.stetho:stetho-urlconnection:1.4.2'
     debugCompile 'com.facebook.stetho:stetho-okhttp3:1.4.2'
+    compile 'com.fivehundredpx:blurringview:1.0.0'
 
 }
 

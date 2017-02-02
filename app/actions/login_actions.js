@@ -3,8 +3,6 @@ import sha1 from 'sha1';
 import queryString from 'query-string';
 
 export const login = (mobile, password) => {
-  console.log('login ', mobile, sha1(password));
-
 
   return {
     type: types.LOGIN_HTTP,
@@ -12,11 +10,13 @@ export const login = (mobile, password) => {
       request: {
         method: 'post',
         url: '/nurse/login',
+        responseType: 'text',
         data: queryString.stringify({mobile: mobile, password: sha1(password)}),
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
         }
       }
     }
-  };
+  }
+
 }
