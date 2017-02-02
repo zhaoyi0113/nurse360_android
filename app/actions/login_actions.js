@@ -7,7 +7,7 @@ export const login = (mobile, password) => {
 
 
   return {
-    type: types.LOGIN,
+    type: types.LOGIN_HTTP,
     payload: {
       request: {
         method: 'post',

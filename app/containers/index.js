@@ -1,40 +1,26 @@
 import React, {Component} from 'react';
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
-import {createStore, applyMiddleware, combineReducers, compose} from 'redux';
-import {Provider, connect} from 'react-redux';
-import thunk from 'redux-thunk';
-import App from '../components';
-import * as reducers from '../reducers';
-import createLogger from 'redux-logger';
-import axios from 'axios';
-import axiosMiddleware from 'redux-axios-middleware';
+import {connect} from 'react-redux';
 
-const client = axios.create({ //all axios can be used, shown in axios documentation
-  baseURL: 'https://www.nurse-go.cn:9100/nurse360',
-  responseType: 'json'
-});
+import App from '../components'
 
-const middlewares = [];
-middlewares.push(thunk);
-middlewares.push(axiosMiddleware(client));
-middlewares.push(createLogger());
-const reducer = combineReducers(reducers);
-const store = compose(
-  applyMiddleware(...middlewares),
-)(createStore)(reducer)
-
-export default class AppContainer extends Component {
+class MainContainer extends Component {
   render() {
     return (
-      <Provider store={store}>
-        <App token={store.token}/>
-      </Provider>
+        <App token={this.props.token}/>
     );
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    token: state.token,
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainContainer);

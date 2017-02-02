@@ -4,6 +4,6 @@
  * @flow
  */
 import { AppRegistry } from 'react-native';
-import App from './app/containers';
+import App from './app';
 
 AppRegistry.registerComponent('nurse360_android', () => App);
