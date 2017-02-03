@@ -50,14 +50,14 @@ const styles = StyleSheet.create({
   head_image: {flex: 3, resizeMode: 'contain', marginVertical: 10},
   login_image: {flex: 1, resizeMode: 'contain', marginVertical: 10},
   input_view: {
-    flex: 1,
+    flex: 1.5,
     marginHorizontal: 10,
     marginVertical: 10,
     backgroundColor: '#f6f6f6',
     // alignItems: 'center',
   },
   input_text: {
-    height: 40,
+    height: 50,
     flex: 1,
   },
   login_button: {

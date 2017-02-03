@@ -9,9 +9,9 @@ export const LoginReducer = (state = {}, action) => {
       return {...state, error: action.error.data};
     case types.LOGIN_HTTP + types.SUCCESS:
       if ('error' in state) {
-        state = _.omit(state, error);
+        state = _.omit(state, 'error');
       }
-      return {...state, token: true};
+      return {...state, token: action.payload.data};
     default:
       return state;
   }
