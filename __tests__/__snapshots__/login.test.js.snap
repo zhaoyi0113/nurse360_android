@@ -1,0 +1,166 @@
+exports[`test renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "white",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#f6f6f6",
+        "flex": 2,
+        "marginHorizontal": 10,
+        "marginVertical": 10,
+      }
+    }>
+    <View
+      style={
+        Object {
+          "flex": 2,
+        }
+      } />
+    <Image
+      source={1}
+      style={
+        Object {
+          "flex": 3,
+          "marginVertical": 10,
+          "resizeMode": "contain",
+        }
+      } />
+    <Image
+      source={1}
+      style={
+        Object {
+          "flex": 1,
+          "marginVertical": 10,
+          "resizeMode": "contain",
+        }
+      } />
+    <View
+      style={
+        Object {
+          "flex": 2,
+        }
+      } />
+  </View>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#f6f6f6",
+        "flex": 1.5,
+        "marginHorizontal": 10,
+        "marginVertical": 10,
+      }
+    }>
+    <TextInput
+      onChangeText={[Function]}
+      placeholder="手机号"
+      style={
+        Object {
+          "flex": 1,
+          "height": 50,
+        }
+      } />
+    <TextInput
+      onChangeText={[Function]}
+      placeholder="密码"
+      secureTextEntry={true}
+      style={
+        Object {
+          "flex": 1,
+          "height": 50,
+        }
+      } />
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "marginHorizontal": 10,
+      }
+    }>
+    <View
+      accessibilityComponentType="button"
+      accessibilityLabel={undefined}
+      accessibilityTraits={
+        Array [
+          "button",
+        ]
+      }
+      accessible={true}
+      hitSlop={undefined}
+      onLayout={undefined}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+      testID={undefined}>
+      <View
+        style={
+          Array [
+            Object {},
+            Object {},
+          ]
+        }>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Array [
+              Object {
+                "color": "#0C42FD",
+                "fontSize": 18,
+                "padding": 8,
+                "textAlign": "center",
+              },
+              Object {
+                "color": "#cdcdcd",
+              },
+            ]
+          }>
+          登录
+        </Text>
+      </View>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+      }
+    }>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail">
+      没有账号？去注册
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail">
+      忘记密码
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 4,
+      }
+    } />
+</View>
+`;
