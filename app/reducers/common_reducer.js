@@ -3,7 +3,7 @@ import * as types from '../actions/action_types';
 
 export const CommonReducer = (state = {}, action) => {
   if (action.type.includes(types.FAIL)) {
-    state = {...state, alert: {title: '', message: errorMessage[action.type]}}
+    state = {...state, alert: {title: '', message: errorMessage[action.type] || '网络错误'}}
   }
 
   switch (action.type) {

@@ -1,9 +1,7 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {View, Text} from 'react-native';
-
-import * as actions from '../../../actions/user_actions';
-import User from '../components/user';
+import React, {Component} from "react";
+import {connect} from "react-redux";
+import * as actions from "../../../actions/user_actions";
+import User from "../components/user";
 
 class UserContainer extends Component {
 

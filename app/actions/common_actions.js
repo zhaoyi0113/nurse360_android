@@ -17,7 +17,7 @@ export const requestPost = (type, url, data, token, options) => {
     'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
   };
   if (token) {
-    headers.token = token;
+    headers.ACCESS_TOKEN = token;
   }
   let responseType = 'json';
   if(options && options.responseType){
