@@ -10,16 +10,29 @@ class UserContainer extends Component {
   }
 
   render() {
-    return (<User userInfo={this.props.userInfo} userOrder={this.props.userOrder}/>)
+    let userOrder = this.props.userOrders.length > 0 ? this.props.userOrders[0] : {};
+    let userCourse = this.props.userCourses.length > 0 ? this.props.userCourses[0] : {};
+    return (<User userInfo={this.props.userInfo} userOrder={userOrder} userCourse={userCourse}/>)
   }
 
+}
+
+UserContainer.propTypes = {
+  userOrders: React.PropTypes.array,
+  userCourses: React.PropTypes.array,
+}
+
+UserContainer.defaultProps = {
+  userOrders: [],
+  userCourses: [],
 }
 
 const mapStateToProps = (state) => {
   return {
     token: state.login.token,
     userInfo: state.user.userInfo,
-    userOrder: state.user.userOrder,
+    userOrders: state.user.userOrders,
+    userCourses: state.user.userCourses,
   }
 }
 
@@ -28,6 +41,7 @@ const mapDispatchToProps = (dispatch) => {
     getUserInfo: (token) => {
       dispatch(actions.getUserInfo(token));
       dispatch(actions.getUserOrder(token, 0, 1));
+      dispatch(actions.getUserHistoryCourse(token, 0, 1));
     },
 
   }

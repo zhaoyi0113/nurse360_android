@@ -14,3 +14,4 @@ export const LOGOUT_HTTP = 'LOGOUT_HTTP';
 //user
 export const USER_INFO_HTTP = 'USER_INFO_HTTP';
 export const USER_ORDER_HTTP = 'USER_ORDER_HTTP';
+export const USER_COURSE_HTTP = 'USER_COURSE_HTTP';

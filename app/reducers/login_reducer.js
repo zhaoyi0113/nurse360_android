@@ -1,5 +1,4 @@
-import _ from 'lodash';
-import * as types from '../actions/action_types';
+import * as types from "../actions/action_types";
 
 export const LoginReducer = (state = {}, action) => {
   switch (action.type) {

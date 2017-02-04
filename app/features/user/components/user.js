@@ -3,18 +3,19 @@ import {View, StyleSheet, Text, Image, ScrollView, TouchableHighlight} from 'rea
 import {FontSize} from '../../../constants';
 
 import Order from '../../order/components/order';
+import CourseCell from '../../course/components/course_cell';
 
 export default class User extends React.Component {
 
   render() {
-    let {userInfo, userOrder} = this.props;
+    let {userInfo, userOrder, userCourse} = this.props;
 
     return (
       <ScrollView style={styles.container}>
         <UserHeader userInfo={userInfo}/>
         <Function userInfo={userInfo}/>
         <Tasks userInfo={userInfo} userOrder={userOrder}/>
-        <LearnHistory userInfo={userInfo}/>
+        <LearnHistory userInfo={userInfo} userCourse={userCourse}/>
       </ScrollView>
     );
   }
@@ -115,6 +116,7 @@ class LearnHistory extends React.Component {
           <Text style={taskStyles.reminder}>学习历史</Text>
           <TouchableHighlight><Text style={taskStyles.more}>更多</Text></TouchableHighlight>
         </View>
+        <CourseCell course={this.props.userCourse}/>
       </View>
     )
   }

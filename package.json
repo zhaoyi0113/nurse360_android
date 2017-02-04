@@ -6,7 +6,8 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
     "debug": "open \"rndebugger://set-debugger-loc?host=localhost&port=8081\"",
-    "postinstall": "rndebugger-open"
+    "postinstall": "rndebugger-open",
+    "sign-apk": "keytool -genkey -v -keystore android/key/key.keystore -alias nurse360_android -keyalg RSA -keysize 2048 -validity 10000"
   },
   "dependencies": {
     "axios": "^0.15.3",

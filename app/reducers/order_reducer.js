@@ -24,11 +24,11 @@ export const getOrderAction = (status) => {
 }
 
 export const parseUserOrders = (data) => {
-  let order = {};
-  if (data && data.length > 0) {
-    order = parseUserOrder(data[0]);
-  }
-  return order;
+  let orders = [];
+  data.forEach((o)=>{
+    orders.push(parseUserOrder(o));
+  })
+  return orders;
 }
 
 export const parseUserOrder = (data) => {
