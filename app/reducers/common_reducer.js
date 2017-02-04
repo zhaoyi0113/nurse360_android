@@ -1,6 +1,5 @@
 import _ from 'lodash';
 import * as types from '../actions/action_types';
-import {LOAD, SAVE} from 'redux-storage';
 
 export const CommonReducer = (state = {}, action) => {
   if (action.type.includes(types.FAIL)) {
@@ -10,15 +9,18 @@ export const CommonReducer = (state = {}, action) => {
   switch (action.type) {
     case types.WAITING_INDICATOR:
       return {...state, waitingIndicator: action.waitingIndicator};
-    case types.LOGIN_HTTP + types.FAIL:
-      return {...state, waitingIndicator: false}
-    case types.LOGIN_HTTP + types.SUCCESS:
-      return {...state, waitingIndicator: false}
     case types.CLEAR_ALERT:
       state = _.omit(state, 'alert');
       return state;
     default:
-      return state;
+      let extra = {};
+      if (action.type.includes('HTTP') && (action.type.includes(types.FAIL) || action.type.includes(types.SUCCESS))) {
+        extra.waitingIndicator = false;
+      }
+      if (action.type.includes('HTTP') && !action.type.includes(types.FAIL) && !action.type.includes(types.SUCCESS)) {
+        extra.waitingIndicator = true;
+      }
+      return {...state, ...extra};
   }
 }
 

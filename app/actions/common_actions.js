@@ -38,14 +38,18 @@ export const requestPost = (type, url, data, token, options) => {
 }
 
 export const requestGet = (type, url, token) => {
-
+  let headers = {};
+  if(token){
+    headers.ACCESS_TOKEN = token;
+  }
   return {
-    type: ACCESS_TOKEN,
-    payoad: {
+    type: type,
+    payload: {
       request:{
         method: 'get',
         url: url,
-        responseType: 'json'
+        responseType: 'json',
+        headers: headers
       }
     }
   }

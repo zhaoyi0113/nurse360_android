@@ -1,9 +1,8 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {View, Text} from 'react-native';
-import Login from '../components/login';
-import * as actions from '../../../actions/login_actions';
-import * as commonActions from '../../../actions/common_actions';
+import React, {Component} from "react";
+import {connect} from "react-redux";
+import {View, Text} from "react-native";
+import Login from "../components/login";
+import * as actions from "../../../actions/login_actions";
 
 class LoginContainer extends Component {
 
@@ -20,7 +19,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     login: (mobile, password) => {
-      dispatch(commonActions.requestWaitingIndicator(true));
       dispatch(actions.login(mobile, password));
     }
   }

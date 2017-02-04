@@ -3,17 +3,16 @@ import {connect} from 'react-redux';
 import {View, Text} from 'react-native';
 
 import * as actions from '../../../actions/user_actions';
+import User from '../components/user';
 
 class UserContainer extends Component {
 
-  componentDidMount(){
-
+  componentDidMount() {
+    this.props.getUserInfo(this.props.token);
   }
 
   render() {
-    return (<View>
-      <Text>User Home</Text>
-    </View>)
+    return (<User userInfo={this.props.userInfo}/>)
   }
 
 }
@@ -21,11 +20,16 @@ class UserContainer extends Component {
 const mapStateToProps = (state) => {
   return {
     token: state.login.token,
+    userInfo: state.user.userInfo,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {}
+  return {
+    getUserInfo: (token) => {
+      dispatch(actions.getUserInfo(token));
+    }
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserContainer)
