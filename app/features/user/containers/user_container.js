@@ -2,7 +2,13 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {View, Text} from 'react-native';
 
+import * as actions from '../../../actions/user_actions';
+
 class UserContainer extends Component {
+
+  componentDidMount(){
+
+  }
 
   render() {
     return (<View>
@@ -13,7 +19,9 @@ class UserContainer extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return {}
+  return {
+    token: state.login.token,
+  }
 }
 
 const mapDispatchToProps = (dispatch) => {

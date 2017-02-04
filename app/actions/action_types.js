@@ -10,3 +10,5 @@ export const CLEAR_ALERT = 'CLEAR_ALERT';
 export const LOGIN_HTTP = 'LOGIN_HTTP';
 
 
+//user
+export const USER_INFO_HTTP = 'USER_INFO_HTTP';
