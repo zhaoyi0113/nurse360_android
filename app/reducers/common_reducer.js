@@ -1,5 +1,10 @@
 import _ from 'lodash';
 import * as types from '../actions/action_types';
+import moment from 'moment';
+
+export const DEFAULT_DATE_TIME_FORMAT = 'YYYY-MM-DD HH:mm:ss'
+export const DEFAULT_DATE_FORMAT = 'YYYY-MM-DD'
+
 
 export const CommonReducer = (state = {}, action) => {
   if (action.type.includes(types.FAIL)) {
@@ -28,3 +33,16 @@ export const CommonReducer = (state = {}, action) => {
 export const errorMessage = {}
 
 errorMessage[types.LOGIN_HTTP + types.FAIL] = '登录失败';
+
+export const getTime = (time) => {
+  if (time) {
+    return moment(time).format(DEFAULT_DATE_TIME_FORMAT);
+  }
+}
+
+export const getDate = (date) => {
+  if (date) {
+    return moment(date).format(DEFAULT_DATE_FORMAT)
+  }
+}
+

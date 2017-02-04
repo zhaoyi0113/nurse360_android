@@ -1,22 +1,21 @@
 import React from 'react';
-import {View, StyleSheet, Text, Image} from 'react-native';
+import {View, StyleSheet, Text, Image, ScrollView, TouchableHighlight} from 'react-native';
 import {FontSize} from '../../../constants';
+
+import Order from '../../order/components/order';
 
 export default class User extends React.Component {
 
   render() {
-    let {userInfo} = this.props;
+    let {userInfo, userOrder} = this.props;
+
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <UserHeader userInfo={userInfo}/>
         <Function userInfo={userInfo}/>
-        <View style={styles.task_reminder}>
-          <Text>task</Text>
-        </View>
-        <View style={styles.learn_history}>
-          <Text>history</Text>
-        </View>
-      </View>
+        <Tasks userInfo={userInfo} userOrder={userOrder}/>
+        <LearnHistory userInfo={userInfo}/>
+      </ScrollView>
     );
   }
 
@@ -25,6 +24,7 @@ export default class User extends React.Component {
 User.propTypes = {
   userInfo: React.PropTypes.object.isRequired,
 }
+
 User.defaultProps = {
   userInfo: {},
 }
@@ -89,10 +89,42 @@ class Function extends React.Component {
   }
 }
 
+class Tasks extends React.Component {
+
+  render() {
+    const {userOrder} = this.props;
+    return (
+      <View style={taskStyles.container}>
+        <View style={taskStyles.header}>
+          <Text style={taskStyles.reminder}>任务提醒</Text>
+          <TouchableHighlight><Text style={taskStyles.more}>更多</Text></TouchableHighlight>
+        </View>
+        <View style={taskStyles.task}>
+          <Order order={userOrder}/>
+        </View>
+      </View>
+    )
+  }
+}
+
+class LearnHistory extends React.Component {
+  render() {
+    return (
+      <View style={historyStyles.container}>
+        <View style={taskStyles.header}>
+          <Text style={taskStyles.reminder}>学习历史</Text>
+          <TouchableHighlight><Text style={taskStyles.more}>更多</Text></TouchableHighlight>
+        </View>
+      </View>
+    )
+  }
+}
+
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'column',
     flex: 1,
+    backgroundColor: '#f6f6f6',
   },
 
   function: {
@@ -108,7 +140,7 @@ const styles = StyleSheet.create({
 
 const headerStyles = StyleSheet.create({
   container: {
-    flex: 1,
+    height: 110,
     flexDirection: 'row',
     backgroundColor: '#559bec',
   },
@@ -163,17 +195,53 @@ const headerStyles = StyleSheet.create({
 
 const functionStyles = StyleSheet.create({
   container: {
-    flex: 1,
+    height: 110,
     flexDirection: 'row',
     alignItems: 'center',
+    backgroundColor: 'white',
   },
   view: {
     flex: 1,
     alignItems: 'center',
   },
   image: {
-    width: 80,
-    height: 80,
+    width: 70,
+    height: 70,
     resizeMode: 'contain',
+  }
+});
+
+const taskStyles = StyleSheet.create({
+  container: {
+    height: 210,
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    margin: 10,
+  },
+  reminder: {
+    color: '#9a9a9a',
+    marginLeft: 10,
+    flex: 1,
+  },
+  more: {
+    marginRight: 10,
+    textAlign: 'right',
+    flex: 1,
+    color: '#559bec'
+  },
+  task: {
+    backgroundColor: 'white',
+    height: 210,
+  }
+});
+
+const historyStyles = StyleSheet.create({
+  container: {
+    height: 80,
+  },
+  history: {
+    backgroundColor: 'white',
   }
 });

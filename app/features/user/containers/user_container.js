@@ -10,7 +10,7 @@ class UserContainer extends Component {
   }
 
   render() {
-    return (<User userInfo={this.props.userInfo}/>)
+    return (<User userInfo={this.props.userInfo} userOrder={this.props.userOrder}/>)
   }
 
 }
@@ -19,6 +19,7 @@ const mapStateToProps = (state) => {
   return {
     token: state.login.token,
     userInfo: state.user.userInfo,
+    userOrder: state.user.userOrder,
   }
 }
 
@@ -26,7 +27,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getUserInfo: (token) => {
       dispatch(actions.getUserInfo(token));
-    }
+      dispatch(actions.getUserOrder(token, 0, 1));
+    },
+
   }
 }
 
