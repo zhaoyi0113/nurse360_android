@@ -9,9 +9,7 @@ export default class User extends React.Component {
     return (
       <View style={styles.container}>
         <UserHeader userInfo={userInfo}/>
-        <View style={styles.function}>
-          <Text>function</Text>
-        </View>
+        <Function userInfo={userInfo}/>
         <View style={styles.task_reminder}>
           <Text>task</Text>
         </View>
@@ -56,14 +54,47 @@ class UserHeader extends React.Component {
   }
 }
 
+class Function extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      functions: [{
+        image: require('../../../images/user/woderenwu.png'),
+        text: '我的任务',
+      }, {
+        image: require('../../../images/user/wodexuexi.png'),
+        text: '我的学习',
+      }, {
+        image: require('../../../images/user/wodetiwen.png'),
+        text: '患者提问',
+      }
+      ]
+    }
+  }
+
+  render() {
+    return (
+      <View style={functionStyles.container}>
+        {
+          this.state.functions.map((f, i) => {
+            return <View key={i} style={functionStyles.view}>
+              <Image style={functionStyles.image} source={f.image}/>
+              <Text>{f.text}</Text>
+            </View>
+          })
+        }
+      </View>
+    )
+  }
+}
+
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'column',
     flex: 1,
   },
-  header: {
-    flex: 1,
-  },
+
   function: {
     flex: 1,
   },
@@ -115,7 +146,7 @@ const headerStyles = StyleSheet.create({
     right: 5,
     alignSelf: 'center',
   },
-  setting:{
+  setting: {
     height: 20,
     width: 20,
     alignSelf: 'center',
@@ -128,4 +159,21 @@ const headerStyles = StyleSheet.create({
     marginBottom: 30,
   },
 
+});
+
+const functionStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  view: {
+    flex: 1,
+    alignItems: 'center',
+  },
+  image: {
+    width: 80,
+    height: 80,
+    resizeMode: 'contain',
+  }
 });
