@@ -60,7 +60,7 @@ export default class App extends Component {
                 image = tabbar.selected_image;
               }
               return <TouchableHighlight key={index} onPress={()=> this.setState({selected: index})}
-                                         underlayColor="gray">
+                                         underlayColor="lightgray">
                 <Image style={styles.tab_image} source={image}/>
               </TouchableHighlight>
             })

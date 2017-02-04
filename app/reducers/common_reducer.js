@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import * as types from '../actions/action_types';
+import {LOAD, SAVE} from 'redux-storage';
 
 export const CommonReducer = (state = {}, action) => {
   if (action.type.includes(types.FAIL)) {
@@ -8,7 +9,7 @@ export const CommonReducer = (state = {}, action) => {
 
   switch (action.type) {
     case types.WAITING_INDICATOR:
-      return {...state, ...action};
+      return {...state, waitingIndicator: action.waitingIndicator};
     case types.LOGIN_HTTP + types.FAIL:
       return {...state, waitingIndicator: false}
     case types.LOGIN_HTTP + types.SUCCESS:
@@ -22,7 +23,6 @@ export const CommonReducer = (state = {}, action) => {
 }
 
 
-export const errorMessage = {
+export const errorMessage = {}
 
-}
-errorMessage[types.LOGIN_HTTP+types.FAIL] = '登录失败';
+errorMessage[types.LOGIN_HTTP + types.FAIL] = '登录失败';
