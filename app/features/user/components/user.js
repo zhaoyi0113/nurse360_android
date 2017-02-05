@@ -48,7 +48,7 @@ class UserHeader extends React.Component {
         </View>
         <View style={headerStyles.right_area}>
           <Image style={headerStyles.setting} source={require('../../../images/editSetting.png')}/>
-          <Image style={headerStyles.next_image} source={require('../../../images/next_blue.png')}/>
+          <Image style={headerStyles.next_image} source={require('../../../images/next.png')}/>
         </View>
       </View>
     )
@@ -187,8 +187,8 @@ const headerStyles = StyleSheet.create({
     marginBottom: 20,
   },
   next_image: {
-    height: 10,
-    width: 10,
+    height: 20,
+    width: 30,
     alignSelf: 'center',
     marginBottom: 30,
   },
@@ -215,7 +215,7 @@ const functionStyles = StyleSheet.create({
 
 const taskStyles = StyleSheet.create({
   container: {
-    height: 210,
+    height: 200,
   },
   header: {
     flexDirection: 'row',
@@ -243,7 +243,4 @@ const historyStyles = StyleSheet.create({
   container: {
     height: 80,
   },
-  history: {
-    backgroundColor: 'white',
-  }
 });

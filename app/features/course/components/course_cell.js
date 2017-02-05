@@ -11,11 +11,11 @@ export default class CourseCell extends React.Component {
         <Text style={styles.title_text}>
           {course.name.split('')[0]}
         </Text>
-        <View>
+        <View style={{flex:1}}>
           <Text>{course.name}</Text>
-          <Text>{course.introduction}</Text>
+          <Text style={{fontSize: FontSize.small}}>{course.introduction}</Text>
         </View>
-        <Image source={require('../../../images/next.png')}/>
+        <Image style={{width: 30, height: 20, marginRight: 10}} source={require('../../../images/next.png')}/>
       </View>
     );
   }
