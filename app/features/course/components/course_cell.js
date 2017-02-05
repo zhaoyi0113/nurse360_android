@@ -9,7 +9,7 @@ export default class CourseCell extends React.Component {
     return (
       <View style={styles.container}>
         <Text style={styles.title_text}>
-          {course.name.split('')[0]}
+          {course.name && course.name.split('')[0]}
         </Text>
         <View style={{flex:1}}>
           <Text>{course.name}</Text>

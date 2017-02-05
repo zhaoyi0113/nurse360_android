@@ -1,21 +1,29 @@
 import React from 'react';
-import {View, StyleSheet, Text, Image, ScrollView, TouchableHighlight} from 'react-native';
+import {View, StyleSheet, Text, Image, ScrollView, TouchableHighlight, Navigator} from 'react-native';
 import {FontSize} from '../../../constants';
 
 import Order from '../../order/components/order';
 import CourseCell from '../../course/components/course_cell';
+import * as routers from '../../../routers';
 
 export default class User extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {routeIndex: 0};
+  }
+
   render() {
     let {userInfo, userOrder, userCourse} = this.props;
-
     return (
       <ScrollView style={styles.container}>
-        <UserHeader userInfo={userInfo}/>
+        <UserHeader userInfo={userInfo}
+                    navigator={this.props.navigator}
+        />
         <Function userInfo={userInfo}/>
         <Tasks userInfo={userInfo} userOrder={userOrder}/>
         <LearnHistory userInfo={userInfo} userCourse={userCourse}/>
+
       </ScrollView>
     );
   }
@@ -29,6 +37,7 @@ User.propTypes = {
 User.defaultProps = {
   userInfo: {},
 }
+
 
 class UserHeader extends React.Component {
 
@@ -47,7 +56,11 @@ class UserHeader extends React.Component {
           <Text style={headerStyles.nurse_name}>{userInfo.wallet}元</Text>
         </View>
         <View style={headerStyles.right_area}>
-          <Image style={headerStyles.setting} source={require('../../../images/editSetting.png')}/>
+          <TouchableHighlight onPress={()=>this.props.navigator.push( routers.getRouters(routers.SETTING_ROUTER))}
+                              underlayColor="transparent">
+            <Image style={headerStyles.setting}
+                   source={require('../../../images/editSetting.png')}/>
+          </TouchableHighlight>
           <Image style={headerStyles.next_image} source={require('../../../images/next.png')}/>
         </View>
       </View>
@@ -112,7 +125,7 @@ class LearnHistory extends React.Component {
   render() {
     return (
       <View style={historyStyles.container}>
-        <View style={taskStyles.header}>
+        <View style={historyStyles.header}>
           <Text style={taskStyles.reminder}>学习历史</Text>
           <TouchableHighlight><Text style={taskStyles.more}>更多</Text></TouchableHighlight>
         </View>
@@ -221,6 +234,7 @@ const taskStyles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     margin: 10,
+    backgroundColor: '#f6f6f6',
   },
   reminder: {
     color: '#9a9a9a',
@@ -231,7 +245,8 @@ const taskStyles = StyleSheet.create({
     marginRight: 10,
     textAlign: 'right',
     flex: 1,
-    color: '#559bec'
+    color: '#559bec',
+    fontSize: FontSize.small,
   },
   task: {
     backgroundColor: 'white',
@@ -241,6 +256,12 @@ const taskStyles = StyleSheet.create({
 
 const historyStyles = StyleSheet.create({
   container: {
-    height: 80,
+    height: 100,
   },
+  header: {
+    backgroundColor: '#f6f6f6',
+    flexDirection: 'row',
+    paddingTop: 10,
+    paddingBottom: 10,
+  }
 });

@@ -12,7 +12,7 @@ class UserContainer extends Component {
   render() {
     let userOrder = this.props.userOrders.length > 0 ? this.props.userOrders[0] : {};
     let userCourse = this.props.userCourses.length > 0 ? this.props.userCourses[0] : {};
-    return (<User userInfo={this.props.userInfo} userOrder={userOrder} userCourse={userCourse}/>)
+    return (<User userInfo={this.props.userInfo} userOrder={userOrder} userCourse={userCourse} navigator={this.props.navigator}/>)
   }
 
 }

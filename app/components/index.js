@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component} from "react";
 import {
   AppRegistry,
   StyleSheet,
@@ -8,12 +8,15 @@ import {
   TouchableHighlight,
   Animated,
   Image,
-  Dimensions,
-} from 'react-native';
-import {HomeContainer} from '../features/home';
-import {PatientContainer} from '../features/patients';
-import {UserContainer} from '../features/user';
-import {LoginContainer} from '../features/login';
+  Dimensions
+} from "react-native";
+import {HomeContainer} from "../features/home";
+import {PatientContainer} from "../features/patients";
+import {UserContainer} from "../features/user";
+import {LoginContainer} from "../features/login";
+import * as routers from "../routers";
+import Setting from "../features/user/containers/setting_container";
+import NavigationBar from './navigation_bar';
 
 export default class App extends Component {
 
@@ -35,22 +38,20 @@ export default class App extends Component {
           unselected_image: require('../images/my_nor.png')
         },
       ],
-      childViews: {
-        0: <HomeContainer/>,
-        1: <PatientContainer/>,
-        2: <UserContainer/>
-      }
+      routeId: 0
     }
   }
 
-  render() {
-    if (!this.props.token) {
-      return <LoginContainer/>
+  renderScene(route, navigator) {
+    let childViews = {
+      0: <HomeContainer/>,
+      1: <PatientContainer/>,
+      2: <UserContainer navigator={navigator}/>
     }
-    return (
-      <View style={styles.container}>
+    if (route.id === 0) {
+      return <View style={styles.container}>
         <View style={styles.center_view}>
-          {this.state.childViews[this.state.selected]}
+          {childViews[this.state.selected]}
         </View>
         <View style={styles.tabbar}>
           {
@@ -67,7 +68,29 @@ export default class App extends Component {
           }
         </View>
       </View>
-    )
+    } else if (route.id === 1) {
+      return <Setting/>
+    }
+  }
+
+  render() {
+    if (!this.props.token) {
+      return <LoginContainer/>
+    }
+    return <Navigator
+      initialRoute={routers.routers[0]}
+      renderScene={this.renderScene.bind(this)}
+      style={{flex: 1}}
+      configureScene={(route, routeStack) => Navigator.SceneConfigs.PushFromRight}
+      onWillFocus={(route)=>this.setState({routeId: route.id})}
+      navigationBar={
+          <NavigationBar
+            navigationStyles={Navigator.NavigationBar.StylesIOS}
+            route={routers.getRouters(this.state.routeId)}
+            routeMapper={routers.getRouterMap()}
+          />
+        }
+    />
   }
 }
 
