@@ -56,7 +56,7 @@ class UserHeader extends React.Component {
           <Text style={headerStyles.nurse_name}>{userInfo.wallet}元</Text>
         </View>
         <View style={headerStyles.right_area}>
-          <TouchableHighlight onPress={()=>this.props.navigator.push( routers.getRouters(routers.SETTING_ROUTER))}
+          <TouchableHighlight onPress={()=>this.props.navigator.push(routers.getRouters(routers.SETTING_ROUTER))}
                               underlayColor="transparent">
             <Image style={headerStyles.setting}
                    source={require('../../../images/editSetting.png')}/>

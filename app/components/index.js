@@ -15,8 +15,7 @@ import {PatientContainer} from "../features/patients";
 import {UserContainer} from "../features/user";
 import {LoginContainer} from "../features/login";
 import * as routers from "../routers";
-import SettingContainer from "../features/user/containers/setting_container";
-import NavigationBar from './navigation_bar';
+import NavigationBar from "./navigation_bar";
 
 export default class App extends Component {
 
@@ -68,8 +67,8 @@ export default class App extends Component {
           }
         </View>
       </View>
-    } else if (route.id === 1) {
-      return <SettingContainer/>
+    } else {
+      return routers.getRouteComponent(route, navigator);
     }
   }
 

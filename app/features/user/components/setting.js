@@ -1,6 +1,8 @@
 import React from 'react';
 import {View, Text, Image, StyleSheet, TouchableHighlight, Alert} from 'react-native';
 
+import * as routers from '../../../routers';
+
 export default class Setting extends React.Component {
 
   constructor(props) {
@@ -36,7 +38,11 @@ export default class Setting extends React.Component {
 
   click(item) {
     const that = this;
-    if (item.id === 5) {
+    if (item.id === 3) {
+      this.props.navigator.push(routers.getRouters(routers.USER_AGREEMENT));
+    } else if (item.id === 4) {
+      this.props.navigator.push(routers.getRouters(routers.ABOUT_ROUTER));
+    } else if (item.id === 5) {
       Alert.alert(
         '',
         '退出账户？',
@@ -50,7 +56,6 @@ export default class Setting extends React.Component {
   }
 
   render() {
-    console.log('logout = ', this.props.logout);
     return (
       <View style={{flex:1, height:100, flexDirection: 'column', marginTop: 50}}>
         <Text style={{marginLeft: 30}}>设置您的账号</Text>

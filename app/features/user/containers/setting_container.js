@@ -7,7 +7,7 @@ import * as actions from '../../../actions/login_actions';
 class SettingContainer extends React.Component {
 
   render() {
-    return (<Setting logout={()=> this.props.logout(this.props.token)}/>)
+    return (<Setting navigator={this.props.navigator} logout={()=> this.props.logout(this.props.token)}/>)
   }
 }
 
