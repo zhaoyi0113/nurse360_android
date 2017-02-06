@@ -2,11 +2,12 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import Setting from '../components/setting';
+import * as actions from '../../../actions/login_actions';
 
 class SettingContainer extends React.Component {
 
   render() {
-    return <Setting />
+    return (<Setting logout={()=> this.props.logout(this.props.token)}/>)
   }
 }
 
@@ -19,9 +20,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getUserInfo: (token) => {
-    },
-
+    logout: (token) => {
+      dispatch(actions.logout(token));
+    }
   }
 }
 

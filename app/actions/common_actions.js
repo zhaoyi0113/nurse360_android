@@ -12,7 +12,15 @@ export const clearAlert = () => {
   return {type: types.CLEAR_ALERT}
 }
 
+export const requestPut = (type, url, data, token, options) => {
+  return requestPutPost(type, url, 'put', data, token, options);
+}
+
 export const requestPost = (type, url, data, token, options) => {
+  return requestPutPost(type, url, 'post', data, token, options);
+}
+
+export const requestPutPost = (type, url, method, data, token, options) => {
   let headers = {
     'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
   };
@@ -20,17 +28,18 @@ export const requestPost = (type, url, data, token, options) => {
     headers.ACCESS_TOKEN = token;
   }
   let responseType = 'json';
-  if(options && options.responseType){
+  if (options && options.responseType) {
     responseType = options.responseType;
   }
+  let requestData = data? queryString.stringify(data):{};
   return {
     type: type,
     payload: {
       request: {
-        method: 'post',
-        url: '/nurse/login',
+        method: method,
+        url: url,
         responseType: responseType,
-        data: queryString.stringify(data),
+        data: requestData,
         headers: headers
       }
     }
@@ -39,13 +48,13 @@ export const requestPost = (type, url, data, token, options) => {
 
 export const requestGet = (type, url, token) => {
   let headers = {};
-  if(token){
+  if (token) {
     headers.ACCESS_TOKEN = token;
   }
   return {
     type: type,
     payload: {
-      request:{
+      request: {
         method: 'get',
         url: url,
         responseType: 'json',

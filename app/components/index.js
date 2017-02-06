@@ -15,7 +15,7 @@ import {PatientContainer} from "../features/patients";
 import {UserContainer} from "../features/user";
 import {LoginContainer} from "../features/login";
 import * as routers from "../routers";
-import Setting from "../features/user/containers/setting_container";
+import SettingContainer from "../features/user/containers/setting_container";
 import NavigationBar from './navigation_bar';
 
 export default class App extends Component {
@@ -69,7 +69,7 @@ export default class App extends Component {
         </View>
       </View>
     } else if (route.id === 1) {
-      return <Setting/>
+      return <SettingContainer/>
     }
   }
 
@@ -81,7 +81,7 @@ export default class App extends Component {
       initialRoute={routers.routers[0]}
       renderScene={this.renderScene.bind(this)}
       style={{flex: 1}}
-      configureScene={(route, routeStack) => Navigator.SceneConfigs.PushFromRight}
+      configureScene={(route, routeStack) => Navigator.SceneConfigs.HorizontalSwipeJump}
       onWillFocus={(route)=>this.setState({routeId: route.id})}
       navigationBar={
           <NavigationBar

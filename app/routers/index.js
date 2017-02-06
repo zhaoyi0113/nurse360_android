@@ -8,7 +8,7 @@ export const SETTING_ROUTER = 1;
 export const routers = [
   {
     id: 0,
-    title: 'main',
+    title: '',
   }, {
     //user setting
     id: SETTING_ROUTER,
