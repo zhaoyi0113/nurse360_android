@@ -4,7 +4,8 @@ import {View, Text, Navigator} from "react-native";
 import Login from "../components/login";
 import * as actions from "../../../actions/login_actions";
 
-import RegisterContainer from './register_container';
+import Register from '../components/register';
+import RegisterOccupationInfo from '../components/register_occupation_info';
 
 class LoginContainer extends Component {
 
@@ -17,6 +18,9 @@ class LoginContainer extends Component {
       }, {
         id: 1,
         title: 'register'
+      }, {
+        id: 2,
+        title: 'occupation',
       }],
     };
   }
@@ -25,10 +29,12 @@ class LoginContainer extends Component {
     if (route.id === 0) {
       return <Login login={(mobile, password)=> this.props.login(mobile,password)}
                     goRegister={()=> navigator.push(this.state.routes[1])}
-
       />
     } else if (route.id === 1) {
-      return <RegisterContainer goLogin={()=>navigator.pop()}/>
+      return <Register goLogin={()=>navigator.pop()} requestSmsCode={this.props.requestSmsCode}
+                       nextStep={()=>navigator.push(this.state.routes[2])}/>
+    } else if (route.id === 2) {
+      return <RegisterOccupationInfo goBack={()=>navigator.pop()}/>
     }
   }
 
@@ -53,6 +59,12 @@ const mapDispatchToProps = (dispatch) => {
   return {
     login: (mobile, password) => {
       dispatch(actions.login(mobile, password));
+    },
+    requestSmsCode: (mobile) => {
+      if (!mobile) {
+        return;
+      }
+      dispatch(actions.requestSmsCode(mobile));
     }
   }
 }

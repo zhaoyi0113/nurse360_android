@@ -18,15 +18,18 @@ export default class Register extends React.Component {
         [
           {text: '确定'},
         ]
-      )
+      );
+      return;
     }
+    this.props.nextStep();
   }
 
   render() {
 
     return (<View style={styles.container}>
       <CommonHeader headerImage={require('../../../images/login/loginhead.png')}
-                    textImage={require('../../../images/login/registerFont.png')}/>
+                    textImage={require('../../../images/login/registerFont.png')}
+                    text="护士基本信息"/>
       <View style={styles.input_view}>
         <TextInput style={styles.input_text} placeholder="手机号" onChangeText={(text)=>this.setState({mobile: text})}/>
         <View style={styles.verify_view}>

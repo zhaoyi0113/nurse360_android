@@ -7,11 +7,10 @@ export default class CommonHeader extends React.Component {
     const {headerImage, textImage, text} = this.props
     return (
       <View style={styles.container}>
-        <View style={{flex:2}}/>
         <Image style={styles.head_image} source={headerImage}/>
         <Image style={styles.login_image} source={textImage}/>
         {
-          text ? <Text>{text}</Text> : <View style={{flex:2}}/>
+          text ? <Text style={{marginBottom: 10}}>{text}</Text> : <View style={{flex:2}}/>
         }
 
       </View>
