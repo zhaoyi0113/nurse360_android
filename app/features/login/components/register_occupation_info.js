@@ -33,7 +33,7 @@ export default class RegisterOccupationInfo extends React.Component {
       <View style={styles.input_view}>
         <View style={styles.input_row}>
           <Text style={styles.input_label}>医院</Text>
-          <Text style={styles.input_text}></Text>
+          <Text style={styles.input_text} onPress={()=>this.props.selectHospital()}></Text>
           <Image style={styles.image} source={require('../../../images/next_gray.png')}/>
         </View>
         <View style={styles.input_row}>

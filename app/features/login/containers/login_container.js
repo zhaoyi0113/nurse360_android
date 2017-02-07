@@ -6,6 +6,7 @@ import * as actions from "../../../actions/login_actions";
 
 import Register from '../components/register';
 import RegisterOccupationInfo from '../components/register_occupation_info';
+import HospitalSelection from '../../../components/hospital_selection';
 
 class LoginContainer extends Component {
 
@@ -21,7 +22,11 @@ class LoginContainer extends Component {
       }, {
         id: 2,
         title: 'occupation',
+      }, {
+        id: 3,
+        title: 'hospital',
       }],
+
     };
   }
 
@@ -34,7 +39,10 @@ class LoginContainer extends Component {
       return <Register goLogin={()=>navigator.pop()} requestSmsCode={this.props.requestSmsCode}
                        nextStep={()=>navigator.push(this.state.routes[2])}/>
     } else if (route.id === 2) {
-      return <RegisterOccupationInfo goBack={()=>navigator.pop()}/>
+      return <RegisterOccupationInfo goBack={()=>navigator.pop()}
+                                     selectHospital={()=>navigator.push(this.state.routes[3])}/>
+    } else if (route.id === 3) {
+      return <HospitalSelection goBack={()=>navigator.pop()} selectHospital={(hospital)=>this.setState({hospital:hospital})}/>
     }
   }
 
