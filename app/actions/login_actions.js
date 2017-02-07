@@ -1,6 +1,7 @@
 import * as types from './action_types';
 import sha1 from 'sha1';
 import * as commonActions from './common_actions';
+import * as keys from '../utils/keys';
 
 export const login = (mobile, password) => {
   return commonActions.requestPost(types.LOGIN_HTTP, '/nurse/login', {
@@ -12,4 +13,15 @@ export const login = (mobile, password) => {
 
 export const logout = (token) => {
   return commonActions.requestPut(types.LOGOUT_HTTP, '/nurse/logout', null, token, {responseType: 'text'});
+}
+
+export const requestSmsCode = (mobile) => {
+  return commonActions.requestPost(types.REQUEST_SMS_CODE_HTTP, '/requestSmsCode', {
+    mobilePhoneNumber: mobile,
+    name: '全时护理',
+    ttl: 30
+  }, null, {
+    headers: {'X-LC-Id': keys.LEANCLOUD_APP_ID, 'X-LC-Key': keys.LEANCLOUD_APP_KEY, 'Content-Type': 'application/json'},
+    client: 'leanCloud'
+  });
 }

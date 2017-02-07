@@ -27,14 +27,25 @@ export const requestPutPost = (type, url, method, data, token, options) => {
   if (token) {
     headers.ACCESS_TOKEN = token;
   }
+  if (options && options.headers) {
+    headers = options.headers;
+  }
   let responseType = 'json';
   if (options && options.responseType) {
     responseType = options.responseType;
   }
-  let requestData = data? queryString.stringify(data):{};
+  let client = 'default';
+  if (options && options.client) {
+    client = options.client;
+  }
+  let requestData = data ? queryString.stringify(data) : {};
+  if (headers['Content-Type'] === 'application/json' && data) {
+    requestData = data;
+  }
   return {
     type: type,
     payload: {
+      client: client,
       request: {
         method: method,
         url: url,
@@ -46,13 +57,21 @@ export const requestPutPost = (type, url, method, data, token, options) => {
   }
 }
 
-export const requestGet = (type, url, token) => {
+export const requestGet = (type, url, token, options) => {
   let headers = {};
   if (token) {
     headers.ACCESS_TOKEN = token;
   }
+  if (options && options.headers) {
+    headers = {...headers, ...options.headers};
+  }
+  let client = 'default';
+  if (options && options.client) {
+    client = options.client;
+  }
   return {
     type: type,
+    client: client,
     payload: {
       request: {
         method: 'get',

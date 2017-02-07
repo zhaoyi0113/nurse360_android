@@ -1,5 +1,7 @@
 import React from 'react';
-import {View, Text, StyleSheet, Image, TextInput, Button} from 'react-native';
+import {View, Text, StyleSheet, Image, TextInput, Button, Navigator} from 'react-native';
+
+import CommonHeader from './common_header';
 
 export default class Login extends React.Component {
 
@@ -10,12 +12,9 @@ export default class Login extends React.Component {
 
   render() {
     return (<View style={styles.container}>
-      <View style={styles.login_view}>
-        <View style={{flex:2}}/>
-        <Image style={styles.head_image} source={require('../../../images/login/loginhead.png')}/>
-        <Image style={styles.login_image} source={require('../../../images/login/loginFont.png')}/>
-        <View style={{flex:2}}/>
-      </View>
+      <CommonHeader headerImage={require('../../../images/login/loginhead.png')}
+        textImage={require('../../../images/login/loginFont.png')}/>
+
       <View style={styles.input_view}>
         <TextInput style={styles.input_text} placeholder="手机号" onChangeText={(text)=>this.setState({mobile: text})}/>
         <TextInput style={styles.input_text} placeholder="密码" secureTextEntry={true}
@@ -26,7 +25,7 @@ export default class Login extends React.Component {
                 disabled={!this.state.mobile || !this.state.password}/>
       </View>
       <View style={styles.text_view}>
-        <Text>没有账号？去注册</Text>
+        <Text onPress={()=> this.props.goRegister()}>没有账号？去注册</Text>
         <Text>忘记密码</Text>
       </View>
       <View style={{flex: 4}}/>
@@ -40,15 +39,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: 'white',
   },
-  login_view: {
-    flex: 2,
-    alignItems: 'center',
-    backgroundColor: '#f6f6f6',
-    marginVertical: 10,
-    marginHorizontal: 10,
-  },
-  head_image: {flex: 3, resizeMode: 'contain', marginVertical: 10},
-  login_image: {flex: 1, resizeMode: 'contain', marginVertical: 10},
   input_view: {
     flex: 1.5,
     marginHorizontal: 10,
