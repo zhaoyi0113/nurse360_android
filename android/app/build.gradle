@@ -149,6 +149,7 @@ repositories {
     maven { url 'https://github.com/500px/500px-android-blur/raw/master/releases/' }
 }
 dependencies {
+    compile project(':react-native-vector-icons')
     compile project(':react-native-fs')
     compile project(':react-native-device-info')
     compile fileTree(dir: "libs", include: ["*.jar"])

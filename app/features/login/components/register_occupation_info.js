@@ -44,8 +44,7 @@ export default class RegisterOccupationInfo extends React.Component {
         <View style={styles.input_row}>
           <Text style={styles.input_label}>职称</Text>
           <TechnicalTitlesPicker style={styles.input_text} hidden={false} ref={(p)=> this.picker=p}/>
-          {/*<Text style={styles.input_text} onPress={()=>this.setState({occupationClick: true})}>ss</Text>*/}
-          <Image style={styles.image} source={require('../../../images/next_gray.png')}/>
+          {/*<Image style={styles.image} source={require('../../../images/next_gray.png')}/>*/}
         </View>
       </View>
       <View style={styles.register_button}>
