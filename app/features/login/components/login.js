@@ -1,19 +1,20 @@
 import React from 'react';
-import {View, Text, StyleSheet, Image, TextInput, Button, Navigator} from 'react-native';
+import {View, Text, StyleSheet, Image, TextInput, Button, Navigator, TouchableHighlight} from 'react-native';
 
 import CommonHeader from './common_header';
+import {colors} from '../../../constants';
 
 export default class Login extends React.Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state={};
+    this.state = {};
   }
 
   render() {
     return (<View style={styles.container}>
       <CommonHeader headerImage={require('../../../images/login/loginhead.png')}
-        textImage={require('../../../images/login/loginFont.png')}/>
+                    textImage={require('../../../images/login/loginFont.png')}/>
 
       <View style={styles.input_view}>
         <TextInput style={styles.input_text} placeholder="手机号" onChangeText={(text)=>this.setState({mobile: text})}/>
@@ -25,7 +26,9 @@ export default class Login extends React.Component {
                 disabled={!this.state.mobile || !this.state.password}/>
       </View>
       <View style={styles.text_view}>
-        <Text onPress={()=> this.props.goRegister()}>没有账号？去注册</Text>
+        <TouchableHighlight onPress={()=> this.props.goRegister()} underlayColor={colors.underlayColor}>
+          <Text>没有账号？去注册</Text>
+        </TouchableHighlight>
         <Text>忘记密码</Text>
       </View>
       <View style={{flex: 4}}/>

@@ -3,3 +3,5 @@ export const FontSize = {
   xlarge: 20,
   small: 10,
 }
+
+export const colors = {underlayColor: 'lightgray'};

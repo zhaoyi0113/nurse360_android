@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, Image} from 'react-native';
+import {View, Text, StyleSheet, Image, TouchableHighlight} from 'react-native';
 
 export default class ManualNavBar extends React.Component {
 
@@ -7,10 +7,19 @@ export default class ManualNavBar extends React.Component {
     let {left, title, right} = this.props;
 
     return (<View style={styles.container}>
-      <Image style={{resizeMode:'center', flex: 0.3}} source={require('../images/back_blue.png')}/>
-      <Text style={styles.left} onPress={()=>this.props.clickLeft()}>{left}</Text>
+
+      <TouchableHighlight style={{flex:1}} onPress={()=>this.props.clickLeft()} underlayColor='lightgray'>
+        <View style={{flex:1,  flexDirection: 'row', alignItems: 'center'}}>
+          <Image style={{resizeMode:'center', flex: 0.3}} source={require('../images/back_blue.png')}/>
+          <Text style={styles.left}>{left}</Text>
+        </View>
+      </TouchableHighlight>
       <Text style={styles.title}>{title}</Text>
-      <Text style={styles.right} onPress={()=>this.props.clickRight()}>{right}</Text>
+      <TouchableHighlight style={{flex:1}} onPress={()=>this.props.clickRight()} underlayColor="lightgray">
+        <View style={{flexDirection: 'row', flex:1, alignItems: 'center'}}>
+          <Text style={styles.right}>{right}</Text>
+        </View>
+      </TouchableHighlight>
     </View>)
   }
 }
@@ -37,5 +46,6 @@ const styles = StyleSheet.create({
     flex: 1,
     textAlign: 'right',
     marginRight: 10,
+    alignSelf: 'center',
   }
 });

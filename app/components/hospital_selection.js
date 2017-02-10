@@ -26,9 +26,9 @@ export default class HospitalSelection extends React.Component {
     if(rowData === this.state.selectedHospital){
       style = styles.selected;
     }
-    return <TouchableHighlight>
+    return <TouchableHighlight onPress={()=>this.setState({searchText: rowData.name, selectedHospital: rowData})} underlayColor="lightgray">
       <Text style={style}
-            onPress={()=>this.setState({searchText: rowData.name, selectedHospital: rowData})}>{rowData.name}</Text>
+            >{rowData.name}</Text>
     </TouchableHighlight>
   }
 

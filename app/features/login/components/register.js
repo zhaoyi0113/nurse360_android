@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, TextInput, Button, Alert} from 'react-native';
+import {View, Text, StyleSheet, TextInput, Button, Alert, TouchableHighlight} from 'react-native';
 
 import CommonHeader from './common_header';
 
@@ -44,7 +44,9 @@ export default class Register extends React.Component {
         <Button title="下一步" onPress={this.nextStep.bind(this)}
                 disabled={!this.state.mobile || !this.state.password || !this.state.verifyCode}/>
       </View>
-      <Text style={{textAlign:'center'}} onPress={()=>this.props.goLogin()}>已有账号？去登录</Text>
+      <TouchableHighlight onPress={()=>this.props.goLogin()} underlayColor="lightgray">
+        <Text style={{textAlign:'center'}}>已有账号？去登录</Text>
+      </TouchableHighlight>
       <View style={{flex: 4}}/>
     </View>)
   }

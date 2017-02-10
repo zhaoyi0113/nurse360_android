@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, TextInput, Button, Alert, Image} from 'react-native';
+import {View, Text, StyleSheet, TextInput, Button, Alert, Image, TouchableHighlight} from 'react-native';
 
 import CommonHeader from './common_header';
 import TechnicalTitlesPicker from './technical_titles_picker';
@@ -25,8 +25,8 @@ export default class RegisterOccupationInfo extends React.Component {
 
   render() {
     let {hospital} = this.props;
-    let hospitalName='';
-    if(hospital){
+    let hospitalName = '';
+    if (hospital) {
       hospitalName = hospital.name;
     }
     return (<View style={styles.container}>
@@ -55,7 +55,9 @@ export default class RegisterOccupationInfo extends React.Component {
         <Button title="完成" onPress={this.nextStep.bind(this)}
                 disabled={!this.state.mobile || !this.state.password || !this.state.verifyCode}/>
       </View>
-      <Text style={{textAlign:'center'}} onPress={()=>this.props.goBack()}>返回上一步</Text>
+      <TouchableHighlight onPress={()=>this.props.goBack()} underlayColor="lightgray">
+        <Text style={{textAlign:'center'}}>返回上一步</Text>
+      </TouchableHighlight>
       <View style={{flex: 4}}/>
     </View>)
   }
