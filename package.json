@@ -154,7 +154,8 @@
     "prepublish": "npm run transpile",
     "test": "jest",
     "transpile": "npm run compile && cp src/basic/Icon/NBIcons.json dist/src/basic/Icon",
-    "eject-native-base": "node node_modules/native-base/ejectTheme.js"
+    "eject-native-base": "node node_modules/native-base/ejectTheme.js",
+    "upload_fir":"fir publish -T d9476d8e7188861373e85d74b3fb8dc0 ./android/app/build/outputs/apk/app-debug-nurse360.apk"
   },
   "version": "2.0.2"
 }
