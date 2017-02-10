@@ -16,16 +16,18 @@ export default class HospitalSelection extends React.Component {
   }
 
   selectHospital() {
-    console.log('select hospital ', this.state.selectedHospital)
     if(this.state.selectedHospital !== null) {
       this.props.selectHospital(this.state.selectedHospital);
     }
   }
 
   renderRow(rowData) {
-
+    let style = styles.rowData;
+    if(rowData === this.state.selectedHospital){
+      style = styles.selected;
+    }
     return <TouchableHighlight>
-      <Text style={styles.rowData}
+      <Text style={style}
             onPress={()=>this.setState({searchText: rowData.name, selectedHospital: rowData})}>{rowData.name}</Text>
     </TouchableHighlight>
   }
@@ -103,5 +105,12 @@ const styles = StyleSheet.create({
   rowData: {
     textAlign: 'center',
     height: 30,
+    textAlignVertical: 'center',
+  },
+  selected: {
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    height: 30,
+    backgroundColor: 'lightgray',
   }
 });
