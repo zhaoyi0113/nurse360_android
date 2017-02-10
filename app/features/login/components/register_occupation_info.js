@@ -24,7 +24,11 @@ export default class RegisterOccupationInfo extends React.Component {
   }
 
   render() {
-
+    let {hospital} = this.props;
+    let hospitalName='';
+    if(hospital){
+      hospitalName = hospital.name;
+    }
     return (<View style={styles.container}>
       <CommonHeader headerImage={require('../../../images/login/loginhead.png')}
                     textImage={require('../../../images/login/registerFont.png')}
@@ -33,7 +37,7 @@ export default class RegisterOccupationInfo extends React.Component {
       <View style={styles.input_view}>
         <View style={styles.input_row}>
           <Text style={styles.input_label}>医院</Text>
-          <Text style={styles.input_text} onPress={()=>this.props.selectHospital()}></Text>
+          <Text style={styles.input_text} onPress={()=>this.props.selectHospital()}>{hospitalName}</Text>
           <Image style={styles.image} source={require('../../../images/next_gray.png')}/>
         </View>
         <View style={styles.input_row}>

@@ -17,3 +17,6 @@ export const REGISTER_HTTP = 'REGISTER_HTTP';
 export const USER_INFO_HTTP = 'USER_INFO_HTTP';
 export const USER_ORDER_HTTP = 'USER_ORDER_HTTP';
 export const USER_COURSE_HTTP = 'USER_COURSE_HTTP';
+
+//hospital
+export const HOSTPIAL_SEARCH = 'HOSPITAL_SEARCH';

@@ -6,7 +6,7 @@ import * as actions from "../../../actions/login_actions";
 
 import Register from '../components/register';
 import RegisterOccupationInfo from '../components/register_occupation_info';
-import HospitalSelection from '../../../components/hospital_selection';
+import HospitalSelectionContainer from '../../../containers/hospital_selection_container';
 
 class LoginContainer extends Component {
 
@@ -40,9 +40,14 @@ class LoginContainer extends Component {
                        nextStep={()=>navigator.push(this.state.routes[2])}/>
     } else if (route.id === 2) {
       return <RegisterOccupationInfo goBack={()=>navigator.pop()}
+                                     hospital={this.state.hospital}
                                      selectHospital={()=>navigator.push(this.state.routes[3])}/>
     } else if (route.id === 3) {
-      return <HospitalSelection goBack={()=>navigator.pop()} selectHospital={(hospital)=>this.setState({hospital:hospital})}/>
+      return <HospitalSelectionContainer goBack={()=>navigator.pop()}
+                                         selectHospital={(hospital)=>{
+                                           this.setState({hospital:hospital});
+                                           navigator.pop();
+                                         }}/>
     }
   }
 
