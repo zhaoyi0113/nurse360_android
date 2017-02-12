@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginLeft: 0,
     textAlign: 'left',
-    color: 'lightblue',
+    color: '#559bec',
   },
   title: {
     flex: 3,

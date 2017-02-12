@@ -20,3 +20,4 @@ export const USER_COURSE_HTTP = 'USER_COURSE_HTTP';
 
 //hospital
 export const HOSTPIAL_SEARCH = 'HOSPITAL_SEARCH';
+export const DEPARTMENT_LIST_HTTP = 'DEPARTMENT_LIST_HTTP';

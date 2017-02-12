@@ -25,3 +25,14 @@ export const requestSmsCode = (mobile) => {
     client: 'leanCloud'
   });
 }
+
+export const register = (mobile, password, smsCode, hospitalId, departmentId, jobTitle) => {
+  return commonActions.requestPost(types.REGISTER_HTTP, '/nurse/register', {
+    mobile: mobile,
+    password: sha1(password),
+    sms_code: smsCode,
+    hospital_id: hospitalId,
+    department_id: departmentId,
+    job_title: jobTitle
+  }, null, null);
+}

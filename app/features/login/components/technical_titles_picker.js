@@ -17,7 +17,10 @@ export default class TechnicalTitlesPicker extends React.Component {
         style={this.props.style}
         selectedValue={this.state.title}
         mode={Picker.MODE_DROPDOWN}
-        onValueChange={(t) => this.setState({title: t})}>
+        onValueChange={(t) => {
+          this.setState({title: t});
+          this.props.onValueChange(t);
+        }}>
         {
           this.state.titles.map((title,i) => {
             return <Picker.Item key={i} label={title} value={title}/>

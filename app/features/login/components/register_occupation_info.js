@@ -8,26 +8,18 @@ export default class RegisterOccupationInfo extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {occupationClick: false,};
-  }
-
-  nextStep() {
-    if (this.state.password.length < 6) {
-      Alert.alert(
-        '',
-        '密码长度不能小于6位',
-        [
-          {text: '确定'},
-        ]
-      )
-    }
+    this.state = {};
   }
 
   render() {
-    let {hospital} = this.props;
+    let {hospital, department} = this.props;
     let hospitalName = '';
     if (hospital) {
       hospitalName = hospital.name;
+    }
+    let departmentName = '';
+    if (department) {
+      departmentName = department.name;
     }
     return (<View style={styles.container}>
       <CommonHeader headerImage={require('../../../images/login/loginhead.png')}
@@ -42,18 +34,30 @@ export default class RegisterOccupationInfo extends React.Component {
         </View>
         <View style={styles.input_row}>
           <Text style={styles.input_label}>科室</Text>
-          <Text style={styles.input_text}></Text>
+          <Text style={styles.input_text} onPress={()=>{
+            if(this.props.hospital){
+              this.props.selectDepartment();
+            }else{
+              Alert.alert(
+                '',
+                '请选择医院',
+                [
+                  {text: '确定'},
+                ]
+              )
+            }
+          }}>{departmentName}</Text>
           <Image style={styles.image} source={require('../../../images/next_gray.png')}/>
         </View>
         <View style={styles.input_row}>
           <Text style={styles.input_label}>职称</Text>
-          <TechnicalTitlesPicker style={styles.input_text} hidden={false} ref={(p)=> this.picker=p}/>
-          {/*<Image style={styles.image} source={require('../../../images/next_gray.png')}/>*/}
+          <TechnicalTitlesPicker style={styles.input_text} hidden={false}
+                                 onValueChange={(t)=>this.setState({title: t})}/>
         </View>
       </View>
       <View style={styles.register_button}>
-        <Button title="完成" onPress={this.nextStep.bind(this)}
-                disabled={!this.state.mobile || !this.state.password || !this.state.verifyCode}/>
+        <Button title="完成" onPress={this.props.register.bind(this)}
+                disabled={!hospital || !department || !this.state.title}/>
       </View>
       <TouchableHighlight onPress={()=>this.props.goBack()} underlayColor="lightgray">
         <Text style={{textAlign:'center'}}>返回上一步</Text>
