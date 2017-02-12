@@ -32,6 +32,7 @@ export const CommonReducer = (state = {}, action) => {
 export const errorMessage = {}
 
 errorMessage[types.LOGIN_HTTP + types.FAIL] = '登录失败';
+errorMessage[types.REGISTER_HTTP + types.FAIL] = '注册失败';
 
 const getErrorMessage = (action) => {
   if (errorMessage[action.type]) {

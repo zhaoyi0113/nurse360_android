@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, StyleSheet, Text, Image, ScrollView, TouchableHighlight, Navigator} from 'react-native';
 import {FontSize} from '../../../constants';
+import _ from 'lodash';
 
 import Order from '../../order/components/order';
 import CourseCell from '../../course/components/course_cell';
@@ -23,7 +24,6 @@ export default class User extends React.Component {
         <Function userInfo={userInfo}/>
         <Tasks userInfo={userInfo} userOrder={userOrder}/>
         <LearnHistory userInfo={userInfo} userCourse={userCourse}/>
-
       </ScrollView>
     );
   }
@@ -43,9 +43,19 @@ class UserHeader extends React.Component {
 
   render() {
     let {userInfo} = this.props;
+    let wallet = '0.00';
+    if (userInfo.wallet) {
+      wallet = userInfo.wallet;
+    }
+    let headerPhoto
+    if (userInfo.profilePhotoUrl) {
+      headerPhoto = {uri: userInfo.profilePhotoUrl}
+    } else {
+      headerPhoto = require('../../../images/user/default_header.png')
+    }
     return (
       <View style={headerStyles.container}>
-        <Image style={headerStyles.image} source={{uri: userInfo.profilePhotoUrl}}/>
+        <Image style={headerStyles.image} source={headerPhoto}/>
         <View style={headerStyles.text_area}>
           <Text style={headerStyles.nurse_name}>{userInfo.name}</Text>
           <Text style={headerStyles.department_name}>{userInfo.departmentName}</Text>
@@ -53,7 +63,7 @@ class UserHeader extends React.Component {
         </View>
         <View style={headerStyles.wallet}>
           <Text style={headerStyles.nurse_name}>我的钱包</Text>
-          <Text style={headerStyles.nurse_name}>{userInfo.wallet}元</Text>
+          <Text style={headerStyles.nurse_name}>{wallet}元</Text>
         </View>
         <View style={headerStyles.right_area}>
           <TouchableHighlight onPress={()=>this.props.navigator.push(routers.getRouters(routers.SETTING_ROUTER))}
@@ -104,18 +114,25 @@ class Function extends React.Component {
 }
 
 class Tasks extends React.Component {
-
   render() {
     const {userOrder} = this.props;
+    let order;
+    if (!_.isEmpty(userOrder)) {
+      order = <View style={taskStyles.task}>
+        <Order order={userOrder}/>
+      </View>
+    } else {
+      order = <View style={{backgroundColor: 'white', padding: 10}}>
+        <Text style={{textAlign:'center'}}>暂无任务提醒</Text>
+      </View>
+    }
     return (
       <View style={taskStyles.container}>
         <View style={taskStyles.header}>
           <Text style={taskStyles.reminder}>任务提醒</Text>
           <TouchableHighlight><Text style={taskStyles.more}>更多</Text></TouchableHighlight>
         </View>
-        <View style={taskStyles.task}>
-          <Order order={userOrder}/>
-        </View>
+        {order}
       </View>
     )
   }
@@ -123,13 +140,19 @@ class Tasks extends React.Component {
 
 class LearnHistory extends React.Component {
   render() {
+    let course;
+    if (_.isEmpty(this.props.userCourse)) {
+      course = <Text style={{padding: 10, backgroundColor: 'white', textAlign: 'center'}}>暂无学习历史</Text>
+    } else {
+      course = <CourseCell course={this.props.userCourse}/>;
+    }
     return (
       <View style={historyStyles.container}>
         <View style={historyStyles.header}>
           <Text style={taskStyles.reminder}>学习历史</Text>
           <TouchableHighlight><Text style={taskStyles.more}>更多</Text></TouchableHighlight>
         </View>
-        <CourseCell course={this.props.userCourse}/>
+        {course}
       </View>
     )
   }
@@ -228,7 +251,7 @@ const functionStyles = StyleSheet.create({
 
 const taskStyles = StyleSheet.create({
   container: {
-    height: 200,
+    // height: 200,
   },
   header: {
     flexDirection: 'row',
@@ -256,12 +279,11 @@ const taskStyles = StyleSheet.create({
 
 const historyStyles = StyleSheet.create({
   container: {
-    height: 100,
+    // height: 100,
   },
   header: {
     backgroundColor: '#f6f6f6',
     flexDirection: 'row',
-    paddingTop: 10,
-    paddingBottom: 10,
+    margin:10
   }
 });
