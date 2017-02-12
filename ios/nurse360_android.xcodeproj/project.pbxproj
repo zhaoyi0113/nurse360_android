@@ -36,6 +36,7 @@
 		9725F9C7219C4B12A10AA931 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 20DF26D7EEB84D55ABB3331D /* Octicons.ttf */; };
 		2F9BF2150D654E8687980552 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8B59DA94D5094F8386EF64C6 /* SimpleLineIcons.ttf */; };
 		191481C1F25D4733AFBB44DB /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F3DEF0D3740643D2BE7F74DA /* Zocial.ttf */; };
+		BAB0982ECE6B48D4B58CB948 /* libReactNativeConfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 80FF144BD1684DE38AA1FBD8 /* libReactNativeConfig.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -262,6 +263,8 @@
 		20DF26D7EEB84D55ABB3331D /* Octicons.ttf */ = {isa = PBXFileReference; name = "Octicons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		8B59DA94D5094F8386EF64C6 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; name = "SimpleLineIcons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		F3DEF0D3740643D2BE7F74DA /* Zocial.ttf */ = {isa = PBXFileReference; name = "Zocial.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		22A523A234D24E07AF144702 /* ReactNativeConfig.xcodeproj */ = {isa = PBXFileReference; name = "ReactNativeConfig.xcodeproj"; path = "../node_modules/react-native-config/ios/ReactNativeConfig.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		80FF144BD1684DE38AA1FBD8 /* libReactNativeConfig.a */ = {isa = PBXFileReference; name = "libReactNativeConfig.a"; path = "libReactNativeConfig.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -291,6 +294,7 @@
 				00434EA38D984D38B3B393B2 /* libRNDeviceInfo.a in Frameworks */,
 				EA44A1F2DC0248059CC11A6A /* libRNFS.a in Frameworks */,
 				DAE46A2E028C4B1F837AA489 /* libRNVectorIcons.a in Frameworks */,
+				BAB0982ECE6B48D4B58CB948 /* libReactNativeConfig.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -438,6 +442,7 @@
 				1A8AF4A01C9249C99544B113 /* RNDeviceInfo.xcodeproj */,
 				0D9CBC855695450F8F7D3179 /* RNFS.xcodeproj */,
 				A3A1363B0EA04AF79D1109AB /* RNVectorIcons.xcodeproj */,
+				22A523A234D24E07AF144702 /* ReactNativeConfig.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -893,6 +898,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 			};
 			name = Debug;
@@ -909,6 +915,7 @@
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/nurse360_android.app/nurse360_android";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",

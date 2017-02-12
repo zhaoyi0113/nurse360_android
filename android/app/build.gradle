@@ -67,6 +67,13 @@ import com.android.build.OutputFile
 
 apply from: "../../node_modules/react-native/react.gradle"
 
+project.ext.envConfigFiles = [
+    debug: ".debug.env",
+    release: ".release.env",
+    staging: ".staging.env",
+]
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
+
 /**
  * Set this to true to create two separate APKs instead of one:
  *   - An APK that only works on ARM devices
@@ -126,6 +133,11 @@ android {
         debug {
             debuggable true
         }
+        staging {
+            minifyEnabled enableProguardInReleaseBuilds
+            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            signingConfig signingConfigs.release
+        }
     }
     // applicationVariants are e.g. debug, release
     applicationVariants.all { variant ->
@@ -149,15 +161,16 @@ repositories {
     maven { url 'https://github.com/500px/500px-android-blur/raw/master/releases/' }
 }
 dependencies {
+    compile project(':react-native-config')
     compile project(':react-native-vector-icons')
     compile project(':react-native-fs')
     compile project(':react-native-device-info')
     compile fileTree(dir: "libs", include: ["*.jar"])
     compile "com.android.support:appcompat-v7:23.0.1"
     compile "com.facebook.react:react-native:+"  // From node_modules
-    debugCompile 'com.facebook.stetho:stetho:1.4.2'
-    debugCompile 'com.facebook.stetho:stetho-urlconnection:1.4.2'
-    debugCompile 'com.facebook.stetho:stetho-okhttp3:1.4.2'
+    compile 'com.facebook.stetho:stetho:1.4.2'
+    compile 'com.facebook.stetho:stetho-urlconnection:1.4.2'
+    compile 'com.facebook.stetho:stetho-okhttp3:1.4.2'
     compile 'com.fivehundredpx:blurringview:1.0.0'
 
 }

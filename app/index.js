@@ -15,6 +15,7 @@ import axios from 'axios';
 import {multiClientMiddleware} from 'redux-axios-middleware';
 import * as storage from 'redux-storage';
 import createEngine from 'redux-storage-engine-reactnativeasyncstorage';
+import Config from 'react-native-config';
 import * as actions from './actions/common_actions';
 import * as types from './actions/action_types';
 
@@ -22,7 +23,7 @@ const engine = createEngine('nurse360_android');
 
 
 const client = axios.create({ //all axios can be used, shown in axios documentation
-  baseURL: 'https://www.nurse-go.cn:9100/nurse360',
+  baseURL: Config.API_URL,
   responseType: 'json'
 });
 const leanCloud = axios.create({baseURL: 'https://api.leancloud.cn/1.1'})

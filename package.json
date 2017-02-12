@@ -62,6 +62,7 @@
     "lodash": "~4.11.1",
     "native-base": "^2.0.2",
     "print-message": "^2.1.0",
+    "react-native-config": "^0.3.1",
     "react-native-drawer": "^2.3.0",
     "react-native-easy-grid": "0.1.7",
     "react-native-keyboard-aware-scroll-view": "0.2.0",
@@ -155,7 +156,10 @@
     "test": "jest",
     "transpile": "npm run compile && cp src/basic/Icon/NBIcons.json dist/src/basic/Icon",
     "eject-native-base": "node node_modules/native-base/ejectTheme.js",
-    "upload_fir":"fir publish -T d9476d8e7188861373e85d74b3fb8dc0 ./android/app/build/outputs/apk/app-debug-nurse360.apk"
+    "upload-fir": "fir publish -T d9476d8e7188861373e85d74b3fb8dc0 ./android/app/build/outputs/apk/app-debug-nurse360.apk",
+    "run-staging": "ENVFILE=.staging.env react-native run-android --configuration=staging",
+    "run-debug": "ENVFILE=.debug.env react-native run-android",
+    "run-release": "ENVFILE=.release.env react-native run-android"
   },
   "version": "2.0.2"
 }
