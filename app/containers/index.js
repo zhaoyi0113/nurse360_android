@@ -27,7 +27,6 @@ class MainContainer extends Component {
       </View>
     );
   }
-
 }
 
 const mapStateToProps = (state) => {
@@ -40,7 +39,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    clearAlert: ()=>{
+    clearAlert: () => {
       dispatch(actions.clearAlert());
     }
   }

@@ -43,8 +43,8 @@ export default class App extends Component {
 
   renderScene(route, navigator) {
     let childViews = {
-      0: <HomeContainer/>,
-      1: <PatientContainer/>,
+      0: <HomeContainer navigator={navigator}/>,
+      1: <PatientContainer navigator={navigator}/>,
       2: <UserContainer navigator={navigator}/>
     }
     if (route.id === 0) {
