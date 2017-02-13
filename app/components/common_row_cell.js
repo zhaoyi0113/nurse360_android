@@ -5,11 +5,21 @@ import {FontSize} from '../constants';
 
 export default class CommonRowCell extends React.Component {
 
+  _getHeaderView() {
+    let {image, headTitle} = this.props;
+    if (image) {
+      return <Image style={styles.image} source={image}/>
+    }
+    if (headTitle) {
+      return <Text style={styles.head_title}>{headTitle}</Text>
+    }
+  }
+
   render() {
-    let {title, description, image} = this.props;
+    let {title, description} = this.props;
 
     return (<View style={styles.container}>
-      <Image style={styles.image} source={image}/>
+      {this._getHeaderView()}
       <View style={styles.text_view}>
         <Text style={styles.title}>{title}</Text>
         <Text style={styles.description} numberOfLines={1}>{description}</Text>
@@ -43,6 +53,19 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 30,
   },
+  head_title:{
+    margin: 5,
+    padding: 5,
+    height: 30,
+    width: 30,
+    borderRadius: 15,
+    borderColor: 'rgb(85, 155, 236)',
+    color: 'rgb(85, 155, 236)',
+    fontSize: FontSize.large,
+    borderWidth: 1,
+    textAlign:'center',
+    textAlignVertical: 'center',
+  },
   text_view: {
     flex: 4,
     flexDirection: 'column',
@@ -52,11 +75,11 @@ const styles = StyleSheet.create({
     resizeMode: 'center',
     flex: 1,
   },
-  title:{
+  title: {
     color: 'black',
     textAlign: 'left',
   },
-  description:{
+  description: {
     color: '#9a9a9a',
     fontSize: FontSize.small,
     textAlign: 'left',

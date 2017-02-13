@@ -5,6 +5,7 @@ import {View, Text, Navigator} from 'react-native';
 import Home from '../components/home';
 import * as notificationActions from '../../../actions/notification_actions';
 import * as studyActions from '../../../actions/study_actions';
+import * as orderActions from '../../../actions/order_actions';
 
 class HomeContainer extends Component {
 
@@ -14,7 +15,8 @@ class HomeContainer extends Component {
 
   _refresh() {
     const promises = [this.props.queryNotification(this.props.token),
-      this.props.queryStudyCourses(this.props.token)];
+      this.props.queryStudyCourses(this.props.token),
+      this.props.queryOrders(this.props.token)];
     const that = this;
     Promise.all(promises).then((v) => {
       that.home._endRefresh();
@@ -23,7 +25,7 @@ class HomeContainer extends Component {
 
   render() {
     return (<Home navigator={this.props.navigator} _refresh={this._refresh.bind(this)}
-                  ref={(home)=>this.home=home}
+                  ref={(home)=>this.home=home} orders={this.props.orders}
                   courses={this.props.courses} notifications={this.props.notifications}/>);
   }
 
@@ -34,6 +36,7 @@ const mapStateToProps = (state) => {
     token: state.login.token,
     courses: state.study.courses,
     notifications: state.notification.notifications,
+    orders: state.order.orders,
   }
 }
 
@@ -44,6 +47,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     queryStudyCourses: (token) => {
       return dispatch(studyActions.queryStudyCourses(token, 0, 2));
+    },
+    queryOrders: (token) => {
+      return dispatch(orderActions.queryOrders(token, 0, 2));
     }
   }
 }

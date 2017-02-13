@@ -32,9 +32,9 @@ const styles = StyleSheet.create({
   },
   title: {
     color: '#9a9a9a',
+    flex: 1,
     marginLeft: 10,
     fontSize: FontSize.small,
-    flex: 1,
   },
   more: {
     marginRight: 10,

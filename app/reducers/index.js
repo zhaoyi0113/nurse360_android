@@ -5,6 +5,7 @@ import {UserReducer} from './user_reducer';
 import {HospitalReducer} from './hospital_reducer';
 import {StudyReducer} from './study_reducers';
 import {NotificationReducer} from './notification_reducers';
+import {OrderReducer} from './order_reducer';
 
 import * as types from '../actions/action_types';
 
@@ -27,6 +28,7 @@ const appReducers = combineReducers({
   hospital: HospitalReducer,
   study: StudyReducer,
   notification: NotificationReducer,
+  order: OrderReducer,
 });
 
 export default rootReducer;

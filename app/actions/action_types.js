@@ -27,3 +27,6 @@ export const QUERY_NOTIFICATION = 'QUERY_NOTIFICATION';
 
 //study
 export const QUERY_STUDY_COURSES = 'QUERY_STUDY_COURSES';
+
+//order
+export const QUERY_ORDERS = 'QUERY_ORDERS';

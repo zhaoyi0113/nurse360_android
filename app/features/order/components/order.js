@@ -6,6 +6,7 @@ export default class Order extends React.Component {
 
   render() {
     let {order} = this.props;
+    let actionStyle = order.orderStatus === 'TO_SERVICE' ? styles.action_active : styles.action_gray;
     return (
       <View style={styles.container}>
         <View style={styles.header}>
@@ -24,7 +25,9 @@ export default class Order extends React.Component {
           <Text style={{marginLeft: 50, fontSize: FontSize.small}}>{order.address}</Text>
           <View style={{ flex:1,  marginRight: 10}}>
             <Text
-              style={{fontSize: FontSize.small, borderWidth:1, alignSelf: 'flex-end', padding:2, color:'gray', borderColor:'gray'}}>{order.actionName}</Text>
+              style={actionStyle}>
+              {order.actionName}
+            </Text>
           </View>
         </View>
       </View>
@@ -59,6 +62,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+  },
+  action_gray: {
+    fontSize: FontSize.small, borderWidth: 1, alignSelf: 'flex-end', padding: 2, color: 'gray',
+    borderColor: 'gray', width: 50, textAlign: 'center'
+  },
+  action_active: {
+    fontSize: FontSize.small, borderWidth: 1, alignSelf: 'flex-end', padding: 2, color: 'rgb(85, 155, 236)',
+    borderColor: 'rgb(85, 155, 236)', width: 50, textAlign: 'center'
   }
 
 });

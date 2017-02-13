@@ -1,5 +1,15 @@
 
 import * as utils from './common_reducer';
+import * as types from '../actions/action_types';
+
+export const OrderReducer = (state={}, action) => {
+  switch(action.type){
+    case types.QUERY_ORDERS + types.SUCCESS:
+      return {...state, orders: parseUserOrders(action.payload.data)}
+    default:
+      return state;
+  }
+}
 
 export const ORDER_STATUS_NAME = {
   TO_SERVICE: '待接单',
