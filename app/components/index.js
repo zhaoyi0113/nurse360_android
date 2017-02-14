@@ -67,6 +67,8 @@ export default class App extends Component {
           }
         </View>
       </View>
+    } else if (route.component) {
+      return route.component;
     } else {
       return routers.getRouteComponent(route, navigator);
     }

@@ -1,9 +1,11 @@
-import React, {Component} from 'react';
-import {View, ScrollView, Image, RefreshControl, StyleSheet, Text, Dimensions} from 'react-native';
-
-import CommonRowCell from '../../../components/common_row_cell';
-import CommonTableHeader from '../../../components/common_table_header';
-import Order from '../../order/components/order';
+import React, {Component} from "react";
+import {View, ScrollView, Image, RefreshControl, StyleSheet, Text, Dimensions} from "react-native";
+import CommonRowCell from "../../../components/common_row_cell";
+import CommonTableHeader from "../../../components/common_table_header";
+import Order from "../../order/components/order";
+import {NOTIFICATION_CATEGORY_VIEW, STUDY_CATEGORY_VIEW} from "../../../routers";
+import NotificationListContainer from "../containers/notification_list_container";
+import StudyCourseListContainer from '../containers/study_course_list_container';
 
 export default class Home extends Component {
 
@@ -24,12 +26,10 @@ export default class Home extends Component {
   _getNotificationView() {
     if (this.props.notifications.length > 0) {
       return this.props.notifications.map((noti, i) => {
-        const image = noti.significance === 'NO' ? require('../../../images/notification/inform_blue.png')
-          : require('../../../images/notification/inform_red.png')
-        return <CommonRowCell key={i} title={noti.title} description={noti.introduction} image={image}/>
+        return <CommonRowCell key={i} title={noti.title} description={noti.introduction} image={noti.image}/>
       });
     } else {
-      return <Text>暂无通知</Text>;
+      return <Text style={{textAlign: 'center'}}>暂无通知</Text>;
     }
   }
 
@@ -40,7 +40,7 @@ export default class Home extends Component {
                               headTitle={course.name.split('')[0]}/>
       });
     } else {
-      return <Text>暂无通知</Text>;
+      return <Text style={{textAlign: 'center'}}>暂无通知</Text>;
     }
   }
 
@@ -50,7 +50,7 @@ export default class Home extends Component {
         return <Order order={order} key={i}/>
       });
     } else {
-      return <Text>暂无服务</Text>;
+      return <Text style={{textAlign: 'center'}}>暂无服务</Text>;
     }
   }
 
@@ -68,13 +68,19 @@ export default class Home extends Component {
       <Image style={{resizeMode: 'stretch'}} source={require('../../../images/home/headIm.png')}/>
       <View style={styles.notification_view}>
         <View style={styles.title_view}>
-          <CommonTableHeader title='通知' more='更多'/>
+          <CommonTableHeader title='通知' more='更多'
+                             clickMore={()=>this.props.navigator.push(
+                               {id: NOTIFICATION_CATEGORY_VIEW, title: '通知',
+                               component: <NotificationListContainer/>})}/>
           {this._getNotificationView()}
         </View>
       </View>
       <View style={styles.notification_view}>
         <View style={styles.title_view}>
-          <CommonTableHeader title='学习' more='更多'/>
+          <CommonTableHeader title='学习' more='更多'
+                             clickMore={()=>this.props.navigator.push(
+                               {id:STUDY_CATEGORY_VIEW, title: '学习', component: <StudyCourseListContainer/>}
+                             )}/>
           {this._getStudyCoursesView()}
         </View>
       </View>

@@ -24,7 +24,11 @@ class HomeContainer extends Component {
   }
 
   render() {
-    return (<Home navigator={this.props.navigator} _refresh={this._refresh.bind(this)}
+    return (<Home navigator={this.props.navigator}
+                  _refresh={this._refresh.bind(this)}
+                  queryNotification={()=>this.props.queryNotification(this.props.token)}
+                  queryStudyCourses={()=>this.props.queryStudyCourses(this.props.token)}
+                  queryOrders={()=>this.props.queryOrders(this.props.token)}
                   ref={(home)=>this.home=home} orders={this.props.orders}
                   courses={this.props.courses} notifications={this.props.notifications}/>);
   }
