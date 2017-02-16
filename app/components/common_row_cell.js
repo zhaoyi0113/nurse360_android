@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {View, StyleSheet, Text, Image} from 'react-native';
+import {View, StyleSheet, Text, Image, TouchableHighlight} from 'react-native';
 import {FontSize} from '../constants';
 
 export default class CommonRowCell extends React.Component {
@@ -17,26 +17,32 @@ export default class CommonRowCell extends React.Component {
 
   render() {
     let {title, description} = this.props;
-
     return (<View style={styles.container}>
       {this._getHeaderView()}
-      <View style={styles.text_view}>
-        <Text style={styles.title}>{title}</Text>
-        <Text style={styles.description} numberOfLines={1}>{description}</Text>
-      </View>
+      <TouchableHighlight style={{flex:5, flexDirection: 'row'}} underlayColor="transparent"
+                          onPress={this.props.onClick.bind(this)}>
+        <View style={styles.text_view}>
+          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.description} numberOfLines={1}>{description}</Text>
+        </View>
+      </TouchableHighlight>
       <Image style={styles.next} source={require('../images/next_gray.png')}/>
     </View>);
   }
+
 }
 
 CommonRowCell.propTypes = {
   title: React.PropTypes.string,
   description: React.PropTypes.string,
+  onClick: React.PropTypes.func,
 }
 
 CommonRowCell.defaultProps = {
   title: '',
   description: '',
+  onClick: () => {
+  },
 }
 
 const styles = StyleSheet.create({
@@ -53,7 +59,7 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 30,
   },
-  head_title:{
+  head_title: {
     margin: 5,
     padding: 5,
     height: 30,
@@ -63,7 +69,7 @@ const styles = StyleSheet.create({
     color: 'rgb(85, 155, 236)',
     fontSize: FontSize.large,
     borderWidth: 1,
-    textAlign:'center',
+    textAlign: 'center',
     textAlignVertical: 'center',
   },
   text_view: {

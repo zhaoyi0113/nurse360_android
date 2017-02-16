@@ -11,6 +11,9 @@ export const USER_AGREEMENT = 3;
 export const STUDY_CATEGORY_VIEW = 4;
 export const NOTIFICATION_CATEGORY_VIEW = 5;
 export const PATIENT_SERVICE_CATEGORY_VIEW = 6;
+export const ARTICLE_VIEW = 7;
+export const NOTIFICATION_DETAIL = 8;
+export const COURSE_DETAIL = 9;
 
 export const routers = [
   {
@@ -35,6 +38,15 @@ export const routers = [
   }, {
     id: PATIENT_SERVICE_CATEGORY_VIEW,
     title: '患者服务'
+  }, {
+    id: ARTICLE_VIEW,
+    title: '文章',
+  }, {
+    id: NOTIFICATION_DETAIL,
+    title: '',
+  }, {
+    id: COURSE_DETAIL,
+    title: '',
   }
 ]
 

@@ -69,6 +69,10 @@ export const requestGet = (type, url, token, options) => {
   if (options && options.client) {
     client = options.client;
   }
+  let responseType = 'json';
+  if (options && options.responseType) {
+    responseType = options.responseType;
+  }
   return {
     type: type,
     client: client,
@@ -76,7 +80,7 @@ export const requestGet = (type, url, token, options) => {
       request: {
         method: 'get',
         url: url,
-        responseType: 'json',
+        responseType: responseType,
         headers: headers
       }
     }

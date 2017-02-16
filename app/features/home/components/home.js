@@ -3,10 +3,17 @@ import {View, ScrollView, Image, RefreshControl, StyleSheet, Text, Dimensions} f
 import CommonRowCell from "../../../components/common_row_cell";
 import CommonTableHeader from "../../../components/common_table_header";
 import Order from "../../order/components/order";
-import {NOTIFICATION_CATEGORY_VIEW, STUDY_CATEGORY_VIEW, PATIENT_SERVICE_CATEGORY_VIEW} from "../../../routers";
+import {
+  NOTIFICATION_CATEGORY_VIEW,
+  STUDY_CATEGORY_VIEW,
+  PATIENT_SERVICE_CATEGORY_VIEW,
+  NOTIFICATION_DETAIL,
+  COURSE_DETAIL,
+} from "../../../routers";
 import NotificationListContainer from "../containers/notification_list_container";
 import StudyCourseListContainer from '../containers/study_course_list_container';
 import OrderListContainer from '../../order/containers/order_list_container';
+import ArticleContainer from '../../../containers/article_container';
 
 export default class Home extends Component {
 
@@ -27,7 +34,10 @@ export default class Home extends Component {
   _getNotificationView() {
     if (this.props.notifications.length > 0) {
       return this.props.notifications.map((noti, i) => {
-        return <CommonRowCell key={i} title={noti.title} description={noti.introduction} image={noti.image}/>
+        return <CommonRowCell key={i} title={noti.title} description={noti.introduction} image={noti.image}
+                              onClick={()=>this.props.navigator.push(
+                               {id: NOTIFICATION_DETAIL, title: noti.title,
+                               component: <ArticleContainer routeId={NOTIFICATION_DETAIL} id={noti.id}/>})}/>
       });
     } else {
       return <Text style={{textAlign: 'center'}}>暂无通知</Text>;
@@ -38,7 +48,14 @@ export default class Home extends Component {
     if (this.props.courses.length > 0) {
       return this.props.courses.map((course, i) => {
         return <CommonRowCell key={i} title={course.name} description={course.introduction}
-                              headTitle={course.name.split('')[0]}/>
+                              headTitle={course.name.split('')[0]}
+                              onClick={()=> this.props.navigator.push(
+                                {
+                                  id: COURSE_DETAIL,
+                                  title: course.name,
+                                  component: <ArticleContainer routeId={COURSE_DETAIL} id={course.id}/>
+                                }
+                              )}/>
       });
     } else {
       return <Text style={{textAlign: 'center'}}>暂无通知</Text>;
@@ -88,7 +105,8 @@ export default class Home extends Component {
       <View style={styles.notification_view}>
         <View style={styles.title_view}>
           <CommonTableHeader title='患者服务' more='更多'
-                             clickMore={()=>this.props.navigator.push({id:PATIENT_SERVICE_CATEGORY_VIEW, title: '患者服务', component: <OrderListContainer/>})}/>
+                             clickMore={()=>this.props.navigator.push({id:PATIENT_SERVICE_CATEGORY_VIEW, title: '患者服务',
+                             component: <OrderListContainer/>})}/>
           {this._getOrdersView()}
         </View>
       </View>
