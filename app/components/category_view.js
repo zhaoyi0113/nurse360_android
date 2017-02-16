@@ -22,11 +22,15 @@ export default class CategoryView extends React.Component {
       } else {
         this.setState({loadMore: false});
       }
+    } else {
+      this.setState({loadMore: false});
     }
   }
 
   renderRow(rowData) {
-    return <CommonRowCell title={rowData.title} description={rowData.introduction} image={rowData.image} headTitle={rowData.name.split('')[0]}/>
+    let headTitle = rowData.name && rowData.name.split('')[0];
+    return <CommonRowCell title={rowData.title} description={rowData.introduction} image={rowData.image}
+                          headTitle={headTitle}/>
   }
 
   render() {

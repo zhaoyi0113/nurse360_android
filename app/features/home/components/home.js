@@ -3,9 +3,10 @@ import {View, ScrollView, Image, RefreshControl, StyleSheet, Text, Dimensions} f
 import CommonRowCell from "../../../components/common_row_cell";
 import CommonTableHeader from "../../../components/common_table_header";
 import Order from "../../order/components/order";
-import {NOTIFICATION_CATEGORY_VIEW, STUDY_CATEGORY_VIEW} from "../../../routers";
+import {NOTIFICATION_CATEGORY_VIEW, STUDY_CATEGORY_VIEW, PATIENT_SERVICE_CATEGORY_VIEW} from "../../../routers";
 import NotificationListContainer from "../containers/notification_list_container";
 import StudyCourseListContainer from '../containers/study_course_list_container';
+import OrderListContainer from '../../order/containers/order_list_container';
 
 export default class Home extends Component {
 
@@ -86,7 +87,8 @@ export default class Home extends Component {
       </View>
       <View style={styles.notification_view}>
         <View style={styles.title_view}>
-          <CommonTableHeader title='患者服务' more='更多'/>
+          <CommonTableHeader title='患者服务' more='更多'
+                             clickMore={()=>this.props.navigator.push({id:PATIENT_SERVICE_CATEGORY_VIEW, title: '患者服务', component: <OrderListContainer/>})}/>
           {this._getOrdersView()}
         </View>
       </View>
