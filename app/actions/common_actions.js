@@ -12,6 +12,10 @@ export const clearAlert = () => {
   return {type: types.CLEAR_ALERT}
 }
 
+export const setNavigator = (navigator) => {
+  return {type: types.SET_NAVIGATOR, navigator};
+}
+
 export const requestPut = (type, url, data, token, options) => {
   return requestPutPost(type, url, 'put', data, token, options);
 }

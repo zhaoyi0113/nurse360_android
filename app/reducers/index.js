@@ -1,13 +1,12 @@
-import {combineReducers} from 'redux'
-import {LoginReducer} from './login_reducer';
-import {CommonReducer} from './common_reducer';
-import {UserReducer} from './user_reducer';
-import {HospitalReducer} from './hospital_reducer';
-import {StudyReducer} from './study_reducers';
-import {NotificationReducer} from './notification_reducers';
-import {OrderReducer} from './order_reducer';
-
-import * as types from '../actions/action_types';
+import {combineReducers} from "redux";
+import {LoginReducer} from "./login_reducer";
+import {CommonReducer} from "./common_reducer";
+import {UserReducer} from "./user_reducer";
+import {HospitalReducer} from "./hospital_reducer";
+import {StudyReducer} from "./study_reducers";
+import {NotificationReducer} from "./notification_reducers";
+import {OrderReducer} from "./order_reducer";
+import * as types from "../actions/action_types";
 
 const initialState = {};
 

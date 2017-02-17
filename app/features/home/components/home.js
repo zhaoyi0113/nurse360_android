@@ -89,7 +89,7 @@ export default class Home extends Component {
           <CommonTableHeader title='通知' more='更多'
                              clickMore={()=>this.props.navigator.push(
                                {id: NOTIFICATION_CATEGORY_VIEW, title: '通知',
-                               component: <NotificationListContainer/>})}/>
+                               component: <NotificationListContainer navigator={this.props.navigator}/>})}/>
           {this._getNotificationView()}
         </View>
       </View>
@@ -97,7 +97,7 @@ export default class Home extends Component {
         <View style={styles.title_view}>
           <CommonTableHeader title='学习' more='更多'
                              clickMore={()=>this.props.navigator.push(
-                               {id:STUDY_CATEGORY_VIEW, title: '学习', component: <StudyCourseListContainer/>}
+                               {id:STUDY_CATEGORY_VIEW, title: '学习', component: <StudyCourseListContainer navigator={this.props.navigator}/>}
                              )}/>
           {this._getStudyCoursesView()}
         </View>
@@ -106,7 +106,7 @@ export default class Home extends Component {
         <View style={styles.title_view}>
           <CommonTableHeader title='患者服务' more='更多'
                              clickMore={()=>this.props.navigator.push({id:PATIENT_SERVICE_CATEGORY_VIEW, title: '患者服务',
-                             component: <OrderListContainer/>})}/>
+                             component: <OrderListContainer navigator={this.props.navigator}/>})}/>
           {this._getOrdersView()}
         </View>
       </View>

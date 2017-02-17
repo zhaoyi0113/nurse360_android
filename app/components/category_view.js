@@ -30,7 +30,7 @@ export default class CategoryView extends React.Component {
   renderRow(rowData) {
     let headTitle = rowData.name && rowData.name.split('')[0];
     return <CommonRowCell title={rowData.title} description={rowData.introduction} image={rowData.image}
-                          headTitle={headTitle}/>
+                          headTitle={headTitle} onClick={()=>this.props.onClick(rowData)}/>
   }
 
   render() {
@@ -57,10 +57,13 @@ export default class CategoryView extends React.Component {
 CategoryView.propTypes = {
   title: React.PropTypes.string,
   description: React.PropTypes.string,
+  navigator: React.PropTypes.object,
+  onClick: React.PropTypes.func,
 }
 CategoryView.defaultProps = {
   title: '',
-  description: ''
+  description: '',
+  onClick: ()=>{}
 }
 
 const styles = StyleSheet.create({

@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 import CategoryView from '../../../components/category_view';
 
 import * as actions from '../../../actions/study_actions';
+import {COURSE_DETAIL} from '../../../routers';
+import ArticleContainer from '../../../containers/article_container';
 
 class StudyCourseListContainer extends React.Component {
 
@@ -29,6 +31,15 @@ class StudyCourseListContainer extends React.Component {
       <CategoryView title='我的学习' description='我正在学习的课程'
                     list={this.props.courses}
                     loadMoreData={this.loadMoreData.bind(this)}
+                    onClick={ (data)=>
+                      this.props.navigator.push(
+                                {
+                                  id: COURSE_DETAIL,
+                                  title: data.name,
+                                  component: <ArticleContainer routeId={COURSE_DETAIL} id={data.id}/>
+                                }
+                              )
+                    }
                     image={require('../../../images/study/studyIcon.png')}/>)
   }
 

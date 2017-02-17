@@ -22,7 +22,7 @@ class MainContainer extends Component {
 
     return (
       <View style={{flex: 1}}>
-        <App token={this.props.token}/>
+        <App token={this.props.token} setNavigator={this.props.setNavigator.bind(this)} navigator={this.props.navigator}/>
         <WaitingIndicator isVisible={this.props.waitingIndicator}/>
       </View>
     );
@@ -41,6 +41,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     clearAlert: () => {
       dispatch(actions.clearAlert());
+    },
+    setNavigator: (navigator) => {
+      dispatch(actions.setNavigator(navigator));
     }
   }
 }
@@ -50,11 +53,3 @@ MainContainer.propTypes = {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainContainer);
-
-const styles = StyleSheet.create({
-  centering: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 8,
-  },
-});

@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 import CategoryView from '../../../components/category_view';
 
 import * as actions from '../../../actions/notification_actions';
+import ArticleContainer from '../../../containers/article_container';
+import {NOTIFICATION_DETAIL} from '../../../routers';
 
 class NotificationListContainer extends React.Component {
 
@@ -29,6 +31,9 @@ class NotificationListContainer extends React.Component {
       <CategoryView title='通知' description='医院通知信息'
                     list={this.props.notifications}
                     loadMoreData={this.loadMoreData.bind(this)}
+                    onClick={(data)=>this.props.navigator.push(
+                               {id: NOTIFICATION_DETAIL, title: data.title,
+                               component: <ArticleContainer routeId={NOTIFICATION_DETAIL} id={data.id}/>})}
                     image={require('../../../images/notification/inform_blue.png')}/>)
   }
 
