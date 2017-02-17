@@ -1,8 +1,8 @@
-import React from 'react';
-import {ListView, View, Image, Text, ActivityIndicator, StyleSheet} from 'react-native';
-import Order from './order';
-import {FontSize} from "../../../constants";
-import _ from 'lodash';
+import React from "react";
+import {ListView, View, Image, Text, ActivityIndicator, StyleSheet} from "react-native";
+import Order from "./order";
+import _ from "lodash";
+import HeaderCategoryView from "../../../components/header_category_view";
 
 export default class OrderList extends React.Component {
 
@@ -35,12 +35,7 @@ export default class OrderList extends React.Component {
     let {image, title, description} = this.props;
     return (
       <View style={styles.container}>
-        <View style={styles.header_view}>
-          <Image style={styles.title_image} source={image}/>
-          <Text style={styles.title}>{title}</Text>
-          <Text style={styles.description}>{description}</Text>
-        </View>
-
+        <HeaderCategoryView title={title} description={description} image={image}/>
         <ListView
           style={styles.list_view}
           dataSource={this.state.dataSource.cloneWithRows(this.state.orders)}
@@ -64,29 +59,8 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     marginTop: 40,
   },
-  header_view: {
-    flex: 0.3,
-    flexDirection: 'column',
-    alignItems: 'center',
-    margin: 10,
-    backgroundColor: 'white',
-  },
-  title_image: {
-    resizeMode: 'contain',
-    marginTop: 10,
-    flex: 1,
-  },
-  title: {
-    fontSize: FontSize.xlarge,
-    flex: 0.5,
-  },
-  description: {
-    fontSize: FontSize.small,
-    flex: 0.5,
-  },
   list_view: {
     flex: 5,
     margin: 10,
-
   }
 });

@@ -1,8 +1,8 @@
 import React from "react";
 import {View, Text, Image, StyleSheet, ListView, ActivityIndicator} from "react-native";
 import _ from "lodash";
-import {FontSize} from "../constants";
 import CommonRowCell from "./common_row_cell";
+import HeaderCategoryView from "./header_category_view";
 
 export default class CategoryView extends React.Component {
 
@@ -35,13 +35,9 @@ export default class CategoryView extends React.Component {
 
   render() {
     let {title, description, image} = this.props;
-
     return (<View style={styles.container}>
-      <View style={styles.header_view}>
-        <Image style={styles.title_image} source={image}/>
-        <Text style={styles.title}>{title}</Text>
-        <Text style={styles.description}>{description}</Text>
-      </View>
+      <HeaderCategoryView description={description} image={image} title={title}/>
+
       <ListView
         style={styles.list_view}
         dataSource={this.state.dataSource.cloneWithRows(this.state.list)}
@@ -73,29 +69,9 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     marginTop: 40,
   },
-  header_view: {
-    flex: 0.3,
-    flexDirection: 'column',
-    alignItems: 'center',
-    margin: 10,
-    backgroundColor: 'white',
-  },
-  title_image: {
-    resizeMode: 'contain',
-    marginTop: 10,
-    flex: 1,
-  },
-  title: {
-    fontSize: FontSize.xlarge,
-    flex: 0.5,
-  },
-  description: {
-    fontSize: FontSize.small,
-    flex: 0.5,
-  },
   list_view: {
     flex: 5,
-    margin: 10,
+    margin: 5,
 
   }
 });
