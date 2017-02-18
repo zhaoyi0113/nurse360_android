@@ -68,10 +68,11 @@ export default class Home extends Component {
     if (this.props.orders.length > 0) {
       return this.props.orders.map((order, i) => {
         return <Order order={order} key={i} navigator={this.props.navigator}
+                      fetchOrder={this.props.fetchOrder.bind(this)}
                       onClick={()=>this.props.navigator.push({
                         id: ORDER_DETAIL,
                         title: '订单详情',
-                        component: <OrderDetail order={order}/>
+                        component: <OrderDetail order={order} fetchOrder={this.props.fetchOrder.bind(this)}/>
                       })}/>
       });
     } else {
@@ -118,7 +119,7 @@ export default class Home extends Component {
                                                   onClick={(order)=>this.props.navigator.push({
                                                     id: ORDER_DETAIL,
                                                     title: '订单详情',
-                                                    component: <OrderDetail order={order}/>
+                                                    component: <OrderDetail order={order} fetchOrder={this.props.fetchOrder.bind(this)}/>
                                                   })}/>
                                       })}
           />

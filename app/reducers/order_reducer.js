@@ -1,11 +1,12 @@
-
 import * as utils from './common_reducer';
 import * as types from '../actions/action_types';
 
-export const OrderReducer = (state={}, action) => {
-  switch(action.type){
+export const OrderReducer = (state = {}, action) => {
+  switch (action.type) {
     case types.QUERY_ORDERS + types.SUCCESS:
       return {...state, orders: parseUserOrders(action.payload.data)}
+    case types.FETCH_ORDER_HTTP + types.SUCCESS:
+      return {...state, fetchOrder: action.payload.data}
     default:
       return state;
   }
@@ -35,7 +36,7 @@ export const getOrderAction = (status) => {
 
 export const parseUserOrders = (data) => {
   let orders = [];
-  data.forEach((o)=>{
+  data.forEach((o) => {
     orders.push(parseUserOrder(o));
   })
   return orders;

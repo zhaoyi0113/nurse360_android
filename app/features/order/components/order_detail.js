@@ -12,7 +12,7 @@ export default class OrderDetail extends React.Component {
     let payment = order.pingPP && order.pingPP.length > 0 ? order.pingPP[0] : {}
 
     return (<View style={styles.container}>
-      <HeaderCategoryView title='快抢单' description={'订单号:'+order.orderNo}
+      <HeaderCategoryView title={order.orderStatus === 'TO_SERVICE'?'快抢单':'已被抢'} description={'订单号:'+order.orderNo}
                           image={require('../../../images/order/alPay.png')}/>
       <Patient patient={patient} serviceStartTime={order.serviceStartTime} address={order.address}/>
       {
@@ -20,7 +20,7 @@ export default class OrderDetail extends React.Component {
           <View/>
       }
       <Paymethod payment={payment} service={order.serviceItem}/>
-      <TimeInfo order={order} payment={payment}/>
+      <TimeInfo order={order} payment={payment} fetchOrder={this.props.fetchOrder.bind(this)}/>
     </View>);
   }
 }
@@ -84,7 +84,7 @@ class Paymethod extends React.Component {
 class TimeInfo extends React.Component {
   render() {
     let {order, payment} = this.props;
-    let textStyle = StyleSheet.create({style:{fontSize: FontSize.small}});
+    let textStyle = StyleSheet.create({style: {fontSize: FontSize.small}});
     let actionStyle = order.orderStatus === 'TO_SERVICE' ? styles.action_active : styles.action_gray;
     return (<View style={{flex:0.15, flexDirection: 'column', margin:10}}>
       <View style={{flex:1, flexDirection: 'row'}}>
@@ -98,7 +98,7 @@ class TimeInfo extends React.Component {
       <View style={{flex:1, flexDirection: 'row'}}>
         <Text style={textStyle.style}>接单时间：</Text>
         <Text style={{fontSize: FontSize.small, flex:2}}>{getTime(order.fetchTime)}</Text>
-        <Text style={actionStyle}>{order.actionName}</Text>
+        <Text style={actionStyle} onPress={()=>this.props.fetchOrder(order.id)}>{order.actionName}</Text>
       </View>
     </View>);
   }

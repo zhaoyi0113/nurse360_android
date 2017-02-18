@@ -30,6 +30,7 @@ class HomeContainer extends Component {
                   queryStudyCourses={()=>this.props.queryStudyCourses(this.props.token)}
                   queryOrders={()=>this.props.queryOrders(this.props.token)}
                   ref={(home)=>this.home=home} orders={this.props.orders}
+                  fetchOrder={(id)=>this.props.fetchOrder(this.props.token, id)}
                   courses={this.props.courses} notifications={this.props.notifications}/>);
   }
 
@@ -54,6 +55,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     queryOrders: (token) => {
       return dispatch(orderActions.queryOrders(token, 0, 2));
+    },
+    fetchOrder: (token, id) => {
+      return dispatch(orderActions.fetchOrder(token, id));
     }
   }
 }
