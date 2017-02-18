@@ -9,11 +9,13 @@ import {
   PATIENT_SERVICE_CATEGORY_VIEW,
   NOTIFICATION_DETAIL,
   COURSE_DETAIL,
+  ORDER_DETAIL,
 } from "../../../routers";
 import NotificationListContainer from "../containers/notification_list_container";
 import StudyCourseListContainer from '../containers/study_course_list_container';
 import OrderListContainer from '../../order/containers/order_list_container';
 import ArticleContainer from '../../../containers/article_container';
+import {OrderDetail} from '../../../features/order';
 
 export default class Home extends Component {
 
@@ -65,7 +67,12 @@ export default class Home extends Component {
   _getOrdersView() {
     if (this.props.orders.length > 0) {
       return this.props.orders.map((order, i) => {
-        return <Order order={order} key={i}/>
+        return <Order order={order} key={i} navigator={this.props.navigator}
+                      onClick={()=>this.props.navigator.push({
+                        id: ORDER_DETAIL,
+                        title: '订单详情',
+                        component: <OrderDetail order={order}/>
+                      })}/>
       });
     } else {
       return <Text style={{textAlign: 'center'}}>暂无服务</Text>;
@@ -105,8 +112,16 @@ export default class Home extends Component {
       <View style={styles.notification_view}>
         <View style={styles.title_view}>
           <CommonTableHeader title='患者服务' more='更多'
-                             clickMore={()=>this.props.navigator.push({id:PATIENT_SERVICE_CATEGORY_VIEW, title: '患者服务',
-                             component: <OrderListContainer navigator={this.props.navigator}/>})}/>
+                             clickMore={()=>this.props.navigator.push(
+                                      {id:PATIENT_SERVICE_CATEGORY_VIEW, title: '患者服务',
+                                      component: <OrderListContainer navigator={this.props.navigator}
+                                                  onClick={(order)=>this.props.navigator.push({
+                                                    id: ORDER_DETAIL,
+                                                    title: '订单详情',
+                                                    component: <OrderDetail order={order}/>
+                                                  })}/>
+                                      })}
+          />
           {this._getOrdersView()}
         </View>
       </View>

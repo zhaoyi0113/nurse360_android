@@ -14,6 +14,7 @@ export const PATIENT_SERVICE_CATEGORY_VIEW = 6;
 export const ARTICLE_VIEW = 7;
 export const NOTIFICATION_DETAIL = 8;
 export const COURSE_DETAIL = 9;
+export const ORDER_DETAIL = 10;
 
 export const routers = [
   {
@@ -46,6 +47,9 @@ export const routers = [
     title: '',
   }, {
     id: COURSE_DETAIL,
+    title: '',
+  }, {
+    id: ORDER_DETAIL,
     title: '',
   }
 ]

@@ -26,6 +26,7 @@ class OrderListContainer extends React.Component {
   render() {
     return (<OrderList orders={this.props.orders} loadMoreData={this.loadMoreData.bind(this)}
                        title="患者服务" description="患者需求服务"
+                       onClick={this.props.onClick.bind(this)}
                        image={require('../../../images/order/alPay.png')}/>);
   }
 

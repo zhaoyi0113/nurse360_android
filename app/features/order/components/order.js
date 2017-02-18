@@ -8,7 +8,8 @@ export default class Order extends React.Component {
     let {order} = this.props;
     let actionStyle = order.orderStatus === 'TO_SERVICE' ? styles.action_active : styles.action_gray;
     return (
-      <View style={styles.container}>
+      <TouchableHighlight style={styles.container} onPress={this.props.onClick.bind(this)} underlayColor='transparent'>
+        <View style={{flex:1}}>
         <View style={styles.header}>
           <Image style={{height: 30, width: 30, margin:10}} source={require('../../../images/yi.png')}/>
           <Text style={{fontSize: FontSize.large}}>{order.hospitalName}</Text>
@@ -25,22 +26,27 @@ export default class Order extends React.Component {
           <Text style={{marginLeft: 50, fontSize: FontSize.small}}>{order.address}</Text>
           <View style={{ flex:1,  marginRight: 10}}>
             <Text
+              onPress={()=>console.log('抢单')}
               style={actionStyle}>
               {order.actionName}
             </Text>
           </View>
         </View>
-      </View>
+        </View>
+      </TouchableHighlight>
     )
   }
 }
 
 Order.propTypes = {
   order: React.PropTypes.object.isRequired,
+  onClick: React.PropTypes.func,
 }
 
 Order.defaultProps = {
-  order: {}
+  order: {},
+  onClick: () => {
+  }
 }
 
 const styles = StyleSheet.create({
