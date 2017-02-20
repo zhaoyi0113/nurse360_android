@@ -6,6 +6,9 @@ import _ from 'lodash';
 import Order from '../../order/components/order';
 import CourseCell from '../../course/components/course_cell';
 import * as routers from '../../../routers';
+import UserTaskContainer from '../containers/user_task_container';
+
+import {USER_ORDER_LIST} from '../../../routers';
 
 export default class User extends React.Component {
 
@@ -22,7 +25,8 @@ export default class User extends React.Component {
                     navigator={this.props.navigator}
         />
         <Function userInfo={userInfo}/>
-        <Tasks userInfo={userInfo} userOrder={userOrder}/>
+        <Tasks userInfo={userInfo} userOrder={userOrder}
+               clickMore={()=> this.props.navigator.push({id:USER_ORDER_LIST, component: <UserTaskContainer navigator={this.props.navigator}/>})}/>
         <LearnHistory userInfo={userInfo} userCourse={userCourse}/>
       </ScrollView>
     );
@@ -130,7 +134,7 @@ class Tasks extends React.Component {
       <View style={taskStyles.container}>
         <View style={taskStyles.header}>
           <Text style={taskStyles.reminder}>任务提醒</Text>
-          <TouchableHighlight><Text style={taskStyles.more}>更多</Text></TouchableHighlight>
+          <TouchableHighlight onPress={this.props.clickMore.bind(this)} underlayColor='lightgray'><Text style={taskStyles.more}>更多</Text></TouchableHighlight>
         </View>
         {order}
       </View>

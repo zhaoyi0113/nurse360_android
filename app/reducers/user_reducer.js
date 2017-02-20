@@ -6,9 +6,11 @@ export const UserReducer = (state = {}, action) => {
     case types.USER_INFO_HTTP + types.SUCCESS:
       return {...state, userInfo: parseUserInfo(action.payload.data)};
     case types.USER_ORDER_HTTP + types.SUCCESS:
-      return {...state, userOrders: orderUtils.parseUserOrders(action.payload.data)};
+      return {...state, userOrder: orderUtils.parseUserOrders(action.payload.data)};
     case types.USER_COURSE_HTTP + types.SUCCESS:
       return {...state, userCourses: action.payload.data}
+    case types.USER_ORDERS+types.SUCCESS:
+      return {...state, userOrders: orderUtils.parseUserOrders(action.payload.data)}
     default:
       return state;
   }

@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import * as actions from "../../../actions/user_actions";
 import User from "../components/user";
 
+
 class UserContainer extends Component {
 
   componentDidMount() {
@@ -10,7 +11,7 @@ class UserContainer extends Component {
   }
 
   render() {
-    let userOrder = this.props.userOrders.length > 0 ? this.props.userOrders[0] : {};
+    let userOrder = this.props.userOrder.length > 0 ? this.props.userOrder[0] : {};
     let userCourse = this.props.userCourses.length > 0 ? this.props.userCourses[0] : {};
     return (<User userInfo={this.props.userInfo} userOrder={userOrder} userCourse={userCourse} navigator={this.props.navigator}/>)
   }
@@ -23,7 +24,7 @@ UserContainer.propTypes = {
 }
 
 UserContainer.defaultProps = {
-  userOrders: [],
+  userOrder: [],
   userCourses: [],
 }
 
@@ -31,7 +32,7 @@ const mapStateToProps = (state) => {
   return {
     token: state.login.token,
     userInfo: state.user.userInfo,
-    userOrders: state.user.userOrders,
+    userOrder: state.user.userOrder,
     userCourses: state.user.userCourses,
   }
 }

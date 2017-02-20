@@ -16,7 +16,8 @@ export default class OrderDetail extends React.Component {
                           image={require('../../../images/order/alPay.png')}/>
       <Patient patient={patient} serviceStartTime={order.serviceStartTime} address={order.address}/>
       {
-        order.vendorType === 'HOSPITAL' ? <Hospital hospital={order.vendorHospital} service={order.serviceItem} serviceIcon={order.icon}/> :
+        order.vendorType === 'HOSPITAL' ?
+          <Hospital hospital={order.vendorHospital} service={order.serviceItem} serviceIcon={order.icon}/> :
           <View/>
       }
       <Paymethod payment={payment} service={order.serviceItem}/>
@@ -24,6 +25,7 @@ export default class OrderDetail extends React.Component {
     </View>);
   }
 }
+
 
 class Patient extends React.Component {
   render() {
@@ -88,12 +90,12 @@ class TimeInfo extends React.Component {
     let actionStyle = order.orderStatus === 'TO_SERVICE' ? styles.action_active : styles.action_gray;
     let fetchTime;
     let fetchTimeStyle;
-    if(order.fetchTime){
+    if (order.fetchTime) {
       fetchTime = getTime(order.fetchTime);
-      fetchTimeStyle = StyleSheet.create({style: {fontSize: FontSize.small, flex:2}});
+      fetchTimeStyle = StyleSheet.create({style: {fontSize: FontSize.small, flex: 2}});
     } else {
       fetchTime = '待接单';
-      fetchTimeStyle = StyleSheet.create({style: {fontSize: FontSize.small, flex:2, color: 'rgb(85, 155, 236)'}});
+      fetchTimeStyle = StyleSheet.create({style: {fontSize: FontSize.small, flex: 2, color: 'rgb(85, 155, 236)'}});
     }
     return (<View style={{flex:0.15, flexDirection: 'column', margin:10}}>
       <View style={{flex:1, flexDirection: 'row'}}>
@@ -115,9 +117,12 @@ class TimeInfo extends React.Component {
 
 OrderDetail.propTypes = {
   order: React.PropTypes.object,
+  fetchOrder: React.PropTypes.func,
 }
 OrderDetail.defaultProps = {
-  order: {}
+  order: {},
+  fetchOrder: () => {
+  }
 }
 
 const styles = StyleSheet.create({
