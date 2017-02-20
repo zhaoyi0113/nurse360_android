@@ -16,7 +16,7 @@ export default class OrderDetail extends React.Component {
                           image={require('../../../images/order/alPay.png')}/>
       <Patient patient={patient} serviceStartTime={order.serviceStartTime} address={order.address}/>
       {
-        order.vendorType === 'HOSPITAL' ? <Hospital hospital={order.vendorHospital} service={order.serviceItem}/> :
+        order.vendorType === 'HOSPITAL' ? <Hospital hospital={order.vendorHospital} service={order.serviceItem} serviceIcon={order.icon}/> :
           <View/>
       }
       <Paymethod payment={payment} service={order.serviceItem}/>
@@ -44,7 +44,7 @@ class Patient extends React.Component {
 class Hospital extends React.Component {
 
   render() {
-    let {hospital, service} = this.props;
+    let {hospital, service, serviceIcon} = this.props;
     return (<View style={styles.info_blok}>
       <View style={{flexDirection: 'row', alignItems: 'center', flex: 1.5}}>
         <Image style={{flex:0.2, resizeMode: 'contain', marginRight: 5}}
@@ -53,7 +53,7 @@ class Hospital extends React.Component {
       </View>
       <View style={{flexDirection: 'row', alignItems: 'center', flex: 1.5}}>
         <Image style={{flex:0.08, resizeMode: 'contain', marginRight: 5}}
-               source={require('../../../images/hospital/dingzhituisong.png')}/>
+               source={serviceIcon}/>
         <Text style={{flex:1}}>{service.name}</Text>
         <Text style={{fontSize: FontSize.small}}>¥ {service.servicePrice}</Text>
       </View>
@@ -86,6 +86,15 @@ class TimeInfo extends React.Component {
     let {order, payment} = this.props;
     let textStyle = StyleSheet.create({style: {fontSize: FontSize.small}});
     let actionStyle = order.orderStatus === 'TO_SERVICE' ? styles.action_active : styles.action_gray;
+    let fetchTime;
+    let fetchTimeStyle;
+    if(order.fetchTime){
+      fetchTime = getTime(order.fetchTime);
+      fetchTimeStyle = StyleSheet.create({style: {fontSize: FontSize.small, flex:2}});
+    } else {
+      fetchTime = '待接单';
+      fetchTimeStyle = StyleSheet.create({style: {fontSize: FontSize.small, flex:2, color: 'rgb(85, 155, 236)'}});
+    }
     return (<View style={{flex:0.15, flexDirection: 'column', margin:10}}>
       <View style={{flex:1, flexDirection: 'row'}}>
         <Text style={textStyle.style}>创建时间：</Text>
@@ -97,7 +106,7 @@ class TimeInfo extends React.Component {
       </View>
       <View style={{flex:1, flexDirection: 'row'}}>
         <Text style={textStyle.style}>接单时间：</Text>
-        <Text style={{fontSize: FontSize.small, flex:2}}>{getTime(order.fetchTime)}</Text>
+        <Text style={fetchTimeStyle.style}>{fetchTime}</Text>
         <Text style={actionStyle} onPress={()=>this.props.fetchOrder(order.id)}>{order.actionName}</Text>
       </View>
     </View>);
@@ -124,5 +133,6 @@ const styles = StyleSheet.create({
   action_active: {
     fontSize: FontSize.small, borderWidth: 1, alignSelf: 'flex-end', padding: 2, color: 'rgb(85, 155, 236)',
     borderColor: 'rgb(85, 155, 236)', width: 50, textAlign: 'center'
-  }
+  },
+
 });

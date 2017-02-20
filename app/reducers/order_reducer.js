@@ -50,7 +50,11 @@ export const parseUserOrder = (data) => {
   }
   order.statusName = parseOrderStatus(order.orderStatus);
   order.actionName = getOrderAction(order.orderStatus);
-  order.icon = order.serviceItem.imageUrl;
+  if (order.serviceItem.imageUrl) {
+    order.icon = {uri: order.serviceItem.imageUrl};
+  } else {
+    order.icon = require('../images/order/serviceIcon.png');
+  }
   if (data.serviceItem) {
     order.serviceName = data.serviceItem.name;
     order.orderDate = utils.getDate(data.serviceItem.time);

@@ -17,7 +17,7 @@ export default class Order extends React.Component {
         </View>
         <View style={styles.order}>
           <View style={styles.order_header}>
-            <Image style={{margin:10, height:30, width:30}} source={{uri: order.icon}}/>
+            <Image style={{margin:10, height:30, width:30}} source={order.icon}/>
             <Text style={{fontSize: FontSize.small}}>{order.serviceName}</Text>
             <Text
               style={{fontSize: FontSize.small, flex: 1, textAlign:'right', marginRight:10, color: '#559bec'}}>{order.totalConsumption}元</Text>
