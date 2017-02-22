@@ -7,8 +7,10 @@ import Order from '../../order/components/order';
 import CourseCell from '../../course/components/course_cell';
 import * as routers from '../../../routers';
 import UserTaskContainer from '../containers/user_task_container';
+import OrderDetail from '../../order/components/order_detail';
+import UserHistoryCourseContainer from '../containers/user_history_course_container';
 
-import {USER_ORDER_LIST} from '../../../routers';
+import {USER_ORDER_LIST, ORDER_DETAIL, USER_HISTORY_COURSES} from '../../../routers';
 
 export default class User extends React.Component {
 
@@ -17,17 +19,38 @@ export default class User extends React.Component {
     this.state = {routeIndex: 0};
   }
 
+  _goToUserTask() {
+    this.props.navigator.push({id: USER_ORDER_LIST, component: <UserTaskContainer navigator={this.props.navigator}/>})
+  }
+
+  _goToUserCourse() {
+    this.props.navigator.push(
+      {id: USER_HISTORY_COURSES, title: '学习', component: <UserHistoryCourseContainer navigator={this.props.navigator}/>}
+    )
+  }
+
+
   render() {
-    let {userInfo, userOrder, userCourse} = this.props;
+    let {userInfo, userOrder, userCourse, fetchOrder} = this.props;
     return (
       <ScrollView style={styles.container}>
         <UserHeader userInfo={userInfo}
                     navigator={this.props.navigator}
         />
-        <Function userInfo={userInfo}/>
+        <Function userInfo={userInfo}
+                  goToUserCourse={this._goToUserCourse.bind(this)}
+                  goToUserTask={this._goToUserTask.bind(this)}
+        />
         <Tasks userInfo={userInfo} userOrder={userOrder}
-               clickMore={()=> this.props.navigator.push({id:USER_ORDER_LIST, component: <UserTaskContainer navigator={this.props.navigator}/>})}/>
-        <LearnHistory userInfo={userInfo} userCourse={userCourse}/>
+               fetchOrder={fetchOrder.bind(this)}
+               openOrder={(order)=>this.props.navigator.push({
+                                                    id: ORDER_DETAIL,
+                                                    title: '订单详情',
+                                                    component: <OrderDetail order={order} fetchOrder={this.props.fetchOrder.bind(this)}/>
+                                                  })}
+               clickMore={this._goToUserTask.bind(this)}/>
+        <LearnHistory userInfo={userInfo} userCourse={userCourse}
+                      clickMore={this._goToUserCourse.bind(this)}/>
       </ScrollView>
     );
   }
@@ -88,16 +111,31 @@ class Function extends React.Component {
     super(props);
     this.state = {
       functions: [{
+        id: 0,
         image: require('../../../images/user/woderenwu.png'),
         text: '我的任务',
       }, {
+        id: 1,
         image: require('../../../images/user/wodexuexi.png'),
         text: '我的学习',
       }, {
+        id: 2,
         image: require('../../../images/user/wodetiwen.png'),
         text: '患者提问',
-      }
-      ]
+      }]
+    }
+  }
+
+  _clickFunction(f) {
+    switch (f.id) {
+      case 0:
+        this.props.goToUserTask();
+        break;
+      case 1:
+        this.props.goToUserCourse();
+        break;
+      case 2:
+        break;
     }
   }
 
@@ -106,10 +144,14 @@ class Function extends React.Component {
       <View style={functionStyles.container}>
         {
           this.state.functions.map((f, i) => {
-            return <View key={i} style={functionStyles.view}>
-              <Image style={functionStyles.image} source={f.image}/>
-              <Text>{f.text}</Text>
-            </View>
+            return <TouchableHighlight key={i} underlayColor='lightgray'
+                                       onPress={this._clickFunction.bind(this,f)}
+                                       style={functionStyles.view}>
+              <View key={i}>
+                <Image style={functionStyles.image} source={f.image}/>
+                <Text>{f.text}</Text>
+              </View>
+            </TouchableHighlight>
           })
         }
       </View>
@@ -123,7 +165,7 @@ class Tasks extends React.Component {
     let order;
     if (!_.isEmpty(userOrder)) {
       order = <View style={taskStyles.task}>
-        <Order order={userOrder}/>
+        <Order order={userOrder} onClick={()=>this.props.openOrder(userOrder)}/>
       </View>
     } else {
       order = <View style={{backgroundColor: 'white', padding: 10}}>
@@ -134,7 +176,8 @@ class Tasks extends React.Component {
       <View style={taskStyles.container}>
         <View style={taskStyles.header}>
           <Text style={taskStyles.reminder}>任务提醒</Text>
-          <TouchableHighlight onPress={this.props.clickMore.bind(this)} underlayColor='lightgray'><Text style={taskStyles.more}>更多</Text></TouchableHighlight>
+          <TouchableHighlight onPress={this.props.clickMore.bind(this)} underlayColor='lightgray'><Text
+            style={taskStyles.more}>更多</Text></TouchableHighlight>
         </View>
         {order}
       </View>
@@ -151,13 +194,14 @@ class LearnHistory extends React.Component {
       course = <CourseCell course={this.props.userCourse}/>;
     }
     return (
-      <View style={historyStyles.container}>
-        <View style={historyStyles.header}>
-          <Text style={taskStyles.reminder}>学习历史</Text>
-          <TouchableHighlight><Text style={taskStyles.more}>更多</Text></TouchableHighlight>
+        <View style={historyStyles.container}>
+          <View style={historyStyles.header}>
+            <Text style={taskStyles.reminder}>学习历史</Text>
+            <TouchableHighlight underlayColor='lightgray'
+            onPress={this.props.clickMore.bind(this)}><Text style={taskStyles.more}>更多</Text></TouchableHighlight>
+          </View>
+          {course}
         </View>
-        {course}
-      </View>
     )
   }
 }
@@ -277,7 +321,6 @@ const taskStyles = StyleSheet.create({
   },
   task: {
     backgroundColor: 'white',
-    height: 210,
   }
 });
 
@@ -288,6 +331,6 @@ const historyStyles = StyleSheet.create({
   header: {
     backgroundColor: '#f6f6f6',
     flexDirection: 'row',
-    margin:10
+    margin: 10
   }
 });

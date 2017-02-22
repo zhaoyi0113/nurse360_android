@@ -16,3 +16,4 @@ export const getUserOrders = (token, index, number) => {
 export const getUserHistoryCourse = (token, index, number) => {
   return commonActions.requestGet(types.USER_COURSE_HTTP, '/nurse/extension/course/'+index+'/'+number, token)
 }
+
