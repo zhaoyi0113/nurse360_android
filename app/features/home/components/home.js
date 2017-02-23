@@ -1,8 +1,9 @@
 import React, {Component} from "react";
-import {View, ScrollView, Image, RefreshControl, StyleSheet, Text, Dimensions} from "react-native";
+import {View, ScrollView, Image, RefreshControl, StyleSheet, Text, Dimensions, Alert} from "react-native";
 import CommonRowCell from "../../../components/common_row_cell";
 import CommonTableHeader from "../../../components/common_table_header";
 import Order from "../../order/components/order";
+import * as types from '../../../actions/action_types';
 import {
   NOTIFICATION_CATEGORY_VIEW,
   STUDY_CATEGORY_VIEW,
@@ -33,6 +34,31 @@ export default class Home extends Component {
     this.setState({isRefreshing: false});
   }
 
+  _fetchOrder(order) {
+    this.props.fetchOrder(order.id)
+      .then((response) => {
+        if (response.type === types.FETCH_ORDER_HTTP + types.FAIL) {
+          return;
+        }
+        Alert.alert(
+          '',
+          '您已抢单成功',
+          [
+            {text: '知道了', onPress: () => console.log('Ask me later pressed'), style: 'cancel'},
+            {
+              text: '查看订单', onPress: () => this.props.navigator.push(
+              {
+                id: ORDER_DETAIL,
+                title: '订单详情',
+                component: <OrderDetail order={order} fetchOrder={this._fetchOrder.bind(this)}/>
+              })
+            },
+          ],
+          {cancelable: false}
+        );
+      });
+  }
+
   _getNotificationView() {
     if (this.props.notifications.length > 0) {
       return this.props.notifications.map((noti, i) => {
@@ -60,7 +86,7 @@ export default class Home extends Component {
                               )}/>
       });
     } else {
-      return <Text style={{textAlign: 'center'}}>暂无通知</Text>;
+      return <Text style={{textAlign: 'center'}}>暂无学习</Text>;
     }
   }
 
@@ -68,11 +94,11 @@ export default class Home extends Component {
     if (this.props.orders.length > 0) {
       return this.props.orders.map((order, i) => {
         return <Order order={order} key={i} navigator={this.props.navigator}
-                      fetchOrder={this.props.fetchOrder.bind(this)}
+                      fetchOrder={this._fetchOrder.bind(this)}
                       onClick={()=>this.props.navigator.push({
                         id: ORDER_DETAIL,
                         title: '订单详情',
-                        component: <OrderDetail order={order} fetchOrder={this.props.fetchOrder.bind(this)}/>
+                        component: <OrderDetail order={order} fetchOrder={this._fetchOrder.bind(this)}/>
                       })}/>
       });
     } else {
@@ -119,7 +145,7 @@ export default class Home extends Component {
                                                   onClick={(order)=>this.props.navigator.push({
                                                     id: ORDER_DETAIL,
                                                     title: '订单详情',
-                                                    component: <OrderDetail order={order} fetchOrder={this.props.fetchOrder.bind(this)}/>
+                                                    component: <OrderDetail order={order} fetchOrder={this._fetchOrder.bind(this)}/>
                                                   })}/>
                                       })}
           />

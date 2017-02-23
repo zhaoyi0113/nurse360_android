@@ -109,7 +109,7 @@ class TimeInfo extends React.Component {
       <View style={{flex:1, flexDirection: 'row'}}>
         <Text style={textStyle.style}>接单时间：</Text>
         <Text style={fetchTimeStyle.style}>{fetchTime}</Text>
-        <Text style={actionStyle} onPress={()=>this.props.fetchOrder(order.id)}>{order.actionName}</Text>
+        <Text style={actionStyle} onPress={()=>this.props.fetchOrder(order)}>{order.actionName}</Text>
       </View>
     </View>);
   }

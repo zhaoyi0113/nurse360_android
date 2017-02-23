@@ -27,6 +27,7 @@ class OrderListContainer extends React.Component {
     return (<OrderList orders={this.props.orders} loadMoreData={this.loadMoreData.bind(this)}
                        title="患者服务" description="患者需求服务"
                        onClick={this.props.onClick.bind(this)}
+                       fetchOrder={(id)=>this.props.fetchOrder(this.props.token, id)}
                        image={require('../../../images/order/alPay.png')}/>);
   }
 
@@ -44,6 +45,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     queryOrders: (token, index, number) => {
       return dispatch(actions.queryOrders(token, index, number));
+    },
+    fetchOrder: (token, id) => {
+      return dispatch(actions.fetchOrder(token, id));
     }
   }
 }
