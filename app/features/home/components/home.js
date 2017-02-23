@@ -3,20 +3,20 @@ import {View, ScrollView, Image, RefreshControl, StyleSheet, Text, Dimensions, A
 import CommonRowCell from "../../../components/common_row_cell";
 import CommonTableHeader from "../../../components/common_table_header";
 import Order from "../../order/components/order";
-import * as types from '../../../actions/action_types';
+import * as types from "../../../actions/action_types";
 import {
   NOTIFICATION_CATEGORY_VIEW,
   STUDY_CATEGORY_VIEW,
   PATIENT_SERVICE_CATEGORY_VIEW,
   NOTIFICATION_DETAIL,
   COURSE_DETAIL,
-  ORDER_DETAIL,
+  ORDER_DETAIL
 } from "../../../routers";
 import NotificationListContainer from "../containers/notification_list_container";
-import StudyCourseListContainer from '../containers/study_course_list_container';
-import OrderListContainer from '../../order/containers/order_list_container';
-import ArticleContainer from '../../../containers/article_container';
-import {OrderDetail} from '../../../features/order';
+import StudyCourseListContainer from "../containers/study_course_list_container";
+import OrderListContainer from "../../order/containers/order_list_container";
+import ArticleContainer from "../../../containers/article_container";
+import {OrderDetail} from "../../../features/order";
 
 export default class Home extends Component {
 
@@ -117,7 +117,7 @@ export default class Home extends Component {
             colors={['lightgray']}
           />
         }>
-      <Image style={{resizeMode: 'stretch'}} source={require('../../../images/home/headIm.png')}/>
+      <Image style={{height:110,width:Dimensions.get('window').width,resizeMode:'cover'}} source={require('../../../images/home/headIm.png')}/>
       <View style={styles.notification_view}>
         <View style={styles.title_view}>
           <CommonTableHeader title='通知' more='更多'
