@@ -17,6 +17,7 @@ export const COURSE_DETAIL = 9;
 export const ORDER_DETAIL = 10;
 export const USER_ORDER_LIST = 11;
 export const USER_HISTORY_COURSES = 12;
+export const SUGGESTION_FEEDBACK = 13;
 
 export const routers = [
   {
@@ -59,6 +60,9 @@ export const routers = [
   }, {
     id: USER_HISTORY_COURSES,
     title: '我的学习'
+  }, {
+    id: SUGGESTION_FEEDBACK,
+    title: '意见反馈',
   }
 ]
 

@@ -6,7 +6,7 @@ class PatientContainer extends Component {
 
   render() {
     return (<View>
-      <Text>Patient</Text>
+      <Text>敬请期待</Text>
     </View>)
   }
 

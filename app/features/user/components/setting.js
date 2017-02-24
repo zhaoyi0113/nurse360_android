@@ -2,6 +2,8 @@ import React from 'react';
 import {View, Text, Image, StyleSheet, TouchableHighlight, Alert} from 'react-native';
 
 import * as routers from '../../../routers';
+import {SUGGESTION_FEEDBACK} from '../../../routers';
+import SuggestionFeedbackContainer from '../containers/suggestion_feedback_container';
 
 export default class Setting extends React.Component {
 
@@ -38,7 +40,13 @@ export default class Setting extends React.Component {
 
   click(item) {
     const that = this;
-    if (item.id === 3) {
+    if (item.id === 1) {
+      this.props.navigator.push({
+        id: SUGGESTION_FEEDBACK,
+        title: '意见反馈',
+        component: <SuggestionFeedbackContainer navigator={this.props.navigator}/>
+      });
+    } else if (item.id === 3) {
       this.props.navigator.push(routers.getRouters(routers.USER_AGREEMENT));
     } else if (item.id === 4) {
       this.props.navigator.push(routers.getRouters(routers.ABOUT_ROUTER));
