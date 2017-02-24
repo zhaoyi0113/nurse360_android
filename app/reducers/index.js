@@ -7,6 +7,7 @@ import {StudyReducer} from "./study_reducers";
 import {NotificationReducer} from "./notification_reducers";
 import {OrderReducer} from "./order_reducer";
 import * as types from "../actions/action_types";
+import {WalletReducer} from './wallet_reducer';
 
 const initialState = {};
 
@@ -28,6 +29,7 @@ const appReducers = combineReducers({
   study: StudyReducer,
   notification: NotificationReducer,
   order: OrderReducer,
+  wallet: WalletReducer,
 });
 
 export default rootReducer;

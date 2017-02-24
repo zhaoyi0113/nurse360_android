@@ -20,6 +20,9 @@ export const USER_ORDER_HTTP = 'USER_ORDER_HTTP';
 export const USER_ORDERS = 'USER_ORDERS';
 export const USER_COURSE_HTTP = 'USER_COURSE_HTTP';
 
+//wallet
+export const QUERY_WALLET_HTTP = 'QUERY_WALLET_HTTP';
+
 //hospital
 export const HOSTPIAL_SEARCH = 'HOSPITAL_SEARCH';
 export const DEPARTMENT_LIST_HTTP = 'DEPARTMENT_LIST_HTTP';

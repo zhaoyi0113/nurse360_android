@@ -9,8 +9,9 @@ import * as routers from '../../../routers';
 import UserTaskContainer from '../containers/user_task_container';
 import OrderDetail from '../../order/components/order_detail';
 import UserHistoryCourseContainer from '../containers/user_history_course_container';
+import WalletContainer from '../containers/wallet_container';
 
-import {USER_ORDER_LIST, ORDER_DETAIL, USER_HISTORY_COURSES} from '../../../routers';
+import {USER_ORDER_LIST, ORDER_DETAIL, USER_HISTORY_COURSES, USER_WALLET} from '../../../routers';
 
 export default class User extends React.Component {
 
@@ -88,10 +89,15 @@ class UserHeader extends React.Component {
           <Text style={headerStyles.department_name}>{userInfo.departmentName}</Text>
           <Text style={headerStyles.hospital_name}>{userInfo.hospitalName}</Text>
         </View>
-        <View style={headerStyles.wallet}>
-          <Text style={headerStyles.nurse_name}>我的钱包</Text>
-          <Text style={headerStyles.nurse_name}>{wallet}元</Text>
-        </View>
+        <TouchableHighlight style={headerStyles.wallet} underlayColor='transparent'
+                            onPress={()=>this.props.navigator.push(
+                              {id:USER_WALLET, title: '我的钱包', component: <WalletContainer navigator={this.props.navigator}/> })
+                            }>
+          <View>
+            <Text style={headerStyles.nurse_name}>我的钱包</Text>
+            <Text style={headerStyles.nurse_name}>{wallet}元</Text>
+          </View>
+        </TouchableHighlight>
         <View style={headerStyles.right_area}>
           <TouchableHighlight onPress={()=>this.props.navigator.push(routers.getRouters(routers.SETTING_ROUTER))}
                               underlayColor="transparent">
@@ -194,14 +200,15 @@ class LearnHistory extends React.Component {
       course = <CourseCell course={this.props.userCourse}/>;
     }
     return (
-        <View style={historyStyles.container}>
-          <View style={historyStyles.header}>
-            <Text style={taskStyles.reminder}>学习历史</Text>
-            <TouchableHighlight underlayColor='lightgray'
-            onPress={this.props.clickMore.bind(this)}><Text style={taskStyles.more}>更多</Text></TouchableHighlight>
-          </View>
-          {course}
+      <View style={historyStyles.container}>
+        <View style={historyStyles.header}>
+          <Text style={taskStyles.reminder}>学习历史</Text>
+          <TouchableHighlight underlayColor='lightgray'
+                              onPress={this.props.clickMore.bind(this)}><Text
+            style={taskStyles.more}>更多</Text></TouchableHighlight>
         </View>
+        {course}
+      </View>
     )
   }
 }
