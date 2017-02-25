@@ -11,6 +11,8 @@ import OrderDetail from '../features/order/components/order_detail';
 import NotificationListContainer from '../features/home/containers/notification_list_container';
 import StudyCourseListContainer from '../features/home/containers/study_course_list_container';
 import OrderListContainer from '../features/order/containers/order_list_container';
+import UserTaskContainer from '../features/user/containers/user_task_container';
+import UserHistoryCourseContainer from '../features/user/containers/user_history_course_container';
 
 export const Root = StackNavigator({
   Main: {screen: MainContainer, path: 'main'},
@@ -19,6 +21,8 @@ export const Root = StackNavigator({
   NotificationList: {screen: NotificationListContainer},
   StudyList: {screen: StudyCourseListContainer},
   OrderList: {screen: OrderListContainer},
+  UserOrderList: {screen: UserTaskContainer},
+  HistoryCourse: {screen: UserHistoryCourseContainer},
 }, {
   initialRouteName: 'Main',
 });

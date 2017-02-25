@@ -58,7 +58,6 @@ export default class AppContainer extends Component {
     return (
       <Provider store={store}>
         <AppWithNavigationState/>
-        {/*<MainContainer rootNavigation={this.props.navigation}/>*/}
       </Provider>
     );
   }

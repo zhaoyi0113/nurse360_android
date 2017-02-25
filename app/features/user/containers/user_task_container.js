@@ -7,7 +7,16 @@ import {ORDER_DETAIL} from '../../../routers';
 import OrderDetail from '../../order/components/order_detail';
 
 class UserTaskContainer extends React.Component {
-
+  static navigationOptions = {
+    title: '任务',
+    header: {
+      visible: true,
+      titleStyle: {height: 20}
+    },
+    cardStack: {
+      gesturesEnabled: true,
+    }
+  }
   constructor(props) {
     super(props);
     this.state = {index: 0, number: 20};
@@ -23,11 +32,13 @@ class UserTaskContainer extends React.Component {
   }
 
   _onClick(order){
-    this.props.navigator.push({
-      id: ORDER_DETAIL,
-      title: '订单详情',
-      component: <OrderDetail order={order}/>
-    });
+    let {fetchOrder} = this.props.navigation.state.params;
+    this.props.navigation.navigate('OrderDetail', {order: order, fetchOrder: fetchOrder.bind(this)})
+    // this.props.navigator.push({
+    //   id: ORDER_DETAIL,
+    //   title: '订单详情',
+    //   component: <OrderDetail order={order}/>
+    // });
   }
 
   render() {

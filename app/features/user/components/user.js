@@ -1,18 +1,13 @@
-import React from 'react';
-import {View, StyleSheet, Text, Image, ScrollView, TouchableHighlight, Navigator} from 'react-native';
-import {FontSize} from '../../../constants';
-import _ from 'lodash';
-
-import Order from '../../order/components/order';
-import CourseCell from '../../course/components/course_cell';
-import * as routers from '../../../routers';
-import UserTaskContainer from '../containers/user_task_container';
-import OrderDetail from '../../order/components/order_detail';
-import UserHistoryCourseContainer from '../containers/user_history_course_container';
-import WalletContainer from '../containers/wallet_container';
-import ArticleContainer from "../../../containers/article_container";
-
-import {USER_ORDER_LIST, ORDER_DETAIL, USER_HISTORY_COURSES, USER_WALLET, COURSE_DETAIL} from '../../../routers';
+import React from "react";
+import {View, StyleSheet, Text, Image, ScrollView, TouchableHighlight, Navigator} from "react-native";
+import {FontSize} from "../../../constants";
+import _ from "lodash";
+import Order from "../../order/components/order";
+import CourseCell from "../../course/components/course_cell";
+import * as routers from "../../../routers";
+import {USER_WALLET, COURSE_DETAIL} from "../../../routers";
+import OrderDetail from "../../order/components/order_detail";
+import WalletContainer from "../containers/wallet_container";
 
 export default class User extends React.Component {
 
@@ -22,13 +17,11 @@ export default class User extends React.Component {
   }
 
   _goToUserTask() {
-    this.props.navigator.push({id: USER_ORDER_LIST, component: <UserTaskContainer navigator={this.props.navigator}/>})
+    this.props.rootNavigation.navigate('UserOrderList',{fetchOrder: this.props.fetchOrder.bind(this)});
   }
 
   _goToUserCourse() {
-    this.props.navigator.push(
-      {id: USER_HISTORY_COURSES, title: '学习', component: <UserHistoryCourseContainer navigator={this.props.navigator}/>}
-    )
+    this.props.rootNavigation.navigate('HistoryCourse')
   }
 
   render() {
@@ -44,17 +37,11 @@ export default class User extends React.Component {
         />
         <Tasks userInfo={userInfo} userOrder={userOrder}
                fetchOrder={fetchOrder.bind(this)}
-               openOrder={(order)=>this.props.navigator.push({
-                                                    id: ORDER_DETAIL,
-                                                    title: '订单详情',
-                                                    component: <OrderDetail order={order} fetchOrder={this.props.fetchOrder.bind(this)}/>
-                                                  })}
+               openOrder={(order)=> this.props.rootNavigation.navigate('OrderDetail', {order: order, fetchOrder: this.props.fetchOrder.bind(this)})}
                clickMore={this._goToUserTask.bind(this)}/>
         <LearnHistory userInfo={userInfo} userCourse={userCourse}
                       openCourse={()=>{
-                        this.props.navigator.push({id:COURSE_DETAIL, title: userCourse.name,
-                        component: <ArticleContainer routeId={COURSE_DETAIL} id={userCourse.id}/>})
-                      }}
+                        this.props.rootNavigation.navigate('Article',{routeId: COURSE_DETAIL, id: userCourse.id, title: userCourse.name})}}
                       clickMore={this._goToUserCourse.bind(this)}/>
       </ScrollView>
     );

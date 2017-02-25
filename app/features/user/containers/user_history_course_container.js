@@ -9,6 +9,13 @@ import * as actions from '../../../actions/user_actions';
 
 class UserHistoryCourseContainer extends React.Component {
 
+  static navigationOptions = {
+    title: '学习',
+    cardStack: {
+      gesturesEnabled: true,
+    }
+  }
+
   constructor(props) {
     super(props);
     this.state = {index: 0, number: 20};
@@ -34,11 +41,11 @@ class UserHistoryCourseContainer extends React.Component {
                     loadMoreData={this.loadMoreData.bind(this)}
                     loadMaxNumber={this.state.number}
                     onClick={ (data)=>
-                      this.props.navigator.push(
+                      this.props.navigation.navigate('Article',
                                 {
-                                  id: COURSE_DETAIL,
+                                  routeId: COURSE_DETAIL,
+                                  id: data.id,
                                   title: data.name,
-                                  component: <ArticleContainer routeId={COURSE_DETAIL} id={data.id}/>
                                 }
                               )
                     }

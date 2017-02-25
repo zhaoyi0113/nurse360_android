@@ -8,11 +8,12 @@ class PatientContainer extends Component {
     tabBar: {
       label: '',
       // Note: By default the icon is only shown on iOS. Search the showIcon option below.
-      icon: ({ tintColor }) => (
-        <Image style={{resizeMode:'contain', width:25, height: 25}}
-          source={require('../../../images/patient_pre.png')}
+      icon: (obj) => {
+        const image = obj.focused ? require('../../../images/patient_pre.png') : require('../../../images/patient_nor.png');
+        return <Image style={{resizeMode:'contain', width:25, height: 25}}
+                      source={image}
         />
-      ),
+      }
     },
   };
 

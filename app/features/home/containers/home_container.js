@@ -12,8 +12,8 @@ class HomeContainer extends Component {
     tabBar: {
       label: '',
       // Note: By default the icon is only shown on iOS. Search the showIcon option below.
-      icon: (focused) => {
-        const image = focused ? require('../../../images/home_pre.png') : require('../../../images/home_nor.png');
+      icon: (obj) => {
+        const image = obj.focused ? require('../../../images/home_pre.png') : require('../../../images/home_nor.png');
         return <Image style={{resizeMode:'contain', height:25, width:30}}
                       source={image}
         />

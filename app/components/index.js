@@ -14,64 +14,12 @@ import {HomeContainer} from "../features/home";
 import {PatientContainer} from "../features/patients";
 import {UserContainer} from "../features/user";
 import {LoginContainer} from "../features/login";
-import * as routers from "../routers";
-import {TabNavigator} from 'react-navigation';
+import {TabNavigator} from "react-navigation";
 
 export default class App extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      selected: 0,
-      tabbar: [
-        {
-          selected_image: require('../images/home_pre.png'),
-          unselected_image: require('../images/home_nor.png')
-        },
-        {
-          selected_image: require('../images/patient_pre.png'),
-          unselected_image: require('../images/patient_nor.png')
-        },
-        {
-          selected_image: require('../images/my_pre.png'),
-          unselected_image: require('../images/my_nor.png')
-        },
-      ],
-      routeId: 0
-    }
-  }
-
-  renderScene(route, navigator) {
-    let childViews = {
-      0: <HomeContainer navigation={this.props.navigation}/>,
-      1: <PatientContainer navigation={this.props.navigation}/>,
-      2: <UserContainer navigation={this.props.navigation}/>
-    }
-    if (route.id === 0) {
-      return <View style={styles.container}>
-        <View style={styles.center_view}>
-          {childViews[this.state.selected]}
-        </View>
-        <View style={styles.tabbar}>
-          {
-            this.state.tabbar.map((tabbar, index) => {
-              let image = tabbar.unselected_image;
-              if (index === this.state.selected) {
-                image = tabbar.selected_image;
-              }
-              return <TouchableHighlight key={index} onPress={()=> this.setState({selected: index})}
-                                         underlayColor="lightgray">
-                <Image style={styles.tab_image} source={image}/>
-              </TouchableHighlight>
-            })
-          }
-        </View>
-      </View>
-    } else if (route.component) {
-      return route.component;
-    } else {
-      return routers.getRouteComponent(route, navigator);
-    }
   }
 
   render() {

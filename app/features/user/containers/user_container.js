@@ -10,11 +10,13 @@ class UserContainer extends Component {
     tabBar: {
       label: '',
       // Note: By default the icon is only shown on iOS. Search the showIcon option below.
-      icon: ({ tintColor }) => (
-        <Image style={{ height:25, width: 25}}
-          source={require('../../../images/my_pre.png')}
+      icon: (obj) => {
+        const image = obj.focused?require('../../../images/my_pre.png'):require('../../../images/my_nor.png')
+        return <Image style={{ height:25, width: 25}}
+                      source={image}
         />
-      ),
+      }
+
     },
   }
   componentDidMount() {
@@ -26,7 +28,7 @@ class UserContainer extends Component {
     let userCourse = this.props.userCourses.length > 0 ? this.props.userCourses[0] : {};
     return (<User userInfo={this.props.userInfo} userOrder={userOrder}
                   fetchOrder={this.props.fetchOrder.bind(this)}
-                  userCourse={userCourse} navigator={this.props.navigator}/>)
+                  userCourse={userCourse} rootNavigation={this.props.screenProps.rootNavigation}/>)
   }
 
 }
