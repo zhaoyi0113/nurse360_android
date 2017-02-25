@@ -2,7 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 import Wallet from "../components/wallet";
 import * as actions from "../../../actions/wallet_actions";
-import {ScrollView} from 'react-native';
+import {Alert} from 'react-native';
 
 class WalletContainer extends React.Component {
 
@@ -13,7 +13,15 @@ class WalletContainer extends React.Component {
   _withdraw() {
     this.props.withdraw()
       .then(() => {
-        this.props.navigator.pop();
+        Alert.alert(
+          '',
+          '提现成功',
+          [
+            {text: 'OK', onPress: () => this.props.navigator.pop()},
+          ],
+          {cancelable: false}
+        )
+
       });
   }
 
