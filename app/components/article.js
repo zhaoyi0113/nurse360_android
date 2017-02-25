@@ -16,7 +16,6 @@ export default class Article extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex:1,
-    marginTop: 50,
     backgroundColor: '#f6f6f6',
   }
 

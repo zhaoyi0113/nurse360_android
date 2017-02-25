@@ -3,7 +3,5 @@
  * https://github.com/facebook/react-native
  * @flow
  */
-import { AppRegistry } from 'react-native';
-import App from './app';
+import './app.js';
 
-AppRegistry.registerComponent('nurse360_android', () => App);

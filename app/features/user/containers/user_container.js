@@ -2,10 +2,21 @@ import React, {Component} from "react";
 import {connect} from "react-redux";
 import * as actions from "../../../actions/user_actions";
 import User from "../components/user";
+import {Image} from 'react-native';
 import * as orderActions from '../../../actions/order_actions';
 
 class UserContainer extends Component {
-
+  static navigationOptions = {
+    tabBar: {
+      label: '',
+      // Note: By default the icon is only shown on iOS. Search the showIcon option below.
+      icon: ({ tintColor }) => (
+        <Image style={{ height:25, width: 25}}
+          source={require('../../../images/my_pre.png')}
+        />
+      ),
+    },
+  }
   componentDidMount() {
     this.props.getUserInfo(this.props.token);
   }

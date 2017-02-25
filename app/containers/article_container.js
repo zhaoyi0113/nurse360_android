@@ -9,24 +9,30 @@ import {NOTIFICATION_DETAIL, COURSE_DETAIL} from '../routers';
 
 class ArticleContainer extends React.Component {
 
+  static navigationOptions = {
+    title: ({state}) => `${state.params.title}`,
+  }
+
   constructor(props) {
     super(props);
     this.state = {content: {}};
   }
 
   componentDidMount() {
-    switch (this.props.routeId) {
+    const {routeId, id} = this.props.navigation.state.params;
+    switch (routeId) {
       case NOTIFICATION_DETAIL:
-        this.props.requestNotificationDetail(this.props.token, this.props.id);
+        this.props.requestNotificationDetail(this.props.token, id);
         break;
       case COURSE_DETAIL:
-        this.props.requestCourseDetail(this.props.token, this.props.id);
+        this.props.requestCourseDetail(this.props.token, id);
         break;
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    switch (this.props.routeId) {
+    const {routeId, id} = this.props.navigation.state.params;
+    switch (routeId) {
       case NOTIFICATION_DETAIL:
         if (nextProps.notification) {
           this.setState({content: nextProps.notification});

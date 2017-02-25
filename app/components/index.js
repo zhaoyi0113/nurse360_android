@@ -15,7 +15,7 @@ import {PatientContainer} from "../features/patients";
 import {UserContainer} from "../features/user";
 import {LoginContainer} from "../features/login";
 import * as routers from "../routers";
-import NavigationBar from "./navigation_bar";
+import {TabNavigator} from 'react-navigation';
 
 export default class App extends Component {
 
@@ -43,9 +43,9 @@ export default class App extends Component {
 
   renderScene(route, navigator) {
     let childViews = {
-      0: <HomeContainer navigator={navigator}/>,
-      1: <PatientContainer navigator={navigator}/>,
-      2: <UserContainer navigator={navigator}/>
+      0: <HomeContainer navigation={this.props.navigation}/>,
+      1: <PatientContainer navigation={this.props.navigation}/>,
+      2: <UserContainer navigation={this.props.navigation}/>
     }
     if (route.id === 0) {
       return <View style={styles.container}>
@@ -78,22 +78,33 @@ export default class App extends Component {
     if (!this.props.token) {
       return <LoginContainer/>
     }
-    return <Navigator
-      initialRoute={routers.routers[0]}
-      renderScene={this.renderScene.bind(this)}
-      style={{flex: 1}}
-      configureScene={(route, routeStack) => Navigator.SceneConfigs.HorizontalSwipeJump}
-      onWillFocus={(route)=>this.setState({routeId: route.id})}
-      navigationBar={
-          <NavigationBar
-            navigationStyles={Navigator.NavigationBar.StylesIOS}
-            route={routers.getRouters(this.state.routeId)}
-            routeMapper={routers.getRouterMap()}
-          />
-        }
-    />
+    return (<Tabs screenProps={{rootNavigation: this.props.rootNavigation}}/>);
+
   }
 }
+
+const Tabs = TabNavigator({
+  Home: {
+    screen: HomeContainer,
+  },
+  Patient: {
+    screen: PatientContainer,
+  },
+  User: {
+    screen: UserContainer,
+  }
+}, {
+  tabBarOptions: {
+    // activeTintColor: 'lightgray',
+    // inactiveTintColor: 'lightgray',
+    showIcon: true,
+    style: {backgroundColor: 'lightgray', height: 40},
+    showLabel: false,
+    tabStyle: {margin: 0, padding: 0, height: 40},
+    indicatorStyle: {backgroundColor: 'lightgray'}
+  },
+  tabBarPosition: 'bottom',
+});
 
 App.propTypes = {}
 

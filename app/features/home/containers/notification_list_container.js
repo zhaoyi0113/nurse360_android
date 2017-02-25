@@ -1,12 +1,14 @@
-import React from 'react';
-import {connect} from 'react-redux';
-import CategoryView from '../../../components/category_view';
-
-import * as actions from '../../../actions/notification_actions';
-import ArticleContainer from '../../../containers/article_container';
-import {NOTIFICATION_DETAIL} from '../../../routers';
+import React from "react";
+import {connect} from "react-redux";
+import CategoryView from "../../../components/category_view";
+import * as actions from "../../../actions/notification_actions";
+import {NOTIFICATION_DETAIL} from "../../../routers";
 
 class NotificationListContainer extends React.Component {
+
+  static navigationOptions = {
+    title: '通知',
+  }
 
   constructor(props) {
     super(props);
@@ -17,7 +19,7 @@ class NotificationListContainer extends React.Component {
     this.loadMoreData();
   }
 
-  componentWillUnmount(){
+  componentWillUnmount() {
     this.props.queryNotification(this.props.token, 0, 2);
   }
 
@@ -32,9 +34,8 @@ class NotificationListContainer extends React.Component {
                     list={this.props.notifications}
                     loadMaxNumber={this.state.number}
                     loadMoreData={this.loadMoreData.bind(this)}
-                    onClick={(data)=>this.props.navigator.push(
-                               {id: NOTIFICATION_DETAIL, title: data.title,
-                               component: <ArticleContainer routeId={NOTIFICATION_DETAIL} id={data.id}/>})}
+                    onClick={(data)=>this.props.navigation.navigate('Article',
+                               {id: data.id, routeId: NOTIFICATION_DETAIL, title: data.title})}
                     image={require('../../../images/notification/inform_blue.png')}/>)
   }
 

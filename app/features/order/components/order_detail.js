@@ -6,8 +6,12 @@ import {getDate, getTime} from "../../../reducers/common_reducer";
 
 export default class OrderDetail extends React.Component {
 
+  static navigationOptions = {
+    title: '订单详情',
+  }
+
   render() {
-    let {order} = this.props;
+    let {order, fetchOrder} = this.props.navigation.state.params;
     let {patient} = order;
     let payment = order.pingPP && order.pingPP.length > 0 ? order.pingPP[0] : {}
 
@@ -21,7 +25,7 @@ export default class OrderDetail extends React.Component {
           <View/>
       }
       <Paymethod payment={payment} service={order.serviceItem}/>
-      <TimeInfo order={order} payment={payment} fetchOrder={this.props.fetchOrder.bind(this)}/>
+      <TimeInfo order={order} payment={payment} fetchOrder={(order)=>fetchOrder(order)}/>
     </View>);
   }
 }
@@ -128,7 +132,6 @@ OrderDetail.defaultProps = {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 50,
   },
   info_blok: {flex: 0.2, margin: 10, padding: 10, backgroundColor: 'white', flexDirection: 'column', borderRadius: 5},
   action_gray: {

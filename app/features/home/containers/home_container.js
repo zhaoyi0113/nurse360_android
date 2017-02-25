@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {View, Text, Navigator} from 'react-native';
+import {View, Text, Navigator, Image} from 'react-native';
 
 import Home from '../components/home';
 import * as notificationActions from '../../../actions/notification_actions';
@@ -8,6 +8,18 @@ import * as studyActions from '../../../actions/study_actions';
 import * as orderActions from '../../../actions/order_actions';
 
 class HomeContainer extends Component {
+  static navigationOptions = {
+    tabBar: {
+      label: '',
+      // Note: By default the icon is only shown on iOS. Search the showIcon option below.
+      icon: (focused) => {
+        const image = focused ? require('../../../images/home_pre.png') : require('../../../images/home_nor.png');
+        return <Image style={{resizeMode:'contain', height:25, width:30}}
+                      source={image}
+        />
+      },
+    },
+  }
 
   componentDidMount() {
     this._refresh();
@@ -19,7 +31,7 @@ class HomeContainer extends Component {
       this.props.queryOrders(this.props.token)];
     const that = this;
     Promise.all(promises).then((v) => {
-      if(that.home) {
+      if (that.home) {
         that.home._endRefresh();
       }
     }).catch(() => that.home._endRefresh());
@@ -27,7 +39,7 @@ class HomeContainer extends Component {
   }
 
   render() {
-    return (<Home navigator={this.props.navigator}
+    return (<Home rootNavigation={this.props.screenProps.rootNavigation}
                   _refresh={this._refresh.bind(this)}
                   queryNotification={()=>this.props.queryNotification(this.props.token)}
                   queryStudyCourses={()=>this.props.queryStudyCourses(this.props.token)}

@@ -8,6 +8,7 @@ import {NotificationReducer} from "./notification_reducers";
 import {OrderReducer} from "./order_reducer";
 import * as types from "../actions/action_types";
 import {WalletReducer} from './wallet_reducer';
+import {NavReducer} from './nav_reducer';
 
 const initialState = {};
 
@@ -21,6 +22,9 @@ const rootReducer = (state = initialState, action) => {
   return appReducers(state, action);
 }
 
+
+
+
 const appReducers = combineReducers({
   login: LoginReducer,
   common: CommonReducer,
@@ -30,6 +34,7 @@ const appReducers = combineReducers({
   notification: NotificationReducer,
   order: OrderReducer,
   wallet: WalletReducer,
+  nav: NavReducer,
 });
 
 export default rootReducer;

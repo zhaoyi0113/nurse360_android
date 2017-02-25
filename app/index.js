@@ -5,6 +5,7 @@ import {
   Text,
   View
 } from 'react-native';
+import {addNavigationHelpers} from 'react-navigation';
 import {createStore, applyMiddleware, combineReducers, compose} from 'redux';
 import {Provider, connect} from 'react-redux';
 import thunk from 'redux-thunk';
@@ -18,6 +19,7 @@ import createEngine from 'redux-storage-engine-reactnativeasyncstorage';
 import Config from 'react-native-config';
 import * as actions from './actions/common_actions';
 import * as types from './actions/action_types';
+import {Root} from './routers';
 
 const engine = createEngine('nurse360_android');
 
@@ -43,13 +45,24 @@ const load = storage.createLoader(engine);
 
 load(store).then((newState) => store.dispatch(actions.requestWaitingIndicator(false)));
 
+const AppWithNavigationState = connect(state=>({
+  nav: state.nav,
+}))(({ dispatch, nav }) => (
+  <Root navigation={addNavigationHelpers({ dispatch, state: nav })} />
+));
+
 export default class AppContainer extends Component {
+
   render() {
+
     return (
       <Provider store={store}>
-        <MainContainer/>
+        <AppWithNavigationState/>
+        {/*<MainContainer rootNavigation={this.props.navigation}/>*/}
       </Provider>
     );
   }
 }
+
+
 

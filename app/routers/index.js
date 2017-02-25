@@ -4,6 +4,24 @@ import {Text, View, TouchableHighlight} from "react-native";
 import SettingContainer from "../features/user/containers/setting_container";
 import About from "../features/user/components/about";
 import UserAgreemnt from "../features/user/components/user_agreement";
+import {StackNavigator} from 'react-navigation';
+import MainContainer from '../containers/index';
+import ArticleContainer from '../containers/article_container';
+import OrderDetail from '../features/order/components/order_detail';
+import NotificationListContainer from '../features/home/containers/notification_list_container';
+import StudyCourseListContainer from '../features/home/containers/study_course_list_container';
+import OrderListContainer from '../features/order/containers/order_list_container';
+
+export const Root = StackNavigator({
+  Main: {screen: MainContainer, path: 'main'},
+  Article: {path: 'article', screen: ArticleContainer},
+  OrderDetail: {path: 'orderDetail', screen: OrderDetail},
+  NotificationList: {screen: NotificationListContainer},
+  StudyList: {screen: StudyCourseListContainer},
+  OrderList: {screen: OrderListContainer},
+}, {
+  initialRouteName: 'Main',
+});
 
 export const SETTING_ROUTER = 1;
 export const ABOUT_ROUTER = 2;
@@ -20,6 +38,7 @@ export const USER_HISTORY_COURSES = 12;
 export const SUGGESTION_FEEDBACK = 13;
 export const USER_WALLET = 14;
 export const WITHDRAW = 15;
+
 
 export const routers = [
   {

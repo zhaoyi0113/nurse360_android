@@ -5,6 +5,10 @@ import OrderList from "../components/order_list";
 
 class OrderListContainer extends React.Component {
 
+  static navigationOptions = {
+    title: '患者服务',
+  }
+
   constructor(props) {
     super(props);
     this.state = {index: 0, number: 20};
@@ -23,11 +27,18 @@ class OrderListContainer extends React.Component {
     this.setState({index: this.state.index + 1});
   }
 
+  _onClick(order) {
+    this.props.navigation.navigate('OrderDetail', {
+      order: order,
+      fetchOrder: (id) => this.props.navigation.state.params.fetchOrder(this.props.token, id)
+    });
+  }
+
   render() {
     return (<OrderList orders={this.props.orders} loadMoreData={this.loadMoreData.bind(this)}
                        title="患者服务" description="患者需求服务"
-                       onClick={this.props.onClick.bind(this)}
-                       fetchOrder={(id)=>this.props.fetchOrder(this.props.token, id)}
+                       onClick={this._onClick.bind(this)}
+                       fetchOrder={(id)=>this.props.navigation.state.params.fetchOrder(this.props.token, id)}
                        image={require('../../../images/order/alPay.png')}/>);
   }
 

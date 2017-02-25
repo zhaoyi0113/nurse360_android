@@ -7,7 +7,11 @@ import WaitingIndicator from '../components/waiting_indicator';
 import * as actions from '../actions/common_actions';
 
 class MainContainer extends Component {
-
+  static navigationOptions = {
+    header: {
+      visible: false
+    },
+  }
   render() {
 
     if (this.props.alert) {
@@ -19,10 +23,9 @@ class MainContainer extends Component {
         ]
       )
     }
-
     return (
       <View style={{flex: 1}}>
-        <App token={this.props.token} setNavigator={this.props.setNavigator.bind(this)} navigator={this.props.navigator}/>
+        <App token={this.props.token} rootNavigation={this.props.navigation}/>
         <WaitingIndicator isVisible={this.props.waitingIndicator}/>
       </View>
     );
