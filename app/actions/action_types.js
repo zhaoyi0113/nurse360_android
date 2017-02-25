@@ -22,6 +22,7 @@ export const USER_COURSE_HTTP = 'USER_COURSE_HTTP';
 
 //wallet
 export const QUERY_WALLET_HTTP = 'QUERY_WALLET_HTTP';
+export const WITHDRAW_HTTP = 'WITHDRAW_HTTP';
 
 //hospital
 export const HOSTPIAL_SEARCH = 'HOSPITAL_SEARCH';

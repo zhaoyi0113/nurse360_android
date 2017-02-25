@@ -19,8 +19,11 @@ class HomeContainer extends Component {
       this.props.queryOrders(this.props.token)];
     const that = this;
     Promise.all(promises).then((v) => {
-      that.home._endRefresh();
+      if(that.home) {
+        that.home._endRefresh();
+      }
     }).catch(() => that.home._endRefresh());
+
   }
 
   render() {
