@@ -10,8 +10,9 @@ import UserTaskContainer from '../containers/user_task_container';
 import OrderDetail from '../../order/components/order_detail';
 import UserHistoryCourseContainer from '../containers/user_history_course_container';
 import WalletContainer from '../containers/wallet_container';
+import ArticleContainer from "../../../containers/article_container";
 
-import {USER_ORDER_LIST, ORDER_DETAIL, USER_HISTORY_COURSES, USER_WALLET} from '../../../routers';
+import {USER_ORDER_LIST, ORDER_DETAIL, USER_HISTORY_COURSES, USER_WALLET, COURSE_DETAIL} from '../../../routers';
 
 export default class User extends React.Component {
 
@@ -29,7 +30,6 @@ export default class User extends React.Component {
       {id: USER_HISTORY_COURSES, title: '学习', component: <UserHistoryCourseContainer navigator={this.props.navigator}/>}
     )
   }
-
 
   render() {
     let {userInfo, userOrder, userCourse, fetchOrder} = this.props;
@@ -51,6 +51,10 @@ export default class User extends React.Component {
                                                   })}
                clickMore={this._goToUserTask.bind(this)}/>
         <LearnHistory userInfo={userInfo} userCourse={userCourse}
+                      openCourse={()=>{
+                        this.props.navigator.push({id:COURSE_DETAIL, title: userCourse.name,
+                        component: <ArticleContainer routeId={COURSE_DETAIL} id={userCourse.id}/>})
+                      }}
                       clickMore={this._goToUserCourse.bind(this)}/>
       </ScrollView>
     );
@@ -197,7 +201,7 @@ class LearnHistory extends React.Component {
     if (_.isEmpty(this.props.userCourse)) {
       course = <Text style={{padding: 10, backgroundColor: 'white', textAlign: 'center'}}>暂无学习历史</Text>
     } else {
-      course = <CourseCell course={this.props.userCourse}/>;
+      course = <CourseCell course={this.props.userCourse} openCourse={this.props.openCourse.bind(this)}/>;
     }
     return (
       <View style={historyStyles.container}>

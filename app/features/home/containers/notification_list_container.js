@@ -30,6 +30,7 @@ class NotificationListContainer extends React.Component {
     return (
       <CategoryView title='通知' description='医院通知信息'
                     list={this.props.notifications}
+                    loadMaxNumber={this.state.number}
                     loadMoreData={this.loadMoreData.bind(this)}
                     onClick={(data)=>this.props.navigator.push(
                                {id: NOTIFICATION_DETAIL, title: data.title,

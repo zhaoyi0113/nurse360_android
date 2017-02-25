@@ -18,7 +18,11 @@ export default class CategoryView extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.list) {
       if (nextProps.list.length > 0) {
-        this.setState({list: _.unionBy(this.state.list, nextProps.list, 'id'), loadMore: true});
+        if(nextProps.list.length < this.props.loadMaxNumber) {
+          this.setState({list: _.unionBy(this.state.list, nextProps.list, 'id'), loadMore: false});
+        }else{
+          this.setState({list: _.unionBy(this.state.list, nextProps.list, 'id'), loadMore: true});
+        }
       } else {
         this.setState({loadMore: false});
       }

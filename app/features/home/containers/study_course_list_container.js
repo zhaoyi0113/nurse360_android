@@ -31,6 +31,7 @@ class StudyCourseListContainer extends React.Component {
       <CategoryView title='我的学习' description='我正在学习的课程'
                     list={this.props.courses}
                     loadMoreData={this.loadMoreData.bind(this)}
+                    loadMaxNumber={this.state.number}
                     onClick={ (data)=>
                       this.props.navigator.push(
                                 {

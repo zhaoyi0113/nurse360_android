@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, Text, Image} from 'react-native';
+import {View, StyleSheet, Text, Image, TouchableHighlight} from 'react-native';
 import {FontSize} from '../../../constants';
 
 export default class CourseCell extends React.Component {
@@ -7,16 +7,18 @@ export default class CourseCell extends React.Component {
   render() {
     let {course} = this.props;
     return (
-      <View style={styles.container}>
-        <Text style={styles.title_text}>
-          {course.name && course.name.split('')[0]}
-        </Text>
-        <View style={{flex:1}}>
-          <Text>{course.name}</Text>
-          <Text style={{fontSize: FontSize.small}}>{course.introduction}</Text>
+      <TouchableHighlight underlayColor='lightgray' onPress={this.props.openCourse.bind(this)}>
+        <View style={styles.container}>
+          <Text style={styles.title_text}>
+            {course.name && course.name.split('')[0]}
+          </Text>
+          <View style={{flex:1}}>
+            <Text>{course.name}</Text>
+            <Text style={{fontSize: FontSize.small}}>{course.introduction}</Text>
+          </View>
+          <Image style={{width: 30, height: 20, marginRight: 10}} source={require('../../../images/next.png')}/>
         </View>
-        <Image style={{width: 30, height: 20, marginRight: 10}} source={require('../../../images/next.png')}/>
-      </View>
+      </TouchableHighlight>
     );
   }
 }
