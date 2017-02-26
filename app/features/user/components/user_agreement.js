@@ -4,7 +4,9 @@ import RNFS from 'react-native-fs';
 
 
 export default class UserAgreement extends React.Component {
-
+  static navigationOptions = {
+    title: '用户协议',
+  }
   constructor(props) {
     super(props);
     this.state = {agreement: ''}

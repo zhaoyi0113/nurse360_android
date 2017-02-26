@@ -41,15 +41,11 @@ export default class Setting extends React.Component {
   click(item) {
     const that = this;
     if (item.id === 1) {
-      this.props.navigator.push({
-        id: SUGGESTION_FEEDBACK,
-        title: '意见反馈',
-        component: <SuggestionFeedbackContainer navigator={this.props.navigator}/>
-      });
+      this.props.navigation.navigate('Feedback');
     } else if (item.id === 3) {
-      this.props.navigator.push(routers.getRouters(routers.USER_AGREEMENT));
+      this.props.navigation.navigate('UserAgreement');
     } else if (item.id === 4) {
-      this.props.navigator.push(routers.getRouters(routers.ABOUT_ROUTER));
+      this.props.navigation.navigate('About');
     } else if (item.id === 5) {
       Alert.alert(
         '',
@@ -75,7 +71,7 @@ export default class Setting extends React.Component {
                 <Text>{item.name}</Text>
               </TouchableHighlight>
               <TouchableHighlight onPress={()=> this.click(item)} style={styles.next} underlayColor="transparent">
-                <Image style={{resizeMode: 'contain', height: 20}} source={require('../../../images/next.png')}/>
+                <Image style={{resizeMode: 'contain', height: 10}} source={require('../../../images/next.png')}/>
               </TouchableHighlight>
             </View>
           })

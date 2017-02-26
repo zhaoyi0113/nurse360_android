@@ -6,8 +6,12 @@ import * as actions from '../../../actions/login_actions';
 
 class SettingContainer extends React.Component {
 
+  static navigationOptions = {
+    title: '设置',
+  }
+
   render() {
-    return (<Setting navigator={this.props.navigator} logout={()=> this.props.logout(this.props.token)}/>)
+    return (<Setting navigation={this.props.navigation} logout={()=> this.props.logout(this.props.token)}/>)
   }
 }
 

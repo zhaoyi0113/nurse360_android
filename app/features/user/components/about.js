@@ -3,7 +3,9 @@ import {View, Text} from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 
 export default class About extends React.Component {
-
+  static navigationOptions = {
+    title: '关于',
+  }
   render() {
     return (
       <View style={{flex: 1, alignItems: 'center', flexDirection:'row'}}>

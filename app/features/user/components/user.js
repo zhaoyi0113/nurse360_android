@@ -88,7 +88,7 @@ class UserHeader extends React.Component {
           </View>
         </TouchableHighlight>
         <View style={headerStyles.right_area}>
-          <TouchableHighlight onPress={()=>this.props.navigator.push(routers.getRouters(routers.SETTING_ROUTER))}
+          <TouchableHighlight onPress={()=>this.props.navigation.navigate('UserSetting')}
                               underlayColor="transparent">
             <Image style={headerStyles.setting}
                    source={require('../../../images/editSetting.png')}/>
@@ -152,6 +152,7 @@ class Function extends React.Component {
       </View>
     )
   }
+
 }
 
 class Tasks extends React.Component {
