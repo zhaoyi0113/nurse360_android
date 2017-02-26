@@ -77,7 +77,6 @@ DepartmentSelection.defaultProps = {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // alignItems: 'center',
   },
   department_row: {
     height: 50,

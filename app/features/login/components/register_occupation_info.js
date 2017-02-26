@@ -5,6 +5,11 @@ import CommonHeader from './common_header';
 import TechnicalTitlesPicker from './technical_titles_picker';
 
 export default class RegisterOccupationInfo extends React.Component {
+  static navigationOptions = {
+    header: {
+      visible: false
+    },
+  }
 
   constructor(props) {
     super(props);
@@ -12,7 +17,7 @@ export default class RegisterOccupationInfo extends React.Component {
   }
 
   render() {
-    let {hospital, department} = this.props;
+    let {hospital, department} = this.props.screenProps;
     let hospitalName = '';
     if (hospital) {
       hospitalName = hospital.name;
@@ -29,14 +34,15 @@ export default class RegisterOccupationInfo extends React.Component {
       <View style={styles.input_view}>
         <View style={styles.input_row}>
           <Text style={styles.input_label}>医院</Text>
-          <Text style={styles.input_text} onPress={()=>this.props.selectHospital()}>{hospitalName}</Text>
+          <Text style={styles.input_text}
+                onPress={()=>this.props.navigation.navigate('HospitalSelection')}>{hospitalName}</Text>
           <Image style={styles.image} source={require('../../../images/next_gray.png')}/>
         </View>
         <View style={styles.input_row}>
           <Text style={styles.input_label}>科室</Text>
           <Text style={styles.input_text} onPress={()=>{
-            if(this.props.hospital){
-              this.props.selectDepartment();
+            if(hospital){
+              this.props.navigation.navigate('DepartmentSelection');
             }else{
               Alert.alert(
                 '',
@@ -52,14 +58,17 @@ export default class RegisterOccupationInfo extends React.Component {
         <View style={styles.input_row}>
           <Text style={styles.input_label}>职称</Text>
           <TechnicalTitlesPicker style={styles.input_text} hidden={false}
-                                 onValueChange={(t)=>this.setState({title: t})}/>
+                                 onValueChange={(t)=>{
+                                   this.setState({title: t});
+                                   this.props.screenProps.selectJobTitle(t);
+                                 }}/>
         </View>
       </View>
       <View style={styles.register_button}>
-        <Button title="完成" onPress={this.props.register.bind(this)}
+        <Button title="完成" onPress={this.props.screenProps.register.bind(this)}
                 disabled={!hospital || !department || !this.state.title}/>
       </View>
-      <TouchableHighlight onPress={()=>this.props.goBack()} underlayColor="lightgray">
+      <TouchableHighlight onPress={()=>this.props.navigation.goBack()} underlayColor="lightgray">
         <Text style={{textAlign:'center'}}>返回上一步</Text>
       </TouchableHighlight>
       <View style={{flex: 4}}/>

@@ -25,7 +25,7 @@ class UserContainer extends Component {
 
   render() {
     let userOrder = this.props.userOrder.length > 0 ? this.props.userOrder[0] : {};
-    let userCourse = this.props.userCourses.length > 0 ? this.props.userCourses[0] : {};
+    let userCourse = this.props.userCourses && this.props.userCourses.length > 0 ? this.props.userCourses[0] : {};
     return (<User userInfo={this.props.userInfo} userOrder={userOrder}
                   fetchOrder={this.props.fetchOrder.bind(this)}
                   userCourse={userCourse} rootNavigation={this.props.screenProps.rootNavigation}/>)

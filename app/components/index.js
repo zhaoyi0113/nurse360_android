@@ -22,11 +22,15 @@ export default class App extends Component {
     super(props);
   }
 
+
+
   render() {
     if (!this.props.token) {
-      return <LoginContainer/>
+      // this.props.navigation.navigate('Login');
+      //return <LoginContainer navigation={this.props.navigation}/>
+      return null;
     }
-    return (<Tabs screenProps={{rootNavigation: this.props.rootNavigation}}/>);
+    return (<Tabs screenProps={{rootNavigation: this.props.navigation}}/>);
 
   }
 }

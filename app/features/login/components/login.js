@@ -5,7 +5,11 @@ import CommonHeader from './common_header';
 import {colors} from '../../../constants';
 
 export default class Login extends React.Component {
-
+  static navigationOptions = {
+    header: {
+      visible: false
+    },
+  }
   constructor(props) {
     super(props);
     this.state = {};
@@ -22,11 +26,11 @@ export default class Login extends React.Component {
                    onChangeText={(text)=>this.setState({password: text})}/>
       </View>
       <View style={styles.login_button}>
-        <Button title="登录" onPress={()=>this.props.login(this.state.mobile, this.state.password)}
+        <Button title="登录" onPress={()=>this.props.screenProps.login(this.state.mobile, this.state.password)}
                 disabled={!this.state.mobile || !this.state.password}/>
       </View>
       <View style={styles.text_view}>
-        <TouchableHighlight onPress={()=> this.props.goRegister()} underlayColor={colors.underlayColor}>
+        <TouchableHighlight onPress={()=> this.props.navigation.navigate('Register')} underlayColor={colors.underlayColor}>
           <Text>没有账号？去注册</Text>
         </TouchableHighlight>
         <Text>忘记密码</Text>

@@ -4,7 +4,11 @@ import {View, Text, StyleSheet, TextInput, Button, Alert, TouchableHighlight} fr
 import CommonHeader from './common_header';
 
 export default class Register extends React.Component {
-
+  static navigationOptions = {
+    header: {
+      visible: false
+    },
+  }
   constructor(props) {
     super(props);
     this.state = {};
@@ -21,7 +25,8 @@ export default class Register extends React.Component {
       );
       return;
     }
-    this.props.nextStep();
+    this.props.screenProps.nextRegisterStep({mobile: this.state.mobile, password: this.state.password, verifyCode: this.state.verifyCode});
+    this.props.navigation.navigate('RegisterInfo');
   }
 
   render() {
@@ -35,16 +40,16 @@ export default class Register extends React.Component {
         <View style={styles.verify_view}>
           <TextInput style={styles.input_text} placeholder="验证码"
                      onChangeText={(text)=>this.setState({verifyCode: text})}/>
-          <Text style={{color: '#559bec', marginRight: 10}} onPress={()=> this.props.requestSmsCode(this.state.mobile)}>获取验证码</Text>
+          <Text style={{color: '#559bec', marginRight: 10}} onPress={()=> this.props.screenProps.requestSmsCode(this.state.mobile)}>获取验证码</Text>
         </View>
         <TextInput style={styles.input_text} placeholder="密码" secureTextEntry={true}
                    onChangeText={(text)=>this.setState({password: text})}/>
       </View>
       <View style={styles.register_button}>
-        <Button title="下一步" onPress={this.nextStep.bind(this)}
+        <Button title="下一步" onPress={()=> this.nextStep()}
                 disabled={!this.state.mobile || !this.state.password || !this.state.verifyCode}/>
       </View>
-      <TouchableHighlight onPress={()=>this.props.goLogin()} underlayColor="lightgray">
+      <TouchableHighlight onPress={()=>this.props.navigation.navigate('Login')} underlayColor="lightgray">
         <Text style={{textAlign:'center'}}>已有账号？去登录</Text>
       </TouchableHighlight>
       <View style={{flex: 4}}/>

@@ -25,7 +25,7 @@ class MainContainer extends Component {
     }
     return (
       <View style={{flex: 1}}>
-        <App token={this.props.token} rootNavigation={this.props.navigation}/>
+        <App token={this.props.token} navigation={this.props.navigation}/>
         <WaitingIndicator isVisible={this.props.waitingIndicator}/>
       </View>
     );

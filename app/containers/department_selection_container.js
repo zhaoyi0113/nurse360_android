@@ -5,16 +5,23 @@ import DepartmentSelection from '../components/department_selection';
 import * as actions from '../actions/hospital_actions';
 
 class DepartmentSelectionContainer extends React.Component {
-
+  static navigationOptions = {
+    header: {
+      visible: false
+    },
+  }
   componentDidMount() {
-    this.props.queryDepartmentList(this.props.hospital.id);
+    this.props.queryDepartmentList(this.props.screenProps.hospital.id);
   }
 
   render() {
-    return <DepartmentSelection goBack={this.props.goBack.bind(this)}
-                                hospital={this.props.hospital}
+    return <DepartmentSelection goBack={()=>this.props.navigation.goBack()}
+                                hospital={this.props.screenProps.hospital}
                                 departmentList={this.props.departmentList}
-                                selectDepartment={this.props.selectDepartment.bind(this)}/>
+                                selectDepartment={(department)=>{
+                                  this.props.screenProps.selectDepartment(department);
+                                  this.props.navigation.goBack();
+                                }}/>
   }
 }
 

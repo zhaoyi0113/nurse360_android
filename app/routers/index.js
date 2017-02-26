@@ -16,6 +16,7 @@ import UserHistoryCourseContainer from '../features/user/containers/user_history
 import WalletContainer from '../features/user/containers/wallet_container';
 import Withdraw from '../features/user/components/withdraw';
 import SuggestionFeedbackContainer from '../features/user/containers/suggestion_feedback_container';
+import LoginContainer from '../features/login/containers/login_container';
 
 export const Root = StackNavigator({
   Main: {screen: MainContainer, path: 'main'},
@@ -32,8 +33,9 @@ export const Root = StackNavigator({
   Feedback: {screen: SuggestionFeedbackContainer},
   UserAgreement: {screen: UserAgreemnt},
   About: {screen: About},
+  Login: {screen: LoginContainer},
 }, {
-  initialRouteName: 'Main',
+  initialRouteName: 'Login',
 });
 
 export const SETTING_ROUTER = 1;

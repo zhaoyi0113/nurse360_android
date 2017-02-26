@@ -4,7 +4,11 @@ import HospitalSelection from "../components/hospital_selection";
 import * as actions from "../actions/hospital_actions";
 
 class HospitalSelectionContainer extends React.Component {
-
+  static navigationOptions = {
+    header: {
+      visible: false
+    },
+  }
   constructor(props) {
     super(props);
     this.state = {index: 0, number: 50};
@@ -15,8 +19,11 @@ class HospitalSelectionContainer extends React.Component {
   }
 
   render() {
-    return <HospitalSelection goBack={this.props.goBack.bind(this)}
-                              selectHospital={this.props.selectHospital.bind(this)}
+    return <HospitalSelection goBack={()=>this.props.navigation.goBack()}
+                              selectHospital={(hospital)=>{
+                                this.props.screenProps.selectHospital(hospital);
+                                this.props.navigation.goBack();
+                              }}
                               hospitalList={this.props.hospitalList}
                               queryHospital={(name)=>{
                                 this.props.queryHospitalList(name, this.state.index+1, this.state.number);

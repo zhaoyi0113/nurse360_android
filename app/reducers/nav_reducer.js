@@ -1,9 +1,10 @@
 import {Root} from '../routers';
 
 const initialNavState = {
-  index: 0,
+  index: 1,
   routes: [
     {key: 'InitA', routeName: 'Main'},
+    {key: 'InitB', routeName: 'Login'},
   ],
 };
 
