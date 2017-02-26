@@ -29,7 +29,7 @@ export default class User extends React.Component {
     return (
       <ScrollView style={styles.container}>
         <UserHeader userInfo={userInfo}
-                    navigator={this.props.navigator}
+                    navigation={this.props.rootNavigation}
         />
         <Function userInfo={userInfo}
                   goToUserCourse={this._goToUserCourse.bind(this)}
@@ -81,9 +81,7 @@ class UserHeader extends React.Component {
           <Text style={headerStyles.hospital_name}>{userInfo.hospitalName}</Text>
         </View>
         <TouchableHighlight style={headerStyles.wallet} underlayColor='transparent'
-                            onPress={()=>this.props.navigator.push(
-                              {id:USER_WALLET, title: '我的钱包', component: <WalletContainer navigator={this.props.navigator}/> })
-                            }>
+                            onPress={()=>this.props.navigation.navigate('Wallet')}>
           <View>
             <Text style={headerStyles.nurse_name}>我的钱包</Text>
             <Text style={headerStyles.nurse_name}>{wallet}元</Text>

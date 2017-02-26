@@ -22,7 +22,7 @@ export default class Wallet extends React.Component {
   }
 
   render() {
-    let {userInfo, wallets, navigator, withdraw} = this.props;
+    let {userInfo, wallets, navigation, withdraw} = this.props;
     return (
       <View style={{flex:1}}>
         <ScrollView style={styles.container} refreshControl={
@@ -60,7 +60,7 @@ export default class Wallet extends React.Component {
           </View>
         </ScrollView>
         <Button style={{ position: 'absolute', bottom: 10}} title="申请提现"
-                onPress={()=>navigator.push({id: WITHDRAW, title: '申请提现',
+                onPress={()=>navigation.navigate('Withdraw', {withdraw: withdraw.bind(this), amount: userInfo.wallet,
               component: <Withdraw navigator={navigator} withdraw={withdraw.bind(this)} amount={userInfo.wallet}/>})}/>
       </View>
     );

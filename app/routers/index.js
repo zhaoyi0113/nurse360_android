@@ -13,6 +13,8 @@ import StudyCourseListContainer from '../features/home/containers/study_course_l
 import OrderListContainer from '../features/order/containers/order_list_container';
 import UserTaskContainer from '../features/user/containers/user_task_container';
 import UserHistoryCourseContainer from '../features/user/containers/user_history_course_container';
+import WalletContainer from '../features/user/containers/wallet_container';
+import Withdraw from '../features/user/components/withdraw';
 
 export const Root = StackNavigator({
   Main: {screen: MainContainer, path: 'main'},
@@ -23,6 +25,8 @@ export const Root = StackNavigator({
   OrderList: {screen: OrderListContainer},
   UserOrderList: {screen: UserTaskContainer},
   HistoryCourse: {screen: UserHistoryCourseContainer},
+  Wallet: {screen: WalletContainer},
+  Withdraw: {screen: Withdraw},
 }, {
   initialRouteName: 'Main',
 });

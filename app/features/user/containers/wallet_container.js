@@ -6,6 +6,10 @@ import {Alert} from 'react-native';
 
 class WalletContainer extends React.Component {
 
+  static navigationOptions = {
+    title: '我的钱包',
+  }
+
   componentDidMount() {
     this.props.queryWallet(this.props.token);
   }
@@ -17,7 +21,7 @@ class WalletContainer extends React.Component {
           '',
           '提现成功',
           [
-            {text: 'OK', onPress: () => this.props.navigator.pop()},
+            {text: 'OK', onPress: () => this.props.navigation.goBack()},
           ],
           {cancelable: false}
         )
@@ -40,7 +44,7 @@ class WalletContainer extends React.Component {
               ref={(wallet)=>this.wallet = wallet}
               wallets={this.props.wallets}
               _refresh={this._refresh.bind(this)}
-              navigator={this.props.navigator}
+              navigation={this.props.navigation}
               withdraw={this._withdraw.bind(this)}/>
     );
   }
