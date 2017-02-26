@@ -3,11 +3,15 @@ import {connect} from "react-redux";
 import CategoryView from "../../../components/category_view";
 import * as actions from "../../../actions/notification_actions";
 import {NOTIFICATION_DETAIL} from "../../../routers";
+import {InteractionManager} from 'react-native';
 
 class NotificationListContainer extends React.Component {
 
   static navigationOptions = {
     title: '通知',
+    cardStack: {
+      gesturesEnabled: true
+    }
   }
 
   constructor(props) {
