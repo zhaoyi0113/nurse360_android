@@ -50,6 +50,7 @@ export const parseUserOrder = (data) => {
   }
   order.statusName = parseOrderStatus(order.orderStatus);
   order.actionName = getOrderAction(order.orderStatus);
+
   if (order.serviceItem.imageUrl) {
     order.icon = {uri: order.serviceItem.imageUrl};
   } else {
@@ -58,6 +59,7 @@ export const parseUserOrder = (data) => {
   if (data.serviceItem) {
     order.serviceName = data.serviceItem.name;
     order.orderDate = utils.getDate(data.serviceItem.time);
+    order.needVisitPatientRecord = data.serviceItem.needVisitPatientRecord;
   }
   return order;
 }

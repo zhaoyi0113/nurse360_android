@@ -3,6 +3,7 @@ import {View, Text, Image, StyleSheet, Button} from "react-native";
 import HeaderCategoryView from "../../../components/header_category_view";
 import {FontSize} from "../../../constants";
 import {getDate, getTime} from "../../../reducers/common_reducer";
+import {ORDER_STATUS_NAME} from '../../../reducers/order_reducer';
 
 export default class OrderDetail extends React.Component {
 
@@ -16,7 +17,7 @@ export default class OrderDetail extends React.Component {
     let payment = order.pingPP && order.pingPP.length > 0 ? order.pingPP[0] : {}
 
     return (<View style={styles.container}>
-      <HeaderCategoryView title={order.orderStatus === 'TO_SERVICE'?'快抢单':'已被抢'} description={'订单号:'+order.orderNo}
+      <HeaderCategoryView title={ORDER_STATUS_NAME[order.orderStatus]} description={'订单号:'+order.orderNo}
                           image={require('../../../images/order/alPay.png')}/>
       <Patient patient={patient} serviceStartTime={order.serviceStartTime} address={order.address}/>
       {
@@ -70,16 +71,17 @@ class Hospital extends React.Component {
 class Paymethod extends React.Component {
   render() {
     let {payment, service} = this.props;
-    return (<View style={{flex:0.3, margin:10, backgroundColor:'white', flexDirection: 'column', borderRadius:5}}>
-      <View style={{flex:1, flexDirection: 'row', padding: 10, borderBottomWidth:1, borderBottomColor: '#F5FCFF'}}>
+    return (<View
+      style={{flex:0.25, marginHorizontal:10,marginVertical:5, backgroundColor:'white', flexDirection: 'column', borderRadius:5}}>
+      <View style={{flex:1, flexDirection: 'row', padding: 5, borderBottomWidth:1, borderBottomColor: '#F5FCFF'}}>
         <Text style={{flex:1, color: '#9b9b9b'}}>支付方式</Text>
         <Text>{payment.channel === 'wx' ? '微信' : '支付宝'}</Text>
       </View>
-      <View style={{flex:1, flexDirection: 'row', padding: 10}}>
+      <View style={{flex:1, flexDirection: 'row', padding: 5}}>
         <Text style={{flex:1, color: '#9b9b9b'}}>优惠</Text>
         <Text>¥ {service.serviceDiscount}</Text>
       </View>
-      <View style={{flex:1, flexDirection: 'row', padding: 10}}>
+      <View style={{flex:1, flexDirection: 'row', padding: 5}}>
         <Text style={{flex:1, color: '#9b9b9b'}}>实付款</Text>
         <Text>¥ {service.servicePrice}</Text>
       </View>
@@ -91,7 +93,6 @@ class TimeInfo extends React.Component {
   render() {
     let {order, payment} = this.props;
     let textStyle = StyleSheet.create({style: {fontSize: FontSize.small}});
-    let actionStyle = order.orderStatus === 'TO_SERVICE' ? styles.action_active : styles.action_gray;
     let fetchTime;
     let fetchTimeStyle;
     if (order.fetchTime) {
@@ -101,7 +102,7 @@ class TimeInfo extends React.Component {
       fetchTime = '待接单';
       fetchTimeStyle = StyleSheet.create({style: {fontSize: FontSize.small, flex: 2, color: 'rgb(85, 155, 236)'}});
     }
-    return (<View style={{flex:0.15, flexDirection: 'column', margin:10}}>
+    return (<View style={{flex:0.2, flexDirection: 'column', marginHorizontal:10, marginBottom: 5}}>
       <View style={{flex:1, flexDirection: 'row'}}>
         <Text style={textStyle.style}>创建时间：</Text>
         <Text style={textStyle.style}>{getTime(order.time)}</Text>
@@ -113,10 +114,31 @@ class TimeInfo extends React.Component {
       <View style={{flex:1, flexDirection: 'row'}}>
         <Text style={textStyle.style}>接单时间：</Text>
         <Text style={fetchTimeStyle.style}>{fetchTime}</Text>
-        <Text style={actionStyle} onPress={()=>this.props.fetchOrder(order)}>{order.actionName}</Text>
       </View>
+      <OrderButtonPanel order={order} fetchOrder={this.props.fetchOrder.bind(this)}/>
     </View>);
   }
+}
+
+class OrderButtonPanel extends React.Component {
+
+  render() {
+    const {order} = this.props;
+    let actionStyle = order.orderStatus === 'TO_SERVICE' ? styles.action_active : styles.action_gray;
+    if (order.orderStatus === 'IN_PROCESS' && order.isNurseFetched === 'YES') {
+      return (<View style={{flex:0.5, flexDirection: 'row'}}>
+        <Text style={styles.chuzhen}>出诊添加</Text>
+        <View style={{flex:1}}/>
+        <Text style={styles.chuzhen}>取消订单</Text>
+        <Text style={actionStyle} onPress={()=>this.props.fetchOrder(order)}>{order.actionName}</Text>
+      </View>)
+    }
+    return (<View style={{flex:0.5, flexDirection: 'row'}}>
+      <View style={{flex:1}}/>
+      <Text style={actionStyle} onPress={()=>this.props.fetchOrder(order)}>{order.actionName}</Text>
+    </View>)
+  }
+
 }
 
 OrderDetail.propTypes = {
@@ -133,7 +155,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  info_blok: {flex: 0.2, margin: 10, padding: 10, backgroundColor: 'white', flexDirection: 'column', borderRadius: 5},
+  info_blok: {
+    flex: 0.2,
+    marginHorizontal: 10,
+    padding: 10,
+    backgroundColor: 'white',
+    flexDirection: 'column',
+    borderRadius: 5
+  },
   action_gray: {
     fontSize: FontSize.small, borderWidth: 1, alignSelf: 'flex-end', padding: 2, color: 'gray',
     borderColor: 'gray', width: 50, textAlign: 'center'
@@ -142,5 +171,9 @@ const styles = StyleSheet.create({
     fontSize: FontSize.small, borderWidth: 1, alignSelf: 'flex-end', padding: 2, color: 'rgb(85, 155, 236)',
     borderColor: 'rgb(85, 155, 236)', width: 50, textAlign: 'center'
   },
+  chuzhen: {
+    fontSize: FontSize.small, borderWidth: 1, alignSelf: 'flex-end', padding: 2, color: 'rgb(85, 155, 236)',
+    borderColor: 'rgb(85, 155, 236)', width: 50, textAlign: 'center', marginRight: 10,
+  }
 
 });
