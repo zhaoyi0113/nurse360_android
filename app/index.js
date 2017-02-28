@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {AppRegistry, StyleSheet, Text, View} from "react-native";
-import {addNavigationHelpers} from "react-navigation";
+import {addNavigationHelpers, NavigationActions} from "react-navigation";
 import {createStore, applyMiddleware, compose} from "redux";
 import {Provider, connect} from "react-redux";
 import thunk from "redux-thunk";
@@ -40,20 +40,49 @@ const load = storage.createLoader(engine);
 
 load(store).then((newState) => store.dispatch(actions.requestWaitingIndicator(false)));
 
-const AppWithNavigationState = connect(state => ({
-  nav: state.nav,
-}))(({dispatch, nav}) => (
-  <Root navigation={addNavigationHelpers({ dispatch, state: nav })}/>
-));
+// const AppWithNavigationState = connect(state => ({
+//   nav: state.nav,
+// }))(({dispatch, nav}) => (
+//   <Root navigation={addNavigationHelpers({ dispatch, state: nav })}/>
+// ));
 
-export default class AppContainer extends Component {
+class AppWithNavigation extends Component {
 
   constructor(props) {
     super(props);
   }
 
-  componentDidMount() {
+  render() {
+    return (<Root navigation={this.props.addNavigationHelpers(this.props.nav)}/>);
+  }
 
+}
+const mapStateToProps = (state) => {
+  return {
+    token: state.login.token,
+    nav: state.nav,
+    alert: state.common.alert,
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loginSuccess: () => {
+      return dispatch(NavigationActions.navigate({routeName: 'Main'}));
+    },
+    addNavigationHelpers: (nav) => {
+      return addNavigationHelpers({dispatch, state: nav})
+    }
+
+  }
+}
+
+const AppWithNavigationState = connect(mapStateToProps, mapDispatchToProps)(AppWithNavigation);
+
+export default class AppContainer extends Component {
+
+  constructor(props) {
+    super(props);
   }
 
   render() {
@@ -65,6 +94,7 @@ export default class AppContainer extends Component {
     );
   }
 }
+
 
 
 

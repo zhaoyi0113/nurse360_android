@@ -129,7 +129,7 @@ const mapDispatchToProps = (dispatch) => {
       return dispatch(actions.register(mobile, password, smsCode, hospitalId, departmentId, jobTitle));
     },
     loginSuccess: () => {
-      return dispatch(NavigationActions.navigate({routeName: 'Main'}));
+      // return dispatch(NavigationActions.navigate({routeName: 'Main'}));
     }
   }
 }
