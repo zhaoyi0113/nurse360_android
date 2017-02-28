@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {AppRegistry, StyleSheet, Text, View} from "react-native";
+import {AppRegistry, StyleSheet, Text, View, Alert} from "react-native";
 import {addNavigationHelpers, NavigationActions} from "react-navigation";
 import {createStore, applyMiddleware, compose} from "redux";
 import {Provider, connect} from "react-redux";
@@ -50,9 +50,27 @@ class AppWithNavigation extends Component {
 
   constructor(props) {
     super(props);
+    this.showAlert = false;
   }
 
+
+
   render() {
+    if (this.props.alert && !this.showAlert) {
+      this.showAlert = true;
+      Alert.alert(
+        this.props.alert.title,
+        this.props.alert.message,
+        [
+          {
+            text: '确定', onPress: () => {
+            this.props.clearAlert();
+            this.showAlert = false;
+          }
+          },
+        ]
+      )
+    }
     return (<Root navigation={this.props.addNavigationHelpers(this.props.nav)}/>);
   }
 
@@ -72,8 +90,10 @@ const mapDispatchToProps = (dispatch) => {
     },
     addNavigationHelpers: (nav) => {
       return addNavigationHelpers({dispatch, state: nav})
-    }
-
+    },
+    clearAlert: () => {
+      dispatch(actions.clearAlert());
+    },
   }
 }
 

@@ -18,21 +18,7 @@ class MainContainer extends Component {
   }
 
   render() {
-    if (this.props.alert && !MainContainer.showAlert) {
-      this.showAlert = true;
-      Alert.alert(
-        this.props.alert.title,
-        this.props.alert.message,
-        [
-          {
-            text: '确定', onPress: () => {
-            this.props.clearAlert();
-            MainContainer.showAlert = false;
-          }
-          },
-        ]
-      )
-    }
+
     return (
       <View style={{flex: 1}}>
         <App token={this.props.token} navigation={this.props.navigation}/>

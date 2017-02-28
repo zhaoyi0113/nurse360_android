@@ -9,6 +9,9 @@ export default class OrderDetail extends React.Component {
 
   static navigationOptions = {
     title: '订单详情',
+    cardStack: {
+      gesturesEnabled: true
+    }
   }
 
   render() {

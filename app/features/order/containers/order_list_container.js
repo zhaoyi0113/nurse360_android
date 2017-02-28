@@ -7,6 +7,9 @@ class OrderListContainer extends React.Component {
 
   static navigationOptions = {
     title: '患者服务',
+    cardStack: {
+      gesturesEnabled: true
+    }
   }
 
   constructor(props) {

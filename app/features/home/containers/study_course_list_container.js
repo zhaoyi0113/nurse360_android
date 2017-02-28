@@ -10,6 +10,9 @@ class StudyCourseListContainer extends React.Component {
 
   static navigationOptions = {
     title: '学习',
+    cardStack: {
+      gesturesEnabled: true
+    }
   }
 
   constructor(props) {
