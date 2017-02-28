@@ -13,7 +13,6 @@ import {
 import {HomeContainer} from "../features/home";
 import {PatientContainer} from "../features/patients";
 import {UserContainer} from "../features/user";
-import {LoginContainer} from "../features/login";
 import {TabNavigator} from "react-navigation";
 
 export default class App extends Component {
@@ -22,12 +21,8 @@ export default class App extends Component {
     super(props);
   }
 
-
-
   render() {
     if (!this.props.token) {
-      // this.props.navigation.navigate('Login');
-      //return <LoginContainer navigation={this.props.navigation}/>
       return null;
     }
     return (<Tabs screenProps={{rootNavigation: this.props.navigation}}/>);

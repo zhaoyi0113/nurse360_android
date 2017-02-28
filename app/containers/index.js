@@ -12,14 +12,24 @@ class MainContainer extends Component {
       visible: false
     },
   }
-  render() {
+  static showAlert = false;
+  constructor(props) {
+    super(props);
+  }
 
-    if (this.props.alert) {
+  render() {
+    if (this.props.alert && !MainContainer.showAlert) {
+      this.showAlert = true;
       Alert.alert(
         this.props.alert.title,
         this.props.alert.message,
         [
-          {text: '确定', onPress: () => this.props.clearAlert()},
+          {
+            text: '确定', onPress: () => {
+            this.props.clearAlert();
+            MainContainer.showAlert = false;
+          }
+          },
         ]
       )
     }

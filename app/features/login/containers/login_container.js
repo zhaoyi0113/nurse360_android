@@ -62,7 +62,6 @@ class LoginContainer extends Component {
   }
 
   _login(mobile, password) {
-    console.log('login ', mobile, password)
     this.props.login(mobile, password).then(v => {
       this.props.loginSuccess();
     });

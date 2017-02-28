@@ -15,7 +15,7 @@ export const CommonReducer = (state = {}, action) => {
     case types.WAITING_INDICATOR:
       return {...state, waitingIndicator: action.waitingIndicator};
     case types.CLEAR_ALERT:
-      state = _.omit(state, 'alert');
+      state.alert=null;
       return state;
     default:
       let extra = {};

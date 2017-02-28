@@ -1,4 +1,4 @@
-import {Root} from '../routers';
+import {getStateForAction} from '../routers';
 
 const initialNavState = {
   index: 1,
@@ -9,5 +9,5 @@ const initialNavState = {
 };
 
 export const NavReducer = (state = initialNavState, action) => {
-  return Root.router.getStateForAction(action, state) || state;
+  return getStateForAction(action, state) || state;
 }

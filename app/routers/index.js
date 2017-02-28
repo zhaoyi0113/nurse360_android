@@ -38,6 +38,8 @@ export const Root = StackNavigator({
   initialRouteName: 'Login',
 });
 
+export const getStateForAction = Root.router.getStateForAction;
+
 export const SETTING_ROUTER = 1;
 export const ABOUT_ROUTER = 2;
 export const USER_AGREEMENT = 3;
