@@ -1,5 +1,7 @@
 import React from "react";
 import {View, Text, Image, StyleSheet, Button, Linking, Alert} from "react-native";
+
+
 import HeaderCategoryView from "../../../components/header_category_view";
 import {FontSize} from "../../../constants";
 import {getDate, getTime} from "../../../reducers/common_reducer";
@@ -30,8 +32,12 @@ export default class OrderDetail extends React.Component {
     )
   }
 
+  _addVisit(order) {
+    this.props.navigation.navigate('AddVisit', {order: order});
+  }
+
   render() {
-    let {order, fetchOrder, cancelOrder} = this.props.navigation.state.params;
+    let {order, fetchOrder} = this.props.navigation.state.params;
     let {patient} = order;
     let payment = order.pingPP && order.pingPP.length > 0 ? order.pingPP[0] : {}
 
@@ -46,6 +52,7 @@ export default class OrderDetail extends React.Component {
       }
       <Paymethod payment={payment} service={order.serviceItem}/>
       <TimeInfo order={order} payment={payment} fetchOrder={(order)=>fetchOrder(order)}
+                addVisit={()=>this._addVisit(order)}
                 cancelOrder={this._cancelOrder.bind(this)}/>
     </View>);
   }
@@ -111,7 +118,7 @@ class Paymethod extends React.Component {
 
 class TimeInfo extends React.Component {
   render() {
-    let {order, payment} = this.props;
+    let {order, payment, addVisit} = this.props;
     let textStyle = StyleSheet.create({style: {fontSize: FontSize.small}});
     let fetchTime;
     let fetchTimeStyle;
@@ -136,6 +143,7 @@ class TimeInfo extends React.Component {
         <Text style={fetchTimeStyle.style}>{fetchTime}</Text>
       </View>
       <OrderButtonPanel order={order} fetchOrder={this.props.fetchOrder.bind(this)}
+                        addVisit={addVisit.bind(this)}
                         cancelOrder={this.props.cancelOrder.bind(this)}/>
     </View>);
   }
@@ -144,11 +152,11 @@ class TimeInfo extends React.Component {
 class OrderButtonPanel extends React.Component {
 
   render() {
-    const {order, fetchOrder, cancelOrder} = this.props;
+    const {order, fetchOrder, cancelOrder, addVisit} = this.props;
     let actionStyle = order.orderStatus === 'TO_SERVICE' ? styles.action_active : styles.action_gray;
     if (order.orderStatus === 'IN_PROCESS' && order.isNurseFetched === 'YES') {
       return (<View style={{flex:0.5, flexDirection: 'row'}}>
-        <Text style={styles.chuzhen}>出诊添加</Text>
+        <Text style={styles.chuzhen} onPress={addVisit.bind(this)}>出诊添加</Text>
         <View style={{flex:1}}/>
         <Text style={styles.chuzhen} onPress={cancelOrder.bind(this)}>取消订单</Text>
         <Text style={actionStyle} onPress={()=>this.props.fetchOrder(order)}>{order.actionName}</Text>

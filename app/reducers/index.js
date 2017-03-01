@@ -9,6 +9,7 @@ import {OrderReducer} from "./order_reducer";
 import * as types from "../actions/action_types";
 import {WalletReducer} from './wallet_reducer';
 import {NavReducer} from './nav_reducer';
+import {VisitReducer} from './visit_reducer';
 
 const initialState = {};
 
@@ -35,6 +36,7 @@ const appReducers = combineReducers({
   order: OrderReducer,
   wallet: WalletReducer,
   nav: NavReducer,
+  visit: VisitReducer,
 });
 
 export default rootReducer;

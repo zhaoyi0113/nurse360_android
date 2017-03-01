@@ -8,7 +8,6 @@ import {
   NOTIFICATION_DETAIL,
   COURSE_DETAIL
 } from "../../../routers";
-import {OrderDetail} from "../../../features/order";
 
 export default class Home extends Component {
 
