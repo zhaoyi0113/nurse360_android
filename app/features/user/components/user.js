@@ -4,10 +4,8 @@ import {FontSize} from "../../../constants";
 import _ from "lodash";
 import Order from "../../order/components/order";
 import CourseCell from "../../course/components/course_cell";
-import * as routers from "../../../routers";
-import {USER_WALLET, COURSE_DETAIL} from "../../../routers";
+import {COURSE_DETAIL} from "../../../routers";
 import OrderDetail from "../../order/components/order_detail";
-import WalletContainer from "../containers/wallet_container";
 
 export default class User extends React.Component {
 
@@ -17,7 +15,7 @@ export default class User extends React.Component {
   }
 
   _goToUserTask() {
-    this.props.rootNavigation.navigate('UserOrderList',{fetchOrder: this.props.fetchOrder.bind(this)});
+    this.props.rootNavigation.navigate('UserOrderList', {fetchOrder: this.props.fetchOrder.bind(this)});
   }
 
   _goToUserCourse() {
@@ -25,7 +23,7 @@ export default class User extends React.Component {
   }
 
   render() {
-    let {userInfo, userOrder, userCourse, fetchOrder} = this.props;
+    let {userInfo, userOrder, userCourse, fetchOrder, cancelOrder} = this.props;
     return (
       <ScrollView style={styles.container}>
         <UserHeader userInfo={userInfo}
@@ -37,7 +35,8 @@ export default class User extends React.Component {
         />
         <Tasks userInfo={userInfo} userOrder={userOrder}
                fetchOrder={fetchOrder.bind(this)}
-               openOrder={(order)=> this.props.rootNavigation.navigate('OrderDetail', {order: order, fetchOrder: this.props.fetchOrder.bind(this)})}
+               openOrder={(order)=> this.props.rootNavigation.navigate('OrderDetail',
+               {order: order, fetchOrder: this.props.fetchOrder.bind(this), cancelOrder: cancelOrder.bind(this)})}
                clickMore={this._goToUserTask.bind(this)}/>
         <LearnHistory userInfo={userInfo} userCourse={userCourse}
                       openCourse={()=>{

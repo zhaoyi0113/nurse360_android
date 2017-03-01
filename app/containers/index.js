@@ -12,13 +12,12 @@ class MainContainer extends Component {
       visible: false
     },
   }
-  static showAlert = false;
+
   constructor(props) {
     super(props);
   }
 
   render() {
-
     return (
       <View style={{flex: 1}}>
         <App token={this.props.token} navigation={this.props.navigation}/>

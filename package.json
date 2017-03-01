@@ -124,16 +124,8 @@
   "main": "dist/src/index.js",
   "maintainers": [
     {
-      "name": "himanshu-sahusoft",
-      "email": "himanshu@sahusoft.com"
-    },
-    {
-      "name": "sankhadeeproy007",
-      "email": "sankhadeep@sahusoft.com"
-    },
-    {
-      "name": "shivrajk",
-      "email": "shivraj@sahusoft.com"
+      "name": "Zhao Yi",
+      "email": "zhaoyi0113@gmail.com"
     }
   ],
   "name": "native-base",

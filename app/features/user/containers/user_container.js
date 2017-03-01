@@ -6,21 +6,26 @@ import {Image} from 'react-native';
 import * as orderActions from '../../../actions/order_actions';
 
 class UserContainer extends Component {
+
   static navigationOptions = {
     tabBar: {
       label: '',
       // Note: By default the icon is only shown on iOS. Search the showIcon option below.
       icon: (obj) => {
-        const image = obj.focused?require('../../../images/my_pre.png'):require('../../../images/my_nor.png')
+        const image = obj.focused ? require('../../../images/my_pre.png') : require('../../../images/my_nor.png')
         return <Image style={{ height:25, width: 25}}
                       source={image}
         />
       }
-
     },
   }
+
   componentDidMount() {
     this.props.getUserInfo(this.props.token);
+  }
+
+  _cancelOrder(order){
+    this.props.cancelOrder(this.props.token, order.id);
   }
 
   render() {
@@ -28,6 +33,7 @@ class UserContainer extends Component {
     let userCourse = this.props.userCourses && this.props.userCourses.length > 0 ? this.props.userCourses[0] : {};
     return (<User userInfo={this.props.userInfo} userOrder={userOrder}
                   fetchOrder={this.props.fetchOrder.bind(this)}
+                  cancelOrder={this._cancelOrder.bind(this)}
                   userCourse={userCourse} rootNavigation={this.props.screenProps.rootNavigation}/>)
   }
 
@@ -61,6 +67,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     fetchOrder: (token, id) => {
       dispatch(orderActions.fetchOrder(token, id));
+    },
+    cancelOrder: (token, id) => {
+      return dispatch(orderActions.cancelOrder(token, id));
     }
   }
 }

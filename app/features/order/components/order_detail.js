@@ -1,5 +1,5 @@
 import React from "react";
-import {View, Text, Image, StyleSheet, Button} from "react-native";
+import {View, Text, Image, StyleSheet, Button, Linking, Alert} from "react-native";
 import HeaderCategoryView from "../../../components/header_category_view";
 import {FontSize} from "../../../constants";
 import {getDate, getTime} from "../../../reducers/common_reducer";
@@ -12,6 +12,22 @@ export default class OrderDetail extends React.Component {
     cardStack: {
       gesturesEnabled: true
     }
+  }
+
+  _cancelOrder() {
+    const mobile = '01065185531';
+    Alert.alert(
+      '取消需联系客服',
+      mobile,
+      [
+        {
+          text: '呼叫', onPress: () => Linking.openURL('tel:' + mobile)
+        },
+        {
+          text: '取消'
+        }
+      ]
+    )
   }
 
   render() {
@@ -30,7 +46,7 @@ export default class OrderDetail extends React.Component {
       }
       <Paymethod payment={payment} service={order.serviceItem}/>
       <TimeInfo order={order} payment={payment} fetchOrder={(order)=>fetchOrder(order)}
-                cancelOrder={(order)=>cancelOrder(order)}/>
+                cancelOrder={this._cancelOrder.bind(this)}/>
     </View>);
   }
 }

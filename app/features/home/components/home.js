@@ -5,12 +5,8 @@ import CommonTableHeader from "../../../components/common_table_header";
 import Order from "../../order/components/order";
 import * as types from "../../../actions/action_types";
 import {
-  NOTIFICATION_CATEGORY_VIEW,
-  STUDY_CATEGORY_VIEW,
-  PATIENT_SERVICE_CATEGORY_VIEW,
   NOTIFICATION_DETAIL,
-  COURSE_DETAIL,
-  ORDER_DETAIL
+  COURSE_DETAIL
 } from "../../../routers";
 import {OrderDetail} from "../../../features/order";
 

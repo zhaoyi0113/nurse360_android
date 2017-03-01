@@ -69,7 +69,7 @@ class AppWithNavigation extends Component {
           }
           },
         ]
-      )
+      );
     }
     return (<Root navigation={this.props.addNavigationHelpers(this.props.nav)}/>);
   }
