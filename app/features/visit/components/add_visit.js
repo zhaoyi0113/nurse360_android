@@ -8,7 +8,7 @@ export default class AddVisit extends React.Component {
     const {visitItems} = this.props;
     return (<ScrollView style={{flexDirection: 'column', backgroundColor: '#f6f6f6'}}>
         <Text style={{marginHorizontal:10, marginVertical:5}}>治疗项目</Text>
-        <DiagnosticItems items={visitItems}/>
+        <DiagnosticItems items={visitItems} ref={(i)=>this.diagnostic = i}/>
         <Text style={{marginHorizontal:10, marginVertical:5}}>出诊地址</Text>
         <TextInput style={{flex:1, marginHorizontal:10, backgroundColor: 'white'}} underlineColorAndroid='transparent'
                    multiline={true} placeholder='填写您要出诊的地址。'/>
@@ -18,14 +18,25 @@ export default class AddVisit extends React.Component {
                    multiline={true} placeholder='本次家庭治疗、护理操作的具体情况记录。'/>
         <Text style={{marginHorizontal:10, marginVertical:5}}>上传问题相关或诊断结果（最多9张，没有可不传)</Text>
       </ScrollView>
-    );
-  }
+    )
+}
+
 }
 
 class DiagnosticItems extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {items: []};
+  }
+
+  componentWillReceiveProps(nextProps) {
+    let items = _.cloneDeep(nextProps.items);
+    this.setState({items: items});
+  }
+
   render() {
-    let {items} = this.props;
+    let {items} = this.state;
     let arrays = [];
     items.map((item, i) => {
       let index = Math.floor(i / 3);
@@ -47,19 +58,11 @@ class DiagnosticItems extends React.Component {
             {
               array.map((item, j) => {
                 const itemName = item ? item.itemName : '';
-                const itemStyle = StyleSheet.create({
-                  style: {
-                    flex: 0.3,
-                    marginHorizontal: 10,
-                    marginVertical: 5,
-                    textAlign: 'center',
-                    borderRadius: 2,
-                    backgroundColor: 'lightgray'
-                  }
-                });
-                const emptyStyle = StyleSheet.create({style: {flex: 0.3, marginHorizontal: 10, marginVertical: 5}});
-                const style = item ? itemStyle : emptyStyle;
-                return <Text key={j} style={style.style}>{itemName}</Text>
+                const style = item ? (item.selected ? styles.diagnostic_selected_item : styles.diagnostic_item) : styles.diagnostic_empty_style;
+                return <Text key={j} style={style} onPress={()=>{
+                  item.selected = item.selected?false:true;
+                  this.setState({items: items});
+                }}>{itemName}</Text>
               })
             }
           </View>
@@ -69,3 +72,22 @@ class DiagnosticItems extends React.Component {
   }
 }
 
+const styles = StyleSheet.create({
+  diagnostic_item: {
+    flex: 0.3,
+    marginHorizontal: 10,
+    marginVertical: 5,
+    textAlign: 'center',
+    borderRadius: 2,
+    backgroundColor: 'lightgray'
+  },
+  diagnostic_selected_item: {
+    flex: 0.3,
+    marginHorizontal: 10,
+    marginVertical: 5,
+    textAlign: 'center',
+    borderRadius: 2,
+    backgroundColor: '#559bec',
+  },
+  diagnostic_empty_style: {flex: 0.3, marginHorizontal: 10, marginVertical: 5}
+});
