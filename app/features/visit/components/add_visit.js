@@ -1,23 +1,34 @@
 import React from "react";
-import {View, Text, ScrollView, StyleSheet, TextInput} from "react-native";
+import {View, Text, ScrollView, StyleSheet, TextInput, TouchableHighlight, Button, Dimensions} from "react-native";
 import _ from "lodash";
+import ImageSelector from '../../../components/image_selector';
 
 export default class AddVisit extends React.Component {
 
   render() {
     const {visitItems} = this.props;
-    return (<ScrollView style={{flexDirection: 'column', backgroundColor: '#f6f6f6'}}>
-        <Text style={{marginHorizontal:10, marginVertical:5}}>治疗项目</Text>
-        <DiagnosticItems items={visitItems} ref={(i)=>this.diagnostic = i}/>
-        <Text style={{marginHorizontal:10, marginVertical:5}}>出诊地址</Text>
-        <TextInput style={{flex:1, marginHorizontal:10, backgroundColor: 'white'}} underlineColorAndroid='transparent'
-                   multiline={true} placeholder='填写您要出诊的地址。'/>
-        <Text style={{marginHorizontal:10, marginVertical:5}}>操作及观察记录</Text>
-        <TextInput style={{flex:1, marginHorizontal:10, backgroundColor: 'white'}} underlineColorAndroid='transparent'
-                   numberOfLines={5}
-                   multiline={true} placeholder='本次家庭治疗、护理操作的具体情况记录。'/>
-        <Text style={{marginHorizontal:10, marginVertical:5}}>上传问题相关或诊断结果（最多9张，没有可不传)</Text>
-      </ScrollView>
+    return (
+      <View style={{flex:1, flexDirection: 'column'}}>
+        <ScrollView style={{flexDirection: 'column', backgroundColor: '#f6f6f6'}}>
+          <Text style={{marginHorizontal:10, marginVertical:5}}>治疗项目</Text>
+          <DiagnosticItems items={visitItems} ref={(i)=>this.diagnostic = i}/>
+          <Text style={{marginHorizontal:10, marginVertical:5}}>出诊地址</Text>
+          <TextInput style={{flex:1, marginHorizontal:10, backgroundColor: 'white'}} underlineColorAndroid='transparent'
+                     multiline={true} placeholder='填写您要出诊的地址。'/>
+          <Text style={{marginHorizontal:10, marginVertical:5}}>操作及观察记录</Text>
+          <TextInput style={{flex:1, marginHorizontal:10, backgroundColor: 'white'}} underlineColorAndroid='transparent'
+                     numberOfLines={5}
+                     multiline={true} placeholder='本次家庭治疗、护理操作的具体情况记录。'/>
+          <Text style={{marginHorizontal:10, marginVertical:5}}>上传问题相关或诊断结果（最多9张，没有可不传)</Text>
+          <ImageSelector/>
+
+
+        </ScrollView>
+        <View style={{position: 'absolute', bottom: 10, width: Dimensions.get('window').width-40, marginHorizontal:20}}>
+
+          <Button title='提交并且患者确认签字' style={{flex:1}}/>
+        </View>
+      </View>
     )
 }
 

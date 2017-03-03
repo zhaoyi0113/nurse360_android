@@ -1,57 +1,4 @@
 {
-  "_args": [
-    [
-      {
-        "raw": "native-base",
-        "scope": null,
-        "escapedName": "native-base",
-        "name": "native-base",
-        "rawSpec": "",
-        "spec": "latest",
-        "type": "tag"
-      },
-      "/Users/joey/dev/cooltoo/nurse360_android"
-    ]
-  ],
-  "_from": "native-base@latest",
-  "_id": "native-base@2.0.2",
-  "_inCache": true,
-  "_location": "/native-base",
-  "_nodeVersion": "6.9.4",
-  "_npmOperationalInternal": {
-    "host": "packages-18-east.internal.npmjs.com",
-    "tmp": "tmp/native-base-2.0.2.tgz_1486476592951_0.5993464631028473"
-  },
-  "_npmUser": {
-    "name": "sankhadeeproy007",
-    "email": "sankhadeep@sahusoft.com"
-  },
-  "_npmVersion": "3.10.10",
-  "_phantomChildren": {
-    "graceful-fs": "4.1.11",
-    "jsonfile": "2.4.0"
-  },
-  "_requested": {
-    "raw": "native-base",
-    "scope": null,
-    "escapedName": "native-base",
-    "name": "native-base",
-    "rawSpec": "",
-    "spec": "latest",
-    "type": "tag"
-  },
-  "_requiredBy": [
-    "#USER",
-    "/"
-  ],
-  "_resolved": "https://registry.npmjs.org/native-base/-/native-base-2.0.2.tgz",
-  "_shasum": "61ca7b648ed2edc7a7690498c86c12920e5c1d58",
-  "_shrinkwrap": null,
-  "_spec": "native-base",
-  "_where": "/Users/joey/dev/cooltoo/nurse360_android",
-  "bugs": {
-    "url": "https://github.com/GeekyAnts/NativeBase/issues"
-  },
   "dependencies": {
     "@shoutem/animation": "^0.8.9",
     "@shoutem/theme": "git+https://github.com/GeekyAnts/theme.git",
@@ -68,6 +15,7 @@
     "react-native-drawer": "^2.3.0",
     "react-native-easy-grid": "0.1.7",
     "react-native-fs": "^2.1.0-rc.1",
+    "react-native-image-crop-picker": "^0.12.4",
     "react-native-image-picker": "^0.25.7",
     "react-native-keyboard-aware-scroll-view": "0.2.0",
     "react-native-scrollable-tab-view": "^0.7.1",
