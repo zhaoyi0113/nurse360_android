@@ -43,3 +43,4 @@ export const CANCEL_ORDER_HTTP = 'CANCEL_ORDER_HTTP';
 
 //visit
 export const GET_VISIT_ITEMS_HTTP = 'GET_VISIT_ITEMS_HTTP';
+export const ADD_VISIT_HTTP = 'ADD_VISIT_HTTP';

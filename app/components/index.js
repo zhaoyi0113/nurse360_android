@@ -42,8 +42,6 @@ const Tabs = TabNavigator({
   }
 }, {
   tabBarOptions: {
-    // activeTintColor: 'lightgray',
-    // inactiveTintColor: 'lightgray',
     showIcon: true,
     style: {backgroundColor: 'lightgray', height: 40},
     showLabel: false,

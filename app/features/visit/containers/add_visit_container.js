@@ -17,8 +17,16 @@ class AddVisitContainer extends React.Component {
     this.props.queryVisitItems(this.props.token);
   }
 
+  _addVisit(visit){
+    this.props.addVisit(this.props.token, visit)
+      .then(v=> this.props.navigation.goBack());
+  }
+
   render() {
-    return (<AddVisit visitItems={this.props.visitItems}/>);
+    return (<AddVisit visitItems={this.props.visitItems}
+                      addVisit={this._addVisit.bind(this)}
+                      userInfo={this.props.userInfo}
+                      order={this.props.navigation.state.params.order}/>);
   }
 
 }
@@ -35,6 +43,7 @@ const mapStateToProps = (state) => {
   return {
     token: state.login.token,
     visitItems: state.visit.visitItems,
+    userInfo: state.user.userInfo,
   }
 }
 
@@ -42,6 +51,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     queryVisitItems: (token) => {
       return dispatch(actions.queryVisitItems(token));
+    },
+    addVisit: (token, visit) => {
+      return dispatch(actions.addVisit(token, visit));
     }
   }
 }
