@@ -1,15 +1,30 @@
 import React from "react";
-import {View, Text, ScrollView, StyleSheet, TextInput, TouchableHighlight, Button, Dimensions} from "react-native";
+import {
+  View,
+  Text,
+  ScrollView,
+  StyleSheet,
+  TextInput,
+  TouchableHighlight,
+  Button,
+  Dimensions,
+  Alert
+} from "react-native";
 import _ from "lodash";
 import ImageSelector from '../../../components/image_selector';
 import CheckBox from 'react-native-checkbox';
+
+import WaitingIndicator from '../../../components/waiting_indicator';
+
 import {FontSize} from '../../../constants';
+import FileUpload from 'NativeModules';
+import Config from "react-native-config";
 
 export default class AddVisit extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {requireSignature: false, diagnosticItems: [], address: '', record: ''};
+    this.state = {requireSignature: false, diagnosticItems: [], address: '', record: '', waitingIndicator: false};
   }
 
   _submit() {
@@ -18,12 +33,61 @@ export default class AddVisit extends React.Component {
 
     this._addVisit()
       .then(v => {
+        if (images.length > 0) {
+          return this._uploadImages(v.payload.data.id, images);
+        }
+        return Promise.resolve(v.payload.data.id);
+      })
+      .then(v=>{
         if (this.state.requireSignature) {
           this.props.navigation.navigate('PatientSignatureContainer', {visitRecordId: v.payload.data.id});
         } else {
           this.props.navigation.goBack();
         }
       });
+
+  }
+
+  _uploadImages(recordId, images) {
+    this.setState({waitingIndicator: true});
+    const imageLength = images.length;
+    let uploadedCount = 0;
+    const that = this;
+    return new Promise((resolve, reject) => {
+      for (let image of images) {
+        const obj = {
+          uploadUrl: Config.API_URL,
+          method: 'POST', // default 'POST',support 'POST' and 'PUT'
+          headers: {
+            'Accept': 'application/json',
+            'ACCESS_TOKEN': this.props.token,
+          },
+          fields: {
+            'visit_record_id': recordId+'',
+          },
+          files: [
+            {
+              filename: 'image', // require, file name
+              filepath: image.source.uri, // require, file absoluete path
+              filetype: 'image/jpeg', // options, if none, will get mimetype from `filepath` extension
+            },
+          ],
+        };
+        console.log('upload ', image.source.uri);
+        FileUpload.FileUpload.upload(obj, function (err, result) {
+          console.log('upload result ', result);
+          if(err){
+            console.error(err);
+            reject(err);
+          }
+          uploadedCount++;
+          if (uploadedCount === imageLength) {
+            that.setState({waitingIndicator: false});
+            resolve(recordId);
+          }
+        });
+      }
+    });
 
   }
 
@@ -51,6 +115,7 @@ export default class AddVisit extends React.Component {
     const {diagnosticItems} = this.state;
     return (
       <View style={{flex:1, flexDirection: 'column'}}>
+        <WaitingIndicator isVisible={this.state.waitingIndicator}/>
         <ScrollView style={{flexDirection: 'column', backgroundColor: '#f6f6f6'}}>
           <Text style={{marginHorizontal:10, marginVertical:5}}>治疗项目</Text>
           <DiagnosticItems items={diagnosticItems} ref={(i)=>this.diagnostic = i}

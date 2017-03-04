@@ -26,6 +26,7 @@ class AddVisitContainer extends React.Component {
                       addVisit={this._addVisit.bind(this)}
                       userInfo={this.props.userInfo}
                       navigation={this.props.navigation}
+                      token={this.props.token}
                       order={this.props.navigation.state.params.order}/>);
   }
 

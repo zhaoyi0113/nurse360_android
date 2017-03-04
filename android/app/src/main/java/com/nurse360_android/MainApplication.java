@@ -3,6 +3,7 @@ package com.nurse360_android;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.yoloci.fileupload.FileUploadPackage;
 import com.reactnative.ivpusic.imagepicker.PickerPackage;
 import com.imagepicker.ImagePickerPackage;
 import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
@@ -32,6 +33,7 @@ public class MainApplication extends Application implements ReactApplication {
         protected List<ReactPackage> getPackages() {
             return Arrays.<ReactPackage>asList(
                     new MainReactPackage(),
+            new FileUploadPackage(),
             new PickerPackage(),
             new ImagePickerPackage(),
             new ReactNativeConfigPackage(),
