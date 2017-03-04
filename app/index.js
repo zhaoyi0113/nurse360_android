@@ -14,6 +14,7 @@ import Config from "react-native-config";
 import * as actions from "./actions/common_actions";
 import * as types from "./actions/action_types";
 import {Root} from "./routers";
+import WaitingIndicator from './components/waiting_indicator';
 
 const engine = createEngine('nurse360_android');
 
@@ -53,8 +54,6 @@ class AppWithNavigation extends Component {
     this.showAlert = false;
   }
 
-
-
   render() {
     if (this.props.alert && !this.showAlert) {
       this.showAlert = true;
@@ -71,7 +70,10 @@ class AppWithNavigation extends Component {
         ]
       );
     }
-    return (<Root navigation={this.props.addNavigationHelpers(this.props.nav)}/>);
+    return (<View style={{flex:1}}>
+      <Root navigation={this.props.addNavigationHelpers(this.props.nav)}/>
+      <WaitingIndicator isVisible={this.props.waitingIndicator}/>
+    </View>);
   }
 
 }
@@ -80,6 +82,7 @@ const mapStateToProps = (state) => {
     token: state.login.token,
     nav: state.nav,
     alert: state.common.alert,
+    waitingIndicator: state.common ? state.common.waitingIndicator : false,
   }
 }
 

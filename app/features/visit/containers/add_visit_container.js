@@ -27,6 +27,7 @@ class AddVisitContainer extends React.Component {
                       userInfo={this.props.userInfo}
                       navigation={this.props.navigation}
                       token={this.props.token}
+                      requestUploadImageWaiting={this.props.requestUploadImageWaiting.bind(this)}
                       order={this.props.navigation.state.params.order}/>);
   }
 
@@ -55,6 +56,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     addVisit: (token, visit) => {
       return dispatch(actions.addVisit(token, visit));
+    },
+    requestUploadImageWaiting: (data) => {
+      return dispatch(actions.requestUploadImageWaiting(data));
     }
   }
 }

@@ -90,3 +90,21 @@ export const requestGet = (type, url, token, options) => {
     }
   }
 }
+
+export const uploadImageObject = (type, url, data=undefined, token=undefined) => {  // 上传图片
+  return {
+    type: type,
+    payload: {
+      request: {
+        url: url,
+        method: 'post',
+        timeout: 60000,
+        headers: {
+          'ACCESS_TOKEN': token,
+          'Content-Type': 'multipart/form-data',
+        },
+        data: data
+      }
+    }
+  }
+}

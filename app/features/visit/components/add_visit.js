@@ -11,15 +11,12 @@ import {
   Alert
 } from "react-native";
 import _ from "lodash";
-import ImageSelector from '../../../components/image_selector';
-import CheckBox from 'react-native-checkbox';
-import RNGRP from 'react-native-get-real-path';
-
-import WaitingIndicator from '../../../components/waiting_indicator';
-
-import {FontSize} from '../../../constants';
-var FileUpload = require('NativeModules').FileUpload;
+import ImageSelector from "../../../components/image_selector";
+import CheckBox from "react-native-checkbox";
+import RNGRP from "react-native-get-real-path";
+import {FontSize} from "../../../constants";
 import Config from "react-native-config";
+var FileUpload = require('NativeModules').FileUpload;
 
 export default class AddVisit extends React.Component {
 
@@ -47,16 +44,16 @@ export default class AddVisit extends React.Component {
   }
 
   _uploadImages(recordId, images) {
-    this.setState({waitingIndicator: true});
     const imageLength = images.length;
     let uploadedCount = 0;
     const that = this;
+    this.props.requestUploadImageWaiting(true);
     return new Promise((resolve, reject) => {
       for (let image of images) {
         RNGRP.getRealPathFromURI(image.source.uri).then(filePath => {
             const fileName = filePath.split('/').pop(-1);
             const obj = {
-              uploadUrl: Config.API_URL+'/nurse/visit/patient/image',
+              uploadUrl: Config.API_URL + '/nurse/visit/patient/image',
               method: 'POST', // default 'POST',support 'POST' and 'PUT'
               headers: {
                 'Accept': 'application/json',
@@ -69,7 +66,7 @@ export default class AddVisit extends React.Component {
                 {
                   filename: fileName, // require, file name
                   filepath: filePath, // require, file absoluete path
-                  filetype: 'image/jpeg', // options, if none, will get mimetype from `filepath` extension
+                  // filetype: 'image/jpeg', // options, if none, will get mimetype from `filepath` extension
                 },
               ],
             };
@@ -82,26 +79,10 @@ export default class AddVisit extends React.Component {
               }
               uploadedCount++;
               if (uploadedCount === imageLength) {
-                that.setState({waitingIndicator: false});
+                that.props.requestUploadImageWaiting(false);
                 resolve(recordId);
               }
             });
-
-
-          // fetch(Config.API_URL+'/nurse/visit/patient/image',{
-          //   method: 'post',
-          //   body: "data=" + encodeURIComponent(source.uri),
-          //   headers: {
-          //     'Accept': 'application/json',
-          //     'ACCESS_TOKEN': this.props.token,
-          //   },
-          //   data: {
-          //     'visit_record_id': recordId + '',
-          //   },
-          // }).then(response => {
-          //   console.log("image uploaded")
-          //   console.log(response)
-          // }).catch(console.log);
           }
         );
 
@@ -135,7 +116,6 @@ export default class AddVisit extends React.Component {
     const {diagnosticItems} = this.state;
     return (
       <View style={{flex:1, flexDirection: 'column'}}>
-        <WaitingIndicator isVisible={this.state.waitingIndicator}/>
         <ScrollView style={{flexDirection: 'column', backgroundColor: '#f6f6f6'}}>
           <Text style={{marginHorizontal:10, marginVertical:5}}>治疗项目</Text>
           <DiagnosticItems items={diagnosticItems} ref={(i)=>this.diagnostic = i}
