@@ -13,20 +13,28 @@ export default class AddVisit extends React.Component {
   }
 
   _submit() {
-    if (this.state.requireSignature) {
-      this.props.navigation.navigate('PatientSignatureContainer');
-    } else {
-      this._addVisit();
-    }
+    console.log('images:', this.images.state);
+    let images = this.images.state.images;
+
+    this._addVisit()
+      .then(v => {
+        if (this.state.requireSignature) {
+          this.props.navigation.navigate('PatientSignatureContainer', {visitRecordId: v.payload.data.id});
+        } else {
+          this.props.navigation.goBack();
+        }
+      });
+
   }
 
   _addVisit() {
-    const {order, userInfo} = this.props;
+    const {order} = this.props;
+    const serviceIds = _.map(this.state.diagnosticItems, 'id');
     const visit = {
-      'user_id': userInfo.id, 'patient_id': order.patient.id, 'service_item_ids': order.serviceItemId,
+      'user_id': order.userId, 'patient_id': order.patient.id, 'service_item_ids': serviceIds,
       'visit_record': this.state.record, 'order_id': order.id, 'address': this.state.address
     };
-    this.props.addVisit(visit);
+    return this.props.addVisit(visit);
   }
 
   _getSelectedDiagnosticItems() {
@@ -58,7 +66,7 @@ export default class AddVisit extends React.Component {
                      onChangeText={(text)=> this.setState({record: text})}
                      multiline={true} placeholder='本次家庭治疗、护理操作的具体情况记录。'/>
           <Text style={{marginHorizontal:10, marginVertical:5}}>上传问题相关或诊断结果（最多9张，没有可不传)</Text>
-          <ImageSelector/>
+          <ImageSelector ref={image=>this.images = image}/>
         </ScrollView>
         <View style={{position: 'absolute', bottom: 10, width: Dimensions.get('window').width-40, marginHorizontal:20}}>
           <CheckBox

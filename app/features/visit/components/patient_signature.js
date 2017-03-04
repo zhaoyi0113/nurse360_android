@@ -14,7 +14,6 @@ export default class PatientSignature extends React.Component {
   }
 
   _signaturePadChange = ({base64DataUrl}) => {
-    console.log("Got new signature: " + base64DataUrl);
     this.setState({signature: base64DataUrl});
   }
 
@@ -33,7 +32,7 @@ export default class PatientSignature extends React.Component {
       }
       <Button title='确认，并跳转护士签字'
               disabled={!this.state.signature}
-              onPress={this.props.addSignature.bind(this)}/>
+              onPress={this.props.addSignature.bind(this, this.state.signature)}/>
     </View>);
   }
 

@@ -18,8 +18,7 @@ class AddVisitContainer extends React.Component {
   }
 
   _addVisit(visit){
-    this.props.addVisit(this.props.token, visit)
-      .then(v=> this.props.navigation.goBack());
+    return this.props.addVisit(this.props.token, visit);
   }
 
   render() {

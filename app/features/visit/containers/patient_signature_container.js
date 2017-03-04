@@ -13,12 +13,14 @@ class PatientSignatureContainer extends React.Component {
     }
   }
 
-  _addSignature() {
+  _addSignature(signature) {
+    console.log('send signature:', signature);
+    const visitId = this.props.navigation.state.params.visitRecordId;
 
   }
 
   render() {
-    return <PatientSignature addSignature={this._addSignature.bind(this)}/>
+    return <PatientSignature addSignature={this._addSignature.bind(this)} />
   }
 }
 
