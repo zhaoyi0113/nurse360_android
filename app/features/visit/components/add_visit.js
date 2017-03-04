@@ -13,11 +13,12 @@ import {
 import _ from "lodash";
 import ImageSelector from '../../../components/image_selector';
 import CheckBox from 'react-native-checkbox';
+import RNGRP from 'react-native-get-real-path';
 
 import WaitingIndicator from '../../../components/waiting_indicator';
 
 import {FontSize} from '../../../constants';
-import FileUpload from 'NativeModules';
+var FileUpload = require('NativeModules').FileUpload;
 import Config from "react-native-config";
 
 export default class AddVisit extends React.Component {
@@ -28,9 +29,7 @@ export default class AddVisit extends React.Component {
   }
 
   _submit() {
-    console.log('images:', this.images.state);
     let images = this.images.state.images;
-
     this._addVisit()
       .then(v => {
         if (images.length > 0) {
@@ -38,14 +37,13 @@ export default class AddVisit extends React.Component {
         }
         return Promise.resolve(v.payload.data.id);
       })
-      .then(v=>{
+      .then(v => {
         if (this.state.requireSignature) {
-          this.props.navigation.navigate('PatientSignatureContainer', {visitRecordId: v.payload.data.id});
+          this.props.navigation.navigate('PatientSignatureContainer', {visitRecordId: v});
         } else {
           this.props.navigation.goBack();
         }
       });
-
   }
 
   _uploadImages(recordId, images) {
@@ -55,37 +53,59 @@ export default class AddVisit extends React.Component {
     const that = this;
     return new Promise((resolve, reject) => {
       for (let image of images) {
-        const obj = {
-          uploadUrl: Config.API_URL,
-          method: 'POST', // default 'POST',support 'POST' and 'PUT'
-          headers: {
-            'Accept': 'application/json',
-            'ACCESS_TOKEN': this.props.token,
-          },
-          fields: {
-            'visit_record_id': recordId+'',
-          },
-          files: [
-            {
-              filename: 'image', // require, file name
-              filepath: image.source.uri, // require, file absoluete path
-              filetype: 'image/jpeg', // options, if none, will get mimetype from `filepath` extension
-            },
-          ],
-        };
-        console.log('upload ', image.source.uri);
-        FileUpload.FileUpload.upload(obj, function (err, result) {
-          console.log('upload result ', result);
-          if(err){
-            console.error(err);
-            reject(err);
+        RNGRP.getRealPathFromURI(image.source.uri).then(filePath => {
+            const fileName = filePath.split('/').pop(-1);
+            const obj = {
+              uploadUrl: Config.API_URL+'/nurse/visit/patient/image',
+              method: 'POST', // default 'POST',support 'POST' and 'PUT'
+              headers: {
+                'Accept': 'application/json',
+                'ACCESS_TOKEN': this.props.token,
+              },
+              fields: {
+                'visit_record_id': recordId + '',
+              },
+              files: [
+                {
+                  filename: fileName, // require, file name
+                  filepath: filePath, // require, file absoluete path
+                  filetype: 'image/jpeg', // options, if none, will get mimetype from `filepath` extension
+                },
+              ],
+            };
+            console.log('upload ', filePath);
+            FileUpload.upload(obj, function (err, result) {
+              console.log('upload result ', result);
+              if (err) {
+                console.error('get error:', err);
+                reject(err);
+              }
+              uploadedCount++;
+              if (uploadedCount === imageLength) {
+                that.setState({waitingIndicator: false});
+                resolve(recordId);
+              }
+            });
+
+
+          // fetch(Config.API_URL+'/nurse/visit/patient/image',{
+          //   method: 'post',
+          //   body: "data=" + encodeURIComponent(source.uri),
+          //   headers: {
+          //     'Accept': 'application/json',
+          //     'ACCESS_TOKEN': this.props.token,
+          //   },
+          //   data: {
+          //     'visit_record_id': recordId + '',
+          //   },
+          // }).then(response => {
+          //   console.log("image uploaded")
+          //   console.log(response)
+          // }).catch(console.log);
           }
-          uploadedCount++;
-          if (uploadedCount === imageLength) {
-            that.setState({waitingIndicator: false});
-            resolve(recordId);
-          }
-        });
+        );
+
+
       }
     });
 
@@ -95,7 +115,7 @@ export default class AddVisit extends React.Component {
     const {order} = this.props;
     const serviceIds = _.map(this.state.diagnosticItems, 'id');
     const visit = {
-      'user_id': order.userId, 'patient_id': order.patient.id, 'service_item_ids': serviceIds,
+      'user_id': order.userId, 'patient_id': order.patient.id, 'service_item_ids': serviceIds.join(),
       'visit_record': this.state.record, 'order_id': order.id, 'address': this.state.address
     };
     return this.props.addVisit(visit);
