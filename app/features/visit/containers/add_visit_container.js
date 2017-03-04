@@ -26,6 +26,7 @@ class AddVisitContainer extends React.Component {
     return (<AddVisit visitItems={this.props.visitItems}
                       addVisit={this._addVisit.bind(this)}
                       userInfo={this.props.userInfo}
+                      navigation={this.props.navigation}
                       order={this.props.navigation.state.params.order}/>);
   }
 

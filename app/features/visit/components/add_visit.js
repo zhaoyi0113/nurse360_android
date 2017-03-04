@@ -9,10 +9,18 @@ export default class AddVisit extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {checked: true, diagnosticItems: [], address: '', record: ''};
+    this.state = {requireSignature: false, diagnosticItems: [], address: '', record: ''};
   }
 
   _submit() {
+    if (this.state.requireSignature) {
+      this.props.navigation.navigate('PatientSignatureContainer');
+    } else {
+      this._addVisit();
+    }
+  }
+
+  _addVisit() {
     const {order, userInfo} = this.props;
     const visit = {
       'user_id': userInfo.id, 'patient_id': order.patient.id, 'service_item_ids': order.serviceItemId,

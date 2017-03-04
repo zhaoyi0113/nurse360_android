@@ -18,6 +18,7 @@ import Withdraw from '../features/user/components/withdraw';
 import SuggestionFeedbackContainer from '../features/user/containers/suggestion_feedback_container';
 import LoginContainer from '../features/login/containers/login_container';
 import AddVisit from '../features/visit/containers/add_visit_container';
+import PatientSignatureContainer from '../features/visit/containers/patient_signature_container';
 
 export const Root = StackNavigator({
   Main: {screen: MainContainer, path: 'main'},
@@ -36,6 +37,7 @@ export const Root = StackNavigator({
   About: {screen: About},
   Login: {screen: LoginContainer},
   AddVisit: {screen: AddVisit},
+  PatientSignatureContainer: {screen: PatientSignatureContainer},
 }, {
   initialRouteName: 'Login',
 });
