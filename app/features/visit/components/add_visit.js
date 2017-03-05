@@ -36,7 +36,7 @@ export default class AddVisit extends React.Component {
       })
       .then(v => {
         if (this.state.requireSignature) {
-          this.props.navigation.navigate('PatientSignatureContainer', {visitRecordId: v});
+          this.props.navigation.navigate('PatientSignatureContainer', {visitRecordId: v, order: this.props.order});
         } else {
           this.props.navigation.goBack();
         }

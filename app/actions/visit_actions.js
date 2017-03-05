@@ -1,5 +1,6 @@
 import * as types from './action_types';
 import * as commonActions from './common_actions';
+import base64 from 'base-64';
 
 export const queryVisitItems = (token) => {
   return commonActions.requestGet(types.GET_VISIT_ITEMS_HTTP, '/nurse/visit/patient/service/item', token);
@@ -14,12 +15,20 @@ export const requestUploadImageWaiting = (data) => {
   return {type: type};
 }
 
-export const sendPatientSignature = (token, visitRecordId, image) => {
+export const sendPatientSignature = (token, visitRecordId, patient) => {
   let data = new FormData()
-  let converted = decodeBase64Image(image)
-  data.append('image', converted)
+  data.append('image', patient)
+  data.append('image_name', 'patient_signature')
   data.append('visit_record_id', visitRecordId);
-  return commonActions.uploadImageObject(types.SEND_PATIENT_SIGNATURE_HTTP, '/nurse/visit/patient/sign', data, token);
+  return commonActions.uploadImageObject(types.SET_PATIENT_SIGNATURE_HTTP, '/nurse/visit/patient/sign', data, token);
+}
+
+export const sendNurseSignature = (token, visitRecordId, nurse) => {
+  let data = new FormData()
+  data.append('image', nurse)
+  data.append('visit_record_id', visitRecordId);
+  data.append('image_name', 'nurse_signature')
+  return commonActions.uploadImageObject(types.SET_NURSE_SIGNATURE_HTTP, '/nurse/visit/patient/nurse/sign', data, token);
 }
 
 export const decodeBase64Image = (dataURI) => {

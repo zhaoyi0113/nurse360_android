@@ -30,7 +30,7 @@ export default class PatientSignature extends React.Component {
                                             onChange={this._signaturePadChange}
                                             style={{flex: 1, borderColor: 'gray', borderWidth: 1}}/> : null
       }
-      <Button title={this.props.buttonText}
+      <Button title='确认，并跳转护士签字'
               disabled={!this.state.signature}
               onPress={this.props.addSignature.bind(this, this.state.signature)}/>
     </View>);
