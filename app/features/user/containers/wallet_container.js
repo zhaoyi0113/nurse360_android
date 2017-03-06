@@ -3,11 +3,13 @@ import {connect} from "react-redux";
 import Wallet from "../components/wallet";
 import * as actions from "../../../actions/wallet_actions";
 import {Alert} from 'react-native';
+import {header} from '../../../components/navigation_header';
 
 class WalletContainer extends React.Component {
 
   static navigationOptions = {
     title: '我的钱包',
+    header:header,
   }
 
   componentDidMount() {

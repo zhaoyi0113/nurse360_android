@@ -5,6 +5,7 @@ import HeaderCategoryView from "../../../components/header_category_view";
 import {FontSize} from "../../../constants";
 import {getDate, getTime} from "../../../reducers/common_reducer";
 import {ORDER_STATUS_NAME} from '../../../reducers/order_reducer';
+import {header} from '../../../components/navigation_header';
 
 export default class OrderDetail extends React.Component {
 
@@ -12,7 +13,8 @@ export default class OrderDetail extends React.Component {
     title: '订单详情',
     cardStack: {
       gesturesEnabled: true
-    }
+    },
+    header:header,
   }
 
   _cancelOrder() {

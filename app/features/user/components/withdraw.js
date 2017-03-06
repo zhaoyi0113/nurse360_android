@@ -1,11 +1,13 @@
 import React from 'react';
 import {View, Text, TextInput, Button} from 'react-native';
 import {FontSize} from '../../../constants';
+import {header} from '../../../components/navigation_header';
 
 export default class Withdraw extends React.Component {
 
   static navigationOptions = {
     title: '申请提现',
+    header:header,g
   }
 
   render() {

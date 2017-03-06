@@ -2,6 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 import * as actions from "../../../actions/order_actions";
 import OrderList from "../components/order_list";
+import {header} from '../../../components/navigation_header';
 
 class OrderListContainer extends React.Component {
 
@@ -9,7 +10,8 @@ class OrderListContainer extends React.Component {
     title: '患者服务',
     cardStack: {
       gesturesEnabled: true
-    }
+    },
+    header:header
   }
 
   constructor(props) {

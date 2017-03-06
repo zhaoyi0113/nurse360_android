@@ -61,7 +61,7 @@ export default class Setting extends React.Component {
 
   render() {
     return (
-      <View style={{flex:1, height:100, flexDirection: 'column', marginTop: 50}}>
+      <View style={{flex:1, height:100, flexDirection: 'column', marginTop: 10}}>
         <Text style={{marginLeft: 30}}>设置您的账号</Text>
         {
           this.state.items.map((item, i) => {

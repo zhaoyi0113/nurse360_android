@@ -3,11 +3,13 @@ import {connect} from 'react-redux';
 
 import Setting from '../components/setting';
 import * as actions from '../../../actions/login_actions';
+import {header} from '../../../components/navigation_header';
 
 class SettingContainer extends React.Component {
 
   static navigationOptions = {
     title: '设置',
+    header:header,
   }
 
   render() {

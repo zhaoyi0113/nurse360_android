@@ -17,6 +17,7 @@ export const ORDER_STATUS_NAME = {
   IN_PROCESS: '服务中',
   COMPLETED: '服务完成',
   CANCEL: '取消订单',
+  REFUND_IN_PROCESS: '退款中',
 }
 
 export const ORDER_ACTION_NAME = {
@@ -24,6 +25,7 @@ export const ORDER_ACTION_NAME = {
   IN_PROCESS: '您已抢单',
   COMPLETED: '您已抢单',
   CANCEL: '您已取消',
+  REFUND_IN_PROCESS: '退款中',
 }
 
 export const parseOrderStatus = (status) => {
@@ -58,7 +60,7 @@ export const parseUserOrder = (data) => {
   }
   if (data.serviceItem) {
     order.serviceName = data.serviceItem.name;
-    order.orderDate = utils.getDate(data.serviceItem.time);
+    order.orderDate = utils.getDate(data.serviceStartTime);
     order.needVisitPatientRecord = data.serviceItem.needVisitPatientRecord;
   }
   return order;

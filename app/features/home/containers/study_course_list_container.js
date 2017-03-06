@@ -5,6 +5,7 @@ import CategoryView from '../../../components/category_view';
 import * as actions from '../../../actions/study_actions';
 import {COURSE_DETAIL} from '../../../routers';
 import ArticleContainer from '../../../containers/article_container';
+import {header} from '../../../components/navigation_header';
 
 class StudyCourseListContainer extends React.Component {
 
@@ -12,7 +13,8 @@ class StudyCourseListContainer extends React.Component {
     title: '学习',
     cardStack: {
       gesturesEnabled: true
-    }
+    },
+    header:header,
   }
 
   constructor(props) {

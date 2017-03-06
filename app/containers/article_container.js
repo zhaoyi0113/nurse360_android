@@ -7,10 +7,14 @@ import * as courseActions from '../actions/study_actions';
 
 import {NOTIFICATION_DETAIL, COURSE_DETAIL} from '../routers';
 
+
+import {header} from '../components/navigation_header';
+
 class ArticleContainer extends React.Component {
 
   static navigationOptions = {
     title: ({state}) => `${state.params.title}`,
+    header:header,
   }
 
   constructor(props) {

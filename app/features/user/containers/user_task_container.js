@@ -3,16 +3,15 @@ import React from 'react';
 import {connect} from 'react-redux';
 import OrderList from "../../order/components/order_list";
 import * as actions from "../../../actions/user_actions";
-import {ORDER_DETAIL} from '../../../routers';
 import OrderDetail from '../../order/components/order_detail';
+import {View, Button,Image} from 'react-native';
+import {header} from '../../../components/navigation_header';
+
 
 class UserTaskContainer extends React.Component {
   static navigationOptions = {
-    title: '任务',
-    header: {
-      visible: true,
-      titleStyle: {height: 20}
-    },
+    title: '我的任务',
+    header:  header,
     cardStack: {
       gesturesEnabled: true,
     }

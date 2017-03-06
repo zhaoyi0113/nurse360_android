@@ -4,11 +4,13 @@ import CategoryView from "../../../components/category_view";
 import * as actions from "../../../actions/notification_actions";
 import {NOTIFICATION_DETAIL} from "../../../routers";
 import {InteractionManager} from 'react-native';
+import {header} from '../../../components/navigation_header';
 
 class NotificationListContainer extends React.Component {
 
   static navigationOptions = {
     title: '通知',
+    header: header,
     cardStack: {
       gesturesEnabled: true
     }
