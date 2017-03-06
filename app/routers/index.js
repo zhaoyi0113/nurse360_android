@@ -4,22 +4,21 @@ import {Text, View, TouchableHighlight} from "react-native";
 import SettingContainer from "../features/user/containers/setting_container";
 import About from "../features/user/components/about";
 import UserAgreemnt from "../features/user/components/user_agreement";
-import {StackNavigator} from 'react-navigation';
-import MainContainer from '../containers/index';
-import ArticleContainer from '../containers/article_container';
-import OrderDetail from '../features/order/components/order_detail';
-import NotificationListContainer from '../features/home/containers/notification_list_container';
-import StudyCourseListContainer from '../features/home/containers/study_course_list_container';
-import OrderListContainer from '../features/order/containers/order_list_container';
-import UserTaskContainer from '../features/user/containers/user_task_container';
-import UserHistoryCourseContainer from '../features/user/containers/user_history_course_container';
-import WalletContainer from '../features/user/containers/wallet_container';
-import Withdraw from '../features/user/components/withdraw';
-import SuggestionFeedbackContainer from '../features/user/containers/suggestion_feedback_container';
-import LoginContainer from '../features/login/containers/login_container';
-import AddVisit from '../features/visit/containers/add_visit_container';
-import PatientSignatureContainer from '../features/visit/containers/patient_signature_container';
-import NurseSignature from '../features/visit/containers/nurse_signature_container';
+import {StackNavigator} from "react-navigation";
+import MainContainer from "../containers/index";
+import ArticleContainer from "../containers/article_container";
+import OrderDetail from "../features/order/components/order_detail";
+import NotificationListContainer from "../features/home/containers/notification_list_container";
+import StudyCourseListContainer from "../features/home/containers/study_course_list_container";
+import OrderListContainer from "../features/order/containers/order_list_container";
+import UserTaskContainer from "../features/user/containers/user_task_container";
+import UserHistoryCourseContainer from "../features/user/containers/user_history_course_container";
+import WalletContainer from "../features/user/containers/wallet_container";
+import Withdraw from "../features/user/components/withdraw";
+import SuggestionFeedbackContainer from "../features/user/containers/suggestion_feedback_container";
+import LoginContainer from "../features/login/containers/login_container";
+import AddVisit from "../features/visit/containers/add_visit_container";
+import VisitContainer from "../features/visit/containers/visit_container";
 
 export const Root = StackNavigator({
   Main: {screen: MainContainer, path: 'main'},
@@ -38,8 +37,7 @@ export const Root = StackNavigator({
   About: {screen: About},
   Login: {screen: LoginContainer},
   AddVisit: {screen: AddVisit},
-  PatientSignatureContainer: {screen: PatientSignatureContainer},
-  NurseSignature: {screen: NurseSignature},
+  VisitContainer: {screen: VisitContainer},
 }, {
   initialRouteName: 'Login',
 });

@@ -22,13 +22,14 @@ class AddVisitContainer extends React.Component {
   }
 
   render() {
+    const {order} = this.props.screenProps;
     return (<AddVisit visitItems={this.props.visitItems}
                       addVisit={this._addVisit.bind(this)}
                       userInfo={this.props.userInfo}
                       navigation={this.props.navigation}
                       token={this.props.token}
                       requestUploadImageWaiting={this.props.requestUploadImageWaiting.bind(this)}
-                      order={this.props.navigation.state.params.order}/>);
+                      order={order}/>);
   }
 
 }

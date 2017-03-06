@@ -1,10 +1,8 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {View, ActivityIndicator, StyleSheet, Alert} from 'react-native';
-
-import App from '../components'
-import WaitingIndicator from '../components/waiting_indicator';
-import * as actions from '../actions/common_actions';
+import React, {Component} from "react";
+import {connect} from "react-redux";
+import {View, ActivityIndicator, StyleSheet, Alert} from "react-native";
+import App from "../components";
+import * as actions from "../actions/common_actions";
 
 class MainContainer extends Component {
   static navigationOptions = {
@@ -24,6 +22,7 @@ class MainContainer extends Component {
       </View>
     );
   }
+
 }
 
 const mapStateToProps = (state) => {

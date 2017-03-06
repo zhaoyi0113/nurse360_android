@@ -28,9 +28,9 @@ class NurseSignatureContainer extends React.Component {
         return that.props.sendNurseSignature(that.props.token, visitRecordId, signature)
       })
       .then(v => {
-        // this.props.navigation.goBack();
-        let routes = this.props.nav.routes.slice(0, this.props.nav.routes.length - 3);
-        this.props.signatureSuccess(order, routes, this.props.nav.routes.length - 3);
+        this.props.screenProps.exit();
+        // let routes = this.props.nav.routes.slice(0, this.props.nav.routes.length - 3);
+        // this.props.signatureSuccess(order, routes, this.props.nav.routes.length - 3);
       });
   }
 

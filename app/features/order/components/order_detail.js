@@ -1,7 +1,6 @@
 import React from "react";
 import {View, Text, Image, StyleSheet, Button, Linking, Alert} from "react-native";
 
-
 import HeaderCategoryView from "../../../components/header_category_view";
 import {FontSize} from "../../../constants";
 import {getDate, getTime} from "../../../reducers/common_reducer";
@@ -33,7 +32,7 @@ export default class OrderDetail extends React.Component {
   }
 
   _addVisit(order) {
-    this.props.navigation.navigate('AddVisit', {order: order});
+    this.props.navigation.navigate('VisitContainer', {order: order});
   }
 
   render() {
@@ -169,6 +168,8 @@ class OrderButtonPanel extends React.Component {
   }
 
 }
+
+
 
 OrderDetail.propTypes = {
   order: React.PropTypes.object,
