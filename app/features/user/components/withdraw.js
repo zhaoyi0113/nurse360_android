@@ -7,7 +7,7 @@ export default class Withdraw extends React.Component {
 
   static navigationOptions = {
     title: '申请提现',
-    header:header,g
+    header:header,
   }
 
   render() {

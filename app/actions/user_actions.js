@@ -17,3 +17,6 @@ export const getUserHistoryCourse = (token, index, number) => {
   return commonActions.requestGet(types.USER_COURSE_HTTP, '/nurse/extension/course/'+index+'/'+number, token)
 }
 
+export const sendSuggestionFeedback = (token, content) => {
+  return commonActions.requestPost(types.SEND_FEEDBACK_HTTP, '/nurse/suggestion', {suggestion: content, platform: 'NURSE360_ANDROID'},token);
+}

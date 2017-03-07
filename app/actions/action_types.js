@@ -19,6 +19,7 @@ export const USER_INFO_HTTP = 'USER_INFO_HTTP';
 export const USER_ORDER_HTTP = 'USER_ORDER_HTTP';
 export const USER_ORDERS = 'USER_ORDERS';
 export const USER_COURSE_HTTP = 'USER_COURSE_HTTP';
+export const SEND_FEEDBACK_HTTP = 'SEND_FEEDBACK_HTTP';
 
 //wallet
 export const QUERY_WALLET_HTTP = 'QUERY_WALLET_HTTP';
