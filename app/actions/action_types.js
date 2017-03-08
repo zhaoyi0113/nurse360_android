@@ -13,6 +13,7 @@ export const LOGIN_HTTP = 'LOGIN_HTTP';
 export const LOGOUT_HTTP = 'LOGOUT_HTTP';
 export const REQUEST_SMS_CODE_HTTP = 'REQUEST_SMS_CODE_HTTP';
 export const REGISTER_HTTP = 'REGISTER_HTTP';
+export const FORGET_PASSWORD_HTTP = 'FORGET_PASSWORD_HTTP';
 
 //user
 export const USER_INFO_HTTP = 'USER_INFO_HTTP';

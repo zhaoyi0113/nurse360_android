@@ -18,6 +18,7 @@ export default class PasswordUpdate extends React.Component {
       <TextInput placeholder='请输入新密码' value={this.state.newPassword}
                  secureTextEntry={true}
                  onChangeText={(text)=>this.setState({newPassword: text})}/>
+      <Text style={{textAlign: 'right',margin:5}} onPress={this.props.forgetPassword.bind(this)}>忘记密码</Text>
       <Button title='确认' onPress={() => this.props.changePassword(this.state.oldPassword, this.state.newPassword)}
               disabled={!this.state.oldPassword || !this.state.newPassword}/>
     </View>);

@@ -36,14 +36,15 @@ class PasswordUpdateContainer extends React.Component {
     }
     this.props.changePassword(this.props.token, oldPwd, newPwd)
       .then(v => {
-        Alert.alert(
-          '',
-          '修改密码成功',
-          [
-            {text: '确定', onPress: () => this.props.navigation.goBack()},
-          ],
-        );
-
+        if(!v.error) {
+          Alert.alert(
+            '',
+            '修改密码成功',
+            [
+              {text: '确定', onPress: () => this.props.navigation.goBack()},
+            ],
+          );
+        }
       })
       .catch(err => {
 
@@ -57,8 +58,13 @@ class PasswordUpdateContainer extends React.Component {
       });
   }
 
+  _forgetPassword() {
+    this.props.navigation.navigate('ForgetPassword');
+  }
+
   render() {
-    return (<PasswordUpdate userInfo={this.props.userInfo} changePassword={this._changePassword.bind(this)}/>);
+    return (<PasswordUpdate userInfo={this.props.userInfo} changePassword={this._changePassword.bind(this)}
+                            forgetPassword={this._forgetPassword.bind(this)}/>);
   }
 }
 

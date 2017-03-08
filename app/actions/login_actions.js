@@ -36,3 +36,11 @@ export const register = (mobile, password, smsCode, hospitalId, departmentId, jo
     job_title: jobTitle
   }, null, null);
 }
+
+export const forgetPassword = (mobile, verify, newPwd) => {
+  return commonActions.requestPut(types.FORGET_PASSWORD_HTTP, '/nurse/password/reset', {
+    smscode: verify,
+    new_password: newPwd,
+    mobile: mobile
+  });
+}
