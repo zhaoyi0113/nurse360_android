@@ -3,14 +3,16 @@ import {connect} from 'react-redux';
 
 import AddVisit from '../components/add_visit';
 import * as actions from '../../../actions/visit_actions';
+import {header} from '../../../components/navigation_header';
 
 class AddVisitContainer extends React.Component {
 
   static navigationOptions = {
-    title: '添加出诊记录',
+    title:  '添加出诊记录',
     cardStack: {
       gesturesEnabled: true
-    }
+    },
+    header: {visible: false},
   }
 
   componentDidMount() {
@@ -22,11 +24,12 @@ class AddVisitContainer extends React.Component {
   }
 
   render() {
-    const {order} = this.props.screenProps;
+    const {order,changeScreen} = this.props.screenProps;
     return (<AddVisit visitItems={this.props.visitItems}
                       addVisit={this._addVisit.bind(this)}
                       userInfo={this.props.userInfo}
                       navigation={this.props.navigation}
+                      changeScreen={changeScreen.bind(this)}
                       token={this.props.token}
                       requestUploadImageWaiting={this.props.requestUploadImageWaiting.bind(this)}
                       order={order}/>);

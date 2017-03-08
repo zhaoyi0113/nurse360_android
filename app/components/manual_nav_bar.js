@@ -24,6 +24,21 @@ export default class ManualNavBar extends React.Component {
   }
 }
 
+ManualNavBar.propTypes = {
+  left: React.PropTypes.string,
+  right: React.PropTypes.string,
+  title: React.PropTypes.string,
+  clickLeft: React.PropTypes.func,
+}
+
+ManualNavBar.defaultProps = {
+  left: '返回',
+  right: '',
+  title: '',
+  clickLeft: () => {
+  }
+}
+
 const styles = StyleSheet.create({
 
   container: {
@@ -31,6 +46,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     height: 30,
     alignItems: 'center',
+    backgroundColor: '#f6f6f6'
   },
   left: {
     flex: 1,

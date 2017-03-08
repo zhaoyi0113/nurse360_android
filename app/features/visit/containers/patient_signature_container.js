@@ -1,13 +1,16 @@
 import React from "react";
 import {connect} from "react-redux";
 import PatientSignature from "../components/patient_signature";
+import {header} from '../../../components/navigation_header';
 
 class PatientSignatureContainer extends React.Component {
+
   static navigationOptions = {
     title: '患者签字',
     cardStack: {
       gesturesEnabled: true
-    }
+    },
+    header: {visible: false},
   }
 
   constructor(props) {
@@ -17,7 +20,12 @@ class PatientSignatureContainer extends React.Component {
 
   _addPatientSignature(signature) {
     const {visitRecordId, order} = this.props.navigation.state.params;
-    this.props.navigation.navigate('NurseSignature', {patientSignature: signature, visitRecordId:visitRecordId, order: order});
+    this.props.screenProps.changeScreen('NurseSignature');
+    this.props.navigation.navigate('NurseSignature', {
+      patientSignature: signature,
+      visitRecordId: visitRecordId,
+      order: order
+    });
   }
 
   render() {
@@ -33,8 +41,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {
-  }
+  return {}
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PatientSignatureContainer);

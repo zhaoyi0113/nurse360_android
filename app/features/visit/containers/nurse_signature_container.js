@@ -5,6 +5,7 @@ import {NavigationActions} from "react-navigation";
 import PatientSignature from "../components/patient_signature";
 import * as actions from "../../../actions/visit_actions";
 import * as orderActions from '../../../actions/order_actions';
+import {header} from '../../../components/navigation_header';
 
 class NurseSignatureContainer extends React.Component {
 
@@ -12,7 +13,8 @@ class NurseSignatureContainer extends React.Component {
     title: '护士签字',
     cardStack: {
       gesturesEnabled: true
-    }
+    },
+    header: {visible: false},
   }
 
   constructor(props) {
@@ -62,7 +64,7 @@ const mapDispatchToProps = (dispatch) => {
       return dispatch(orderActions.cancelOrder(token, id));
     },
     signatureSuccess: (order, routes, i) => {
-      return dispatch(NavigationActions.reset({index: i-1, actions: [routes[i-1]]}));
+      return dispatch(NavigationActions.reset({index: i - 1, actions: [routes[i - 1]]}));
     },
   }
 }

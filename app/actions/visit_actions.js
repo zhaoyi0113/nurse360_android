@@ -1,6 +1,5 @@
 import * as types from './action_types';
 import * as commonActions from './common_actions';
-import base64 from 'base-64';
 
 export const queryVisitItems = (token) => {
   return commonActions.requestGet(types.GET_VISIT_ITEMS_HTTP, '/nurse/visit/patient/service/item', token);
@@ -25,7 +24,7 @@ export const sendPatientSignature = (token, visitRecordId, patient) => {
 
 export const sendNurseSignature = (token, visitRecordId, nurse) => {
   let data = new FormData()
-  data.append('image', nurse)
+  data.append('image', nurse);
   data.append('visit_record_id', visitRecordId);
   data.append('image_name', 'nurse_signature')
   return commonActions.uploadImageObject(types.SET_NURSE_SIGNATURE_HTTP, '/nurse/visit/patient/nurse/sign', data, token);
@@ -49,8 +48,7 @@ export const decodeBase64Image = (dataURI) => {
   // write the bytes of the string to a typed array
   let ia = new Uint8Array(byteString.length);
   for (let i = 0; i < byteString.length; i++) {
-    ia[i] = byteString.charCodeAt(i);
+     ia[i] = byteString.charCodeAt(i);
   }
-
   return new Blob([ia], {type: mimeString});
 }

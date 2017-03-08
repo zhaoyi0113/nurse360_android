@@ -40,7 +40,9 @@ export default class Setting extends React.Component {
 
   click(item) {
     const that = this;
-    if (item.id === 1) {
+    if (item.id === 0) {
+      this.props.navigation.navigate('PasswordUpdate');
+    } else if (item.id === 1) {
       this.props.navigation.navigate('Feedback');
     } else if (item.id === 3) {
       this.props.navigation.navigate('UserAgreement');

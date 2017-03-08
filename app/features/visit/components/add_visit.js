@@ -36,6 +36,7 @@ export default class AddVisit extends React.Component {
       })
       .then(v => {
         if (this.state.requireSignature) {
+          this.props.changeScreen('PatientSignature');
           this.props.navigation.navigate('PatientSignature', {visitRecordId: v, order: this.props.order});
         } else {
           this.props.navigation.goBack();
