@@ -53,8 +53,8 @@ export default class Setting extends React.Component {
         '',
         '退出账户？',
         [
-          {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-          {text: 'OK', onPress: () => that.props.logout()},
+          {text: '取消', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+          {text: '确定', onPress: () => that.props.logout()},
         ],
         {cancelable: false}
       )

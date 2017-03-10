@@ -29,7 +29,7 @@ const middlewares = [];
 
 middlewares.push(thunk);
 middlewares.push(multiClientMiddleware({'default': {client: client}, 'leanCloud': {client: leanCloud}}));
-middlewares.push(storage.createMiddleware(engine, [types.WAITING_INDICATOR], [types.LOGIN_HTTP + types.SUCCESS]));
+middlewares.push(storage.createMiddleware(engine, [types.WAITING_INDICATOR], [types.LOGIN_HTTP + types.SUCCESS, types.LOGOUT_HTTP + types.SUCCESS]));
 middlewares.push(createLogger());
 
 const store = compose(

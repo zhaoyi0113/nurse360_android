@@ -23,9 +23,6 @@ const rootReducer = (state = initialState, action) => {
   return appReducers(state, action);
 }
 
-
-
-
 const appReducers = combineReducers({
   login: LoginReducer,
   common: CommonReducer,

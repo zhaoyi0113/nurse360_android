@@ -20,6 +20,7 @@ export default class ForgetPassword extends React.Component {
               onPress={this.props.requestSmsCode.bind(this)}>发送验证码</Text>
       </View>
       <TextInput placeholder='输入您的新密码'
+                 secureTextEntry={true}
                  onChangeText={(text)=>this.setState({newPwd: text})}/>
       <Button title='确定'
               disabled={!this.state.newPwd || !this.state.verifyCode || !this.state.mobile}

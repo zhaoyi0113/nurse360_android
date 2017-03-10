@@ -8,6 +8,9 @@ import Register from "../components/register";
 import RegisterOccupationInfo from "../components/register_occupation_info";
 import HospitalSelectionContainer from "../../../containers/hospital_selection_container";
 import DepartmentSelectionContainer from "../../../containers/department_selection_container";
+import UpdatePasswordContainer from '../../user/containers/password_update_container';
+import ForgetPasswordContainer from '../../login/containers/forget_password_container';
+
 
 class LoginContainer extends Component {
 
@@ -63,7 +66,7 @@ class LoginContainer extends Component {
 
   _login(mobile, password) {
     this.props.login(mobile, password).then(v => {
-      this.props.loginSuccess();
+      this.props.navigation.goBack();
     });
 
   }
@@ -103,6 +106,8 @@ const Routers = StackNavigator({
   RegisterInfo: {screen: RegisterOccupationInfo},
   HospitalSelection: {screen: HospitalSelectionContainer},
   DepartmentSelection: {screen: DepartmentSelectionContainer},
+  UpdatePassword:{screen:UpdatePasswordContainer},
+  ForgetPassword: {screen: ForgetPasswordContainer}
 }, {
   initialRouteName: 'Login',
 })

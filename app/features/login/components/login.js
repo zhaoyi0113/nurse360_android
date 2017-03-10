@@ -10,6 +10,7 @@ export default class Login extends React.Component {
       visible: false
     },
   }
+
   constructor(props) {
     super(props);
     this.state = {};
@@ -30,10 +31,11 @@ export default class Login extends React.Component {
                 disabled={!this.state.mobile || !this.state.password}/>
       </View>
       <View style={styles.text_view}>
-        <TouchableHighlight onPress={()=> this.props.navigation.navigate('Register')} underlayColor={colors.underlayColor}>
+        <TouchableHighlight onPress={()=> this.props.navigation.navigate('Register')}
+                            underlayColor={colors.underlayColor}>
           <Text>没有账号？去注册</Text>
         </TouchableHighlight>
-        <Text>忘记密码</Text>
+        <Text onPress={()=>this.props.navigation.navigate('ForgetPassword')}>忘记密码</Text>
       </View>
       <View style={{flex: 4}}/>
     </View>)
