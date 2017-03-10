@@ -26,7 +26,7 @@ export default class Order extends React.Component {
           <Text style={{marginLeft: 50, fontSize: FontSize.small}}>{order.address}</Text>
           <View style={{ flex:1,  marginRight: 10}}>
             <Text
-              onPress={()=>this.props.fetchOrder(order.id)}
+              onPress={()=>this.props.fetchOrder(order)}
               style={actionStyle}>
               {order.actionName}
             </Text>

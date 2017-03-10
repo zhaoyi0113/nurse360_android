@@ -92,7 +92,9 @@ class UserHeader extends React.Component {
             <Image style={headerStyles.setting}
                    source={require('../../../images/editSetting.png')}/>
           </TouchableHighlight>
-          <Image style={headerStyles.next_image} source={require('../../../images/next.png')}/>
+          <TouchableHighlight onPress={()=>this.props.navigation.navigate('Wallet')}>
+            <Image style={headerStyles.next_image} source={require('../../../images/next.png')}/>
+          </TouchableHighlight>
         </View>
       </View>
     )
