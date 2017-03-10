@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {AppRegistry, StyleSheet, Text, View, Alert} from "react-native";
+import {AppRegistry, StyleSheet, Text, View, Alert, StatusBar} from "react-native";
 import {addNavigationHelpers, NavigationActions} from "react-navigation";
 import {createStore, applyMiddleware, compose} from "redux";
 import {Provider, connect} from "react-redux";
@@ -71,6 +71,7 @@ class AppWithNavigation extends Component {
       );
     }
     return (<View style={{flex:1}}>
+      <StatusBar hidden={true}/>
       <Root navigation={this.props.addNavigationHelpers(this.props.nav)}/>
       <WaitingIndicator isVisible={this.props.waitingIndicator}/>
     </View>);
