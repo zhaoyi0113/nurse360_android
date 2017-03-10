@@ -14,8 +14,14 @@ const initialNavState = {
 export const NavReducer = (state = initialNavState, action) => {
   switch (action.type) {
     case types.LOGIN_HTTP + types.SUCCESS:
-      console.log('xxxxx', action);
       return Root.router.getStateForAction(NavigationActions.navigate({ routeName: 'Main' }), state);
+    // case 'REDUX_STORAGE_LOAD':
+    //   if(!action.payload || !action.payload.login || !action.payload.login.token){
+    //     return Root.router.getStateForAction(NavigationActions.navigate({ routeName: 'Login' }), state);
+    //   }
+    // case types.LOGOUT_HTTP+types.SUCCESS:
+    //   return Root.router.getStateForAction(NavigationActions.navigate({ routeName: 'Login' }), state);
   }
+  console.log('getStateForAction,', (getStateForAction(action, state) || state))
   return getStateForAction(action, state) || state;
 }

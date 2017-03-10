@@ -16,7 +16,7 @@ const initialState = {};
 const rootReducer = (state = initialState, action) => {
   if (action.type === types.LOGOUT_HTTP + types.SUCCESS) {
     //clear state when logout
-    state = {}
+    state = {common: state.common}
   } else if (action.type === types.REDUX_STORAGE_LOAD) {
     state = action.payload;
   }

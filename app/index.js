@@ -88,9 +88,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    loginSuccess: () => {
-      return dispatch(NavigationActions.navigate({routeName: 'Main'}));
-    },
     addNavigationHelpers: (nav) => {
       return addNavigationHelpers({dispatch, state: nav})
     },

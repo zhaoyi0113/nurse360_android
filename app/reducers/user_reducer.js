@@ -19,7 +19,7 @@ export const UserReducer = (state = {}, action) => {
 const parseUserInfo = (data) => {
   let userInfo = {...data};
   if (data.properties && data.properties.qualification) {
-    userInfo.departmentName = data.properties.qualification.departmentName + '-' + data.properties.qualification.parentDepartmentName;
+    userInfo.departmentName = data.properties.qualification.parentDepartmentName + '-' + data.properties.qualification.departmentName;
     userInfo.hospitalName = data.properties.qualification.hospitalName;
     userInfo.wallet = data.properties.wallet_remain;
   }

@@ -54,7 +54,7 @@ class LoginContainer extends Component {
 
   componentWillMount() {
     if (this.props.token) {
-      this.props.loginSuccess();
+      // this.props.loginSuccess();
     }
   }
 
@@ -76,6 +76,12 @@ class LoginContainer extends Component {
   }
 
   render() {
+    if(this.props.token){
+      return null;
+    }
+    if(!this.props.storageLoaded){
+      return null;
+    }
     return (<Routers screenProps={{
       login: this._login.bind(this),
       requestSmsCode: this.props.requestSmsCode.bind(this),
@@ -116,6 +122,7 @@ const mapStateToProps = (state) => {
   return {
     registerSuccess: state.login.registerSuccess,
     token: state.login.token,
+    storageLoaded: state.common.storageLoaded,
   }
 }
 

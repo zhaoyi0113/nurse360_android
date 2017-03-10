@@ -15,8 +15,10 @@ export const CommonReducer = (state = {}, action) => {
     case types.WAITING_INDICATOR:
       return {...state, waitingIndicator: action.waitingIndicator};
     case types.CLEAR_ALERT:
-      state.alert=null;
+      state.alert = null;
       return state;
+    case types.REDUX_STORAGE_LOAD:
+      return {...state, storageLoaded: true};
     default:
       let extra = {};
       if (action.type.includes('HTTP') && (action.type.includes(types.FAIL) || action.type.includes(types.SUCCESS))) {
@@ -34,8 +36,8 @@ export const errorMessage = {}
 errorMessage[types.LOGIN_HTTP + types.FAIL] = '登录失败';
 errorMessage[types.REGISTER_HTTP + types.FAIL] = '注册失败';
 errorMessage[types.FETCH_ORDER_HTTP + types.FAIL] = '抢单失败';
-errorMessage[types.FORGET_PASSWORD_HTTP+types.FAIL] = '重设密码失败';
-errorMessage[types.UPDATE_PASSWORD_HTTP+types.FAIL] = '重设密码失败';
+errorMessage[types.FORGET_PASSWORD_HTTP + types.FAIL] = '重设密码失败';
+errorMessage[types.UPDATE_PASSWORD_HTTP + types.FAIL] = '重设密码失败';
 
 const getErrorMessage = (action) => {
   if (errorMessage[action.type]) {
