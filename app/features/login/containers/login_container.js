@@ -79,9 +79,6 @@ class LoginContainer extends Component {
     if(this.props.token){
       return null;
     }
-    if(!this.props.storageLoaded){
-      return null;
-    }
     return (<Routers screenProps={{
       login: this._login.bind(this),
       requestSmsCode: this.props.requestSmsCode.bind(this),

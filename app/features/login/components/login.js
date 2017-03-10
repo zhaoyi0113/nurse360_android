@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, Image, TextInput, Button, Navigator, TouchableHighlight} from 'react-native';
+import {View, Text, StyleSheet, Image, TextInput, Button, Navigator, TouchableHighlight, KeyboardAvoidingView, Keyboard} from 'react-native';
 
 import CommonHeader from './common_header';
 import {colors} from '../../../constants';
@@ -13,11 +13,29 @@ export default class Login extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {space:4};
+  }
+
+  componentWillMount () {
+    this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow.bind(this));
+    this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this._keyboardDidHide.bind(this));
+  }
+
+  componentWillUnmount () {
+    this.keyboardDidShowListener.remove();
+    this.keyboardDidHideListener.remove();
+  }
+
+  _keyboardDidShow(){
+    this.setState({space:4});
+  }
+
+  _keyboardDidHide(){
+    this.setState({space:4});
   }
 
   render() {
-    return (<View style={styles.container}>
+    return (<KeyboardAvoidingView style={styles.container} behavior='padding'>
       <CommonHeader headerImage={require('../../../images/login/loginhead.png')}
                     textImage={require('../../../images/login/loginFont.png')}/>
 
@@ -37,8 +55,8 @@ export default class Login extends React.Component {
         </TouchableHighlight>
         <Text onPress={()=>this.props.navigation.navigate('ForgetPassword')}>忘记密码</Text>
       </View>
-      <View style={{flex: 4}}/>
-    </View>)
+      <View style={{flex: this.state.space}}/>
+    </KeyboardAvoidingView>)
   }
 }
 

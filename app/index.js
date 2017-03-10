@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {AppRegistry, StyleSheet, Text, View, Alert, StatusBar} from "react-native";
+import {AppRegistry, StyleSheet, Text, View, Alert, StatusBar, BackAndroid} from "react-native";
 import {addNavigationHelpers, NavigationActions} from "react-navigation";
 import {createStore, applyMiddleware, compose} from "redux";
 import {Provider, connect} from "react-redux";
@@ -52,6 +52,19 @@ class AppWithNavigation extends Component {
   constructor(props) {
     super(props);
     this.showAlert = false;
+    BackAndroid.addEventListener('hardwareBackPress', this._deviceBackHandler.bind(this));
+  }
+
+  _deviceBackHandler() {
+    console.log('click back');
+    console.log(this.props.nav);
+    const {nav} = this.props;
+    if (nav.routes.length > 3 && nav.index == nav.routes.length - 1) {
+      this.props.navigateBack(nav.routes[nav.index].key);
+    } else if (nav.routes.length === 3 && nav.index === nav.routes.length - 1) {
+      //TODO: handle exist application
+    }
+    return true;
   }
 
   render() {
@@ -70,6 +83,7 @@ class AppWithNavigation extends Component {
         ]
       );
     }
+
     return (<View style={{flex:1}}>
       <StatusBar hidden={true}/>
       <Root navigation={this.props.addNavigationHelpers(this.props.nav)}/>
@@ -83,6 +97,7 @@ const mapStateToProps = (state) => {
     token: state.login.token,
     nav: state.nav,
     alert: state.common.alert,
+    storageLoaded: state.common.storageLoaded,
     waitingIndicator: state.common ? state.common.waitingIndicator : false,
   }
 }
@@ -95,6 +110,9 @@ const mapDispatchToProps = (dispatch) => {
     clearAlert: () => {
       dispatch(actions.clearAlert());
     },
+    navigateBack: (key) => {
+      dispatch({type: 'Navigation/BACK', key})
+    }
   }
 }
 
