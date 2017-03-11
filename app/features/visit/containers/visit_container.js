@@ -39,7 +39,7 @@ class VisitContainer extends React.Component {
       <View style={{flex:1}}>
         <ManualNavBar clickLeft={()=>this.props.navigation.goBack()} title={this._getTitle(this.state.screenName)}/>
         <Tabs
-          screenProps={{order: order, exit: this._exitVisit.bind(this), changeScreen:(screenName)=>this.setState({screenName: screenName})}}/>
+          screenProps={{order: order, rootNavigation: this.props.navigation, exit: this._exitVisit.bind(this), changeScreen:(screenName)=>this.setState({screenName: screenName})}}/>
       </View>
     );
   }

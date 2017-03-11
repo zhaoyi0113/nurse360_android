@@ -39,7 +39,7 @@ export default class AddVisit extends React.Component {
           this.props.changeScreen('PatientSignature');
           this.props.navigation.navigate('PatientSignature', {visitRecordId: v, order: this.props.order});
         } else {
-          this.props.navigation.goBack();
+          this.props.rootNavigation.goBack();
         }
       });
   }
@@ -117,7 +117,7 @@ export default class AddVisit extends React.Component {
     const {diagnosticItems} = this.state;
     return (
       <View style={{flex:1, flexDirection: 'column'}}>
-        <ScrollView style={{flexDirection: 'column', backgroundColor: '#f6f6f6'}}>
+        <ScrollView style={{flexDirection: 'column', backgroundColor: '#f6f6f6', marginBottom: 80}}>
           <Text style={{marginHorizontal:10, marginVertical:5}}>治疗项目</Text>
           <DiagnosticItems items={diagnosticItems} ref={(i)=>this.diagnostic = i}
                            updateSelected={(items)=>this.setState({diagnosticItems: items})}/>

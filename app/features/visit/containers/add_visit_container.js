@@ -8,7 +8,7 @@ import {header} from '../../../components/navigation_header';
 class AddVisitContainer extends React.Component {
 
   static navigationOptions = {
-    title:  '添加出诊记录',
+    title: '添加出诊记录',
     cardStack: {
       gesturesEnabled: true
     },
@@ -19,16 +19,17 @@ class AddVisitContainer extends React.Component {
     this.props.queryVisitItems(this.props.token);
   }
 
-  _addVisit(visit){
+  _addVisit(visit) {
     return this.props.addVisit(this.props.token, visit);
   }
 
   render() {
-    const {order,changeScreen} = this.props.screenProps;
+    const {order, changeScreen, rootNavigation} = this.props.screenProps;
     return (<AddVisit visitItems={this.props.visitItems}
                       addVisit={this._addVisit.bind(this)}
                       userInfo={this.props.userInfo}
                       navigation={this.props.navigation}
+                      rootNavigation={rootNavigation}
                       changeScreen={changeScreen.bind(this)}
                       token={this.props.token}
                       requestUploadImageWaiting={this.props.requestUploadImageWaiting.bind(this)}

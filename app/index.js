@@ -56,8 +56,6 @@ class AppWithNavigation extends Component {
   }
 
   _deviceBackHandler() {
-    console.log('click back');
-    console.log(this.props.nav);
     const {nav} = this.props;
     if (nav.routes.length > 3 && nav.index == nav.routes.length - 1) {
       this.props.navigateBack(nav.routes[nav.index].key);
