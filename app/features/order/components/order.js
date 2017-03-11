@@ -4,6 +4,12 @@ import {FontSize} from '../../../constants';
 
 export default class Order extends React.Component {
 
+  _orderAction(order){
+    if(order.orderStatus === 'TO_SERVICE'){
+      this.props.fetchOrder(order)
+    }
+  }
+
   render() {
     let {order} = this.props;
     let actionStyle = order.orderStatus === 'TO_SERVICE' ? styles.action_active : styles.action_gray;
@@ -26,7 +32,7 @@ export default class Order extends React.Component {
           <Text style={{marginLeft: 50, fontSize: FontSize.small}}>{order.address}</Text>
           <View style={{ flex:1,  marginRight: 10}}>
             <Text
-              onPress={()=>this.props.fetchOrder(order)}
+              onPress={()=>this._orderAction(order)}
               style={actionStyle}>
               {order.actionName}
             </Text>

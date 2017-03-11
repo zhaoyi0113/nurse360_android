@@ -154,20 +154,26 @@ class TimeInfo extends React.Component {
 
 class OrderButtonPanel extends React.Component {
 
+  _orderAction(order){
+    if(order.orderStatus === 'TO_SERVICE'){
+      this.props.fetchOrder(order);
+    }
+  }
+
   render() {
-    const {order, fetchOrder, cancelOrder, addVisit} = this.props;
+    const {order, cancelOrder, addVisit} = this.props;
     let actionStyle = order.orderStatus === 'TO_SERVICE' ? styles.action_active : styles.action_gray;
     if (order.orderStatus === 'IN_PROCESS' && order.isNurseFetched === 'YES') {
       return (<View style={{flex:0.5, flexDirection: 'row'}}>
         <Text style={styles.chuzhen} onPress={addVisit.bind(this)}>出诊添加</Text>
         <View style={{flex:1}}/>
         <Text style={styles.chuzhen} onPress={cancelOrder.bind(this)}>取消订单</Text>
-        <Text style={actionStyle} onPress={()=>this.props.fetchOrder(order)}>{order.actionName}</Text>
+        <Text style={actionStyle} onPress={()=>this._orderAction(order)}>{order.actionName}</Text>
       </View>)
     }
     return (<View style={{flex:0.5, flexDirection: 'row'}}>
       <View style={{flex:1}}/>
-      <Text style={actionStyle} onPress={()=>fetchOrder(order)}>{order.actionName}</Text>
+      <Text style={actionStyle} onPress={()=>this._orderAction(order)}>{order.actionName}</Text>
     </View>)
   }
 
