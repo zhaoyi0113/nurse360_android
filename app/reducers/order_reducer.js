@@ -28,6 +28,23 @@ export const ORDER_ACTION_NAME = {
   REFUND_IN_PROCESS: '退款中',
 }
 
+export const getOrderTitleIcon = (status) => {
+  switch(status){
+    case 'TO_SERVICE':
+      return require('../images/order/alPay.png');
+    case 'COMPLETED':
+      return require('../images/order/finishPay.png');
+    case 'CANCEL':
+      return require('../images/order/cancelPay.png');
+    case 'IN_PROCESS':
+      return require('../images/order/waitPay.png');
+    case 'REFUND_IN_PROCESS':
+      return require('../images/order/alPay.png');
+    default:
+      return require('../images/order/alPay.png');
+  }
+}
+
 export const parseOrderStatus = (status) => {
   return ORDER_STATUS_NAME[status];
 }
@@ -52,7 +69,7 @@ export const parseUserOrder = (data) => {
   }
   order.statusName = parseOrderStatus(order.orderStatus);
   order.actionName = getOrderAction(order.orderStatus);
-
+  order.titleIcon = getOrderTitleIcon(order.orderStatus);
   if (order.serviceItem.imageUrl) {
     order.icon = {uri: order.serviceItem.imageUrl};
   } else {

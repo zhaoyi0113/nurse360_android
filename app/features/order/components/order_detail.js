@@ -44,7 +44,7 @@ export default class OrderDetail extends React.Component {
 
     return (<View style={styles.container}>
       <HeaderCategoryView title={ORDER_STATUS_NAME[order.orderStatus]} description={'订单号:'+order.orderNo}
-                          image={require('../../../images/order/alPay.png')}/>
+                          image={order.titleIcon}/>
       <Patient patient={patient} serviceStartTime={order.serviceStartTime} address={order.address}/>
       {
         order.vendorType === 'HOSPITAL' ?
