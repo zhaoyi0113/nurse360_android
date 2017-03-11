@@ -1,11 +1,10 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {View, Text, Navigator, Image, InteractionManager} from 'react-native';
-
-import Home from '../components/home';
-import * as notificationActions from '../../../actions/notification_actions';
-import * as studyActions from '../../../actions/study_actions';
-import * as orderActions from '../../../actions/order_actions';
+import React, {Component} from "react";
+import {connect} from "react-redux";
+import {View, Text, Navigator, Image, InteractionManager} from "react-native";
+import Home from "../components/home";
+import * as notificationActions from "../../../actions/notification_actions";
+import * as studyActions from "../../../actions/study_actions";
+import * as orderActions from "../../../actions/order_actions";
 
 class HomeContainer extends Component {
   static navigationOptions = {

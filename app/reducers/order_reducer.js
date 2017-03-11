@@ -4,9 +4,11 @@ import * as types from '../actions/action_types';
 export const OrderReducer = (state = {}, action) => {
   switch (action.type) {
     case types.QUERY_ORDERS + types.SUCCESS:
-      return {...state, orders: parseUserOrders(action.payload.data)}
+      return {...state, orders: parseUserOrders(action.payload.data)};
     case types.FETCH_ORDER_HTTP + types.SUCCESS:
-      return {...state, fetchOrder: action.payload.data}
+      return {...state, fetchOrder: action.payload.data};
+    case types.QUERY_ORDER_HTTP + types.SUCCESS:
+      return {...state, order: parseUserOrder(action.payload.data[0])};
     default:
       return state;
   }
@@ -29,7 +31,7 @@ export const ORDER_ACTION_NAME = {
 }
 
 export const getOrderTitleIcon = (status) => {
-  switch(status){
+  switch (status) {
     case 'TO_SERVICE':
       return require('../images/order/alPay.png');
     case 'COMPLETED':

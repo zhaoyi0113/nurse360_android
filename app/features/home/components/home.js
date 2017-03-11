@@ -26,11 +26,12 @@ export default class Home extends Component {
   }
 
   _fetchOrder(order) {
-    this.props.fetchOrder(order)
+    return this.props.fetchOrder(order)
       .then((response) => {
         if (response.type === types.FETCH_ORDER_HTTP + types.FAIL) {
           return;
         }
+        this.props.queryOrders();
         Alert.alert(
           '',
           '您已抢单成功',

@@ -12,3 +12,7 @@ export const fetchOrder = (token, id) => {
 export const cancelOrder = (token, id) => {
   return commonActions.requestPut(types.CANCEL_ORDER_HTTP, '/nurse/order/cancel', {order_id: id}, token);
 }
+
+export const queryOrder = (token, orderId) => {
+  return commonActions.requestGet(types.QUERY_ORDER_HTTP, '/nurse/order/' + orderId, token);
+}

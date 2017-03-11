@@ -5,17 +5,10 @@ import HeaderCategoryView from "../../../components/header_category_view";
 import {FontSize} from "../../../constants";
 import {getDate, getTime} from "../../../reducers/common_reducer";
 import {ORDER_STATUS_NAME} from '../../../reducers/order_reducer';
-import {header} from '../../../components/navigation_header';
 
 export default class OrderDetail extends React.Component {
 
-  static navigationOptions = {
-    title: '订单详情',
-    cardStack: {
-      gesturesEnabled: true
-    },
-    header:header,
-  }
+
 
   _cancelOrder() {
     const mobile = '01065185531';
@@ -30,7 +23,7 @@ export default class OrderDetail extends React.Component {
           text: '取消'
         }
       ]
-    )
+    );
   }
 
   _addVisit(order) {
@@ -38,7 +31,7 @@ export default class OrderDetail extends React.Component {
   }
 
   render() {
-    let {order, fetchOrder} = this.props.navigation.state.params;
+    let {order, fetchOrder} = this.props;
     let {patient} = order;
     let payment = order.pingPP && order.pingPP.length > 0 ? order.pingPP[0] : {}
 
@@ -61,6 +54,15 @@ export default class OrderDetail extends React.Component {
 
 
 class Patient extends React.Component {
+
+  static propTypes = {
+    patient: React.PropTypes.object,
+  }
+
+  static defaultProps = {
+    patient: {},
+  }
+
   render() {
     let {patient, serviceStartTime, address} = this.props;
     return (<View style={styles.info_blok}>

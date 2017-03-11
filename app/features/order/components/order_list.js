@@ -28,7 +28,7 @@ export default class OrderList extends React.Component {
   }
 
   renderRow(rowData) {
-    return <Order order={rowData} onClick={()=>this.props.onClick(rowData)} fetchOrder={(id)=>this.props.fetchOrder(id)}/>
+    return <Order order={rowData} onClick={()=>this.props.onClick(rowData)} fetchOrder={(order)=>this.props.fetchOrder(order)}/>
   }
 
   render() {

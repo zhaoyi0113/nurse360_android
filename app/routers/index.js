@@ -7,7 +7,7 @@ import UserAgreemnt from "../features/user/components/user_agreement";
 import {StackNavigator} from "react-navigation";
 import MainContainer from "../containers/index";
 import ArticleContainer from "../containers/article_container";
-import OrderDetail from "../features/order/components/order_detail";
+import OrderDetailContainer from "../features/order/containers/order_detail_container";
 import NotificationListContainer from "../features/home/containers/notification_list_container";
 import StudyCourseListContainer from "../features/home/containers/study_course_list_container";
 import OrderListContainer from "../features/order/containers/order_list_container";
@@ -25,7 +25,7 @@ import ForgetPasswordContainer from '../features/login/containers/forget_passwor
 export const Root = StackNavigator({
   Main: {screen: MainContainer, path: 'main'},
   Article: {path: 'article', screen: ArticleContainer},
-  OrderDetail: {path: 'orderDetail', screen: OrderDetail},
+  OrderDetail: {path: 'orderDetail', screen: OrderDetailContainer},
   NotificationList: {screen: NotificationListContainer},
   StudyList: {screen: StudyCourseListContainer},
   OrderList: {screen: OrderListContainer},

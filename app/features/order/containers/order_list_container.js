@@ -35,15 +35,23 @@ class OrderListContainer extends React.Component {
   _onClick(order) {
     this.props.navigation.navigate('OrderDetail', {
       order: order,
-      fetchOrder: (id) => this.props.navigation.state.params.fetchOrder(this.props.token, id)
+      fetchOrder: (order) => this.props.navigation.state.params.fetchOrder(this.props.token, order)
     });
+  }
+
+  _fetchOrder(order){
+    return this.props.navigation.state.params.fetchOrder(order)
+      .then(v=>{
+        this.setState({index: 0});
+        this.props.queryOrders(this.props.token, 0, 20);
+      });
   }
 
   render() {
     return (<OrderList orders={this.props.orders} loadMoreData={this.loadMoreData.bind(this)}
                        title="患者服务" description="患者需求服务"
                        onClick={this._onClick.bind(this)}
-                       fetchOrder={(id)=>this.props.navigation.state.params.fetchOrder(this.props.token, id)}
+                       fetchOrder={this._fetchOrder.bind(this)}
                        image={require('../../../images/order/alPay.png')}/>);
   }
 
