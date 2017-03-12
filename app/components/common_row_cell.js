@@ -16,8 +16,9 @@ export default class CommonRowCell extends React.Component {
   }
 
   render() {
-    let {title, description} = this.props;
-    return (<View style={styles.container}>
+    let {title, description, hasRead} = this.props;
+    const style = hasRead === 'YES'? styles.container : styles.notReadContainer;
+    return (<View style={style}>
       {this._getHeaderView()}
       <TouchableHighlight style={{flex:5, flexDirection: 'row'}} underlayColor="transparent"
                           onPress={this.props.onClick.bind(this)}>
@@ -36,11 +37,13 @@ CommonRowCell.propTypes = {
   title: React.PropTypes.string,
   description: React.PropTypes.string,
   onClick: React.PropTypes.func,
+  hasRead: React.PropTypes.string,
 }
 
 CommonRowCell.defaultProps = {
   title: '',
   description: '',
+  hasRead: 'NO',
   onClick: () => {
   },
 }
@@ -49,6 +52,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
+    margin: 5,
+    borderRadius: 5,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  notReadContainer: {
+    flex: 1,
+    backgroundColor: '#E8EFF7',
     margin: 5,
     borderRadius: 5,
     flexDirection: 'row',

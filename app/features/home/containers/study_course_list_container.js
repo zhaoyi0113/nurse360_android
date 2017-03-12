@@ -12,7 +12,7 @@ class StudyCourseListContainer extends React.Component {
     cardStack: {
       gesturesEnabled: true
     },
-    header:header,
+    header: header,
   }
 
   constructor(props) {
@@ -35,7 +35,8 @@ class StudyCourseListContainer extends React.Component {
                     list={this.props.courses}
                     loadMoreData={this.loadMoreData.bind(this)}
                     loadMaxNumber={this.state.number}
-                    onClick={ (data)=>
+                    onClick={ (data)=>{
+                      this.props.readStudyCourse(this.props.token, data.id);
                       this.props.navigation.navigate('Article',
                                 {
                                   id: data.id,
@@ -43,7 +44,7 @@ class StudyCourseListContainer extends React.Component {
                                   title: data.name,
                                 }
                               )
-                    }
+                    }}
                     image={require('../../../images/study/studyIcon.png')}/>)
   }
 
@@ -61,6 +62,9 @@ const mapDispatchToProps = (dispatch) => {
     queryStudyCourses: (token, index, number) => {
       return dispatch(actions.queryStudyCourseList(token, index, number));
     },
+    readStudyCourse: (token, id) => {
+      return dispatch(actions.readStudyCourse(token, id));
+    }
   }
 }
 

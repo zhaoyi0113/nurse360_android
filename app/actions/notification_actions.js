@@ -12,3 +12,8 @@ export const queryNotificationList = (token, index, number) => {
 export const queryNotificationDetail = (token, id) => {
   return commonActions.requestGet(types.QUERY_NOTIFICATION_DETAIL_HTTP, '/nurse/extension/notification/' + id, token);
 }
+
+export const readNotification = (token, id) => {
+  return commonActions.requestPost(types.READ_NOTIFICATION, '/nurse/extension/notification', {'notification_id': id}, token);
+}
+

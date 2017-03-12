@@ -36,8 +36,11 @@ class NotificationListContainer extends React.Component {
                     list={this.props.notifications}
                     loadMaxNumber={this.state.number}
                     loadMoreData={this.loadMoreData.bind(this)}
-                    onClick={(data)=>this.props.navigation.navigate('Article',
-                               {id: data.id, routeId: NOTIFICATION_DETAIL, title: data.title})}
+                    onClick={(data)=>{
+                      this.props.readNotification(this.props.token, data.id);
+                      this.props.navigation.navigate('Article',
+                               {id: data.id, routeId: NOTIFICATION_DETAIL, title: data.title})
+                               }}
                     image={require('../../../images/notification/inform_blue.png')}/>)
   }
 
@@ -55,6 +58,9 @@ const mapDispatchToProps = (dispatch) => {
     queryNotification: (token, index, number) => {
       return dispatch(actions.queryNotificationList(token, index, number));
     },
+    readNotification: (token, id) => {
+      return dispatch(actions.readNotification(token, id));
+    }
   }
 }
 

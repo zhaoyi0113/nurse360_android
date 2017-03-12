@@ -12,3 +12,7 @@ export const queryStudyCourseList = (token, index, number) => {
 export const queryStudyCourseDetail = (token, id) => {
   return commonActions.requestGet(types.QUERY_STUDY_COURSES_DETAIL_HTTP, '/nurse/extension/course/detail_html?course_id=' + id, token, {responseType: 'text'});
 }
+
+export const readStudyCourse = (token, id) => {
+  return commonActions.requestPost(types.READ_STUDY_COURSE, '/nurse/extension/course', {'course_id':id}, token);
+}

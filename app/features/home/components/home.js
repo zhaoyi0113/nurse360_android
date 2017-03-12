@@ -55,6 +55,7 @@ export default class Home extends Component {
     if (this.props.notifications.length > 0) {
       return this.props.notifications.map((noti, i) => {
         return <CommonRowCell key={i} title={noti.title} description={noti.introduction} image={noti.image}
+                              hasRead={noti.hasRead}
                               onClick={()=>navigate('Article',{ routeId: NOTIFICATION_DETAIL, id: noti.id, title:noti.title})}/>
       });
     } else {
@@ -68,6 +69,7 @@ export default class Home extends Component {
       return this.props.courses.map((course, i) => {
         return <CommonRowCell key={i} title={course.name} description={course.introduction}
                               headTitle={course.name.split('')[0]}
+                              hasRead={course.hasRead}
                               onClick={()=> navigate('Article',
                                 {
                                   routeId: COURSE_DETAIL,
