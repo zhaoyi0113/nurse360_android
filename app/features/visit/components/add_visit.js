@@ -22,7 +22,7 @@ export default class AddVisit extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {requireSignature: false, diagnosticItems: [], address: '', record: '', waitingIndicator: false};
+    this.state = {requireSignature: true, diagnosticItems: [], address: '', record: '', waitingIndicator: false};
   }
 
 
@@ -139,6 +139,7 @@ export default class AddVisit extends React.Component {
           <CheckBox
             labelStyle={{fontSize: FontSize.small}}
             label='患者签字（勾选此项提交后将跳转到签字页面)'
+            checked={this.state.requireSignature}
             onChange={(checked) => {
               this.setState({requireSignature: !checked})
             }}
