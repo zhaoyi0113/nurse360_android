@@ -1,5 +1,6 @@
 # OSX
 #
+android/app/src/main/assets/index.android.bundle*
 .DS_Store
 dist
 # Xcode
