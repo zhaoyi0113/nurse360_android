@@ -3,6 +3,7 @@ package com.nurse360_android;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.cboy.rn.splashscreen.SplashScreenReactPackage;
 import com.rngrp.RNGRPPackage;
 import com.yoloci.fileupload.FileUploadPackage;
 import com.reactnative.ivpusic.imagepicker.PickerPackage;
@@ -34,6 +35,7 @@ public class MainApplication extends Application implements ReactApplication {
         protected List<ReactPackage> getPackages() {
             return Arrays.<ReactPackage>asList(
                     new MainReactPackage(),
+            new SplashScreenReactPackage(),
             new RNGRPPackage(),
             new FileUploadPackage(),
             new PickerPackage(),

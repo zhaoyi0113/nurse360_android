@@ -9,6 +9,7 @@ export default class PatientSignature extends React.Component {
     this.state = {signature: null, showSign: true};
   }
 
+
   _signaturePadError = (error) => {
     console.error(error);
   }

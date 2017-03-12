@@ -15,6 +15,7 @@ import * as actions from "./actions/common_actions";
 import * as types from "./actions/action_types";
 import {Root} from "./routers";
 import WaitingIndicator from './components/waiting_indicator';
+import SplashScreen from 'react-native-splash-screen';
 
 const engine = createEngine('nurse360_android');
 
@@ -65,6 +66,10 @@ class AppWithNavigation extends Component {
     return true;
   }
 
+  componentDidMount(){
+    SplashScreen.hide();
+  }
+
   render() {
     if (this.props.alert && !this.showAlert) {
       this.showAlert = true;
@@ -83,7 +88,7 @@ class AppWithNavigation extends Component {
     }
 
     return (<View style={{flex:1}}>
-      <StatusBar hidden={true}/>
+      <StatusBar translucent={true} backgroundColor='transparent'/>
       <Root navigation={this.props.addNavigationHelpers(this.props.nav)}/>
       <WaitingIndicator isVisible={this.props.waitingIndicator}/>
     </View>);

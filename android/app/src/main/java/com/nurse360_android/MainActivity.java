@@ -1,6 +1,8 @@
 package com.nurse360_android;
 
 import com.facebook.react.ReactActivity;
+import com.github.yamill.orientation.OrientationPackage;
+import com.cboy.rn.splashscreen.SplashScreen;
 
 public class MainActivity extends ReactActivity {
 
@@ -10,6 +12,7 @@ public class MainActivity extends ReactActivity {
      */
     @Override
     protected String getMainComponentName() {
+        SplashScreen.show(this,true);
         return "nurse360_android";
     }
 }

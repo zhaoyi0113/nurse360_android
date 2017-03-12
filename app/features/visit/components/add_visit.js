@@ -25,6 +25,7 @@ export default class AddVisit extends React.Component {
     this.state = {requireSignature: false, diagnosticItems: [], address: '', record: '', waitingIndicator: false};
   }
 
+
   _submit() {
     let images = this.images.state.images;
     this._addVisit()
