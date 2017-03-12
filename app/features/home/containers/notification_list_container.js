@@ -25,10 +25,6 @@ class NotificationListContainer extends React.Component {
     this.loadMoreData();
   }
 
-  componentWillUnmount() {
-    this.props.queryNotification(this.props.token, 0, 2);
-  }
-
   loadMoreData() {
     this.props.queryNotification(this.props.token, this.state.index, this.state.number);
     this.setState({index: this.state.index + 1});
@@ -50,14 +46,14 @@ class NotificationListContainer extends React.Component {
 const mapStateToProps = (state) => {
   return {
     token: state.login.token,
-    notifications: state.notification.notifications,
+    notifications: state.notification.notificationList,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     queryNotification: (token, index, number) => {
-      return dispatch(actions.queryNotification(token, index, number));
+      return dispatch(actions.queryNotificationList(token, index, number));
     },
   }
 }

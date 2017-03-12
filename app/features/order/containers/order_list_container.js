@@ -23,10 +23,6 @@ class OrderListContainer extends React.Component {
     this.loadMoreData();
   }
 
-  componentWillUnmount() {
-    this.props.queryOrders(this.props.token, 0, 2);
-  }
-
   loadMoreData() {
     this.props.queryOrders(this.props.token, this.state.index, this.state.number);
     this.setState({index: this.state.index + 1});
@@ -61,14 +57,14 @@ class OrderListContainer extends React.Component {
 const mapStateToProps = (state) => {
   return {
     token: state.login.token,
-    orders: state.order.orders,
+    orders: state.order.orderList,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     queryOrders: (token, index, number) => {
-      return dispatch(actions.queryOrders(token, index, number));
+      return dispatch(actions.queryOrderList(token, index, number));
     },
     fetchOrder: (token, id) => {
       return dispatch(actions.fetchOrder(token, id));

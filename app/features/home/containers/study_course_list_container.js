@@ -1,11 +1,9 @@
-import React from 'react';
-import {connect} from 'react-redux';
-import CategoryView from '../../../components/category_view';
-
-import * as actions from '../../../actions/study_actions';
-import {COURSE_DETAIL} from '../../../routers';
-import ArticleContainer from '../../../containers/article_container';
-import {header} from '../../../components/navigation_header';
+import React from "react";
+import {connect} from "react-redux";
+import CategoryView from "../../../components/category_view";
+import * as actions from "../../../actions/study_actions";
+import {COURSE_DETAIL} from "../../../routers";
+import {header} from "../../../components/navigation_header";
 
 class StudyCourseListContainer extends React.Component {
 
@@ -24,10 +22,6 @@ class StudyCourseListContainer extends React.Component {
 
   componentDidMount() {
     this.loadMoreData();
-  }
-
-  componentWillUnmount() {
-    this.props.queryStudyCourses(this.props.token, 0, 2);
   }
 
   loadMoreData() {
@@ -58,14 +52,14 @@ class StudyCourseListContainer extends React.Component {
 const mapStateToProps = (state) => {
   return {
     token: state.login.token,
-    courses: state.study.courses,
+    courses: state.study.courseList,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     queryStudyCourses: (token, index, number) => {
-      return dispatch(actions.queryStudyCourses(token, index, number));
+      return dispatch(actions.queryStudyCourseList(token, index, number));
     },
   }
 }

@@ -6,6 +6,8 @@ export const NotificationReducer = (state = {}, action) => {
       return {...state, notifications: parseNotifications(action.payload.data)}
     case types.QUERY_NOTIFICATION_DETAIL_HTTP + types.SUCCESS:
       return {...state, notification: action.payload.data};
+    case types.QUERY_NOTIFICATION_LIST_HTTP + types.SUCCESS:
+      return {...state, notificationList: action.payload.data};
     default:
       return state;
   }

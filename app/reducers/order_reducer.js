@@ -9,6 +9,8 @@ export const OrderReducer = (state = {}, action) => {
       return {...state, fetchOrder: action.payload.data};
     case types.QUERY_ORDER_HTTP + types.SUCCESS:
       return {...state, order: parseUserOrder(action.payload.data[0])};
+    case types.QUERY_ORDER_LIST_HTTP+types.SUCCESS:
+      return {...state, orderList: parseUserOrders(action.payload.data)};
     default:
       return state;
   }
