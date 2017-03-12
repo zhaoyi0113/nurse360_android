@@ -24,7 +24,7 @@ class UserContainer extends Component {
     this.props.getUserInfo(this.props.token);
   }
 
-  _cancelOrder(order){
+  _cancelOrder(order) {
     this.props.cancelOrder(this.props.token, order.id);
   }
 
@@ -34,6 +34,9 @@ class UserContainer extends Component {
     return (<User userInfo={this.props.userInfo} userOrder={userOrder}
                   fetchOrder={this.props.fetchOrder.bind(this)}
                   cancelOrder={this._cancelOrder.bind(this)}
+                  refresh={()=>{
+                    return this.props.getUserInfo(this.props.token)
+                  }}
                   userCourse={userCourse} rootNavigation={this.props.screenProps.rootNavigation}/>)
   }
 
@@ -61,9 +64,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getUserInfo: (token) => {
-      dispatch(actions.getUserInfo(token));
-      dispatch(actions.getUserOrder(token, 0, 1));
-      dispatch(actions.getUserHistoryCourse(token, 0, 1));
+      return Promise.all([dispatch(actions.getUserInfo(token)),
+        dispatch(actions.getUserOrder(token, 0, 1)),
+        dispatch(actions.getUserHistoryCourse(token, 0, 1))]);
     },
     fetchOrder: (token, id) => {
       dispatch(orderActions.fetchOrder(token, id));

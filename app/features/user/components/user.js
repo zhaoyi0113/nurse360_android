@@ -1,5 +1,5 @@
 import React from "react";
-import {View, StyleSheet, Text, Image, ScrollView, TouchableHighlight, Navigator} from "react-native";
+import {View, StyleSheet, Text, Image, ScrollView, TouchableHighlight, Navigator, RefreshControl} from "react-native";
 import {FontSize} from "../../../constants";
 import _ from "lodash";
 import Order from "../../order/components/order";
@@ -11,7 +11,7 @@ export default class User extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {routeIndex: 0};
+    this.state = {routeIndex: 0, isRefreshing: false};
   }
 
   _goToUserTask() {
@@ -22,10 +22,26 @@ export default class User extends React.Component {
     this.props.rootNavigation.navigate('HistoryCourse')
   }
 
+  _onRefresh() {
+    this.setState({isRefreshing: true});
+    this.props.refresh()
+      .then(v => this.setState({isRefreshing: false}));
+  }
+
   render() {
     let {userInfo, userOrder, userCourse, fetchOrder, cancelOrder} = this.props;
     return (
-      <ScrollView style={styles.container}>
+      <ScrollView style={styles.container}
+                  refreshControl={
+          <RefreshControl
+            refreshing={this.state.isRefreshing}
+            onRefresh={this._onRefresh.bind(this)}
+            tintColor="lightgray"
+            title="Loading..."
+            colors={['lightgray']}
+          />
+        }
+      >
         <UserHeader userInfo={userInfo}
                     navigation={this.props.rootNavigation}
         />
@@ -297,7 +313,8 @@ const functionStyles = StyleSheet.create({
 
 const taskStyles = StyleSheet.create({
   container: {
-    // height: 200,
+    flexDirection: 'column',
+    flex:1,
   },
   header: {
     flexDirection: 'row',
@@ -324,7 +341,8 @@ const taskStyles = StyleSheet.create({
 
 const historyStyles = StyleSheet.create({
   container: {
-    // height: 100,
+    // height: 150,
+    flexDirection: 'column',
   },
   header: {
     backgroundColor: '#f6f6f6',

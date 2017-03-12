@@ -7,7 +7,7 @@ export default class CourseCell extends React.Component {
   render() {
     let {course} = this.props;
     return (
-      <TouchableHighlight underlayColor='lightgray' onPress={this.props.openCourse.bind(this)}>
+      <TouchableHighlight style={{flex:1}} underlayColor='lightgray' onPress={this.props.openCourse.bind(this)}>
         <View style={styles.container}>
           <Text style={styles.title_text}>
             {course.name && course.name.split('')[0]}
