@@ -6,6 +6,7 @@ import Order from "../../order/components/order";
 import CourseCell from "../../course/components/course_cell";
 import {COURSE_DETAIL} from "../../../routers";
 import OrderDetail from "../../order/components/order_detail";
+import Line from '../../../components/line';
 
 export default class User extends React.Component {
 
@@ -90,16 +91,21 @@ class UserHeader extends React.Component {
     return (
       <View style={headerStyles.container}>
         <Image style={headerStyles.image} source={headerPhoto}/>
+        <Image style={headerStyles.editImage} source={require('../../../images/user/edit.png')}/>
         <View style={headerStyles.text_area}>
           <Text style={headerStyles.nurse_name}>{userInfo.name}</Text>
           <Text style={headerStyles.department_name}>{userInfo.departmentName}</Text>
           <Text style={headerStyles.hospital_name}>{userInfo.hospitalName}</Text>
         </View>
+        <Line style={{width: 1, marginVertical:30, backgroundColor: '#4a91e1', left: -30}}/>
         <TouchableHighlight style={headerStyles.wallet} underlayColor='transparent'
                             onPress={()=>this.props.navigation.navigate('Wallet')}>
           <View>
             <Text style={headerStyles.nurse_name}>我的钱包</Text>
-            <Text style={headerStyles.nurse_name}>{wallet}元</Text>
+            <View style={{flexDirection: 'row', }}>
+              <Text style={headerStyles.nurse_name}>{wallet}</Text><Text
+              style={{color:'white', fontSize:FontSize.small, alignSelf:'center'}}>  元</Text>
+            </View>
           </View>
         </TouchableHighlight>
         <View style={headerStyles.right_area}>
@@ -161,7 +167,7 @@ class Function extends React.Component {
                                        style={functionStyles.view}>
               <View key={i}>
                 <Image style={functionStyles.image} source={f.image}/>
-                <Text>{f.text}</Text>
+                <Text style={{textAlign:'center'}}>{f.text}</Text>
               </View>
             </TouchableHighlight>
           })
@@ -245,11 +251,20 @@ const headerStyles = StyleSheet.create({
     backgroundColor: '#559bec',
   },
   image: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
+    width: 60,
+    height: 60,
+    borderRadius: 30,
     marginLeft: 10,
     alignSelf: 'center',
+  },
+  editImage: {
+    width: 16,
+    height: 16,
+    borderRadius: 8,
+    position: 'relative',
+    alignSelf: 'center',
+    marginTop: 40,
+    marginLeft: -10
   },
   text_area: {
     marginLeft: 10,
@@ -314,7 +329,8 @@ const functionStyles = StyleSheet.create({
 const taskStyles = StyleSheet.create({
   container: {
     flexDirection: 'column',
-    flex:1,
+    flex: 1,
+    marginHorizontal: 10,
   },
   header: {
     flexDirection: 'row',
@@ -343,6 +359,7 @@ const historyStyles = StyleSheet.create({
   container: {
     // height: 150,
     flexDirection: 'column',
+    marginHorizontal: 10,
   },
   header: {
     backgroundColor: '#f6f6f6',
