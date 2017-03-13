@@ -240,7 +240,7 @@ const styles = StyleSheet.create({
 
 const headerStyles = StyleSheet.create({
   container: {
-    height: 110,
+    height: 150,
     flexDirection: 'row',
     backgroundColor: '#559bec',
   },
