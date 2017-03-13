@@ -139,6 +139,8 @@ export default class AddVisit extends React.Component {
           <CheckBox
             labelStyle={{fontSize: FontSize.small}}
             label='患者签字（勾选此项提交后将跳转到签字页面)'
+            checkedImage={require('../../../images/user/patientSign.png')}
+            uncheckedImage={require('../../../images/user/patientUnSign.png')}
             checked={this.state.requireSignature}
             onChange={(checked) => {
               this.setState({requireSignature: !checked})
@@ -212,7 +214,8 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     textAlign: 'center',
     borderRadius: 2,
-    backgroundColor: 'lightgray'
+    backgroundColor: 'lightgray',
+    color: 'white',
   },
   diagnostic_selected_item: {
     flex: 0.3,
@@ -221,6 +224,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     borderRadius: 2,
     backgroundColor: '#559bec',
+    color: 'white',
   },
   diagnostic_empty_style: {flex: 0.3, marginHorizontal: 10, marginVertical: 5}
 });

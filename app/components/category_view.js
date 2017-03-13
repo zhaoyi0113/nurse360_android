@@ -3,6 +3,7 @@ import {View, Text, Image, StyleSheet, ListView, ActivityIndicator} from "react-
 import _ from "lodash";
 import CommonRowCell from "./common_row_cell";
 import HeaderCategoryView from "./header_category_view";
+import {colors} from '../constants';
 
 export default class CategoryView extends React.Component {
 
@@ -75,6 +76,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
+    backgroundColor: colors.bkColor,
   },
   list_view: {
     flex: 5,

@@ -34,7 +34,9 @@ const styles = StyleSheet.create({
     flex: 0.3,
     flexDirection: 'column',
     alignItems: 'center',
-    margin: 10,
+    marginHorizontal: 10,
+    marginVertical: 5,
+    borderRadius:5,
     backgroundColor: 'white',
   },
   title_image: {

@@ -52,7 +52,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
-    margin: 5,
+    marginHorizontal: 10,
+    marginVertical: 5,
     borderRadius: 5,
     flexDirection: 'row',
     alignItems: 'center',
