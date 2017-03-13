@@ -3,6 +3,7 @@ import {ListView, View, Image, Text, ActivityIndicator, StyleSheet} from "react-
 import Order from "./order";
 import _ from "lodash";
 import HeaderCategoryView from "../../../components/header_category_view";
+import {colors} from '../../../constants';
 
 export default class OrderList extends React.Component {
 
@@ -57,9 +58,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
+    backgroundColor: colors.bkColor,
   },
   list_view: {
     flex: 5,
-    margin: 10,
+    marginVertical: 10,
   }
 });

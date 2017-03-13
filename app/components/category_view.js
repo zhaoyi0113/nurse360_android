@@ -34,7 +34,8 @@ export default class CategoryView extends React.Component {
 
   renderRow(rowData) {
     let headTitle = rowData.name && rowData.name.split('')[0];
-    return <CommonRowCell title={rowData.title} description={rowData.introduction} image={rowData.image}
+    const title = rowData.title || rowData.name;
+    return <CommonRowCell title={title} description={rowData.introduction} image={rowData.image}
                           hasRead={rowData.hasRead}
                           headTitle={headTitle} onClick={()=>this.props.onClick(rowData)}/>
   }
