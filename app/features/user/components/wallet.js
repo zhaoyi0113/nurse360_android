@@ -1,8 +1,7 @@
 import React from 'react';
 import {View, TouchableHighlight, StyleSheet, Text, ScrollView, Button, RefreshControl} from 'react-native';
-import {FontSize} from '../../../constants';
+import {colors, FontSize} from '../../../constants';
 import {getDate} from '../../../reducers/common_reducer';
-import {WITHDRAW} from '../../../routers';
 import Withdraw from './withdraw';
 
 export default class Wallet extends React.Component {
@@ -24,7 +23,7 @@ export default class Wallet extends React.Component {
   render() {
     let {userInfo, wallets, navigation, withdraw} = this.props;
     return (
-      <View style={{flex:1}}>
+      <View style={{flex:1, backgroundColor: colors.bkColor}}>
         <ScrollView style={styles.container} refreshControl={
           <RefreshControl
             refreshing={this.state.isRefreshing}
@@ -37,7 +36,7 @@ export default class Wallet extends React.Component {
 
           <Text style={{flex:1, margin:10}}>当前余额</Text>
           <Text
-            style={{flex:1.5, fontSize: FontSize.xxlarge, textAlign: 'center', color: 'lightblue'}}>{userInfo.wallet}元</Text>
+            style={{flex:1.5, fontSize: FontSize.xxlarge, textAlign: 'center', color: '#559bec'}}>{userInfo.wallet}元</Text>
           <Text style={{flex:1, margin: 10}}>收支明细</Text>
           <View style={{flex: 15}}>
             <View style={{flex:1, flexDirection:'row'}}>
@@ -47,13 +46,14 @@ export default class Wallet extends React.Component {
             </View>
             {
               wallets.map((wallet, i) => {
-                return <View key={i} style={{flex:1, flexDirection:'row'}}>
+                return <View key={i}
+                             style={{flex:1, height:30, flexDirection:'row', borderBottomWidth:1, borderBottomColor:'lightgray', marginHorizontal: 0}}>
                   <Text
-                    style={{flex:1, textAlign:'center', color: 'gray', fontSize: FontSize.small}}>{wallet.summary}</Text>
+                    style={{flex:1, textAlign:'center', alignSelf:'center', color: 'gray', fontSize: FontSize.small}}>{wallet.summary}</Text>
                   <Text
-                    style={{flex:1, textAlign:'center', color: 'gray', fontSize: FontSize.small}}>{getDate(wallet.time)}</Text>
+                    style={{flex:1, textAlign:'center', alignSelf:'center',color: 'gray', fontSize: FontSize.small}}>{getDate(wallet.time)}</Text>
                   <Text
-                    style={{flex:1, textAlign:'center', color: 'blue', fontSize: FontSize.small}}>{wallet.amount}</Text>
+                    style={{flex:1, textAlign:'center', alignSelf:'center',color: '#559bec', fontSize: FontSize.small}}>{wallet.amount}</Text>
                 </View>
               })
             }
@@ -69,10 +69,12 @@ export default class Wallet extends React.Component {
 
 Wallet.propTypes = {
   wallets: React.PropTypes.array,
+  userInfo: React.PropTypes.object,
 }
 
 Wallet.defaultProps = {
-  wallets: []
+  wallets: [],
+  userInfo: {}
 }
 
 const styles = StyleSheet.create({
