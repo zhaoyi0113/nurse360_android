@@ -13,7 +13,7 @@ class UserContainer extends Component {
       // Note: By default the icon is only shown on iOS. Search the showIcon option below.
       icon: (obj) => {
         const image = obj.focused ? require('../../../images/my_pre.png') : require('../../../images/my_nor.png')
-        return <Image style={{ height:25, width: 25}}
+        return <Image style={{ height:40, width: 40}}
                       source={image}
         />
       }

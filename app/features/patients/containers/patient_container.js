@@ -10,7 +10,7 @@ class PatientContainer extends Component {
       // Note: By default the icon is only shown on iOS. Search the showIcon option below.
       icon: (obj) => {
         const image = obj.focused ? require('../../../images/patient_pre.png') : require('../../../images/patient_nor.png');
-        return <Image style={{resizeMode:'contain', width:25, height: 25}}
+        return <Image style={{resizeMode:'contain', width:40, height: 40}}
                       source={image}
         />
       }
