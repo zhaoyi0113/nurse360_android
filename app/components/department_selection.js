@@ -1,6 +1,5 @@
 import React from "react";
 import {View, StyleSheet, Text, ScrollView, TouchableHighlight} from "react-native";
-import _ from 'lodash';
 import {colors} from '../constants';
 
 import ManualNavBar from "./manual_nav_bar";

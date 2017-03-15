@@ -1,6 +1,7 @@
 import React from 'react';
-import {View, Text, TextInput, StyleSheet, Button} from 'react-native';
+import {View, Text, TextInput, StyleSheet, Dimensions} from 'react-native';
 import {colors} from '../../../constants';
+import Button from 'react-native-button';
 
 export default class PasswordUpdate extends React.Component {
 
@@ -23,9 +24,14 @@ export default class PasswordUpdate extends React.Component {
                    onChangeText={(text)=>this.setState({newPassword: text})}/>
         <Text style={{textAlign: 'right',margin:5}} onPress={this.props.forgetPassword.bind(this)}>忘记密码</Text>
       </View>
-      <Button style={{position:'absolute', bottom:1, margin:10}} title='确认'
-              onPress={() => this.props.changePassword(this.state.oldPassword, this.state.newPassword)}
-              disabled={!this.state.oldPassword || !this.state.newPassword}/>
+      <Button
+        style={{color: 'white', textAlign: 'center' }}
+        styleDisabled={{backgroundColor: 'lightgray'}}
+        containerStyle={{position:'absolute', bottom:1,backgroundColor:colors.labelColor, width: Dimensions.get('window').width - 20, margin:10, alignSelf: 'center'}}
+        onPress={() => this.props.changePassword(this.state.oldPassword, this.state.newPassword)}
+        disabled={!this.state.oldPassword || !this.state.newPassword}>
+        确认
+      </Button>
     </View>);
   }
 
@@ -34,6 +40,6 @@ export default class PasswordUpdate extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.bkColor
+    backgroundColor: colors.bkColor,
   }
 });
