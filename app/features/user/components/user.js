@@ -358,6 +358,7 @@ const taskStyles = StyleSheet.create({
 const historyStyles = StyleSheet.create({
   container: {
     // height: 150,
+    flex:1,
     flexDirection: 'column',
     marginHorizontal: 10,
   },
