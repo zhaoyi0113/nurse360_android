@@ -6,5 +6,5 @@ export const FontSize = {
   xxlarge: 30,
 }
 
-export const colors = {underlayColor: 'lightgray', bkColor: '#f6f6f6'}
+export const colors = {underlayColor: 'lightgray', bkColor: '#f6f6f6', labelColor: '#559bec'}
 

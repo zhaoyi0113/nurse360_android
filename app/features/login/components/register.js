@@ -41,14 +41,16 @@ export default class Register extends React.Component {
                       textImage={require('../../../images/login/registerFont.png')}
                       text="护士基本信息"/>
         <View style={styles.input_view}>
-          <TextInput style={styles.input_text} placeholder="手机号" onChangeText={(text)=>this.setState({mobile: text})}/>
+          <TextInput style={styles.input_text} placeholder="手机号" underlineColorAndroid='transparent'
+                     onChangeText={(text)=>this.setState({mobile: text})}/>
           <View style={styles.verify_view}>
-            <TextInput style={styles.input_text} placeholder="验证码"
+            <TextInput style={styles.input_text} placeholder="验证码" underlineColorAndroid='transparent'
                        onChangeText={(text)=>this.setState({verifyCode: text})}/>
             <Text style={{color: '#559bec', marginRight: 10}}
                   onPress={()=> this.props.screenProps.requestSmsCode(this.state.mobile)}>获取验证码</Text>
           </View>
           <TextInput style={styles.input_text} placeholder="密码" secureTextEntry={true}
+                     underlineColorAndroid='transparent'
                      onChangeText={(text)=>this.setState({password: text})}/>
         </View>
         <View style={styles.register_button}>
@@ -56,7 +58,7 @@ export default class Register extends React.Component {
                   disabled={!this.state.mobile || !this.state.password || !this.state.verifyCode}/>
         </View>
         <TouchableHighlight onPress={()=>this.props.navigation.navigate('Login')} underlayColor="lightgray">
-          <Text style={{textAlign:'center'}}>已有账号？去登录</Text>
+          <Text style={{textAlign:'center', color: '#9b9b9b'}}>已有账号？去登录</Text>
         </TouchableHighlight>
       </View>
     </View>)

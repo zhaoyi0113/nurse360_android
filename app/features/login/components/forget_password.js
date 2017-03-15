@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {View, Text, TextInput, Button} from 'react-native';
+import {colors} from '../../../constants';
 
 export default class ForgetPassword extends React.Component {
 
@@ -10,7 +11,8 @@ export default class ForgetPassword extends React.Component {
   }
 
   render() {
-    return (<View style={{margin:10}}>
+    return (<View style={{flex:1, backgroundColor: colors.bkColor}}>
+      <View style={{margin:10}}>
       <Text>您要修改的新密码</Text>
       <TextInput placeholder='输入您的手机号' onChangeText={(text)=>this.setState({mobile: text})}/>
       <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -25,6 +27,7 @@ export default class ForgetPassword extends React.Component {
       <Button title='确定'
               disabled={!this.state.newPwd || !this.state.verifyCode || !this.state.mobile}
               onPress={()=> this.props.submit(this.state.mobile, this.state.verifyCode, this.state.newPwd)}/>
+      </View>
     </View>);
   }
 

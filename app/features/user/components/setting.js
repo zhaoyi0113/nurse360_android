@@ -1,9 +1,7 @@
 import React from 'react';
 import {View, Text, Image, StyleSheet, TouchableHighlight, Alert} from 'react-native';
 
-import * as routers from '../../../routers';
-import {SUGGESTION_FEEDBACK} from '../../../routers';
-import SuggestionFeedbackContainer from '../containers/suggestion_feedback_container';
+import {colors} from '../../../constants';
 
 export default class Setting extends React.Component {
 
@@ -63,7 +61,7 @@ export default class Setting extends React.Component {
 
   render() {
     return (
-      <View style={{flex:1, height:100, flexDirection: 'column', marginTop: 10}}>
+      <View style={{flex:1, height:100, flexDirection: 'column', marginTop: 0, backgroundColor: colors.bkColor}}>
         <Text style={{marginLeft: 30}}>设置您的账号</Text>
         {
           this.state.items.map((item, i) => {
@@ -88,7 +86,8 @@ const styles = StyleSheet.create({
   cell_view: {
     flexDirection: 'row',
     backgroundColor: 'white',
-    margin: 10,
+    marginVertical: 5,
+    marginHorizontal: 10,
     alignItems: 'center',
     flex: 1,
   },

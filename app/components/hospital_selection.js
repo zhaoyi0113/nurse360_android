@@ -56,6 +56,7 @@ export default class HospitalSelection extends React.Component {
       <View style={styles.searchView}>
         <Image style={{resizeMode: 'contain', height: 20, marginTop: 10}} source={require('../images/search.png')}/>
         <TextInput style={{flex:1, height: 35, fontSize: FontSize.small}}
+                   underlineColorAndroid='transparent'
                    inlineImageLeft='search.png'
                    value={this.state.searchText}
                    onChangeText={(text)=>this.setState({searchText: text})}

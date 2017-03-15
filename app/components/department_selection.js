@@ -1,6 +1,7 @@
 import React from "react";
 import {View, StyleSheet, Text, ScrollView, TouchableHighlight} from "react-native";
 import _ from 'lodash';
+import {colors} from '../constants';
 
 import ManualNavBar from "./manual_nav_bar";
 
@@ -36,12 +37,14 @@ export default class DepartmentSelection extends React.Component {
           {
             this.props.departmentList.map((department, i) => {
               let style = styles.department_row;
+              let textStyle = [styles.department_text];
               if (selectedDepartment && department.id === selectedDepartment.id) {
                 style = styles.department_row_selected;
+                textStyle.push({color: 'white'})
               }
               return <TouchableHighlight kye={i} style={style}
                                          onPress={()=>this.setState({selectedDepartment: department})}>
-                <Text style={styles.department_text}>{department.name}</Text>
+                <Text style={textStyle}>{department.name}</Text>
               </TouchableHighlight>
             })
           }
@@ -50,12 +53,14 @@ export default class DepartmentSelection extends React.Component {
           {
             subDepartmentList.map((dep, i) => {
               let style = styles.department_row;
+              let textStyle = [styles.department_text];
               if (this.state.selectedSubDepartment && this.state.selectedSubDepartment.id === dep.id) {
                 style = styles.department_row_selected;
+                textStyle.push({color: 'white'});
               }
               return <TouchableHighlight key={i} style={style}
                                          onPress={()=> this.setState({selectedSubDepartment: dep})}>
-                <Text style={styles.department_text}>{dep.name}</Text>
+                <Text style={textStyle}>{dep.name}</Text>
               </TouchableHighlight>
             })
           }
@@ -77,13 +82,14 @@ DepartmentSelection.defaultProps = {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: colors.bkColor
   },
   department_row: {
     height: 50,
   },
   department_row_selected: {
     height: 50,
-    backgroundColor: 'blue',
+    backgroundColor: colors.labelColor,
   },
   department_text: {
     marginLeft: 10,

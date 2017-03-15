@@ -6,6 +6,9 @@ import * as notificationActions from "../../../actions/notification_actions";
 import * as studyActions from "../../../actions/study_actions";
 import * as orderActions from "../../../actions/order_actions";
 
+import Orientation from 'react-native-orientation';
+
+
 class HomeContainer extends Component {
   static navigationOptions = {
     tabBar: {
