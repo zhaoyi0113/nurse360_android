@@ -7,7 +7,7 @@ export default class CommonTableHeader extends React.Component {
   render() {
     let {title, more} = this.props;
     return (<View style={styles.container}>
-      <Text style={styles.text}>{title}</Text>
+      <Text style={styles.title}>{title}</Text>
       <TouchableHighlight style={styles.more_click} underlayColor="transparent" onPress={()=>this.props.clickMore()}>
         <Text style={styles.more}>{more}</Text>
       </TouchableHighlight>
@@ -37,8 +37,7 @@ const styles = StyleSheet.create({
   title: {
     color: '#9a9a9a',
     flex: 1,
-    marginLeft: 10,
-    fontSize: FontSize.small,
+    marginLeft: 15,
   },
   more_click: {
     flex: 1,

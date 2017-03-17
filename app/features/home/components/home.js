@@ -4,10 +4,8 @@ import CommonRowCell from "../../../components/common_row_cell";
 import CommonTableHeader from "../../../components/common_table_header";
 import Order from "../../order/components/order";
 import * as types from "../../../actions/action_types";
-import {
-  NOTIFICATION_DETAIL,
-  COURSE_DETAIL
-} from "../../../routers";
+import {NOTIFICATION_DETAIL, COURSE_DETAIL} from "../../../routers";
+
 
 export default class Home extends Component {
 
@@ -111,7 +109,7 @@ export default class Home extends Component {
             colors={['lightgray']}
           />
         }>
-      <Image style={{height:110,width:Dimensions.get('window').width,resizeMode:'cover'}}
+      <Image style={{height:150,width:Dimensions.get('window').width,resizeMode:'cover'}}
              source={require('../../../images/home/headIm.png')}/>
       <View style={styles.notification_view}>
         <View style={styles.title_view}>
@@ -121,6 +119,7 @@ export default class Home extends Component {
           {this._getNotificationView()}
         </View>
       </View>
+      <View style={{height:1, flex:1, backgroundColor: 'lightgray'}}/>
       <View style={styles.notification_view}>
         <View style={styles.title_view}>
           <CommonTableHeader title='学习' more='更多'
@@ -128,6 +127,7 @@ export default class Home extends Component {
           {this._getStudyCoursesView()}
         </View>
       </View>
+      <View style={{height:1, flex:1, backgroundColor: 'lightgray'}}/>
       <View style={styles.notification_view}>
         <View style={styles.title_view}>
           <CommonTableHeader title='患者服务' more='更多'

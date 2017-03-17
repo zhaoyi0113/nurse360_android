@@ -43,11 +43,11 @@ const Tabs = TabNavigator({
 }, {
   tabBarOptions: {
     showIcon: true,
-    style: {backgroundColor: 'lightgray', height: 60},
+    style: {backgroundColor: 'lightgray', height: 50},
     showLabel: false,
-    tabStyle: {margin: 0, padding: 0, height: 60},
+    tabStyle: {margin: 0, padding: 0, height: 50},
     indicatorStyle: {backgroundColor: 'lightgray'},
-    iconStyle: {width: 50, height: 60, alignSelf:'center', margin:0, padding:0}
+    iconStyle: {width: 50, height: 50, alignSelf:'center', margin:0, padding:0}
   },
   tabBarPosition: 'bottom',
 });

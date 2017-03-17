@@ -65,6 +65,7 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     marginBottom: 10,
     marginHorizontal: 10,
+    borderRadius: 5,
   },
   header: {
     flex: 1,

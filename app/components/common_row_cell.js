@@ -17,7 +17,10 @@ export default class CommonRowCell extends React.Component {
 
   render() {
     let {title, description, hasRead} = this.props;
-    const style = hasRead === 'YES'? styles.container : styles.notReadContainer;
+    let style = styles.container;
+    if(hasRead === 'YES'){
+      style = [style, {backgroundColor: '#E8EFF7'}];
+    }
     return (<View style={style}>
       {this._getHeaderView()}
       <TouchableHighlight style={{flex:5, flexDirection: 'row'}} underlayColor="transparent"

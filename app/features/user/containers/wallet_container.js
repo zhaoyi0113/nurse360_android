@@ -16,18 +16,17 @@ class WalletContainer extends React.Component {
     this.props.queryWallet(this.props.token);
   }
 
-  _withdraw() {
-    this.props.withdraw()
+  _withdraw(amount) {
+    this.props.withdraw(this.props.token, amount)
       .then(() => {
         Alert.alert(
           '',
           '提现成功',
           [
-            {text: 'OK', onPress: () => this.props.navigation.goBack()},
+            {text: '确定', onPress: () => this.props.navigation.goBack()},
           ],
           {cancelable: false}
-        )
-
+        );
       });
   }
 
