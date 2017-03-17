@@ -1,7 +1,18 @@
 import React from 'react';
-import {View, Text, TextInput, StyleSheet, Image, Button, KeyboardAvoidingView, Dimensions} from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  Image,
+  Button,
+  KeyboardAvoidingView,
+  Dimensions,
+  TouchableHighlight
+} from 'react-native';
 import Line from '../../../components/line';
 import {colors} from '../../../constants';
+import ImagePicker from 'react-native-image-picker';
 
 export default class UserProfileUpdate extends React.Component {
 
@@ -25,6 +36,36 @@ export default class UserProfileUpdate extends React.Component {
     });
   }
 
+  _imageSelection() {
+    const options = {
+      title: '选择照片',
+      cancelButtonTitle: '取消',
+      takePhotoButtonTitle: '拍照',
+      chooseFromLibraryButtonTitle: '从相册选择',
+    };
+    ImagePicker.showImagePicker(options, (response) => {
+      console.log('Response = ', response);
+
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      }
+      else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      }
+      else if (response.customButton) {
+        console.log('User tapped custom button: ', response.customButton);
+      }
+      else {
+        let source = {uri: response.uri};
+        // You can also display the image using data:
+        // let source = { uri: 'data:image/jpeg;base64,' + response.data };
+        let images = this.state.images;
+        images.push({source: source});
+        this.setState({images: images});
+      }
+    });
+  }
+
   render() {
     let {userInfo} = this.props;
     return (<View style={styles.container} behavior='height'>
@@ -33,8 +74,10 @@ export default class UserProfileUpdate extends React.Component {
         <View style={styles.row}>
           <Text style={styles.label}>头像</Text>
           <View style={{flex:1}}/>
-          <Image style={{height:40, width: 40, borderRadius: 20, marginRight: 10}}
-                 source={{uri: userInfo.profilePhotoUrl}}/>
+          <TouchableHighlight underlayColor='transparent' onPress={this._imageSelection.bind(this)}>
+            <Image style={{height:40, width: 40, borderRadius: 20, marginRight: 10}}
+                   source={{uri: userInfo.profilePhotoUrl}}/>
+          </TouchableHighlight>
         </View>
         <Line/>
         <View style={styles.row}>
@@ -61,19 +104,23 @@ export default class UserProfileUpdate extends React.Component {
                 onPress={()=>this.setState({gender: 'FEMALE'})}>女</Text>
         </View>
         <Line/>
-        <View style={styles.row}>
-          <Text style={styles.label}>医院</Text>
-          <View style={{flex:1}}/>
-          <Text>{this.state.hospitalName}</Text>
-          <Image style={styles.nextImage} source={require('../../../images/next_gray.png')}/>
-        </View>
+        <TouchableHighlight style={{flex:1}} onPress={()=>this.props.navigation.navigate('HospitalSelection')}>
+          <View style={styles.row}>
+            <Text style={styles.label}>医院</Text>
+            <View style={{flex:1}}/>
+            <Text>{this.state.hospitalName}</Text>
+            <Image style={styles.nextImage} source={require('../../../images/next_gray.png')}/>
+          </View>
+        </TouchableHighlight>
         <Line/>
-        <View style={styles.row}>
-          <Text>科室</Text>
-          <View style={{flex:1}}/>
-          <Text>{this.state.departmentName}</Text>
-          <Image style={styles.nextImage} source={require('../../../images/next_gray.png')}/>
-        </View>
+        <TouchableHighlight style={{flex:1}} onPress={()=>this.props.navigation.navigate('DepartmentSelection')}>
+          <View style={styles.row}>
+            <Text>科室</Text>
+            <View style={{flex:1}}/>
+            <Text>{this.state.departmentName}</Text>
+            <Image style={styles.nextImage} source={require('../../../images/next_gray.png')}/>
+          </View>
+        </TouchableHighlight>
         <Line/>
         <View style={styles.row}>
           <Text>资质认证</Text>

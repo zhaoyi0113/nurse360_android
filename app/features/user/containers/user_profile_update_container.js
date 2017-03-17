@@ -22,6 +22,7 @@ class UserProfileUpdateContainer extends React.Component {
 
   render() {
     return (<UserProfileUpdate userInfo={this.props.userInfo}
+                               navigation={this.props.navigation}
                                updateUserInfo={this._updateUserInfo.bind(this)}/>)
   }
 }

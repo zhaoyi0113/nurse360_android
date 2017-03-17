@@ -28,7 +28,7 @@ export default class DepartmentSelection extends React.Component {
       }
     }
     return (<View style={styles.container}>
-      <ManualNavBar left="注册" title={this.props.hospital.name} right="完成"
+      <ManualNavBar left="返回" title={this.props.hospital.name} right="完成"
                     clickLeft={()=>this.props.goBack()}
                     clickRight={this.selectDepartment.bind(this)}/>
       <View style={{flexDirection: 'row'}}>

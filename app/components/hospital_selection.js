@@ -49,7 +49,7 @@ export default class HospitalSelection extends React.Component {
   render() {
 
     return (<View style={styles.container}>
-      <ManualNavBar left="注册" title="选择医院" right="完成"
+      <ManualNavBar left="返回" title="选择医院" right="完成"
                     clickLeft={()=>this.props.goBack()}
                     clickRight={this.selectHospital.bind(this)}/>
 
