@@ -9,7 +9,7 @@ export const UserReducer = (state = {}, action) => {
       return {...state, userOrder: orderUtils.parseUserOrders(action.payload.data)};
     case types.USER_COURSE_HTTP + types.SUCCESS:
       return {...state, userCourses: action.payload.data}
-    case types.USER_ORDERS+types.SUCCESS:
+    case types.USER_ORDERS + types.SUCCESS:
       return {...state, userOrders: orderUtils.parseUserOrders(action.payload.data)}
     default:
       return state;
@@ -22,6 +22,16 @@ const parseUserInfo = (data) => {
     userInfo.departmentName = data.properties.qualification.parentDepartmentName + '-' + data.properties.qualification.departmentName;
     userInfo.hospitalName = data.properties.qualification.hospitalName;
     userInfo.wallet = data.properties.wallet_remain;
+  }
+  if (!userInfo.profilePhotoUrl) {
+    userInfo.profilePhotoUrl = require('../images/user/default_header.png');
+  }
+  userInfo.genderText = '保密';
+  if (userInfo.gender === 'FEMALE') {
+    userInfo.genderText = '女';
+  }
+  if (userInfo.gender === 'MALE') {
+    userInfo.genderText = '男';
   }
   return userInfo;
 }

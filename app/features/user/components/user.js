@@ -82,15 +82,13 @@ class UserHeader extends React.Component {
     if (userInfo.wallet) {
       wallet = userInfo.wallet;
     }
-    let headerPhoto
-    if (userInfo.profilePhotoUrl) {
-      headerPhoto = {uri: userInfo.profilePhotoUrl}
-    } else {
-      headerPhoto = require('../../../images/user/default_header.png')
-    }
+    let headerPhoto = {uri: userInfo.profilePhotoUrl};
     return (
       <View style={headerStyles.container}>
-        <Image style={headerStyles.image} source={headerPhoto}/>
+        <TouchableHighlight style={{alignSelf: 'center'}} underlayColor='transparent'
+                            onPress={()=>this.props.navigation.navigate('UserProfileUpdate')}>
+          <Image style={headerStyles.image} source={headerPhoto}/>
+        </TouchableHighlight>
         <Image style={headerStyles.editImage} source={require('../../../images/user/edit.png')}/>
         <View style={headerStyles.text_area}>
           <Text style={headerStyles.nurse_name}>{userInfo.name}</Text>
@@ -104,7 +102,7 @@ class UserHeader extends React.Component {
             <Text style={headerStyles.nurse_name}>我的钱包</Text>
             <View style={{flexDirection: 'row', }}>
               <Text style={headerStyles.nurse_name}>{wallet}</Text><Text
-              style={{color:'white', fontSize:FontSize.small, alignSelf:'center'}}>  元</Text>
+              style={{color:'white', fontSize:FontSize.small, alignSelf:'center'}}> 元</Text>
             </View>
           </View>
         </TouchableHighlight>
@@ -358,7 +356,7 @@ const taskStyles = StyleSheet.create({
 const historyStyles = StyleSheet.create({
   container: {
     // height: 150,
-    flex:1,
+    flex: 1,
     flexDirection: 'column',
     marginHorizontal: 10,
   },

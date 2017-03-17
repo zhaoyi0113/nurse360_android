@@ -21,6 +21,7 @@ import AddVisit from "../features/visit/containers/add_visit_container";
 import VisitContainer from "../features/visit/containers/visit_container";
 import UpdatePasswordContainer from '../features/user/containers/password_update_container';
 import ForgetPasswordContainer from '../features/login/containers/forget_password_container';
+import UserProfileUpdateContainer from '../features/user/containers/user_profile_update_container';
 
 export const Root = StackNavigator({
   Main: {screen: MainContainer, path: 'main'},
@@ -42,6 +43,7 @@ export const Root = StackNavigator({
   VisitContainer: {screen: VisitContainer},
   PasswordUpdate: {screen: UpdatePasswordContainer},
   ForgetPassword: {screen: ForgetPasswordContainer},
+  UserProfileUpdate: {screen: UserProfileUpdateContainer},
 }, {
   initialRouteName: 'Login',
 });

@@ -18,7 +18,7 @@ export default class CommonRowCell extends React.Component {
   render() {
     let {title, description, hasRead} = this.props;
     let style = styles.container;
-    if(hasRead === 'YES'){
+    if(hasRead !== 'YES'){
       style = [style, {backgroundColor: '#E8EFF7'}];
     }
     return (<View style={style}>

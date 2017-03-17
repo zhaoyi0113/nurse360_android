@@ -4,7 +4,6 @@ import {connect} from 'react-redux';
 import CategoryView from '../../../components/category_view';
 
 import {COURSE_DETAIL} from '../../../routers';
-import ArticleContainer from '../../../containers/article_container';
 import * as actions from '../../../actions/user_actions';
 import {header} from '../../../components/navigation_header';
 
