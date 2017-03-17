@@ -12,11 +12,17 @@ class UserProfileUpdateContainer extends React.Component {
     cardStack: {
       gesturesEnabled: true,
     },
-    header:header,
+    header: header,
   }
 
-  render(){
-    return (<UserProfileUpdate userInfo={this.props.userInfo}/>)
+  _updateUserInfo(userInfo) {
+    this.props.updateUserInfo(this.props.token, userInfo)
+      .then(v => this.props.navigation.goBack());
+  }
+
+  render() {
+    return (<UserProfileUpdate userInfo={this.props.userInfo}
+                               updateUserInfo={this._updateUserInfo.bind(this)}/>)
   }
 }
 
@@ -29,6 +35,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    updateUserInfo: (token, userInfo) => {
+      return dispatch(actions.updateUserInfo(token, userInfo));
+    }
   }
 }
 

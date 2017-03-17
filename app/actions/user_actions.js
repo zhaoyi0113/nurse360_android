@@ -30,3 +30,7 @@ export const changePassword = (token, oldPwd, newPwd) => {
     new_password: sha1(newPwd)
   }, token);
 }
+
+export const updateUserInfo = (token, userInfo)=>{
+  return commonActions.requestPut(types.UPDATE_USER_INFO_HTTP, '/nurse', userInfo, token);
+}

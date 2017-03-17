@@ -13,27 +13,20 @@ export default class UserProfileUpdate extends React.Component {
   componentDidMount() {
     let {userInfo} = this.props;
     if (userInfo) {
-      if (!this.state.name) {
-        this.setState({name: userInfo.name});
-      }
-      if (!this.state.age) {
-        this.setState({age: userInfo.age});
-      }
-      if (!this.state.gender) {
-        this.setState({gender: userInfo.gender});
-      }
-      if (!this.state.hospitalName) {
-        this.setState({hospitalName: userInfo.hospitalName});
-      }
-      if (!this.state.departmentName) {
-        this.setState({departmentName: userInfo.departmentName});
-      }
+      this.setState({...userInfo});
     }
+  }
+
+  _updateUserInfo() {
+    const gender = this.state.gender === 'MALE' ? '1' : (this.state.gender === 'FEMALE' ? '0' : '2');
+    this.props.updateUserInfo({
+      real_name: this.state.realName, birthday: this.state.age, gender: gender,
+      hospital_id: this.state.hospitalId, department_id: this.state.departmentId
+    });
   }
 
   render() {
     let {userInfo} = this.props;
-
     return (<View style={styles.container} behavior='height'>
       <View style={{height: Dimensions.get('window').height*0.7}}>
         <Text style={{alignSelf: 'flex-start', margin:5 }}>修改个人资料</Text>
@@ -48,21 +41,24 @@ export default class UserProfileUpdate extends React.Component {
           <Text style={styles.label}>姓名</Text>
           <View style={{flex:1}}/>
           <TextInput style={{width:100, textAlign:'right'}} underlineColorAndroid='transparent'
-                     onChangeText={(text)=>this.setState({name:text})}>{this.state.name}</TextInput>
+                     onChangeText={(text)=>this.setState({realName:text})}>{this.state.realName}</TextInput>
         </View>
         <Line/>
         <View style={styles.row}>
           <Text style={styles.label}>年龄</Text>
           <View style={{flex:1}}/>
           <TextInput style={{width:100, textAlign:'right'}} underlineColorAndroid='transparent'
+                     onChangeText={(text)=>this.setState({age: text})}
                      keyboardType='numeric'>{this.state.age}</TextInput>
         </View>
         <Line/>
         <View style={styles.row}>
           <Text style={styles.label}>性别</Text>
           <View style={{flex:1}}/>
-          <Text style={this.state.gender === 'MALE'?styles.genderSelected:styles.genderUnselected}>男</Text>
-          <Text style={this.state.gender === 'FEMALE'?styles.genderSelected:styles.genderUnselected}>女</Text>
+          <Text style={this.state.gender === 'MALE'?styles.genderSelected:styles.genderUnselected}
+                onPress={()=>this.setState({gender: 'MALE'})}>男</Text>
+          <Text style={this.state.gender === 'FEMALE'?styles.genderSelected:styles.genderUnselected}
+                onPress={()=>this.setState({gender: 'FEMALE'})}>女</Text>
         </View>
         <Line/>
         <View style={styles.row}>
@@ -84,8 +80,7 @@ export default class UserProfileUpdate extends React.Component {
         </View>
       </View>
       <View style={styles.row}/>
-
-      <Button title='保存' style={{ position: 'absolute', bottom: 10}}/>
+      <Button title='保存' style={{ position: 'absolute', bottom: 10}} onPress={this._updateUserInfo.bind(this)}/>
     </View>);
   }
 }

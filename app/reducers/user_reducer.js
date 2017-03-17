@@ -11,6 +11,8 @@ export const UserReducer = (state = {}, action) => {
       return {...state, userCourses: action.payload.data}
     case types.USER_ORDERS + types.SUCCESS:
       return {...state, userOrders: orderUtils.parseUserOrders(action.payload.data)}
+    case types.UPDATE_USER_INFO_HTTP+types.SUCCESS:
+      return {...state, userInfo: parseUserInfo(action.payload.data)};
     default:
       return state;
   }
@@ -22,6 +24,8 @@ const parseUserInfo = (data) => {
     userInfo.departmentName = data.properties.qualification.parentDepartmentName + '-' + data.properties.qualification.departmentName;
     userInfo.hospitalName = data.properties.qualification.hospitalName;
     userInfo.wallet = data.properties.wallet_remain;
+    userInfo.hospitalId = data.properties.qualification.hospitalId;
+    userInfo.departmentId = data.properties.qualification.departmentId;
   }
   if (!userInfo.profilePhotoUrl) {
     userInfo.profilePhotoUrl = require('../images/user/default_header.png');
