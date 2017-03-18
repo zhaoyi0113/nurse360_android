@@ -10,18 +10,33 @@ class DepartmentSelectionContainer extends React.Component {
       visible: false
     },
   }
+
   componentDidMount() {
-    this.props.queryDepartmentList(this.props.screenProps.hospital.id);
+    let id;
+    if (this.props.screenProps && this.props.screenProps.hospital) {
+      id = this.props.screenProps.hospital.id;
+    }
+    if (this.props.navigation.state.params && this.props.navigation.state.params.hospital) {
+      id = this.props.navigation.state.params.hospital.id;
+    }
+    this.props.queryDepartmentList(id);
+  }
+
+  _selectDepartment(department) {
+    if (this.props.screenProps && this.props.screenProps.selectDepartment) {
+      this.props.screenProps.selectDepartment(department);
+    }
+    if (this.props.navigation.state.params && this.props.navigation.state.params.selectDepartment) {
+      this.props.navigation.state.params.selectDepartment(department);
+    }
+    this.props.navigation.goBack();
   }
 
   render() {
     return <DepartmentSelection goBack={()=>this.props.navigation.goBack()}
-                                hospital={this.props.screenProps.hospital}
+                                hospital={this.props.screenProps?this.props.screenProps.hospital:this.props.navigation.state.params.hospital}
                                 departmentList={this.props.departmentList}
-                                selectDepartment={(department)=>{
-                                  this.props.screenProps.selectDepartment(department);
-                                  this.props.navigation.goBack();
-                                }}/>
+                                selectDepartment={this._selectDepartment.bind(this)}/>
   }
 }
 

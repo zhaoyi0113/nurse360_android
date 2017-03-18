@@ -1,6 +1,6 @@
 import React from "react";
 import {View, StyleSheet, Text, Image, ScrollView, TouchableHighlight, Navigator, RefreshControl} from "react-native";
-import {FontSize} from "../../../constants";
+import {FontSize, defaultUserPhoto} from "../../../constants";
 import _ from "lodash";
 import Order from "../../order/components/order";
 import CourseCell from "../../course/components/course_cell";
@@ -82,7 +82,7 @@ class UserHeader extends React.Component {
     if (userInfo.wallet) {
       wallet = userInfo.wallet;
     }
-    let headerPhoto = {uri: userInfo.profilePhotoUrl};
+    let headerPhoto = userInfo.profilePhotoUrl ? {uri: userInfo.profilePhotoUrl} : defaultUserPhoto;
     return (
       <View style={headerStyles.container}>
         <TouchableHighlight style={{alignSelf: 'center'}} underlayColor='transparent'
@@ -91,7 +91,7 @@ class UserHeader extends React.Component {
         </TouchableHighlight>
         <Image style={headerStyles.editImage} source={require('../../../images/user/edit.png')}/>
         <View style={headerStyles.text_area}>
-          <Text style={headerStyles.nurse_name}>{userInfo.name}</Text>
+          <Text style={headerStyles.nurse_name}>{userInfo.realName}</Text>
           <Text style={headerStyles.department_name}>{userInfo.departmentName}</Text>
           <Text style={headerStyles.hospital_name}>{userInfo.hospitalName}</Text>
         </View>

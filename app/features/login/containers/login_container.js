@@ -66,7 +66,9 @@ class LoginContainer extends Component {
 
   _login(mobile, password) {
     this.props.login(mobile, password).then(v => {
-      this.props.navigation.goBack();
+      if(!v.error) {
+        this.props.navigation.goBack();
+      }
     });
 
   }

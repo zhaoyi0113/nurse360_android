@@ -38,6 +38,7 @@ errorMessage[types.REGISTER_HTTP + types.FAIL] = '注册失败';
 errorMessage[types.FETCH_ORDER_HTTP + types.FAIL] = '抢单失败';
 errorMessage[types.FORGET_PASSWORD_HTTP + types.FAIL] = '重设密码失败';
 errorMessage[types.UPDATE_PASSWORD_HTTP + types.FAIL] = '重设密码失败';
+errorMessage[types.UPDATE_USER_INFO_HTTP + types.FAIL] = '更新失败';
 
 const getErrorMessage = (action) => {
   if (errorMessage[action.type]) {

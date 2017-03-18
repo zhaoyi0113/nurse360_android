@@ -4,7 +4,6 @@ import _ from "lodash";
 import ManualNavBar from "./manual_nav_bar";
 import {FontSize} from "../constants";
 
-
 export default class HospitalSelection extends React.Component {
 
   constructor(props) {

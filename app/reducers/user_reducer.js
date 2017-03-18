@@ -11,7 +11,7 @@ export const UserReducer = (state = {}, action) => {
       return {...state, userCourses: action.payload.data}
     case types.USER_ORDERS + types.SUCCESS:
       return {...state, userOrders: orderUtils.parseUserOrders(action.payload.data)}
-    case types.UPDATE_USER_INFO_HTTP+types.SUCCESS:
+    case types.UPDATE_USER_INFO_HTTP + types.SUCCESS:
       return {...state, userInfo: parseUserInfo(action.payload.data)};
     default:
       return state;
@@ -20,15 +20,19 @@ export const UserReducer = (state = {}, action) => {
 
 const parseUserInfo = (data) => {
   let userInfo = {...data};
-  if (data.properties && data.properties.qualification) {
-    userInfo.departmentName = data.properties.qualification.parentDepartmentName + '-' + data.properties.qualification.departmentName;
-    userInfo.hospitalName = data.properties.qualification.hospitalName;
+  if (data.properties) {
     userInfo.wallet = data.properties.wallet_remain;
-    userInfo.hospitalId = data.properties.qualification.hospitalId;
-    userInfo.departmentId = data.properties.qualification.departmentId;
-  }
-  if (!userInfo.profilePhotoUrl) {
-    userInfo.profilePhotoUrl = require('../images/user/default_header.png');
+    userInfo.hospital = userInfo.properties.hospital_department.hospital;
+    userInfo.department = userInfo.properties.hospital_department.department;
+    userInfo.hospitalId = userInfo.hospital.id;
+    userInfo.departmentId = userInfo.department.id;
+    if (data.properties.qualification) {
+      userInfo.departmentName = data.properties.qualification.parentDepartmentName + '-' + data.properties.qualification.departmentName;
+      userInfo.hospitalName = data.properties.qualification.hospitalName;
+    } else if (userInfo.hospital && userInfo.department) {
+      userInfo.departmentName = userInfo.department.name;
+      userInfo.hospitalName = userInfo.hospital.name;
+    }
   }
   userInfo.genderText = '保密';
   if (userInfo.gender === 'FEMALE') {

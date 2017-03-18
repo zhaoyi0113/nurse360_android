@@ -34,3 +34,7 @@ export const changePassword = (token, oldPwd, newPwd) => {
 export const updateUserInfo = (token, userInfo)=>{
   return commonActions.requestPut(types.UPDATE_USER_INFO_HTTP, '/nurse', userInfo, token);
 }
+
+export const updateUserHeadPhoto = (token, image)=>{
+
+}

@@ -11,7 +11,7 @@ import {
   TouchableHighlight
 } from 'react-native';
 import Line from '../../../components/line';
-import {colors} from '../../../constants';
+import {colors, defaultUserPhoto} from '../../../constants';
 import ImagePicker from 'react-native-image-picker';
 
 export default class UserProfileUpdate extends React.Component {
@@ -32,7 +32,8 @@ export default class UserProfileUpdate extends React.Component {
     const gender = this.state.gender === 'MALE' ? '1' : (this.state.gender === 'FEMALE' ? '0' : '2');
     this.props.updateUserInfo({
       real_name: this.state.realName, birthday: this.state.age, gender: gender,
-      hospital_id: this.state.hospitalId, department_id: this.state.departmentId
+      hospital_id: this.state.hospital.id, department_id: this.state.department.id,
+      profilePhotoUrl: this.state.profilePhotoUrl
     });
   }
 
@@ -59,15 +60,29 @@ export default class UserProfileUpdate extends React.Component {
         let source = {uri: response.uri};
         // You can also display the image using data:
         // let source = { uri: 'data:image/jpeg;base64,' + response.data };
-        let images = this.state.images;
-        images.push({source: source});
-        this.setState({images: images});
+        this.setState({profilePhotoUrl: source.uri});
       }
     });
   }
 
+  _selectHospital() {
+    this.props.navigation.navigate('HospitalSelection', {
+      selectHospital: (hospital) => {
+        this.setState({hospitalName: hospital.name, hospital: hospital});
+      }
+    });
+  }
+
+  _selectDepartment() {
+    this.props.navigation.navigate('DepartmentSelection', {
+      selectDepartment: (department) => {
+        this.setState({departmentName: department.name, department: department});
+      },
+      hospital: this.state.hospital,
+    });
+  }
+
   render() {
-    let {userInfo} = this.props;
     return (<View style={styles.container} behavior='height'>
       <View style={{height: Dimensions.get('window').height*0.7}}>
         <Text style={{alignSelf: 'flex-start', margin:5 }}>修改个人资料</Text>
@@ -76,7 +91,7 @@ export default class UserProfileUpdate extends React.Component {
           <View style={{flex:1}}/>
           <TouchableHighlight underlayColor='transparent' onPress={this._imageSelection.bind(this)}>
             <Image style={{height:40, width: 40, borderRadius: 20, marginRight: 10}}
-                   source={{uri: userInfo.profilePhotoUrl}}/>
+                   source={this.state.profilePhotoUrl?{uri: this.state.profilePhotoUrl}: defaultUserPhoto}/>
           </TouchableHighlight>
         </View>
         <Line/>
@@ -104,7 +119,7 @@ export default class UserProfileUpdate extends React.Component {
                 onPress={()=>this.setState({gender: 'FEMALE'})}>女</Text>
         </View>
         <Line/>
-        <TouchableHighlight style={{flex:1}} onPress={()=>this.props.navigation.navigate('HospitalSelection')}>
+        <TouchableHighlight style={{flex:1}} onPress={this._selectHospital.bind(this)}>
           <View style={styles.row}>
             <Text style={styles.label}>医院</Text>
             <View style={{flex:1}}/>
@@ -113,7 +128,7 @@ export default class UserProfileUpdate extends React.Component {
           </View>
         </TouchableHighlight>
         <Line/>
-        <TouchableHighlight style={{flex:1}} onPress={()=>this.props.navigation.navigate('DepartmentSelection')}>
+        <TouchableHighlight style={{flex:1}} onPress={this._selectDepartment.bind(this)}>
           <View style={styles.row}>
             <Text>科室</Text>
             <View style={{flex:1}}/>

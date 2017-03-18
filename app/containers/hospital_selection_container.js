@@ -9,6 +9,7 @@ class HospitalSelectionContainer extends React.Component {
       visible: false
     },
   }
+
   constructor(props) {
     super(props);
     this.state = {index: 0, number: 50};
@@ -18,12 +19,19 @@ class HospitalSelectionContainer extends React.Component {
     this.props.queryHospitalList('', this.state.index, this.state.number);
   }
 
+  _selectHospital(hospital) {
+    if (this.props.screenProps && this.props.screenProps.selectHospital) {
+      this.props.screenProps.selectHospital(hospital);
+    }
+    if (this.props.navigation.state.params && this.props.navigation.state.params.selectHospital) {
+      this.props.navigation.state.params.selectHospital(hospital);
+    }
+    this.props.navigation.goBack();
+  }
+
   render() {
     return <HospitalSelection goBack={()=>this.props.navigation.goBack()}
-                              selectHospital={(hospital)=>{
-                                this.props.screenProps.selectHospital(hospital);
-                                this.props.navigation.goBack();
-                              }}
+                              selectHospital={this._selectHospital.bind(this)}
                               hospitalList={this.props.hospitalList}
                               queryHospital={(name)=>{
                                 this.props.queryHospitalList(name, this.state.index+1, this.state.number);
