@@ -8,6 +8,7 @@ import {
   Button,
   KeyboardAvoidingView,
   Dimensions,
+  CameraRoll,
   TouchableHighlight
 } from 'react-native';
 import Line from '../../../components/line';
@@ -24,6 +25,9 @@ export default class UserProfileUpdate extends React.Component {
   componentDidMount() {
     let {userInfo} = this.props;
     if (userInfo) {
+      if(userInfo.profilePhotoUrl){
+        userInfo.profilePhotoUrl = {uri: userInfo.profilePhotoUrl};
+      }
       this.setState({...userInfo});
     }
   }
@@ -32,7 +36,8 @@ export default class UserProfileUpdate extends React.Component {
     const gender = this.state.gender === 'MALE' ? '1' : (this.state.gender === 'FEMALE' ? '0' : '2');
     this.props.updateUserInfo({
       real_name: this.state.realName, birthday: this.state.age, gender: gender,
-      hospital_id: this.state.hospital.id, department_id: this.state.department.id,
+      hospital_id: this.state.hospital?this.state.hospital.id:null,
+      department_id: this.state.department?this.state.department.id:null,
       profilePhotoUrl: this.state.profilePhotoUrl
     });
   }
@@ -57,10 +62,14 @@ export default class UserProfileUpdate extends React.Component {
         console.log('User tapped custom button: ', response.customButton);
       }
       else {
-        let source = {uri: response.uri};
+        CameraRoll.saveToCameraRoll('file://'+response.path).then((res)=>{
+          console.log('save to ', res)
+          response.uri = res;
+          this.setState({profilePhotoUrl: response})
+        });
         // You can also display the image using data:
         // let source = { uri: 'data:image/jpeg;base64,' + response.data };
-        this.setState({profilePhotoUrl: source.uri});
+        ;
       }
     });
   }
@@ -91,7 +100,7 @@ export default class UserProfileUpdate extends React.Component {
           <View style={{flex:1}}/>
           <TouchableHighlight underlayColor='transparent' onPress={this._imageSelection.bind(this)}>
             <Image style={{height:40, width: 40, borderRadius: 20, marginRight: 10}}
-                   source={this.state.profilePhotoUrl?{uri: this.state.profilePhotoUrl}: defaultUserPhoto}/>
+                   source={this.state.profilePhotoUrl?{uri: this.state.profilePhotoUrl.uri}: defaultUserPhoto}/>
           </TouchableHighlight>
         </View>
         <Line/>

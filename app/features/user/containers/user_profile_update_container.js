@@ -45,9 +45,9 @@ class UserProfileUpdateContainer extends React.Component {
 
   _uploadimage(userInfo) {
     console.log('upload iamge ', userInfo.profilePhotoUrl);
-    commonActions.requestWaitingIndicator(true);
+    this.props.requestWaiting(true);
     return new Promise((resolve, reject) => {
-      RNGRP.getRealPathFromURI(userInfo.profilePhotoUrl).then(filePath => {
+      RNGRP.getRealPathFromURI(userInfo.profilePhotoUrl.uri).then(filePath => {
           const fileName = filePath.split('/').pop(-1);
           const obj = {
             uploadUrl: Config.API_URL + '/nurse/head_image',
@@ -56,8 +56,7 @@ class UserProfileUpdateContainer extends React.Component {
               'Accept': 'application/json',
               'ACCESS_TOKEN': this.props.token,
             },
-            fields: {
-            },
+            fields: {},
             files: [
               {
                 filename: fileName, // require, file name
@@ -69,7 +68,7 @@ class UserProfileUpdateContainer extends React.Component {
           console.log('upload ', filePath);
           FileUpload.upload(obj, function (err, result) {
             console.log('upload result ', result);
-            commonActions.requestWaitingIndicator(false);
+            this.props.requestWaiting(false);
             if (err) {
               console.error('get error:', err);
               reject(err);
@@ -100,6 +99,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     updateUserInfo: (token, userInfo) => {
       return dispatch(actions.updateUserInfo(token, userInfo));
+    },
+    requestWatiing: (value) => {
+      return dispatch(commonActions.requestWaitingIndicator(value));
     }
   }
 }

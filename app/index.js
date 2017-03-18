@@ -66,7 +66,7 @@ class AppWithNavigation extends Component {
     return true;
   }
 
-  componentDidMount(){
+  componentDidMount() {
     SplashScreen.hide();
   }
 
