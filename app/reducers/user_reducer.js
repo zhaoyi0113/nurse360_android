@@ -33,6 +33,7 @@ const parseUserInfo = (data) => {
       userInfo.departmentName = userInfo.department.name;
       userInfo.hospitalName = userInfo.hospital.name;
     }
+    userInfo.qualification = parseQualification(userInfo.properties.qualification);
   }
   userInfo.genderText = '保密';
   if (userInfo.gender === 'FEMALE') {
@@ -44,3 +45,14 @@ const parseUserInfo = (data) => {
   return userInfo;
 }
 
+const parseQualification = (q) => {
+  const qualification = {...q};
+  if (qualification.status === 'WAITING') {
+    qualification.status = '等待认证';
+  } else if (qualification.status === 'COMPLETED') {
+    qualification.status = '已认证';
+  } else {
+    qualification.status = '未上传';
+  }
+  return qualification;
+}

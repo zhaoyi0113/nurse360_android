@@ -19,13 +19,13 @@ export default class UserProfileUpdate extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {qualification: {}};
   }
 
   componentDidMount() {
     let {userInfo} = this.props;
     if (userInfo) {
-      if(userInfo.profilePhotoUrl){
+      if (userInfo.profilePhotoUrl) {
         userInfo.profilePhotoUrl = {uri: userInfo.profilePhotoUrl};
       }
       this.setState({...userInfo});
@@ -36,8 +36,8 @@ export default class UserProfileUpdate extends React.Component {
     const gender = this.state.gender === 'MALE' ? '1' : (this.state.gender === 'FEMALE' ? '0' : '2');
     this.props.updateUserInfo({
       real_name: this.state.realName, birthday: this.state.age, gender: gender,
-      hospital_id: this.state.hospital?this.state.hospital.id:null,
-      department_id: this.state.department?this.state.department.id:null,
+      hospital_id: this.state.hospital ? this.state.hospital.id : null,
+      department_id: this.state.department ? this.state.department.id : null,
       profilePhotoUrl: this.state.profilePhotoUrl
     });
   }
@@ -66,7 +66,7 @@ export default class UserProfileUpdate extends React.Component {
         console.log('User tapped custom button: ', response.customButton);
       }
       else {
-        CameraRoll.saveToCameraRoll('file://'+response.path).then((res)=>{
+        CameraRoll.saveToCameraRoll('file://' + response.path).then((res) => {
           console.log('save to ', res)
           response.uri = res;
           this.setState({profilePhotoUrl: response})
@@ -153,6 +153,15 @@ export default class UserProfileUpdate extends React.Component {
         <Line/>
         <View style={styles.row}>
           <Text>资质认证</Text>
+          <View style={{flex:1}}/>
+          <TouchableHighlight underlayColor='transparent'
+                              onPress={()=>this.props.navigation.navigate('Qualification')}>
+            <View style={{flexDirection: 'row'}}>
+              <Text style={{color: colors.labelColor}}>{this.state.qualification.status}</Text>
+              <Image style={styles.nextImage} source={require('../../../images/next_gray.png')}/>
+            </View>
+          </TouchableHighlight>
+
         </View>
       </View>
       <View style={styles.row}/>
