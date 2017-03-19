@@ -70,7 +70,7 @@ class QualificationContainer extends React.Component {
             },
             fields: {
               type: image.type,
-              file_name: fileName,
+              file_name: 'file',
               name: 'file',
             },
             files: [

@@ -43,8 +43,12 @@ class HomeContainer extends Component {
   render() {
     return (<Home rootNavigation={this.props.screenProps.rootNavigation}
                   _refresh={this._refresh.bind(this)}
-                  readNotification={(id)=>this.props.readNotification(this.props.token, id)}
-                  readStudyCourse={(id)=>this.props.readStudyCourse(this.props.token, id)}
+                  readNotification={(id)=>{
+                    return this.props.readNotification(this.props.token, id)
+                  }}
+                  readStudyCourse={(id)=> {
+                    return this.props.readStudyCourse(this.props.token, id)
+                  }}
                   queryNotification={()=>this.props.queryNotification(this.props.token)}
                   queryStudyCourses={()=>this.props.queryStudyCourses(this.props.token)}
                   queryOrders={()=>this.props.queryOrders(this.props.token)}
