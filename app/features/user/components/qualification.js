@@ -53,12 +53,12 @@ export default class Qualification extends React.Component {
           switch (image.id) {
             case 1:
               const work = this.state.work;
-              work.image = {uri: res, updated: true};
+              work = {image: {uri: res}, updated: true};
               this.setState({work: work});
               break;
             case 2:
               const qual = this.state.qual;
-              qual.image = {uri: res, updated: true};
+              qual = {image: {uri: res}, updated: true};
               this.setState({qual});
               break;
             case 3:
