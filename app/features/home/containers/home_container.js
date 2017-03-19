@@ -43,6 +43,8 @@ class HomeContainer extends Component {
   render() {
     return (<Home rootNavigation={this.props.screenProps.rootNavigation}
                   _refresh={this._refresh.bind(this)}
+                  readNotification={(id)=>this.props.readNotification(this.props.token, id)}
+                  readStudyCourse={(id)=>this.props.readStudyCourse(this.props.token, id)}
                   queryNotification={()=>this.props.queryNotification(this.props.token)}
                   queryStudyCourses={()=>this.props.queryStudyCourses(this.props.token)}
                   queryOrders={()=>this.props.queryOrders(this.props.token)}
@@ -75,6 +77,12 @@ const mapDispatchToProps = (dispatch) => {
     },
     fetchOrder: (token, order) => {
       return dispatch(orderActions.fetchOrder(token, order.id));
+    },
+    readNotification: (token, id) => {
+      return dispatch(notificationActions.readNotification(token, id));
+    },
+    readStudyCourse: (token, id) => {
+      return dispatch(studyActions.readStudyCourse(token, id));
     }
   }
 }

@@ -8,6 +8,14 @@ export const StudyReducer = (state = {}, action) => {
       return {...state, course: {content: action.payload.data}};
     case types.QUERY_STUDY_COURSE_LIST_HTTP + types.SUCCESS:
       return {...state, courseList: action.payload.data};
+    case types.READ_STUDY_COURSE+types.SUCCESS:
+      const {courses} = state;
+      courses && courses.map((course)=>{
+        if(course === action.payload.data.courseId){
+          course.hasRead = 'YES';
+        }
+      });
+      return {...state, courses};
     default:
       return state;
   }

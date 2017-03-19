@@ -8,6 +8,14 @@ export const NotificationReducer = (state = {}, action) => {
       return {...state, notification: action.payload.data};
     case types.QUERY_NOTIFICATION_LIST_HTTP + types.SUCCESS:
       return {...state, notificationList: parseNotifications(action.payload.data)};
+    case types.READ_NOTIFICATION + types.SUCCESS:
+      const {notifications} = state;
+      notifications && notifications.map((noti) => {
+        if (noti.id === action.payload.data.notificationId) {
+          noti.hasRead = 'YES';
+        }
+      });
+      return {...state, notifications};
     default:
       return state;
   }

@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 
 import AddVisit from '../components/add_visit';
 import * as actions from '../../../actions/visit_actions';
-import {header} from '../../../components/navigation_header';
 
 class AddVisitContainer extends React.Component {
 

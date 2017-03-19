@@ -54,7 +54,10 @@ export default class Home extends Component {
       return this.props.notifications.map((noti, i) => {
         return <CommonRowCell key={i} title={noti.title} description={noti.introduction} image={noti.image}
                               hasRead={noti.hasRead}
-                              onClick={()=>navigate('Article',{ routeId: NOTIFICATION_DETAIL, id: noti.id, title:noti.title})}/>
+                              onClick={()=>{
+                                this.props.readNotification(noti.id);
+                                navigate('Article',{ routeId: NOTIFICATION_DETAIL, id: noti.id, title:noti.title})
+                              }}/>
       });
     } else {
       return <Text style={{textAlign: 'center'}}>暂无通知</Text>;
@@ -68,13 +71,16 @@ export default class Home extends Component {
         return <CommonRowCell key={i} title={course.name} description={course.introduction}
                               headTitle={course.name.split('')[0]}
                               hasRead={course.hasRead}
-                              onClick={()=> navigate('Article',
+                              onClick={()=> {
+                                navigate('Article',
                                 {
                                   routeId: COURSE_DETAIL,
                                   id: course.id,
                                   title: course.name,
                                 }
-                              )}/>
+                              );
+                                this.props.readStudyCourse(course.id);
+                              }}/>
       });
     } else {
       return <Text style={{textAlign: 'center'}}>暂无学习</Text>;
