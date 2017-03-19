@@ -1,7 +1,8 @@
 import React from 'react';
-import {View, StyleSheet, CameraRoll, Text, Image, TouchableHighlight,Dimensions} from 'react-native';
+import {View, StyleSheet, CameraRoll, Text, Image, TouchableHighlight, Dimensions} from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import _ from 'lodash';
+
 
 export default class ImageSelector extends React.Component {
 
@@ -17,6 +18,7 @@ export default class ImageSelector extends React.Component {
       takePhotoButtonTitle: '拍照',
       chooseFromLibraryButtonTitle: '从相册选择',
     };
+    const that = this;
     ImagePicker.showImagePicker(options, (response) => {
       console.log('Response = ', response);
 
@@ -31,18 +33,22 @@ export default class ImageSelector extends React.Component {
       }
       else {
         let source = {uri: response.uri};
+        let images = this.state.images;
+        CameraRoll.saveToCameraRoll('file://' + response.path).then((res) => {
+          console.log('save to ', res)
+          source.uri = res;
+          images.push({source: source});
+          that.setState({images: images});
+        });
         // You can also display the image using data:
         // let source = { uri: 'data:image/jpeg;base64,' + response.data };
-        let images = this.state.images;
-        images.push({source: source});
-        this.setState({images: images});
       }
     });
   }
 
   render() {
     const images = this.state.images.slice(0);
-    if(images.length<9) {
+    if (images.length < 9) {
       images.push({id: -1, source: require('../images/user/mustaddpic.png')});
     }
     let left = 0;
@@ -89,7 +95,7 @@ const styles = StyleSheet.create({
   image: {
     margin: 5,
     resizeMode: 'contain',
-    height: Dimensions.get('window').width/3.5,
-    width: Dimensions.get('window').width/3.5,
+    height: Dimensions.get('window').width / 3.5,
+    width: Dimensions.get('window').width / 3.5,
   }
 })

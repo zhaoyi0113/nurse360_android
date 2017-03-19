@@ -22,30 +22,38 @@ class UserProfileUpdateContainer extends React.Component {
 
   _updateUserInfo(userInfo) {
 
+    if (userInfo.profilePhotoUrl !== this.props.userInfo.profilePhotoUrl) {
+      this._uploadimage(userInfo)
+        .then(v => this._updateUserBasicInfo(userInfo))
+        .catch(err => {
+          console.log('error:', err);
+          Alert.alert(
+            '',
+            '上传图片失败',
+            [
+              {
+                text: '确定', onPress: () => {
+              }
+              },
+            ]
+          );
+        });
+    } else {
+      this._updateUserBasicInfo(userInfo);
+    }
+
+  }
+
+  _updateUserBasicInfo(userInfo) {
     this.props.updateUserInfo(this.props.token, userInfo)
-      .then(v => {
-        if (userInfo.profilePhotoUrl !== this.props.userInfo.profilePhotoUrl) {
-          return this._uploadimage(userInfo);
-        }
-      })
-      .then(v => this.props.navigation.goBack())
-      .catch(err => {
-        Alert.alert(
-          '',
-          '上传图片失败',
-          [
-            {
-              text: '确定', onPress: () => {
-            }
-            },
-          ]
-        );
-      });
+      .then(v => this.props.navigation.goBack());
+
   }
 
   _uploadimage(userInfo) {
     console.log('upload iamge ', userInfo.profilePhotoUrl);
     this.props.requestWaiting(true);
+    const that = this;
     return new Promise((resolve, reject) => {
       RNGRP.getRealPathFromURI(userInfo.profilePhotoUrl.uri).then(filePath => {
           const fileName = filePath.split('/').pop(-1);
@@ -68,7 +76,7 @@ class UserProfileUpdateContainer extends React.Component {
           console.log('upload ', filePath);
           FileUpload.upload(obj, function (err, result) {
             console.log('upload result ', result);
-            this.props.requestWaiting(false);
+            that.props.requestWaiting(false);
             if (err) {
               console.error('get error:', err);
               reject(err);
@@ -100,7 +108,7 @@ const mapDispatchToProps = (dispatch) => {
     updateUserInfo: (token, userInfo) => {
       return dispatch(actions.updateUserInfo(token, userInfo));
     },
-    requestWatiing: (value) => {
+    requestWaiting: (value) => {
       return dispatch(commonActions.requestWaitingIndicator(value));
     }
   }

@@ -48,6 +48,10 @@ export default class UserProfileUpdate extends React.Component {
       cancelButtonTitle: '取消',
       takePhotoButtonTitle: '拍照',
       chooseFromLibraryButtonTitle: '从相册选择',
+      storageOptions: {
+        skipBackup: true,
+        path: 'images'
+      }
     };
     ImagePicker.showImagePicker(options, (response) => {
       console.log('Response = ', response);
@@ -67,6 +71,7 @@ export default class UserProfileUpdate extends React.Component {
           response.uri = res;
           this.setState({profilePhotoUrl: response})
         });
+        // this.setState({profilePhotoUrl: response})
         // You can also display the image using data:
         // let source = { uri: 'data:image/jpeg;base64,' + response.data };
         ;
