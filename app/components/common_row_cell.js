@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {View, StyleSheet, Text, Image, TouchableHighlight} from 'react-native';
+import {View, StyleSheet, Text, Image, TouchableHighlight, TouchableWithoutFeedback} from 'react-native';
 import {FontSize} from '../constants';
 
 export default class CommonRowCell extends React.Component {
@@ -23,13 +23,13 @@ export default class CommonRowCell extends React.Component {
     }
     return (<View style={style}>
       {this._getHeaderView()}
-      <TouchableHighlight style={{flex:5, flexDirection: 'row'}} underlayColor="transparent"
+      <TouchableWithoutFeedback style={{flex:5, flexDirection: 'row'}} underlayColor="transparent"
                           onPress={this.props.onClick.bind(this)}>
         <View style={styles.text_view}>
           <Text style={styles.title}>{title}</Text>
           <Text style={styles.description} numberOfLines={1}>{description}</Text>
         </View>
-      </TouchableHighlight>
+      </TouchableWithoutFeedback>
       <Image style={styles.next} source={require('../images/next_gray.png')}/>
     </View>);
   }

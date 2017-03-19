@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {View, Text,Image} from 'react-native';
+import {View, Text,Image,TouchableOpacity,TouchableWithoutFeedback} from 'react-native';
 
 class PatientContainer extends Component {
 
@@ -18,9 +18,10 @@ class PatientContainer extends Component {
   };
 
   render() {
-    return (<View>
-      <Text>敬请期待</Text>
-    </View>)
+    const {navigate} = this.props.screenProps.rootNavigation;
+    return (<TouchableWithoutFeedback onPress={()=>navigate('Patient')}>
+      <View style={{marginTop: 100}}><Text>敬请期待</Text></View>
+    </TouchableWithoutFeedback>)
   }
 
 }
