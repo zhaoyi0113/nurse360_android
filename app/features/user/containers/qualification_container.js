@@ -98,13 +98,15 @@ class QualificationContainer extends React.Component {
   }
 
   render() {
-    return (<Qualification upload={this._upload.bind(this)}/>);
+    console.log('xxxxx')
+    return (<Qualification upload={this._upload.bind(this)} userInfo={this.props.userInfo}/>);
   }
 }
 
 const mapStateToProps = (state) => {
   return {
     token: state.login.token,
+    userInfo: state.user.userInfo,
   }
 }
 

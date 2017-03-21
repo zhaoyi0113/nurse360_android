@@ -70,7 +70,7 @@ export default class Qualification extends React.Component {
               });
               img.image.uri = res;
               img.showIcon = true;
-              that.setState({otherImages: that.state.otherImages});
+              that.setState({otherImages: that.state.otherImages, showDelete:true});
               break;
           }
         });
@@ -100,10 +100,9 @@ export default class Qualification extends React.Component {
         });
         break;
       default:
-        const images = _.remove(this.state.otherImages, (i) => {
+        _.remove(this.state.otherImages, (i) => {
           return i.id === image.id
         });
-        console.log('remove image ', this.state.otherImages.length);
         this.setState({otherImages: this.state.otherImages});
         break;
 
@@ -122,6 +121,26 @@ export default class Qualification extends React.Component {
       images.push({image: image.image, type: 'OTHER'});
     });
     this.props.upload(images);
+  }
+
+  componentDidMount() {
+    let {userInfo} = this.props;
+    console.log('get user info ', userInfo);
+    if (userInfo && userInfo.qualification && userInfo.qualification.workfiles) {
+      const otherImages = [];
+      userInfo.qualification.workfiles.map(file => {
+        if (file.workfileType.type === 'OTHER') {
+          otherImages.push({image: {uri: file.workfileUrl}, id: 4 + otherImages.length, showDelete: false});
+        } else if (file.workfileType.type === 'EMPLOYEES_CARD') {
+          this.setState({qual: {...this.state.qual, image: {uri: file.workfileUrl}}});
+        } else if (file.workfileType.type === 'QUALIFICATION') {
+          this.setState({work: {...this.state.work, image: {uri: file.workfileUrl}}});
+        }
+      });
+      if (otherImages.length > 0) {
+        this.setState({otherImages});
+      }
+    }
   }
 
   render() {
@@ -155,7 +174,6 @@ export default class Qualification extends React.Component {
                                      showIcon={image.showDelete}
                                      source={image.image}
                                      icon={require('../../../images/deletePics.png')}/>
-                      {/*<Image style={styles.image_item} source={image.image}/>*/}
                       {image.label ?
                         <Text style={{textAlign: 'center', color: 'lightgray'}}>{image.label}</Text> : null}
                     </View>
