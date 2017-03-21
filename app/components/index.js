@@ -34,9 +34,9 @@ const Tabs = TabNavigator({
   Home: {
     screen: HomeContainer,
   },
-  Patient: {
-    screen: PatientContainer,
-  },
+  // Patient: {
+  //   screen: PatientContainer,
+  // },
   User: {
     screen: UserContainer,
   }

@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import _ from 'lodash';
+import ImageWithIcon, {Position} from '../../../components/image_with_icon';
 
 import {colors, FontSize} from '../../../constants';
 
@@ -52,17 +53,15 @@ export default class Qualification extends React.Component {
           console.log('save to ', res);
           switch (image.id) {
             case 1:
-              const work = this.state.work;
-              work = {image: {uri: res}, updated: true};
+              const work = {...this.state.work, image: {uri: res}, updated: true, showDelete: true};
               this.setState({work: work});
               break;
             case 2:
-              const qual = this.state.qual;
-              qual = {image: {uri: res}, updated: true};
+              const qual = {...this.state.qual, image: {uri: res}, updated: true, showDelete: true};
               this.setState({qual});
               break;
             case 3:
-              images.push({image: {uri: res}, id: 4 + this.state.otherImages.length});
+              images.push({image: {uri: res}, id: 4 + this.state.otherImages.length, showDelete: true});
               that.setState({otherImages: images});
               break;
             default:
@@ -70,11 +69,45 @@ export default class Qualification extends React.Component {
                 return i.id === image.id
               });
               img.image.uri = res;
+              img.showIcon = true;
               that.setState({otherImages: that.state.otherImages});
+              break;
           }
         });
       }
     });
+  }
+
+  _removeImage(image) {
+    console.log('remove image ', image)
+    switch (image.id) {
+      case 1:
+        this.setState({
+          work: {
+            ...this.state.work,
+            showDelete: false,
+            image: require('../../../images/user/mustaddpic.png')
+          }
+        });
+        break;
+      case 2:
+        this.setState({
+          qual: {
+            ...this.state.qual,
+            image: require('../../../images/user/mustaddpic.png'),
+            showDelete: false
+          }
+        });
+        break;
+      default:
+        const images = _.remove(this.state.otherImages, (i) => {
+          return i.id === image.id
+        });
+        console.log('remove image ', this.state.otherImages.length);
+        this.setState({otherImages: this.state.otherImages});
+        break;
+
+    }
   }
 
   _submit() {
@@ -116,7 +149,13 @@ export default class Qualification extends React.Component {
                   return <TouchableHighlight key={j} style={styles.image_view} underlayColor='transparent'
                                              onPress={()=>this._clickImage(image)}>
                     <View>
-                      <Image style={styles.image_item} source={image.image}/>
+                      <ImageWithIcon imageStyle={styles.image_item}
+                                     iconPosition={Position.TOP_RIGHT}
+                                     clickIcon={this._removeImage.bind(this, image)}
+                                     showIcon={image.showDelete}
+                                     source={image.image}
+                                     icon={require('../../../images/deletePics.png')}/>
+                      {/*<Image style={styles.image_item} source={image.image}/>*/}
                       {image.label ?
                         <Text style={{textAlign: 'center', color: 'lightgray'}}>{image.label}</Text> : null}
                     </View>
