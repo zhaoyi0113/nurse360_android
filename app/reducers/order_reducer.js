@@ -27,7 +27,7 @@ export const ORDER_STATUS_NAME = {
 export const ORDER_ACTION_NAME = {
   TO_SERVICE: '抢单',
   IN_PROCESS: '您已抢单',
-  COMPLETED: '您已抢单',
+  COMPLETED: '服务完成',
   CANCEL: '您已取消',
   REFUND_IN_PROCESS: '退款中',
 }
