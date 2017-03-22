@@ -1,7 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
 import PatientSignature from "../components/patient_signature";
-import Orientation from 'react-native-orientation';
 
 class PatientSignatureContainer extends React.Component {
 
