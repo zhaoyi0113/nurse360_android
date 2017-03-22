@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import * as types from '../actions/action_types';
 import moment from 'moment';
 

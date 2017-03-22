@@ -66,8 +66,14 @@ class AppWithNavigation extends Component {
     return true;
   }
 
+  componentWillReceiveProps(nextProps){
+    if(nextProps.storageLoaded){
+      SplashScreen.hide();
+    }
+  }
+
   componentDidMount() {
-    SplashScreen.hide();
+
   }
 
   render() {

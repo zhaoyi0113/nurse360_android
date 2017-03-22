@@ -25,6 +25,7 @@ class HomeContainer extends Component {
 
   componentDidMount() {
     this._refresh();
+    console.log('orientation:', Orientation.getInitialOrientation() )
   }
 
   _refresh() {
