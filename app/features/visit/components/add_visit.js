@@ -16,7 +16,8 @@ import CheckBox from "react-native-checkbox";
 import RNGRP from "react-native-get-real-path";
 import {FontSize} from "../../../constants";
 import Config from "react-native-config";
-var FileUpload = require('NativeModules').FileUpload;
+
+const FileUpload = require('NativeModules').FileUpload;
 
 export default class AddVisit extends React.Component {
 

@@ -1,8 +1,10 @@
 import React from 'react';
 import {View, StyleSheet, CameraRoll, Text, Image, TouchableHighlight, Dimensions} from 'react-native';
 import ImagePicker from 'react-native-image-picker';
+
 import _ from 'lodash';
 
+import ImageWithIcon from './image_with_icon';
 
 export default class ImageSelector extends React.Component {
 
@@ -37,13 +39,27 @@ export default class ImageSelector extends React.Component {
         CameraRoll.saveToCameraRoll('file://' + response.path).then((res) => {
           console.log('save to ', res)
           source.uri = res;
-          images.push({source: source});
+          images.push({source: source, canDelete: true});
           that.setState({images: images});
         });
         // You can also display the image using data:
         // let source = { uri: 'data:image/jpeg;base64,' + response.data };
       }
     });
+  }
+
+  _removeImage(image) {
+    console.log('remove image ', image);
+    let index = -1;
+    this.state.images.map((img, i) => {
+      if (image.source.uri === img.source.uri) {
+        index = i;
+      }
+    });
+    if (index != -1) {
+      this.state.images.splice(index, 1);
+      this.setState({images: this.state.images});
+    }
   }
 
   render() {
@@ -70,12 +86,16 @@ export default class ImageSelector extends React.Component {
                 if (image.id === -1) {
                   return <TouchableHighlight key={i} underlayColor='lightgray' style={{flex:0.3, margin:5}}
                                              onPress={()=> this._showImagePicker()}>
-                    <Image style={styles.image} source={image.source}/>
+                    <View>
+                      <Image style={styles.image} source={image.source}/>
+                    </View>
                   </TouchableHighlight>
                 } else if (image.id === -2) {
                   return <View key={i} style={{flex:0.3, margin:5}}/>
                 }
-                return <Image key={i} source={image.source} style={styles.image}/>
+                return <ImageWithIcon key={i} source={image.source} showIcon={image.canDelete}
+                                      clickIcon={()=>this._removeImage(image)}
+                                      imageStyle={styles.image} icon={require('../images/deletePics.png')}/>
               })
             }
           </View>
