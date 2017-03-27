@@ -11,6 +11,7 @@ import {
   TouchableHighlight
 } from 'react-native';
 import CommonTableHeader from '../../../components/common_table_header';
+import CommonRowCell from '../../../components/common_row_cell';
 
 export default class Patient extends React.Component {
 
@@ -23,14 +24,30 @@ export default class Patient extends React.Component {
     this.setState({isRefreshing: true});
   }
 
-  _getInternPatient() {
-    return <View style={{flex:1,justifyContent: 'center',  alignItems: 'center', backgroundColor: 'white', flexDirection: 'row', height: 40}}>
-      <Text style={{textAlign: 'center', flex: 1}}>暂无院内患者</Text></View>;
-  }
-
-  _getOuterPatient() {
-    return  <View style={{flex:1,justifyContent: 'center',  alignItems: 'center', backgroundColor: 'white', flexDirection: 'row', height: 40}}>
-      <Text style={{textAlign: 'center', flex: 1}}>暂无院外患者</Text></View>;
+  _getPatientCell(patients, text) {
+    if (patients.length > 0) {
+      return patients.map((patient, i) => {
+        const name = patient.patient.name + '  (  ' + patient.patient.genderText + ', ' + patient.patient.age + '岁 )';
+        const desc = patient.patient.mobile;
+        return <CommonRowCell key={i} title={name} description={desc}
+                              hasRead='YES'
+                              image={patient.patient.image}
+                              onClick={()=> {
+                                navigate('Article',
+                                {
+                                  routeId: COURSE_DETAIL,
+                                  id: patient.id,
+                                  title: patient.name,
+                                }
+                              );
+                                this.props.readStudyCourse(patient.id);
+                              }}/>
+      });
+    } else {
+      return <View
+        style={{flex:1,justifyContent: 'center',  alignItems: 'center', backgroundColor: 'white', flexDirection: 'row', height: 40}}>
+        <Text style={{textAlign: 'center', flex: 1}}>{text}</Text></View>;
+    }
   }
 
   render() {
@@ -47,21 +64,30 @@ export default class Patient extends React.Component {
         }>
         <Image style={{height:150,width:Dimensions.get('window').width,resizeMode:'cover'}}
                source={require('../../../images/home/headIm.png')}/>
-        <Function
-        />
-        <View style={{flexDirection: 'column'}}>
+        <Function/>
+        <View style={{flex:1}}>
           <CommonTableHeader title='院内患者' more='更多'
                              clickMore={()=>navigate('StudyList')}/>
-          {this._getInternPatient()}
+          {this._getPatientCell(this.props.internalPatients, '暂无院内患者')}
         </View>
-        <View>
+        <View style={{flex:1}}>
           <CommonTableHeader title='院外患者' more='更多'
                              clickMore={()=>navigate('StudyList')}/>
-          {this._getOuterPatient()}
+          {this._getPatientCell(this.props.externalPatients, '暂无院外患者')}
         </View>
       </ScrollView>
     );
   }
+}
+
+Patient.propTypes = {
+  internalPatients: React.PropTypes.array,
+  externalPatients: React.PropTypes.array,
+}
+
+Patient.defaultProps = {
+  internalPatients: [],
+  externalPatients: [],
 }
 
 

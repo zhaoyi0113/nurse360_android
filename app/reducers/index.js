@@ -10,6 +10,7 @@ import * as types from "../actions/action_types";
 import {WalletReducer} from './wallet_reducer';
 import {NavReducer} from './nav_reducer';
 import {VisitReducer} from './visit_reducer';
+import {PatientReducer} from './patient_reducer';
 
 const initialState = {};
 
@@ -34,6 +35,7 @@ const appReducers = combineReducers({
   wallet: WalletReducer,
   nav: NavReducer,
   visit: VisitReducer,
+  patient: PatientReducer,
 });
 
 export default rootReducer;

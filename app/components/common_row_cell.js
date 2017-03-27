@@ -70,9 +70,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   image: {
-    resizeMode: 'contain',
-    flex: 1,
+    // flex: 1,
     height: 30,
+    width: 30,
+    borderRadius: 15,
+    marginLeft: 10,
+    // resizeMode: 'contain',
   },
   head_title: {
     margin: 5,

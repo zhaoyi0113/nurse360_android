@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {View, Text,Image,TouchableOpacity,TouchableWithoutFeedback} from 'react-native';
+import {View, Text, Image, TouchableOpacity, TouchableWithoutFeedback} from 'react-native';
 
 import Patient from '../components/patient';
+import {renderDelayTime} from '../../../constants';
+import * as actions from '../../../actions/patient_actions';
 
 class PatientContainer extends Component {
 
@@ -19,23 +21,40 @@ class PatientContainer extends Component {
     },
   };
 
-  _refresh(){
+  componentDidMount() {
+    setTimeout(() => this._refresh(), renderDelayTime);
+  }
 
+  _refresh() {
+    this.props.queryInternalPatients(this.props.token, 0, 2);
+    this.props.queryExternalPatient(this.props.token, 0, 2);
   }
 
   render() {
     const {rootNavigation} = this.props.screenProps;
-    return (<Patient navigation={rootNavigation} refresh={this._refresh.bind(this)}/>)
+    return (<Patient navigation={rootNavigation} refresh={this._refresh.bind(this)}
+                     internalPatients={this.props.internalPatients} externalPatients={this.props.externalPatients}/>)
   }
 
 }
 
 const mapStateToProps = (state) => {
-  return {}
+  return {
+    token: state.login.token,
+    externalPatients: state.patient.externalPatients,
+    internalPatients: state.patient.internalPatients,
+  }
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {}
+  return {
+    queryInternalPatients: (token, index, number) => {
+      return dispatch(actions.queryInternalPatient(token, index, number));
+    },
+    queryExternalPatient: (token, index, number) => {
+      return dispatch(actions.queryExternalPatient(token, index, number));
+    }
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PatientContainer)
