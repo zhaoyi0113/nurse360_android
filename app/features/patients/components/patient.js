@@ -37,8 +37,7 @@ export default class Patient extends React.Component {
                               onClick={()=> {
                                 navigate('PatientDetail',
                                 {
-                                  id: patient.id,
-                                  title: patient.name,
+                                  patient: patient,
                                 }
                               );
                               }}/>
