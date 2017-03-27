@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import CommonTableHeader from '../../../components/common_table_header';
 import CommonRowCell from '../../../components/common_row_cell';
+import {colors} from '../../../constants';
 
 export default class Patient extends React.Component {
 
@@ -63,7 +64,7 @@ export default class Patient extends React.Component {
         }>
         <Image style={{height:150,width:Dimensions.get('window').width,resizeMode:'cover'}}
                source={require('../../../images/home/headIm.png')}/>
-        <Function/>
+        <Function goToVisitRecord={()=>navigate('PatientVisitList')}/>
         <View style={{flex:1}}>
           <CommonTableHeader title='院内患者' more='更多'
                              clickMore={()=>navigate('PatientList', {internal: true})}/>
@@ -120,6 +121,7 @@ class Function extends React.Component {
         this.props.goToUserCourse();
         break;
       case 2:
+        this.props.goToVisitRecord();
         break;
     }
   }
@@ -129,7 +131,7 @@ class Function extends React.Component {
       <View style={functionStyles.container}>
         {
           this.state.functions.map((f, i) => {
-            return <TouchableHighlight key={i} underlayColor='lightgray'
+            return <TouchableHighlight key={i} underlayColor={colors.underlayColor}
                                        onPress={this._clickFunction.bind(this,f)}
                                        style={functionStyles.view}>
               <View key={i}>

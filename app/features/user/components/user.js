@@ -160,7 +160,7 @@ class Function extends React.Component {
       <View style={functionStyles.container}>
         {
           this.state.functions.map((f, i) => {
-            return <TouchableHighlight key={i} underlayColor='lightgray'
+            return <TouchableHighlight key={i} underlayColor={colors.underlayColor}
                                        onPress={this._clickFunction.bind(this,f)}
                                        style={functionStyles.view}>
               <View key={i}>
