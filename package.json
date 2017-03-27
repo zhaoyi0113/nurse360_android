@@ -117,7 +117,7 @@
   },
   "scripts": {
     "test": "jest",
-    "build-staging": "cd android;gradle clean assembleStaging; cd ..",
+    "build-staging": "npm run staging-bundle && cd android;gradle clean assembleStaging; cd ..",
     "upload-fir": "npm run staging-bundle && npm run build-staging && npm run build-staging && fir publish -T d9476d8e7188861373e85d74b3fb8dc0 ./android/app/build/outputs/apk/app-staging-nurse360.apk",
     "staging": "ENVFILE=.staging.env react-native run-android --configuration=staging",
     "debug": "ENVFILE=.debug.env react-native run-android",

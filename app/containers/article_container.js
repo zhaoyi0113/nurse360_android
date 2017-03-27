@@ -7,7 +7,7 @@ import * as courseActions from '../actions/study_actions';
 
 import {NOTIFICATION_DETAIL, COURSE_DETAIL} from '../routers';
 
-
+import {renderDelayTime} from '../constants';
 import {header} from '../components/navigation_header';
 
 class ArticleContainer extends React.Component {
@@ -23,15 +23,26 @@ class ArticleContainer extends React.Component {
   }
 
   componentDidMount() {
-    const {routeId, id} = this.props.navigation.state.params;
-    switch (routeId) {
-      case NOTIFICATION_DETAIL:
-        this.props.requestNotificationDetail(this.props.token, id);
-        break;
-      case COURSE_DETAIL:
-        this.props.requestCourseDetail(this.props.token, id);
-        break;
-    }
+    setTimeout(()=>{
+      const {routeId, id} = this.props.navigation.state.params;
+      switch (routeId) {
+        case NOTIFICATION_DETAIL:
+          if(id !== this.props.notification.id) {
+            this.props.requestNotificationDetail(this.props.token, id);
+          }else{
+            this.setState({content: this.props.notification});
+
+          }
+          break;
+        case COURSE_DETAIL:
+          if(id !== this.props.course.id) {
+            this.props.requestCourseDetail(this.props.token, id);
+          }else {
+            this.setState({content: this.props.course});
+          }
+          break;
+      }
+    }, renderDelayTime);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -73,6 +84,16 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(courseActions.queryStudyCourseDetail(token, id));
     }
   }
+}
+
+ArticleContainer.propTypes ={
+  notification: React.PropTypes.object,
+  course: React.PropTypes.object,
+}
+
+ArticleContainer.defaultProps = {
+  notification: {},
+  course: {},
 }
 
 ArticleContainer.propTypes = {

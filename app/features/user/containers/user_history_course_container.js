@@ -6,6 +6,7 @@ import CategoryView from '../../../components/category_view';
 import {COURSE_DETAIL} from '../../../routers';
 import * as actions from '../../../actions/user_actions';
 import {header} from '../../../components/navigation_header';
+import {renderDelayTime} from '../../../constants';
 
 class UserHistoryCourseContainer extends React.Component {
 
@@ -14,7 +15,7 @@ class UserHistoryCourseContainer extends React.Component {
     cardStack: {
       gesturesEnabled: true,
     },
-    header:header,
+    header: header,
   }
 
   constructor(props) {
@@ -23,7 +24,7 @@ class UserHistoryCourseContainer extends React.Component {
   }
 
   componentDidMount() {
-    this.loadMoreData();
+    setTimeout(() => this.loadMoreData(), renderDelayTime);
   }
 
   componentWillUnmount() {

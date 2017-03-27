@@ -1,10 +1,12 @@
 import React from "react";
 import {connect} from "react-redux";
+
 import CategoryView from "../../../components/category_view";
 import * as actions from "../../../actions/notification_actions";
 import {NOTIFICATION_DETAIL} from "../../../routers";
 import {InteractionManager} from 'react-native';
 import {header} from '../../../components/navigation_header';
+import {renderDelayTime} from '../../../constants';
 
 class NotificationListContainer extends React.Component {
 
@@ -22,7 +24,7 @@ class NotificationListContainer extends React.Component {
   }
 
   componentDidMount() {
-    this.loadMoreData();
+    setTimeout(() => this.loadMoreData(), renderDelayTime);
   }
 
   loadMoreData() {
@@ -42,8 +44,17 @@ class NotificationListContainer extends React.Component {
                                {id: data.id, routeId: NOTIFICATION_DETAIL, title: data.title})
                                }}
                     image={require('../../../images/notification/inform_blue.png')}/>)
+
   }
 
+}
+
+NotificationListContainer.propTypes = {
+  notifications: React.PropTypes.array,
+}
+
+NotificationListContainer.defaultProps = {
+  notifications: [],
 }
 
 const mapStateToProps = (state) => {

@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   more: {
-    marginRight: 10,
+    paddingRight: 10,
     textAlign: 'right',
     flex: 1,
     color: '#559bec',

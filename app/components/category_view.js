@@ -49,7 +49,7 @@ export default class CategoryView extends React.Component {
         style={styles.list_view}
         dataSource={this.state.dataSource.cloneWithRows(this.state.list)}
         renderRow={this.renderRow.bind(this)}
-        onEndReached={this.props.loadMoreData.bind(this)}
+        onEndReached={()=> this.state.loadMore && this.props.loadMoreData()}
         enableEmptySections={true}
         renderFooter={()=><ActivityIndicator
                             animating={this.state.loadMore}
@@ -81,7 +81,5 @@ const styles = StyleSheet.create({
   },
   list_view: {
     flex: 5,
-    margin: 5,
-
   }
 });

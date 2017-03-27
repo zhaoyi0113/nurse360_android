@@ -1,6 +1,6 @@
 import React from "react";
 import {View, StyleSheet, Text, Image, ScrollView, TouchableHighlight, Navigator, RefreshControl} from "react-native";
-import {FontSize, defaultUserPhoto} from "../../../constants";
+import {FontSize, defaultUserPhoto, colors} from "../../../constants";
 import _ from "lodash";
 import Order from "../../order/components/order";
 import CourseCell from "../../course/components/course_cell";
@@ -214,7 +214,7 @@ class LearnHistory extends React.Component {
       <View style={historyStyles.container}>
         <View style={historyStyles.header}>
           <Text style={taskStyles.reminder}>学习历史</Text>
-          <TouchableHighlight underlayColor='lightgray'
+          <TouchableHighlight underlayColor={colors.underlayColor}
                               onPress={this.props.clickMore.bind(this)}><Text
             style={taskStyles.more}>更多</Text></TouchableHighlight>
         </View>

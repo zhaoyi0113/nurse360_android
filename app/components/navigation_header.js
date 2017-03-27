@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Image, TouchableHighlight, Text} from 'react-native';
 
-import {FontSize} from '../constants';
+import {FontSize, colors} from '../constants';
 
 export const headerHeight = 30;
 
@@ -11,7 +11,7 @@ export const header = ({state, setParams, goBack}) => ({
   style: {height: headerHeight, backgroundColor: '#f6f6f6',elevation: 0, marginTop: 20},
   tintColor: '#f6f6f6',
   right: (<View style={{width: 60}}/>),
-  left: (<TouchableHighlight underlayColor='lightgray' onPress={()=>{
+  left: (<TouchableHighlight underlayColor={colors.underlayColor} onPress={()=>{
     goBack();
   }}>
     <View style={{height: headerHeight, flexDirection: 'row', alignItems: 'center'}}>

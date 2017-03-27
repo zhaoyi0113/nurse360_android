@@ -4,6 +4,7 @@ import CategoryView from "../../../components/category_view";
 import * as actions from "../../../actions/study_actions";
 import {COURSE_DETAIL} from "../../../routers";
 import {header} from "../../../components/navigation_header";
+import {renderDelayTime} from '../../../constants';
 
 class StudyCourseListContainer extends React.Component {
 
@@ -21,7 +22,7 @@ class StudyCourseListContainer extends React.Component {
   }
 
   componentDidMount() {
-    this.loadMoreData();
+    setTimeout(() => this.loadMoreData(), renderDelayTime);
   }
 
   loadMoreData() {
