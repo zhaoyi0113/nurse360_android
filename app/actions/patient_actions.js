@@ -8,3 +8,12 @@ export const queryInternalPatient = (token, index, number) => {
 export const queryExternalPatient = (token, index, number) => {
   return commonActions.requestGet(types.QUERY_EXTERNAL_PATIENTS, '/nurse/patient?index=' + index + '&number=' + number + '&is_in_hospital=NO', token);
 }
+
+export const queryInternalPatientList = (token, index, number) => {
+  return commonActions.requestGet(types.QUERY_INTERNAL_PATIENTS_LIST_HTTP, '/nurse/patient?index=' + index + '&number=' + number + '&is_in_hospital=YES', token);
+}
+
+export const queryExternalPatientList = (token, index, number) => {
+  return commonActions.requestGet(types.QUERY_EXTERNAL_PATIENTS_LIST_HTTP, '/nurse/patient?index=' + index + '&number=' + number + '&is_in_hospital=NO', token);
+}
+

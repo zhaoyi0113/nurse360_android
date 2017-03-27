@@ -8,6 +8,10 @@ export const PatientReducer = (state = {}, action) => {
       return {...state, internalPatients: parsePatients(action.payload.data)};
     case types.QUERY_EXTERNAL_PATIENTS + types.SUCCESS:
       return {...state, externalPatients: parsePatients(action.payload.data)};
+    case types.QUERY_INTERNAL_PATIENTS_LIST_HTTP + types.SUCCESS:
+      return {...state, internalPatientList: parsePatients(action.payload.data)};
+    case types.QUERY_EXTERNAL_PATIENTS_LIST_HTTP + types.SUCCESS:
+      return {...state, externalPatientList: parsePatients(action.payload.data)};
     default:
       return state;
   }

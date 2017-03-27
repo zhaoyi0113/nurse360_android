@@ -25,6 +25,7 @@ export default class Patient extends React.Component {
   }
 
   _getPatientCell(patients, text) {
+    const {navigate} = this.props.navigation;
     if (patients.length > 0) {
       return patients.map((patient, i) => {
         const name = patient.patient.name + '  (  ' + patient.patient.genderText + ', ' + patient.patient.age + '岁 )';
@@ -33,14 +34,12 @@ export default class Patient extends React.Component {
                               hasRead='YES'
                               image={patient.patient.image}
                               onClick={()=> {
-                                navigate('Article',
+                                navigate('PatientDetail',
                                 {
-                                  routeId: COURSE_DETAIL,
                                   id: patient.id,
                                   title: patient.name,
                                 }
                               );
-                                this.props.readStudyCourse(patient.id);
                               }}/>
       });
     } else {
@@ -67,12 +66,12 @@ export default class Patient extends React.Component {
         <Function/>
         <View style={{flex:1}}>
           <CommonTableHeader title='院内患者' more='更多'
-                             clickMore={()=>navigate('StudyList')}/>
+                             clickMore={()=>navigate('PatientList', {internal: true})}/>
           {this._getPatientCell(this.props.internalPatients, '暂无院内患者')}
         </View>
         <View style={{flex:1}}>
           <CommonTableHeader title='院外患者' more='更多'
-                             clickMore={()=>navigate('StudyList')}/>
+                             clickMore={()=>navigate('PatientList', {internal: false})}/>
           {this._getPatientCell(this.props.externalPatients, '暂无院外患者')}
         </View>
       </ScrollView>
