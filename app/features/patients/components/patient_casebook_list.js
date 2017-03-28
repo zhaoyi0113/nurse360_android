@@ -1,15 +1,18 @@
 import React from 'react';
-import {View, Image, Text, ScrollView} from 'react-native';
+import {View, Image, Text, ScrollView, TouchableHighlight} from 'react-native';
 import {colors} from '../../../constants';
 import CaseCell from './case_cell';
 
 export default class PatientCasebookList extends React.Component {
 
   render() {
-    const {patientCaseBookList, openCase} = this.props;
+    const {patientCaseBookList, openCase, navigation, patient} = this.props;
     return (<ScrollView style={{flex:1, backgroundColor: colors.bkColor}}>
       <View style={{flex:1, alignItems: 'center', margin: 10, backgroundColor: 'white'}}>
-        <Image style={{margin: 10, width: 50, height: 50}} source={require('../../../images/patient/addPat.png')}/>
+        <TouchableHighlight underlayColor={colors.underlayColor}
+                            onPress={()=>navigation.navigate('NewCase', {patient:patient})}>
+          <Image style={{margin: 10, width: 50, height: 50}} source={require('../../../images/patient/addPat.png')}/>
+        </TouchableHighlight>
         <Text>新建病例</Text>
       </View>
       <View style={{flexDirection: 'row', alignItems: 'center', alignSelf: 'center'}}>

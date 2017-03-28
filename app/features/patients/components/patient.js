@@ -25,6 +25,10 @@ export default class Patient extends React.Component {
     this.setState({isRefreshing: true});
   }
 
+  _endRefresh() {
+    this.setState({isRefreshing: false});
+  }
+
   _getPatientCell(patients, text) {
     const {navigate} = this.props.navigation;
     if (patients.length > 0) {

@@ -24,11 +24,13 @@ export default class PatientDetail extends React.Component {
       <CommonRowCell title={name} description={desc}
                      hasRead='YES'
                      image={patient.patient.image}
+                     showNextIcon={false}
       />
       <View style={{flex:5}}>
         <CommonRowCell title='病例记录'
                        hasRead='YES'
-                       onClick={()=>this.props.navigation.navigate('PatientCasebookList', {userId: patient.userId,patientId: patient.patientId})}
+                       onClick={()=>this.props.navigation.navigate('PatientCasebookList',
+                       {userId: patient.userId,patientId: patient.patientId, patient: patient,})}
                        image={require('../../../images/patient/binglijilu.png')} />
         <CommonRowCell title='出诊记录'
                        hasRead='YES'
@@ -38,10 +40,10 @@ export default class PatientDetail extends React.Component {
                        image={require('../../../images/patient/pinggu.png')} />
         <CommonRowCell title='问题咨询'
                        hasRead='YES'
-                       image={require('../../../images/patient/binglijilu.png')} />
+                       image={require('../../../images/patient/wentizixun.png')} />
         <CommonRowCell title='定制推送'
                        hasRead='YES'
-                       image={require('../../../images/patient/wentizixun.png')} />
+                       image={require('../../../images/patient/dingzhituisong.png')} />
       </View>
       <View style={{flex: 2}}/>
     </View>);

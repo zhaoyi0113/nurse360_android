@@ -35,8 +35,11 @@ class PatientCasebookListContainer extends React.Component {
   }
 
   render() {
+    const {patient} = this.props.navigation.state.params;
     return (
-      <PatientCasebookList patientCaseBookList={this.props.patientCaseBookList} openCase={this._openCase.bind(this)}/>);
+      <PatientCasebookList navigation={this.props.navigation}
+                           patient={patient}
+                           patientCaseBookList={this.props.patientCaseBookList} openCase={this._openCase.bind(this)}/>);
   }
 }
 

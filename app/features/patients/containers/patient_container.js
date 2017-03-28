@@ -26,13 +26,21 @@ class PatientContainer extends Component {
   }
 
   _refresh() {
-    this.props.queryInternalPatients(this.props.token, 0, 2);
-    this.props.queryExternalPatient(this.props.token, 0, 2);
+    const promises = [];
+    promises.push(this.props.queryInternalPatients(this.props.token, 0, 2));
+    promises.push(this.props.queryExternalPatient(this.props.token, 0, 2));
+    const that = this;
+    Promise.all(promises).then((v) => {
+      if (that.patient) {
+        that.patient._endRefresh();
+      }
+    }).catch(() => that.patient._endRefresh());
+
   }
 
   render() {
     const {rootNavigation} = this.props.screenProps;
-    return (<Patient navigation={rootNavigation} refresh={this._refresh.bind(this)}
+    return (<Patient navigation={rootNavigation} refresh={this._refresh.bind(this)} ref={(patient)=>this.patient=patient}
                      internalPatients={this.props.internalPatients} externalPatients={this.props.externalPatients}/>)
   }
 

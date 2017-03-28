@@ -16,8 +16,7 @@ export default class CommonRowCell extends React.Component {
   }
 
   render() {
-    let {title, description, hasRead, titleStyle} = this.props;
-    let style = styles.container;
+    let {title, description, hasRead, titleStyle, showNextIcon, style} = this.props;
     if(hasRead !== 'YES'){
       style = [style, {backgroundColor: '#E8EFF7'}];
     }
@@ -30,7 +29,8 @@ export default class CommonRowCell extends React.Component {
           <Text style={styles.description} numberOfLines={1}>{description}</Text>
         </View>
       </TouchableWithoutFeedback>
-      <Image style={styles.next} source={require('../images/next_gray.png')}/>
+      {showNextIcon?<Image style={styles.next} source={require('../images/next_gray.png')}/>:null}
+
     </View>);
   }
 
@@ -41,6 +41,7 @@ CommonRowCell.propTypes = {
   description: React.PropTypes.string,
   onClick: React.PropTypes.func,
   hasRead: React.PropTypes.string,
+  showNextIcon: React.PropTypes.bool,
 }
 
 
@@ -112,4 +113,6 @@ CommonRowCell.defaultProps = {
   },
   imageStyle: styles.image,
   titleStyle: styles.title,
+  showNextIcon: true,
+  style: styles.container
 };
