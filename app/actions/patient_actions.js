@@ -25,3 +25,7 @@ export const queryVisitList = (token, index, number) => {
 export const queryNurseCaseBookList = (token, userId, patientId, content='', index, number) => {
   return commonActions.requestGet(types.QUERY_NURSE_CASE_BOOKLIST_HTTP, '/nurse/casebook?user_id=' + userId + '&patient_id=' + patientId + '&content=' + content + '&index=' + index + '&number=' + number, token);
 }
+
+export const queryNurseCaseBookDetail = (token, id) => {
+  return commonActions.requestGet(types.QUERY_NURSE_CASE_BOOK_DETAIL_HTTP, '/nurse/casebook/'+id, token);
+}

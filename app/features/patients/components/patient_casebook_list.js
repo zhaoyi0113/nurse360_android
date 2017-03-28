@@ -6,7 +6,7 @@ import CaseCell from './case_cell';
 export default class PatientCasebookList extends React.Component {
 
   render() {
-    const {patientCaseBookList} = this.props;
+    const {patientCaseBookList, openCase} = this.props;
     return (<ScrollView style={{flex:1, backgroundColor: colors.bkColor}}>
       <View style={{flex:1, alignItems: 'center', margin: 10, backgroundColor: 'white'}}>
         <Image style={{margin: 10}} source={require('../../../images/patient/addPat.png')}/>
@@ -19,8 +19,9 @@ export default class PatientCasebookList extends React.Component {
       </View>
       {
         patientCaseBookList.map((book, i) => {
-          return <View key={i} style={{margin:10}}>
-            <CaseCell patient={book.patient} caseName={book.name} recordNum={book.caseSize} time={book.time} />
+          return <View key={i} style={{margin:0}}>
+            <CaseCell patient={book.patient} caseName={book.name} onClick={()=>openCase(book)} recordNum={book.caseSize}
+                      time={book.time}/>
           </View>
         })
       }
@@ -30,8 +31,11 @@ export default class PatientCasebookList extends React.Component {
 
 PatientCasebookList.propTypes = {
   patientCaseBookList: React.PropTypes.array,
+  openCase: React.PropTypes.func,
 }
 
 PatientCasebookList.defaultProps = {
   patientCaseBookList: [],
+  openCase: () => {
+  }
 }

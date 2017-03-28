@@ -6,7 +6,7 @@ import * as actions from '../../../actions/patient_actions';
 import {renderDelayTime} from '../../../constants';
 import {header} from '../../../components/navigation_header';
 
-class PatientCasebookListContainer extends React.Component{
+class PatientCasebookListContainer extends React.Component {
 
   static navigationOptions = {
     title: '病例记录',
@@ -16,18 +16,27 @@ class PatientCasebookListContainer extends React.Component{
     }
   }
 
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state = {number: 20, index: 0};
+    this.state = {number: 20, index: 0, caseBook: {}};
   }
 
-  componentDidMount(){
+  _openCase(book) {
+    this.props.queryNurseCaseBookDetail(this.props.token, book.id)
+      .then(v => {
+        console.log('get case response', v);
+        this.props.navigation.navigate('CaseDetail',{caseBook: v.payload.data} )
+      });
+  }
+
+  componentDidMount() {
     const {userId, patientId} = this.props.navigation.state.params;
-    setTimeout(()=>this.props.queryNurseCaseBookList(this.props.token, userId, patientId, '',this.state.index, this.state.number ), renderDelayTime);
+    setTimeout(() => this.props.queryNurseCaseBookList(this.props.token, userId, patientId, '', this.state.index, this.state.number), renderDelayTime);
   }
 
-  render(){
-    return (<PatientCasebookList patientCaseBookList={this.props.patientCaseBookList}/>);
+  render() {
+    return (
+      <PatientCasebookList patientCaseBookList={this.props.patientCaseBookList} openCase={this._openCase.bind(this)}/>);
   }
 }
 
@@ -44,6 +53,9 @@ const mapDispatchToProps = (dispatch) => {
     queryNurseCaseBookList: (token, userId, patientId, content, index, number) => {
       return dispatch(actions.queryNurseCaseBookList(token, userId, patientId, content, index, number));
     },
+    queryNurseCaseBookDetail: (token, id) => {
+      return dispatch(actions.queryNurseCaseBookDetail(token, id));
+    }
   }
 }
 

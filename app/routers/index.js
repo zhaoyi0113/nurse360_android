@@ -30,6 +30,7 @@ import PatientListContainer from '../features/patients/containers/patient_list_c
 import PatientVisitListContainer from '../features/patients/containers/patient_visit_list_container';
 import PatientDetail from '../features/patients/components/patient_detail';
 import PatientCasebookListContainer from '../features/patients/containers/patient_casebook_list_container';
+import CaseDetail from '../features/patients/components/case_detail';
 
 export const Root = StackNavigator({
   Main: {screen: MainContainer, path: 'main'},
@@ -60,6 +61,7 @@ export const Root = StackNavigator({
   PatientVisitList: {screen: PatientVisitListContainer},
   PatientDetail: {screen: PatientDetail},
   PatientCasebookList: {screen: PatientCasebookListContainer},
+  CaseDetail: {screen: CaseDetail},
 }, {
   initialRouteName: 'Login',
 });
