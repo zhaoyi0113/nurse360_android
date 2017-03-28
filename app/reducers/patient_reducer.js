@@ -14,6 +14,8 @@ export const PatientReducer = (state = {}, action) => {
       return {...state, externalPatientList: parsePatients(action.payload.data)};
     case types.QUERY_PATIENT_VISIT_LIST_HTTP + types.SUCCESS:
       return {...state, patientVisitList: parsePatients(action.payload.data)};
+    case types.QUERY_NURSE_CASE_BOOKLIST_HTTP + types.SUCCESS:
+      return {...state, patientCaseBookList: parseCaseBookList(action.payload.data)};
     default:
       return state;
   }
@@ -21,13 +23,20 @@ export const PatientReducer = (state = {}, action) => {
 
 const parsePatients = (patients) => {
   return patients.map(p => {
-    return parsePatient(p);
+     parsePatient(p.patient);
+     return p;
+  });
+}
+
+const parseCaseBookList = (caseBooks) => {
+  return caseBooks.map(c => {
+    parsePatient(c.patient);
+    return c;
   });
 }
 
 const parsePatient = (patient) => {
-  const p = {...patient};
-  p.patient.genderText = p.patient.gender === 'MALE' ? '男' : (p.patient.gender === 'FEMALE' ? '女' : '保密');
-  p.patient.image = p.patient.headImageUrl ? {uri: p.patient.headImageUrl} : defaultUserPhoto;
-  return p;
+  patient.genderText = patient.gender === 'MALE' ? '男' : (patient.gender === 'FEMALE' ? '女' : '保密');
+  patient.image = patient.headImageUrl ? {uri: patient.headImageUrl} : defaultUserPhoto;
+  return patient;
 }
