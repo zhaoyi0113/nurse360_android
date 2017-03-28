@@ -6,9 +6,9 @@ import {FontSize} from '../constants';
 export default class CommonRowCell extends React.Component {
 
   _getHeaderView() {
-    let {image, headTitle} = this.props;
+    let {image, headTitle, imageStyle} = this.props;
     if (image) {
-      return <Image style={styles.image} source={image}/>
+      return <Image style={imageStyle} source={image}/>
     }
     if (headTitle) {
       return <Text style={styles.head_title}>{headTitle}</Text>
@@ -16,7 +16,7 @@ export default class CommonRowCell extends React.Component {
   }
 
   render() {
-    let {title, description, hasRead} = this.props;
+    let {title, description, hasRead, titleStyle} = this.props;
     let style = styles.container;
     if(hasRead !== 'YES'){
       style = [style, {backgroundColor: '#E8EFF7'}];
@@ -26,7 +26,7 @@ export default class CommonRowCell extends React.Component {
       <TouchableWithoutFeedback style={{flex:5, flexDirection: 'row'}} underlayColor="transparent"
                           onPress={this.props.onClick.bind(this)}>
         <View style={styles.text_view}>
-          <Text style={styles.title}>{title}</Text>
+          <Text style={titleStyle}>{title}</Text>
           <Text style={styles.description} numberOfLines={1}>{description}</Text>
         </View>
       </TouchableWithoutFeedback>
@@ -43,13 +43,6 @@ CommonRowCell.propTypes = {
   hasRead: React.PropTypes.string,
 }
 
-CommonRowCell.defaultProps = {
-  title: '',
-  description: '',
-  hasRead: 'NO',
-  onClick: () => {
-  },
-}
 
 const styles = StyleSheet.create({
   container: {
@@ -108,4 +101,15 @@ const styles = StyleSheet.create({
     fontSize: FontSize.small,
     textAlign: 'left',
   }
-});
+})
+
+
+CommonRowCell.defaultProps = {
+  title: '',
+  description: '',
+  hasRead: 'NO',
+  onClick: () => {
+  },
+  imageStyle: styles.image,
+  titleStyle: styles.title,
+};

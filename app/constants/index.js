@@ -6,7 +6,7 @@ export const FontSize = {
   xxlarge: 30,
 }
 
-export const colors = {underlayColor: 'transparent', bkColor: '#f6f6f6', labelColor: '#559bec'}
+export const colors = {underlayColor: 'transparent', bkColor: '#f6f6f6', labelColor: '#559bec', lightTextColor: '#4a4a4a'}
 
 export const defaultUserPhoto = require('../images/user/default_header.png');
 

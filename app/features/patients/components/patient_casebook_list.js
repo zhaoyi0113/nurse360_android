@@ -9,7 +9,7 @@ export default class PatientCasebookList extends React.Component {
     const {patientCaseBookList, openCase} = this.props;
     return (<ScrollView style={{flex:1, backgroundColor: colors.bkColor}}>
       <View style={{flex:1, alignItems: 'center', margin: 10, backgroundColor: 'white'}}>
-        <Image style={{margin: 10}} source={require('../../../images/patient/addPat.png')}/>
+        <Image style={{margin: 10, width: 50, height: 50}} source={require('../../../images/patient/addPat.png')}/>
         <Text>新建病例</Text>
       </View>
       <View style={{flexDirection: 'row', alignItems: 'center', alignSelf: 'center'}}>
