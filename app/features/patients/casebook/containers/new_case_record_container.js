@@ -84,6 +84,7 @@ class NewCaseRecordContainer extends React.Component {
   }
 
   render() {
+    const {record} = this.props.navigation.state.params;
     return (
       <NewCaseRecord createNewCaseRecord={this._createCaseRecord.bind(this)}/>
     )
