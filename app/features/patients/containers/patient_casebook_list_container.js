@@ -23,27 +23,29 @@ class PatientCasebookListContainer extends React.Component {
 
   _openCase(book) {
     const {patient} = this.props.navigation.state.params;
-    this.props.queryNurseCaseBookDetail(this.props.token, book.id)
-      .then(v => {
-        console.log('get case response', v);
-        this.props.navigation.navigate('CaseDetail',{caseBook: v.payload.data, patient, editing: false} )
-      });
+    this.props.navigation.navigate('CaseDetail', {patient, editing: false, bookId: book.id})
   }
 
-  _refresh(){
-    this.loadData();
+  _refresh() {
+    const {userId, patientId} = this.props.navigation.state.params;
+    this.props.queryNurseCaseBookList(this.props.token, userId, patientId, '', this.state.index, this.state.number)
+      .then(v => this.list._endRefresh()).catch(err => this.list._endRefresh());
   }
 
   componentDidMount() {
     this.loadData();
   }
 
-  loadData(){
+  componentWillUnmount() {
+    this.props.clearNurseCaseBookList();
+  }
+
+  loadData() {
     const {userId, patientId} = this.props.navigation.state.params;
     setTimeout(() => this.props.queryNurseCaseBookList(this.props.token, userId, patientId, '', this.state.index, this.state.number)
-      .then(v=>this.list._endRefresh()).catch(err => this.list._endRefresh()), renderDelayTime);
-
+      .then(v => this.list._endRefresh()).catch(err => this.list._endRefresh()), renderDelayTime);
   }
+
 
   render() {
     const {patient} = this.props.navigation.state.params;
@@ -52,7 +54,9 @@ class PatientCasebookListContainer extends React.Component {
                            patient={patient}
                            refresh={this._refresh.bind(this)}
                            ref={list=>this.list = list}
-                           patientCaseBookList={this.props.patientCaseBookList} openCase={this._openCase.bind(this)}/>);
+                           patientCaseBookList={this.props.patientCaseBookList}
+                           loadData={this._refresh.bind(this)}
+                           openCase={this._openCase.bind(this)}/>);
   }
 }
 
@@ -69,8 +73,8 @@ const mapDispatchToProps = (dispatch) => {
     queryNurseCaseBookList: (token, userId, patientId, content, index, number) => {
       return dispatch(actions.queryNurseCaseBookList(token, userId, patientId, content, index, number));
     },
-    queryNurseCaseBookDetail: (token, id) => {
-      return dispatch(actions.queryNurseCaseBookDetail(token, id));
+    clearNurseCaseBookList: () => {
+      return dispatch(actions.clearNurseCaseBookList());
     }
   }
 }

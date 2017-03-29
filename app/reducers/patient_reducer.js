@@ -16,6 +16,12 @@ export const PatientReducer = (state = {}, action) => {
       return {...state, patientVisitList: parsePatients(action.payload.data)};
     case types.QUERY_NURSE_CASE_BOOKLIST_HTTP + types.SUCCESS:
       return {...state, patientCaseBookList: parseCaseBookList(action.payload.data)};
+    case types.QUERY_NURSE_CASE_BOOK_DETAIL_HTTP + types.SUCCESS:
+      return {...state, caseBook: action.payload.data};
+    case types.CLEAR_CASEBOOK:
+      return {...state, caseBook: undefined};
+    case types.CLEAR_NURSE_CASEBOOK_LIST:
+      return {...state, patientCaseBookList: undefined};
     default:
       return state;
   }
@@ -23,8 +29,8 @@ export const PatientReducer = (state = {}, action) => {
 
 const parsePatients = (patients) => {
   return patients.map(p => {
-     parsePatient(p.patient);
-     return p;
+    parsePatient(p.patient);
+    return p;
   });
 }
 

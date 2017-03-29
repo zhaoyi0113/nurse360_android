@@ -35,7 +35,20 @@ export const createNewCaseBook = (token, data) => {
   return commonActions.requestPost(types.CREATE_NEW_CASE_BOOK_HTTP, '/nurse/casebook', data, token);
 }
 
+//修改病例
+export const updateCaseBook = (token, data) => {
+  return commonActions.requestPut(types.UPDATE_CASEBOOK_HTTP, '/nurse/casebook', data, token);
+}
+
 //添加一条病例记录
 export const createCaseRecord = (token, data) => {
   return commonActions.requestPost(types.CREATE_CASE_RECORD_HTTP, '/nurse/casebook/case', data, token);
+}
+
+export const clearCaseBook = () => {
+  return {type: types.CLEAR_CASEBOOK};
+}
+
+export const clearNurseCaseBookList = () => {
+  return {type: types.CLEAR_NURSE_CASEBOOK_LIST};
 }

@@ -20,7 +20,7 @@ export default class PatientCasebookList extends React.Component {
   }
 
   render() {
-    const {patientCaseBookList, openCase, navigation, patient} = this.props;
+    const {patientCaseBookList, openCase, navigation, patient, loadData} = this.props;
     return (<ScrollView style={{flex:1, backgroundColor: colors.bkColor}}
                         refreshControl={
                       <RefreshControl
@@ -30,9 +30,9 @@ export default class PatientCasebookList extends React.Component {
                         title="Loading..."
                         colors={['lightgray']}/>}
     >
-      <View style={{flex:1, alignItems: 'center', margin: 10, backgroundColor: 'white'}}>
+      <View style={{flex:1, alignItems: 'center', margin: 10, backgroundColor: 'white', paddingBottom:10}}>
         <TouchableHighlight underlayColor={colors.underlayColor}
-                            onPress={()=>navigation.navigate('NewCase', {patient:patient})}>
+                            onPress={()=>navigation.navigate('NewCase', {patient:patient, loadCaseListData: loadData})}>
           <Image style={{margin: 10, width: 50, height: 50}} source={require('../../../images/patient/addPat.png')}/>
         </TouchableHighlight>
         <Text>新建病例</Text>

@@ -13,23 +13,31 @@ export default class NewCase extends React.Component {
   }
 
   componentWillMount() {
-    console.log('xxxxx,', this.props.caseBook)
     const {caseBook} = this.props;
-    this.setState({
-      name: caseBook.name,
-      description: caseBook.description,
-      roleSelection: caseBook.hidden === 'YES' ? 0 : 1
-    });
+    if(caseBook) {
+      this.setState({
+        name: caseBook.name,
+        description: caseBook.description,
+        roleSelection: caseBook.hidden === 'YES' ? 0 : 1
+      });
+    }
   }
 
   _createNewCaseBook() {
-    const {patient} = this.props;
-    const data = {
-      patient_id: patient.patient.id, user_id: patient.userId, name: this.state.name,
-      description: this.state.description, hidden: this.state.roleSelection === 1 ? 'NO' : 'YES',
-      case_record: this.state.caseRecord
+    const {patient, editing, caseBook} = this.props;
+    if (editing) {
+      const data = {casebook_id: caseBook.id, description: this.state.description, name: this.state.name,
+         hidden: this.state.roleSelection === 1 ? 'NO' : 'YES'};
+      this.props.updateCaseBook(data);
+
+    } else {
+      const data = {
+        patient_id: patient.patient.id, user_id: patient.userId, name: this.state.name,
+        description: this.state.description, hidden: this.state.roleSelection === 1 ? 'NO' : 'YES',
+        case_record: this.state.caseRecord
+      }
+      this.props.createNewCaseBook(data);
     }
-    this.props.createNewCaseBook(data);
   }
 
   render() {
@@ -70,9 +78,9 @@ export default class NewCase extends React.Component {
       }
       {
         !editing ? <TextInput style={{marginHorizontal:10, backgroundColor: 'white', height: 80}}
-                             underlineColorAndroid={colors.underlayColor}
-                             onChangeText={(text)=>this.setState({caseRecord: text})}
-                             placeholder='描述病理情况 伤口状况'
+                              underlineColorAndroid={colors.underlayColor}
+                              onChangeText={(text)=>this.setState({caseRecord: text})}
+                              placeholder='描述病理情况 伤口状况'
         /> : null
       }
 
