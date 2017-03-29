@@ -45,6 +45,9 @@ export const createCaseRecord = (token, data) => {
   return commonActions.requestPost(types.CREATE_CASE_RECORD_HTTP, '/nurse/casebook/case', data, token);
 }
 
+//添加病例记录图片 /nurse/casebook/case/add_image
+
+
 export const clearCaseBook = () => {
   return {type: types.CLEAR_CASEBOOK};
 }

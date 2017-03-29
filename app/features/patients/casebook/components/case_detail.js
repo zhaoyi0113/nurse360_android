@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Image, Text, ScrollView} from 'react-native';
+import {View, Image, Text, ScrollView, TouchableHighlight} from 'react-native';
 import {colors, FontSize} from '../../../../constants';
 import {getDate} from '../../../../reducers/common_reducer';
 import CommonRowCell from '../../../../components/common_row_cell';
@@ -20,11 +20,15 @@ export default class CaseDetail extends React.Component {
           style={{fontSize: FontSize.small, marginLeft:10, marginBottom:10, color: colors.lightTextColor}}>基本信息</Text>
         <Text style={{fontSize: FontSize.small, marginLeft:10, marginBottom:10}}>{caseBook.description}</Text>
       </View>
-      <View style={{backgroundColor: 'white', margin: 10, alignItems: 'center'}}>
-        <Image style={{alignSelf: 'center', margin:10, height: 50, width: 50}}
-               source={require('../../../../images/patient/addPat.png')}/>
-        <Text style={{color: colors.lightTextColor}}>在当前病例添加一条记录</Text>
-      </View>
+      <TouchableHighlight underlayColor={colors.underlayColor}
+                          onPress={()=>navigation.navigate('NewCaseRecord', {loadData: loadData.bind(this), bookId: caseBook.id})}
+                          style={{backgroundColor: 'white', margin: 10, alignItems: 'center'}}>
+        <View>
+          <Image style={{alignSelf: 'center', margin:10, height: 50, width: 50}}
+                 source={require('../../../../images/patient/addPat.png')}/>
+          <Text style={{color: colors.lightTextColor}}>在当前病例添加一条记录</Text>
+        </View>
+      </TouchableHighlight>
       <View style={{flex:1}}>
         {
           caseBook.cases && caseBook.cases.map((c, i) => {

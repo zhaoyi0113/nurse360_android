@@ -37,7 +37,7 @@ export default class ImageSelector extends React.Component {
         let source = {uri: response.uri};
         let images = this.state.images;
         CameraRoll.saveToCameraRoll('file://' + response.path).then((res) => {
-          console.log('save to ', res)
+          console.log('save to ', res);
           source.uri = res;
           images.push({source: source, canDelete: true});
           that.setState({images: images});
