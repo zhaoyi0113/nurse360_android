@@ -18,20 +18,31 @@ class PatientCasebookListContainer extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {number: 20, index: 0, caseBook: {}};
+    this.state = {number: 200, index: 0, caseBook: {}};
   }
 
   _openCase(book) {
+    const {patient} = this.props.navigation.state.params;
     this.props.queryNurseCaseBookDetail(this.props.token, book.id)
       .then(v => {
         console.log('get case response', v);
-        this.props.navigation.navigate('CaseDetail',{caseBook: v.payload.data} )
+        this.props.navigation.navigate('CaseDetail',{caseBook: v.payload.data, patient, editing: false} )
       });
   }
 
+  _refresh(){
+    this.loadData();
+  }
+
   componentDidMount() {
+    this.loadData();
+  }
+
+  loadData(){
     const {userId, patientId} = this.props.navigation.state.params;
-    setTimeout(() => this.props.queryNurseCaseBookList(this.props.token, userId, patientId, '', this.state.index, this.state.number), renderDelayTime);
+    setTimeout(() => this.props.queryNurseCaseBookList(this.props.token, userId, patientId, '', this.state.index, this.state.number)
+      .then(v=>this.list._endRefresh()).catch(err => this.list._endRefresh()), renderDelayTime);
+
   }
 
   render() {
@@ -39,6 +50,8 @@ class PatientCasebookListContainer extends React.Component {
     return (
       <PatientCasebookList navigation={this.props.navigation}
                            patient={patient}
+                           refresh={this._refresh.bind(this)}
+                           ref={list=>this.list = list}
                            patientCaseBookList={this.props.patientCaseBookList} openCase={this._openCase.bind(this)}/>);
   }
 }

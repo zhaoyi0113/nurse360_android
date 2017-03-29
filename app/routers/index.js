@@ -30,7 +30,7 @@ import PatientListContainer from '../features/patients/containers/patient_list_c
 import PatientVisitListContainer from '../features/patients/containers/patient_visit_list_container';
 import PatientDetail from '../features/patients/components/patient_detail';
 import PatientCasebookListContainer from '../features/patients/containers/patient_casebook_list_container';
-import CaseDetail from '../features/patients/components/case_detail';
+import CaseDetail from '../features/patients/casebook/components/case_detail';
 import NewCaseContainer from '../features/patients/casebook/containers/new_case_container';
 
 export const Root = StackNavigator({

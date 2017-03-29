@@ -1,13 +1,35 @@
 import React from 'react';
-import {View, Image, Text, ScrollView, TouchableHighlight} from 'react-native';
+import {View, Image, Text, ScrollView, TouchableHighlight, RefreshControl} from 'react-native';
 import {colors} from '../../../constants';
 import CaseCell from './case_cell';
 
 export default class PatientCasebookList extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {isRefreshing: false};
+  }
+
+  _onRefresh() {
+    this.setState({isRefreshing: true});
+    this.props.refresh();
+  }
+
+  _endRefresh() {
+    this.setState({isRefreshing: false});
+  }
+
   render() {
     const {patientCaseBookList, openCase, navigation, patient} = this.props;
-    return (<ScrollView style={{flex:1, backgroundColor: colors.bkColor}}>
+    return (<ScrollView style={{flex:1, backgroundColor: colors.bkColor}}
+                        refreshControl={
+                      <RefreshControl
+                        refreshing={this.state.isRefreshing}
+                        onRefresh={this._onRefresh.bind(this)}
+                        tintColor="lightgray"
+                        title="Loading..."
+                        colors={['lightgray']}/>}
+    >
       <View style={{flex:1, alignItems: 'center', margin: 10, backgroundColor: 'white'}}>
         <TouchableHighlight underlayColor={colors.underlayColor}
                             onPress={()=>navigation.navigate('NewCase', {patient:patient})}>

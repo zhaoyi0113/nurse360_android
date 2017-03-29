@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import NewCase from '../components/new_case';
 import {header} from '../../../../components/navigation_header';
 
+import * as actions from '../../../../actions/patient_actions';
 
 class NewCaseContainer extends React.Component {
 
@@ -15,9 +16,20 @@ class NewCaseContainer extends React.Component {
     }
   }
 
+  _createNewCaseBook(data) {
+
+    this.props.createNewCaseBook(this.props.token, data).then(v => {
+      console.log('get creat new case book res:', v)
+      return this.props.createCaseRecord(this.props.token, {casebook_id: v.payload.data.id, case_record: data.caseRecord});
+    }).then(r=>{
+      this.props.navigation.goBack();
+    });
+  }
+
   render() {
-    const {patient} = this.props.navigation.state.params;
-    return (<NewCase patient={patient}/>);
+    const {patient, caseBook, editing} = this.props.navigation.state.params;
+    return (<NewCase patient={patient} caseBook={caseBook} editing={editing}
+                     createNewCaseBook={this._createNewCaseBook.bind(this)}/>);
   }
 }
 
@@ -28,7 +40,14 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {}
+  return {
+    createNewCaseBook: (token, data) => {
+      return dispatch(actions.createNewCaseBook(token, data));
+    },
+    createCaseRecord: (token, data) => {
+      return dispatch(actions.createCaseRecord(token, data));
+    }
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewCaseContainer)

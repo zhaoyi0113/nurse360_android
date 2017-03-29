@@ -22,10 +22,20 @@ export const queryVisitList = (token, index, number) => {
     '/nurse/follow-up/patient?index=' + index + '&number=' + number, token);
 }
 
-export const queryNurseCaseBookList = (token, userId, patientId, content='', index, number) => {
+export const queryNurseCaseBookList = (token, userId, patientId, content = '', index, number) => {
   return commonActions.requestGet(types.QUERY_NURSE_CASE_BOOKLIST_HTTP, '/nurse/casebook?user_id=' + userId + '&patient_id=' + patientId + '&content=' + content + '&index=' + index + '&number=' + number, token);
 }
 
 export const queryNurseCaseBookDetail = (token, id) => {
-  return commonActions.requestGet(types.QUERY_NURSE_CASE_BOOK_DETAIL_HTTP, '/nurse/casebook/'+id, token);
+  return commonActions.requestGet(types.QUERY_NURSE_CASE_BOOK_DETAIL_HTTP, '/nurse/casebook/' + id, token);
+}
+
+//新建病例
+export const createNewCaseBook = (token, data) => {
+  return commonActions.requestPost(types.CREATE_NEW_CASE_BOOK_HTTP, '/nurse/casebook', data, token);
+}
+
+//添加一条病例记录
+export const createCaseRecord = (token, data) => {
+  return commonActions.requestPost(types.CREATE_CASE_RECORD_HTTP, '/nurse/casebook/case', data, token);
 }
