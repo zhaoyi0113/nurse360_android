@@ -34,12 +34,12 @@ class NewCaseRecordContainer extends React.Component {
         const caseId = v.payload.data.case_id;
         return this._uploadImages(bookId, caseId, images, loadData);
       })
-      .then(v=>{
+      .then(v => {
         loadData();
         that.props.navigation.goBack();
         that.props.requestWaitingIndicator(false);
       })
-      .catch(err=>{
+      .catch(err => {
         that.props.requestWaitingIndicator(false);
       });
   }
@@ -50,21 +50,21 @@ class NewCaseRecordContainer extends React.Component {
     const that = this;
     const {loadData, bookId} = this.props.navigation.state.params;
     this.props.updateCaseRecord(this.props.token, caseId, record)
-      .then(v=>{
+      .then(v => {
         return this._uploadImages(bookId, caseId, images, loadData);
       })
-      .then(v=>{
+      .then(v => {
         loadData();
         that.props.navigation.goBack();
         that.props.requestWaitingIndicator(false);
       })
-      .catch(err=>{
+      .catch(err => {
         that.props.requestWaitingIndicator(false);
       });
   }
 
-  _uploadImages(bookId, caseId, images, loadData){
-    return new Promise((resolve, reject)=>{
+  _uploadImages(bookId, caseId, images, loadData) {
+    return new Promise((resolve, reject) => {
       if (!images || images.length <= 0) {
         loadData();
         this.props.navigation.goBack();
