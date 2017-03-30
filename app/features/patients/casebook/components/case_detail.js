@@ -32,11 +32,15 @@ export default class CaseDetail extends React.Component {
       <View style={{flex:1}}>
         {
           caseBook.cases && caseBook.cases.map((c, i) => {
-            const image = c.imagesUrl && c.imagesUrl.length > 0 ? {uri: c.imagesUrl[0]} : null;
+            let image = c.imagesUrl && c.imagesUrl.length > 0 ? {uri: c.imagesUrl[0]} : null;
+            if (!image) {
+              image = require('../../../../images/home/headIm.png');
+            }
             return <View key={i} style={{flex:1, height: 100}}>
               <Text style={{marginLeft: 20}}>{getDate(caseBook.time)}</Text>
               <CommonRowCell hasRead='YES' description={c.caseRecord} title='病例记录'
                              image={image}
+                             onClick={()=>navigation.navigate('NewCaseRecord', {loadData: loadData.bind(this), bookId: caseBook.id, record: c})}
                              titleStyle={{color: colors.lightTextColor}}
                              imageStyle={{height:50, width:50, marginLeft:10}}/>
             </View>

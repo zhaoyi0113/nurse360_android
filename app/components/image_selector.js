@@ -63,7 +63,12 @@ export default class ImageSelector extends React.Component {
   }
 
   render() {
-    const images = this.state.images.slice(0);
+    let images = [];
+    if(this.props.images && this.props.images.length> 0){
+      images = this.props.images.slice(0);
+    }
+
+    images = images.concat(this.state.images);
     if (images.length < 9) {
       images.push({id: -1, source: require('../images/user/mustaddpic.png')});
     }
