@@ -34,6 +34,7 @@ export default class PatientDetail extends React.Component {
                        image={require('../../../images/patient/binglijilu.png')} />
         <CommonRowCell title='出诊记录'
                        hasRead='YES'
+                       onClick={()=>this.props.navigation.navigate('VisitContainer', {order: {id:0, patient: patient, userId: patient.userId}})}
                        image={require('../../../images/patient/chuzhenjilu.png')} />
         <CommonRowCell title='随访记录'
                        hasRead='YES'
