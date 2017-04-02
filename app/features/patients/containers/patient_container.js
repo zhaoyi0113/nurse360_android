@@ -38,9 +38,14 @@ class PatientContainer extends Component {
 
   }
 
+  update(){
+    this.forceUpdate();
+  }
+
   render() {
     const {rootNavigation} = this.props.screenProps;
     return (<Patient navigation={rootNavigation}
+                     update={this.update.bind(this)}
                      refresh={this._refresh.bind(this)}
                      ref={(patient)=>this.patient=patient}
                      internalPatients={this.props.internalPatients}

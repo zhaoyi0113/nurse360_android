@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {View, StyleSheet, Text} from 'react-native';
+import BarcodeScanner from 'react-native-barcodescanner';
 
 import CommonRowCell from '../../../components/common_row_cell';
 import {header} from '../../../components/navigation_header';

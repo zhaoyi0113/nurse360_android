@@ -13,12 +13,13 @@ import {
 import CommonTableHeader from '../../../components/common_table_header';
 import CommonRowCell from '../../../components/common_row_cell';
 import {colors} from '../../../constants';
+import BarcodeScanner from 'react-native-barcodescanner';
 
 export default class Patient extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {isRefreshing: false};
+    this.state = {isRefreshing: false, showBarScanner: false};
   }
 
   _onRefresh() {
@@ -54,8 +55,30 @@ export default class Patient extends React.Component {
     }
   }
 
+  _addPatient() {
+    // this.props.navigation.navigate('BarcodeScanner', {goBack: ()=>this.props.update()});
+    this.setState({showBarScanner: true});
+  }
+
+  _barcodeReceived(e) {
+    console.log('scan result:', e);
+    this.setState({showBarScanner: false});
+  }
+
+
   render() {
     const {navigate} = this.props.navigation;
+    if (this.state.showBarScanner) {
+      return (<View style={{flex:1}}>
+        <BarcodeScanner
+          onBarCodeRead={this._barcodeReceived.bind(this)}
+          style={{ flex: 1 }}
+          torchMode={this.state.torchMode}
+          cameraType={this.state.cameraType}
+        />
+      </View>);
+    }
+
     return (<ScrollView style={{flexDirection: 'column', backgroundColor: '#f6f6f6'}}
                         refreshControl={
           <RefreshControl
@@ -68,7 +91,7 @@ export default class Patient extends React.Component {
         }>
         <Image style={{height:150,width:Dimensions.get('window').width,resizeMode:'cover'}}
                source={require('../../../images/home/headIm.png')}/>
-        <Function goToVisitRecord={()=>navigate('PatientVisitList')}/>
+        <Function goToVisitRecord={()=>navigate('PatientVisitList')} addPatient={this._addPatient.bind(this)}/>
         <View style={{flex:1}}>
           <CommonTableHeader title='院内患者' more='更多'
                              clickMore={()=>navigate('PatientList', {internal: true})}/>
@@ -119,7 +142,7 @@ class Function extends React.Component {
   _clickFunction(f) {
     switch (f.id) {
       case 0:
-        this.props.goToUserTask();
+        this.props.addPatient();
         break;
       case 1:
         this.props.goToUserCourse();

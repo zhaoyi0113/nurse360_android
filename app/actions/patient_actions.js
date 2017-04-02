@@ -66,3 +66,7 @@ export const queryPatientVisitList = (token, userId, patientId, index, number) =
   return commonActions.requestGet(types.QUERY_VISIT_LIST_HTTP, '/nurse/visit/patient?user_id='
     + userId + '&patient_id=' + patientId + '&index=' + index + '&number=' + number, token);
 }
+
+export const addPatient = (token, userId, patientId) => {
+
+}
