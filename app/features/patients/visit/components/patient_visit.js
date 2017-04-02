@@ -1,32 +1,37 @@
 import React from 'react';
-import {View, Text, Image, ScrollView, RefreshControl} from 'react-native';
+import {View, Text, Image, ScrollView, RefreshControl, TouchableHighlight} from 'react-native';
 import {colors} from '../../../../constants';
 import {getDate} from '../../../../reducers/common_reducer';
 import CommonRowCell from '../../../../components/common_row_cell';
 
 export default class PatientVisit extends React.Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {isRefreshing: false};
   }
 
-  _endRefresh(){
+  _endRefresh() {
     this.setState({isRefreshing: false});
   }
 
-  _refresh(){
+  _refresh() {
     this.setState({isRefreshing: true});
     this.props.refresh();
   }
-  render() {
-    const {patientVisitList} = this.props;
-    return (<View style={{flex:1, backgroundColor: colors.bkColor}}>
-      <View style={{backgroundColor: 'white', flexDirection: 'column',alignItems:'center', marginHorizontal: 10}}>
-        <Image style={{width:40,height:40,marginTop: 10}} source={require('../../../../images/patient/addPat.png')}/>
-        <Text style={{color: colors.lightTextColor}}>添加一条出诊记录</Text>
 
-      </View>
+  render() {
+    const {patientVisitList, navigation, patient} = this.props;
+    return (<View style={{flex:1, backgroundColor: colors.bkColor}}>
+      <TouchableHighlight
+        underlayColor={colors.underlayColor}
+        onPress={()=> navigation.navigate('VisitContainer', {order: {id:0, patient: patient, userId: patient.userId}})}
+        style={{backgroundColor: 'white', flexDirection: 'column', marginHorizontal: 10}}>
+        <View style={{alignItems:'center',}}>
+          <Image style={{width:40,height:40,marginTop: 10}} source={require('../../../../images/patient/addPat.png')}/>
+          <Text style={{color: colors.lightTextColor}}>添加一条出诊记录</Text>
+        </View>
+      </TouchableHighlight>
       <ScrollView style={{marginHorizontal: 10}}>
         <RefreshControl
           refreshing={this.state.isRefreshing}
@@ -37,7 +42,7 @@ export default class PatientVisit extends React.Component {
         />
         {
           patientVisitList.map((visit, i) => {
-            let image = visit.recordImages && visit.recordImages.length>0?{uri:visit.recordImages[0]}:require('../../../../images/home/headIm.png');
+            let image = visit.recordImages && visit.recordImages.length > 0 ? {uri: visit.recordImages[0]} : require('../../../../images/home/headIm.png');
 
             return <View key={i}>
               <Text style={{color: colors.lightTextColor, marginLeft:10}}>{getDate(visit.time)}</Text>

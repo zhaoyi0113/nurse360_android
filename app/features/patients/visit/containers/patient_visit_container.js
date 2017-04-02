@@ -29,6 +29,7 @@ class PatientVisitContainer extends React.Component {
     const {patient} = this.props.navigation.state.params;
     return (<PatientVisit refresh={this._refresh.bind(this)} patient={patient}
                           ref={(p)=>this.patient=p}
+                          navigation={this.props.navigation}
                           patientVisitList={this.props.patientVisitList}/>);
   }
 }
