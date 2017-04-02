@@ -22,6 +22,8 @@ export const PatientReducer = (state = {}, action) => {
       return {...state, caseBook: undefined};
     case types.CLEAR_NURSE_CASEBOOK_LIST:
       return {...state, patientCaseBookList: undefined};
+    case types.QUERY_VISIT_LIST_HTTP + types.SUCCESS:
+      return {...state, patientVisitList: parsePatientVisits(action.payload.data)};
     default:
       return state;
   }
@@ -45,4 +47,15 @@ const parsePatient = (patient) => {
   patient.genderText = patient.gender === 'MALE' ? '男' : (patient.gender === 'FEMALE' ? '女' : '保密');
   patient.image = patient.headImageUrl ? {uri: patient.headImageUrl} : defaultUserPhoto;
   return patient;
+}
+
+const parsePatientVisits = (visits) => {
+  return visits.map(visit=>{
+    return parsePatientVisit(visit);
+  })
+}
+
+const parsePatientVisit = (visit) => {
+  visit.visitRecords = JSON.parse(visit.serviceItem);
+  return visit;
 }

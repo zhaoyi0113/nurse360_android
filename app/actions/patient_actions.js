@@ -47,7 +47,10 @@ export const createCaseRecord = (token, data) => {
 
 //修改病例记录
 export const updateCaseRecord = (token, caseId, record) => {
-  return commonActions.requestPut(types.UPDATE_CASE_RECORD_HTTP, '/nurse/casebook/case', {case_record: record, case_id: caseId}, token);
+  return commonActions.requestPut(types.UPDATE_CASE_RECORD_HTTP, '/nurse/casebook/case', {
+    case_record: record,
+    case_id: caseId
+  }, token);
 }
 
 export const clearCaseBook = () => {
@@ -56,4 +59,10 @@ export const clearCaseBook = () => {
 
 export const clearNurseCaseBookList = () => {
   return {type: types.CLEAR_NURSE_CASEBOOK_LIST};
+}
+
+//获取出诊记录
+export const queryPatientVisitList = (token, userId, patientId, index, number) => {
+  return commonActions.requestGet(types.QUERY_VISIT_LIST_HTTP, '/nurse/visit/patient?user_id='
+    + userId + '&patient_id=' + patientId + '&index=' + index + '&number=' + number, token);
 }

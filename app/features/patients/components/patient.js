@@ -23,6 +23,7 @@ export default class Patient extends React.Component {
 
   _onRefresh() {
     this.setState({isRefreshing: true});
+    this.props.refresh();
   }
 
   _endRefresh() {
