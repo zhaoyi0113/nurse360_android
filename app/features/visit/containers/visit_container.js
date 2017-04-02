@@ -14,7 +14,7 @@ class VisitContainer extends React.Component {
     },
   }
 
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {screenName: '添加出诊记录'};
   }
@@ -33,13 +33,16 @@ class VisitContainer extends React.Component {
   }
 
   render() {
-    const {order} = this.props.navigation.state.params;
+    const {order, visitRecord} = this.props.navigation.state.params;
 
     return (
       <View style={{flex:1}}>
         <ManualNavBar clickLeft={()=>this.props.navigation.goBack()} title={this._getTitle(this.state.screenName)}/>
         <Tabs
-          screenProps={{order: order, rootNavigation: this.props.navigation, exit: this._exitVisit.bind(this), changeScreen:(screenName)=>this.setState({screenName: screenName})}}/>
+          screenProps={{order: order, rootNavigation: this.props.navigation,
+          exit: this._exitVisit.bind(this),
+          visitRecord: visitRecord,
+          changeScreen:(screenName)=>this.setState({screenName: screenName})}}/>
       </View>
     );
   }

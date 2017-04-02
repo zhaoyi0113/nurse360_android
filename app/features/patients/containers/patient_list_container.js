@@ -39,7 +39,8 @@ class PatientListContainer extends React.Component {
     const dataList = list.map(l => {
       return {id: l.id,
         title: l.patient.name + '  ( ' + l.patient.genderText + ', ' + l.patient.age + ' 岁 )',
-        introduction: l.patient.mobile, image: l.patient.image, hasRead: 'YES'
+        introduction: l.patient.mobile, image: l.patient.image, hasRead: 'YES',
+        patient:l,
       };
     });
     return (
@@ -49,8 +50,9 @@ class PatientListContainer extends React.Component {
         loadMaxNumber={this.state.number}
         loadMoreData={this.loadMoreData.bind(this)}
         onClick={(data)=>{
-                      this.props.navigation.navigate('Article',
-                               {id: data.id, routeId: NOTIFICATION_DETAIL, title: data.title})
+          console.log('patient=', data);
+                      this.props.navigation.navigate('PatientDetail',
+                               {patient: data.patient})
                                }}
       />
     );

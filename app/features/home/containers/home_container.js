@@ -31,9 +31,9 @@ class HomeContainer extends Component {
     const that = this;
     Promise.all(promises).then((v) => {
       if (that.home) {
-        that.home._endRefresh();
+        that.home && that.home._endRefresh();
       }
-    }).catch(() => that.home._endRefresh());
+    }).catch(() => that.home && that.home._endRefresh());
 
   }
 

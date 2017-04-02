@@ -26,7 +26,6 @@ export default class AddVisit extends React.Component {
     this.state = {requireSignature: true, diagnosticItems: [], address: '', record: '', waitingIndicator: false};
   }
 
-
   _submit() {
     let images = this.images.state.images;
     this._addVisit()
@@ -110,8 +109,30 @@ export default class AddVisit extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    console.log('xxxxx:', nextProps.visitRecord)
+    const {visitRecord} = nextProps;
     if (this.state.diagnosticItems.length === 0 && nextProps.visitItems) {
-      this.setState({diagnosticItems: nextProps.visitItems});
+      const visitItems = nextProps.visitItems;
+      if (visitRecord) {
+        visitItems.map(item => {
+          if (visitRecord.serviceItems && item.id === visitRecord.serviceItems[0].id) {
+            item.selected = true;
+          }
+        });
+        const images = [];
+        if(visitRecord.recordImages){
+          visitRecord.recordImages.map(i=>{
+            images.push({source:{uri: i}});
+          });
+
+        }
+        this.setState({
+          diagnosticItems: visitItems, address: visitRecord.address, record: visitRecord.visitRecord,
+          images: images,
+        });
+      } else {
+        this.setState({diagnosticItems: nextProps.visitItems});
+      }
     }
   }
 
@@ -126,15 +147,17 @@ export default class AddVisit extends React.Component {
           <Text style={{marginHorizontal:10, marginVertical:5}}>出诊地址</Text>
           <TextInput style={{flex:1, marginHorizontal:10, backgroundColor: 'white'}} underlineColorAndroid='transparent'
                      multiline={true} placeholder='填写您要出诊的地址。'
+                     value={this.state.address}
                      onChangeText={(text)=>this.setState({address: text})}
           />
           <Text style={{marginHorizontal:10, marginVertical:5}}>操作及观察记录</Text>
           <TextInput style={{flex:1, marginHorizontal:10, backgroundColor: 'white'}} underlineColorAndroid='transparent'
                      numberOfLines={5}
                      onChangeText={(text)=> this.setState({record: text})}
+                     value={this.state.record}
                      multiline={true} placeholder='本次家庭治疗、护理操作的具体情况记录。'/>
           <Text style={{marginHorizontal:10, marginVertical:5}}>上传问题相关或诊断结果（最多9张，没有可不传)</Text>
-          <ImageSelector ref={image=>this.images = image}/>
+          <ImageSelector ref={image=>this.images = image} images={this.state.images}/>
         </ScrollView>
         <View style={{position: 'absolute', bottom: 10, width: Dimensions.get('window').width-40, marginHorizontal:20}}>
           <CheckBox

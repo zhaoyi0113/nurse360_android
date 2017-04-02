@@ -41,14 +41,17 @@ export default class PatientVisit extends React.Component {
           colors={['lightgray']}
         />
         {
+          patientVisitList.length===0?<Text style={{alignSelf: 'center', margin:10}}>没有出诊记录</Text>:null
+        }
+        {
           patientVisitList.map((visit, i) => {
             let image = visit.recordImages && visit.recordImages.length > 0 ? {uri: visit.recordImages[0]} : require('../../../../images/home/headIm.png');
 
             return <View key={i}>
               <Text style={{color: colors.lightTextColor, marginLeft:10}}>{getDate(visit.time)}</Text>
-              <CommonRowCell hasRead='YES' description={visit.visitRecord} title={visit.visitRecords[0].itemName}
+              <CommonRowCell hasRead='YES' description={visit.visitRecord} title={visit.serviceItems[0].itemName}
                              image={image}
-                             onClick={()=>navigation.navigate('NewCaseRecord', {loadData: loadData.bind(this), bookId: caseBook.id, record: c})}
+                             onClick={()=> navigation.navigate('VisitContainer', {order: {id:0, patient: patient, userId: patient.userId}, visitRecord: visit})}
                              titleStyle={{color: colors.lightTextColor}}
                              imageStyle={{height:50, width:50, marginLeft:10}}/>
             </View>

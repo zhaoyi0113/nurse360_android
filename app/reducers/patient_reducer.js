@@ -56,6 +56,6 @@ const parsePatientVisits = (visits) => {
 }
 
 const parsePatientVisit = (visit) => {
-  visit.visitRecords = JSON.parse(visit.serviceItem);
+  visit.serviceItems = JSON.parse(visit.serviceItem);
   return visit;
 }

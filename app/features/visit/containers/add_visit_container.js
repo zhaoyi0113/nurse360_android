@@ -23,8 +23,9 @@ class AddVisitContainer extends React.Component {
   }
 
   render() {
-    const {order, changeScreen, rootNavigation} = this.props.screenProps;
+    const {order, changeScreen, rootNavigation, visitRecord} = this.props.screenProps;
     return (<AddVisit visitItems={this.props.visitItems}
+                      visitRecord={visitRecord}
                       addVisit={this._addVisit.bind(this)}
                       userInfo={this.props.userInfo}
                       navigation={this.props.navigation}
