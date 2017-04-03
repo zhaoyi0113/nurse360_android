@@ -36,6 +36,21 @@ const Tabs = TabNavigator({
   },
   Patient: {
     screen: PatientContainer,
+    navigationOptions: {
+      tabBar: (state,acc) => {
+        console.log('xxxxx, ', state, acc);
+        return {
+          visible: (acc && acc.visible !== 'undefined') ? acc.visible : true,
+          label: 'Camera',
+          icon: (obj) => {
+            const image = obj.focused ? require('../images/patient_pre.png') : require('../images/patient_nor.png');
+            return <Image style={{resizeMode:'contain', width:40, height: 40}}
+                          source={image}
+            />
+          },
+        }
+      },
+    }
   },
   User: {
     screen: UserContainer,

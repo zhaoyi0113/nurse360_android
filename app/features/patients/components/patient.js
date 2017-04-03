@@ -58,6 +58,9 @@ export default class Patient extends React.Component {
   _addPatient() {
     // this.props.navigation.navigate('BarcodeScanner', {goBack: ()=>this.props.update()});
     this.setState({showBarScanner: true});
+    // this.props.showHideTabbar(false);
+    // console.log(this.props.navigation);
+
   }
 
   _barcodeReceived(e) {

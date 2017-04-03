@@ -17,12 +17,18 @@ class PatientContainer extends Component {
         return <Image style={{resizeMode:'contain', width:40, height: 40}}
                       source={image}
         />
-      }
+      },
+      visible: true,
     },
   };
 
   componentDidMount() {
     setTimeout(() => this._refresh(), renderDelayTime);
+  }
+
+  showHideTabbar(show){
+    PatientContainer.navigationOptions.tabBar.visible=show;
+    this.update();
   }
 
   _refresh() {
@@ -47,9 +53,10 @@ class PatientContainer extends Component {
     return (<Patient navigation={rootNavigation}
                      update={this.update.bind(this)}
                      refresh={this._refresh.bind(this)}
+                     showHideTabbar={this.showHideTabbar.bind(this)}
                      ref={(patient)=>this.patient=patient}
                      internalPatients={this.props.internalPatients}
-                     externalPatients={this.props.externalPatients}/>)
+                     externalPatients={this.props.externalPatients}/>);
   }
 
 }

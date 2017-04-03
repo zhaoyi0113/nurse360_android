@@ -177,7 +177,7 @@ export default class AddVisit extends React.Component {
         </View>
       </View>
     );
-}
+  }
 
 }
 

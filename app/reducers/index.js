@@ -11,6 +11,7 @@ import {WalletReducer} from './wallet_reducer';
 import {NavReducer} from './nav_reducer';
 import {VisitReducer} from './visit_reducer';
 import {PatientReducer} from './patient_reducer';
+import {FollowUpReducer} from './follow_up_reducer';
 
 const initialState = {};
 
@@ -36,6 +37,7 @@ const appReducers = combineReducers({
   nav: NavReducer,
   visit: VisitReducer,
   patient: PatientReducer,
+  followUp: FollowUpReducer,
 });
 
 export default rootReducer;
