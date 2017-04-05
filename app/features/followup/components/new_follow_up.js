@@ -7,7 +7,7 @@ import CommonRowCell from '../../../components/common_row_cell';
 export default class NewFollowUp extends React.Component {
 
   render() {
-    const {templateList} = this.props;
+    const {templateList, navigation, patient} = this.props;
     return (<View style={{backgroundColor: colors.bkColor, flex:1}}>
       <View style={{flexDirection: 'row', alignItems:'center'}}>
         <View style={{flex:1, borderBottomColor: 'lightgray', borderBottomWidth:1, marginHorizontal:20}}/>
@@ -33,7 +33,8 @@ export default class NewFollowUp extends React.Component {
             <CommonRowCell title={template.name}
                            hasRead='YES'
                            description={template.introduction}
-                           headTitle={template.name.split('')[0]} />
+                           onClick={()=>navigation.navigate('TemplateCategory', {categoryId: template.id, patient: patient})}
+                           headTitle={template.name.split('')[0]}/>
           </View>
         })
       }

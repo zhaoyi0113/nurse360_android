@@ -21,4 +21,7 @@ export const queryTemplateList = (token, index, number) => {
     + index + '&number=' + number, token);
 }
 
-
+export const queryTemplateCategoryItems = (token, categoryId, index = 0, number = 100) => {
+  return actions.requestGet(types.QUERY_TEMPLATE_CATEGORY_ITEMS,
+    '/nurse/follow-up/patient/questionnaire/category?category_id=' + categoryId + '&number=' + number + '&index=' + index, token);
+}

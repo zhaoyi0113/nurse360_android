@@ -21,8 +21,8 @@ class PatientVisitContainer extends React.Component {
 
   _refresh() {
     const {patient} = this.props.navigation.state.params;
-    this.props.queryPatientVisitList(this.props.token, patient.user.id, patient.patient.id).then(v => this.patient._endRefresh())
-      .catch(e => this.patient._endRefresh());
+    this.props.queryPatientVisitList(this.props.token, patient.user.id, patient.patient.id).then(v => this.patient && this.patient._endRefresh())
+      .catch(e => this.patient && this.patient._endRefresh());
   }
 
   render() {

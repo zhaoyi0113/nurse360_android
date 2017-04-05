@@ -37,9 +37,7 @@ class PatientContainer extends Component {
     promises.push(this.props.queryExternalPatient(this.props.token, 0, 2));
     const that = this;
     Promise.all(promises).then((v) => {
-      if (that.patient && that.patient._endRefresh) {
-        that.patient._endRefresh();
-      }
+        that && that.patient && that.patient._endRefresh();
     }).catch(() => that.patient && that.patient._endRefresh());
 
   }

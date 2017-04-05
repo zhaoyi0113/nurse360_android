@@ -10,6 +10,8 @@ export const FollowUpReducer = (state = {}, action) => {
       return {...state, readList: action.payload.data};
     case types.QUERY_TEMPLATE_LIST_HTTP + types.SUCCESS:
       return {...state, templateList: action.payload.data};
+    case types.QUERY_TEMPLATE_CATEGORY_ITEMS + types.SUCCESS:
+      return {...state, templateCategoryItems: action.payload.data};
     default:
       return state;
   }
