@@ -16,13 +16,16 @@ class FollowUpContainer extends React.Component {
   }
 
   componentDidMount() {
-    this.props.queryFollowUpUnReadList(this.props.token);
-    this.props.queryFollowUpReadList(this.props.token);
+    let {patient} = this.props.navigation.state.params;
+    this.props.queryFollowUpUnReadList(this.props.token, patient.followUpId);
+    this.props.queryFollowUpReadList(this.props.token, patient.followUpId);
   }
 
   render() {
     let {patient} = this.props.navigation.state.params;
-    return (<FollowUp followUpList={this.props.followUpList} patient={patient}
+    return (<FollowUp patient={patient}
+                      unreadList={this.props.unreadList}
+                      readList={this.props.readList}
                       navigation={this.props.navigation}/>);
   }
 
@@ -31,17 +34,18 @@ class FollowUpContainer extends React.Component {
 const mapStateToProps = (state) => {
   return {
     token: state.login.token,
-    followUpList: state.followUp.list,
+    readList: state.followUp.readList,
+    unreadList: state.followUp.unreadList,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    queryFollowUpUnReadList: (token, index = 0, number = 200) => {
-      return dispatch(actions.queryFollowUpUnReadList(token, index, number));
+    queryFollowUpUnReadList: (token, followUpId, index = 0, number = 3) => {
+      return dispatch(actions.queryFollowUpUnReadList(token, followUpId, index, number));
     },
-    queryFollowUpReadList: (token, index = 0, number = 200) => {
-      return dispatch(actions.queryFollowUpReadList(token, index, number));
+    queryFollowUpReadList: (token, followUpId, index = 0, number = 3) => {
+      return dispatch(actions.queryFollowUpReadList(token, followUpId, index, number));
     }
   }
 }

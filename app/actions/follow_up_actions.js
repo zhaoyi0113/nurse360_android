@@ -5,15 +5,16 @@ export const queryFollowUpPatientList = (token, index, number) => {
   return actions.requestGet(types.QUERY_FOLLOW_UP_PATIENT_LIST_HTTP, '/nurse/follow-up/patient?index=' + index + '&number=' + number, token);
 }
 
-export const queryFollowUpUnReadList = (token, index, number) => {
+//获得未读回复列表
+export const queryFollowUpUnReadList = (token, followUpId, index, number) => {
   return actions.requestGet(types.QUERY_FOLLOW_UP_UNREAD_LIST_HTTP, '/nurse/follow-up/patient/record?index='
-    + index + '&number=' + number + '&patient_replied=YES&nurse_read=NO', token);
+    + index + '&number=' + number + '&patient_replied=YES&nurse_read=NO&follow_up_id=' + followUpId, token);
 }
 
-
-export const queryFollowUpReadList = (token, index, number) => {
+//获得已推送列表
+export const queryFollowUpReadList = (token, followUpId, index, number) => {
   return actions.requestGet(types.QUERY_FOLLOW_UP_READ_LIST_HTTP, '/nurse/follow-up/patient/record?index='
-    + index + '&number=' + number + '&patient_replied=YES&nurse_read=&follow_up_id=0&follow_up_type=follow_up', token);
+    + index + '&number=' + number + '&patient_replied=""&nurse_read=YES&&follow_up_id=' + followUpId, token);
 }
 
 export const queryTemplateList = (token, index, number) => {
