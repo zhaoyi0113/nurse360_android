@@ -109,7 +109,6 @@ export default class AddVisit extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('xxxxx:', nextProps.visitRecord)
     const {visitRecord} = nextProps;
     if (this.state.diagnosticItems.length === 0 && nextProps.visitItems) {
       const visitItems = nextProps.visitItems;

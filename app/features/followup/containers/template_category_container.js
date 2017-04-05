@@ -20,7 +20,7 @@ class TemplateCategoryContainer extends React.Component {
 
   loadData() {
     const {categoryId} = this.props.navigation.state.params;
-    this.props.queryTemplateCategoryItems(this.props.token, categoryId);
+    return this.props.queryTemplateCategoryItems(this.props.token, categoryId);
   }
 
   _refresh() {

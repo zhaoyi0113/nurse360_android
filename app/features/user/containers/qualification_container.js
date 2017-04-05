@@ -98,7 +98,6 @@ class QualificationContainer extends React.Component {
   }
 
   render() {
-    console.log('xxxxx')
     return (<Qualification upload={this._upload.bind(this)} userInfo={this.props.userInfo}/>);
   }
 }

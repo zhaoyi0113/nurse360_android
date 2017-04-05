@@ -11,3 +11,5 @@ export const colors = {underlayColor: 'transparent', bkColor: '#f6f6f6', labelCo
 export const defaultUserPhoto = require('../images/user/default_header.png');
 
 export const renderDelayTime = 500;
+
+export const margin = 10;
