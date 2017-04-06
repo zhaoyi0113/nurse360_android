@@ -9,7 +9,9 @@ import {header} from '../../../components/navigation_header';
 class TemplateDetailContainer extends React.Component {
 
   static navigationOptions = {
-    title: ({state}) => `${state.params.template.title}`,
+    title: ({state}) => {
+      state.params.template.title || ''
+    },
     header: header,
     cardStack: {
       gesturesEnabled: true
@@ -17,7 +19,9 @@ class TemplateDetailContainer extends React.Component {
   }
 
   componentDidMount() {
-    const {id} = this.props.navigation.state.params.template;
+    const {template, submit} = this.props.navigation.state.params;
+    console.log('xxx:', template, submit)
+    const id = !submit ? template.followUpId : template.id;
     this.props.queryTemplateDetail(this.props.token, id);
   }
 

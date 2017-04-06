@@ -27,7 +27,11 @@ const FollowUpList = ({list, navigation}) => {
           <CommonRowCell title={followUpContent.title}
                          hasRead={followUp.nurseRead}
                          description={followUpContent.description || followUpContent.diseaseDescription}
-                         onClick={()=>navigation.navigate('TemplateDetail', {template:followUp})}
+                         onClick={()=>{
+                           if(followUp.followUpType === 'QUESTIONNAIRE'){
+                            navigation.navigate('TemplateDetail', {template:followUp, submit:false})
+                           }
+                         }}
                          headTitle={followUpContent.title.split('')[0]}/>
         </View>);
       })
