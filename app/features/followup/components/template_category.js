@@ -37,7 +37,7 @@ export default class TemplateCategory extends React.Component {
             <CommonRowCell title={template.title}
                            hasRead='YES'
                            description={template.description}
-                           onClick={()=>navigation.navigate('TemplateDetail', {template:template})}
+                           onClick={()=>navigation.navigate('TemplateDetail', {template:template, submit:true})}
                            headTitle={template.title.split('')[0]} />
           </View>);
         })

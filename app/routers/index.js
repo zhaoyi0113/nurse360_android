@@ -38,7 +38,7 @@ import BarcodeScannerContainer from '../features/patients/containers/barcode_sca
 import FollowUpContainer from '../features/followup/containers/follow_up_container';
 import NewFollowUpContainer from '../features/followup/containers/new_follow_up_container';
 import TemplateCategoryContainer from '../features/followup/containers/template_category_container';
-import TemplateDetail from '../features/followup/components/template_detail';
+import TemplateDetailContainer from '../features/followup/containers/template_detail_container';
 
 export const Root = StackNavigator({
   Main: {screen: MainContainer, path: 'main'},
@@ -77,7 +77,7 @@ export const Root = StackNavigator({
   FollowUpContainer: {screen: FollowUpContainer},
   NewFollowUp: {screen: NewFollowUpContainer},
   TemplateCategory: {screen: TemplateCategoryContainer},
-  TemplateDetail: {screen: TemplateDetail},
+  TemplateDetail: {screen: TemplateDetailContainer},
 
 }, {
   initialRouteName: 'Login',

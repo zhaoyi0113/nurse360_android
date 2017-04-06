@@ -26,3 +26,25 @@ export const queryTemplateCategoryItems = (token, categoryId, index = 0, number 
   return actions.requestGet(types.QUERY_TEMPLATE_CATEGORY_ITEMS_HTTP,
     '/nurse/follow-up/patient/questionnaire/category?category_id=' + categoryId + '&number=' + number + '&index=' + index, token);
 }
+
+export const clearTemplateCategoryItems = () => {
+  return {type: types.CLEAR_TEMPLATE_CATEGORY_ITEMS};
+}
+
+export const queryTemplateDetail = (token, id) => {
+  return actions.requestGet(types.QUERY_TEMPLATE_DETAIL_HTTP, '/nurse/follow-up/patient/questionnaire/' + id, token);
+}
+
+export const clearTemplateDetail = () => {
+  return {type: types.CLEAR_TEMPLATE_DETAIL};
+}
+
+// 发送随访问卷
+export const sendTemplate = (token, followUpId, followUpType, consultationId, questionnaireId) => {
+  return actions.requestPost(types.SEND_TEMPLATE_HTTP, '/nurse/follow-up/patient/record', {
+    follow_up_id: followUpId,
+    follow_up_type: followUpType,
+    consultation_id: consultationId,
+    questionnaire_id: questionnaireId
+  }, token);
+}

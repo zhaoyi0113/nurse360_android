@@ -23,11 +23,11 @@ const FollowUpList = ({list, navigation}) => {
     {
       list.map((followUp, i) => {
         let {followUpContent} = followUp;
-        return (<View key={i} style={{flex:1, backgroundColor: 'white'}}>
+        return (<View key={i} style={{flex:1, backgroundColor: 'white', marginBottom: margin}}>
           <CommonRowCell title={followUpContent.title}
-                         hasRead='YES'
+                         hasRead={followUp.nurseRead}
                          description={followUpContent.description || followUpContent.diseaseDescription}
-                         onClick={()=>navigation.navigate('TemplateDetail', {template:template})}
+                         onClick={()=>navigation.navigate('TemplateDetail', {template:followUp})}
                          headTitle={followUpContent.title.split('')[0]}/>
         </View>);
       })

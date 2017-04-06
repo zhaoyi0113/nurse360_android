@@ -38,7 +38,6 @@ const Tabs = TabNavigator({
     screen: PatientContainer,
     navigationOptions: {
       tabBar: (state,acc) => {
-        console.log('xxxxx, ', state, acc);
         return {
           visible: (acc && acc.visible !== 'undefined') ? acc.visible : true,
           label: 'Camera',

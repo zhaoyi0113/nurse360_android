@@ -27,9 +27,13 @@ class TemplateCategoryContainer extends React.Component {
     this.loadData().then(v => this.template && this.template._endRefresh()).catch(err => this.template && this.template._endRefresh());
   }
 
+  componentWillUnmount() {
+    this.props.clearTemplateCategoryItems();
+  }
+
   render() {
     const {templateCategoryItems, navigation} = this.props;
-    const {patient} = this.props.navigation.state.params;
+    const {patient, submit} = this.props.navigation.state.params;
     return (
       <TemplateCategory
         ref={t=>this.template=t}
@@ -49,6 +53,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     queryTemplateCategoryItems: (token, categoryId, index, number) => {
       return dispatch(actions.queryTemplateCategoryItems(token, categoryId, index, number));
+    },
+    clearTemplateCategoryItems: () => {
+      return dispatch(actions.clearTemplateCategoryItems());
     }
   }
 }

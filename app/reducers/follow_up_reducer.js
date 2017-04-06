@@ -12,6 +12,12 @@ export const FollowUpReducer = (state = {}, action) => {
       return {...state, templateList: action.payload.data};
     case types.QUERY_TEMPLATE_CATEGORY_ITEMS_HTTP + types.SUCCESS:
       return {...state, templateCategoryItems: parseTemplates(action.payload.data)};
+    case types.QUERY_TEMPLATE_DETAIL_HTTP + types.SUCCESS:
+      return {...state, templateDetail: parseTemplate(action.payload.data)};
+    case types.CLEAR_TEMPLATE_DETAIL:
+      return {...state, templateDetail: undefined};
+    case types.CLEAR_TEMPLATE_CATEGORY_ITEMS:
+      return {...state, templateCategoryItems: undefined};
     default:
       return state;
   }
@@ -25,7 +31,6 @@ const parseTemplates = (templates) => {
 
 const parseTemplate = (t) => {
   const template = {...t};
-  template.detail = JSON.parse(t.conclusion);
   return template;
 }
 
