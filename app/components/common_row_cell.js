@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {View, StyleSheet, Text, Image, TouchableHighlight, TouchableWithoutFeedback} from 'react-native';
-import {FontSize} from '../constants';
+import {FontSize, colors} from '../constants';
 
 export default class CommonRowCell extends React.Component {
 
@@ -16,21 +16,21 @@ export default class CommonRowCell extends React.Component {
   }
 
   render() {
-    let {title, description, hasRead, titleStyle, showNextIcon, style} = this.props;
-    if(hasRead !== 'YES'){
+    let {title, description, hasRead, titleStyle, showNextIcon, style, nextText} = this.props;
+    if (hasRead !== 'YES') {
       style = [style, {backgroundColor: '#E8EFF7'}];
     }
     return (<View style={style}>
       {this._getHeaderView()}
       <TouchableWithoutFeedback style={{flex:5, flexDirection: 'row'}} underlayColor="transparent"
-                          onPress={this.props.onClick.bind(this)}>
+                                onPress={this.props.onClick.bind(this)}>
         <View style={styles.text_view}>
           <Text style={titleStyle}>{title}</Text>
           <Text style={styles.description} numberOfLines={1}>{description}</Text>
         </View>
       </TouchableWithoutFeedback>
-      {showNextIcon?<Image style={styles.next} source={require('../images/next_gray.png')}/>:null}
-
+      {showNextIcon ? <Image style={styles.next} source={require('../images/next_gray.png')}/>
+        : nextText ? <Text style={{color: colors.labelColor}}>{nextText}</Text> : null}
     </View>);
   }
 
@@ -42,6 +42,7 @@ CommonRowCell.propTypes = {
   onClick: React.PropTypes.func,
   hasRead: React.PropTypes.string,
   showNextIcon: React.PropTypes.bool,
+  nextText: React.PropTypes.string,
 }
 
 
@@ -114,5 +115,6 @@ CommonRowCell.defaultProps = {
   imageStyle: styles.image,
   titleStyle: styles.title,
   showNextIcon: true,
-  style: styles.container
+  style: styles.container,
+  nextText: '',
 };

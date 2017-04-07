@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, Dimensions, Button} from 'react-native';
+import {View, Text, Dimensions, Button, ScrollView} from 'react-native';
 import {FontSize, colors, margin} from '../../../constants';
 
 
@@ -34,8 +34,11 @@ export default class TemplateDetail extends React.Component {
   render() {
     const {template, submit, submitTemplate} = this.props;
     return (<View style={{flex:1, backgroundColor: colors.bkColor}}>
-      <Description template={template}/>
-      <Detail questions={template.questions}/>
+      <ScrollView
+        style={{flex:1, backgroundColor: colors.bkColor}}>
+        <Description template={template}/>
+        <Detail questions={template.questions}/>
+      </ScrollView>
       {
         submit ? <View style={{width: Dimensions.get('window').width - margin*2, margin: margin}}>
           <Button title='发送随访' onPress={()=>{ submitTemplate() }}/>

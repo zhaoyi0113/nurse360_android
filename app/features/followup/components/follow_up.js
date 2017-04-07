@@ -29,9 +29,11 @@ const FollowUpList = ({list, navigation}) => {
                          description={followUpContent.description || followUpContent.diseaseDescription}
                          onClick={()=>{
                            if(followUp.followUpType === 'QUESTIONNAIRE'){
-                            navigation.navigate('TemplateDetail', {template:followUp, submit:false})
+                            navigation.navigate('TemplateDetail', {template:followUp, submit:false, title: '问卷详情'})
                            }
                          }}
+                         showNextIcon={false}
+                         nextText={followUp.nurseRead === 'YES'?'已回复':'未回复'}
                          headTitle={followUpContent.title.split('')[0]}/>
         </View>);
       })

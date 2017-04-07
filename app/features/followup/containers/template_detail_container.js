@@ -10,7 +10,7 @@ class TemplateDetailContainer extends React.Component {
 
   static navigationOptions = {
     title: ({state}) => {
-      state.params.template.title || ''
+      return state.params.template.title || state.params.title || ''
     },
     header: header,
     cardStack: {
