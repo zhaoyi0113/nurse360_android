@@ -9,13 +9,14 @@ export default class NewFollowUp extends React.Component {
   render() {
     const {templateList, navigation, patient} = this.props;
     return (<View style={{backgroundColor: colors.bkColor, flex:1}}>
+
       <View style={{flexDirection: 'row', alignItems:'center'}}>
         <View style={{flex:1, borderBottomColor: 'lightgray', borderBottomWidth:1, marginHorizontal:20}}/>
         <Text style={{fontSize: FontSize.small}}>手动添加</Text>
         <View style={{flex:1, borderBottomColor: 'lightgray', borderBottomWidth:1, marginHorizontal:20}}/>
       </View>
       <TouchableHighlight underlayColor={colors.underlayColor}
-                          onPress={()=> navigation.navigate('NewFollowUp', {patient})}>
+                          onPress={()=> navigation.navigate('NewQuestionFollowUp', {patient})}>
         <View style={{backgroundColor: 'white', alignItems: 'center'}}>
           <Image style={{height:30, width:30, marginVertical: 10}}
                  source={require('../../../images/patient/addPat.png')}/>
