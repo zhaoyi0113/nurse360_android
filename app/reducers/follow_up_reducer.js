@@ -18,6 +18,8 @@ export const FollowUpReducer = (state = {}, action) => {
       return {...state, templateDetail: undefined};
     case types.CLEAR_TEMPLATE_CATEGORY_ITEMS:
       return {...state, templateCategoryItems: undefined};
+    case types.CLEAR_FOLLOW_UP_LIST:
+      return {...state, unreadList: undefined, readList: undefined};
     default:
       return state;
   }

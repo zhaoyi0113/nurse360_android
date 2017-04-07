@@ -1,6 +1,7 @@
 import * as types from './action_types';
 import * as actions from './common_actions';
 
+// 获得随访患者列表
 export const queryFollowUpPatientList = (token, index, number) => {
   return actions.requestGet(types.QUERY_FOLLOW_UP_PATIENT_LIST_HTTP, '/nurse/follow-up/patient?index=' + index + '&number=' + number, token);
 }
@@ -15,6 +16,10 @@ export const queryFollowUpUnReadList = (token, followUpId, index, number) => {
 export const queryFollowUpReadList = (token, followUpId, index, number) => {
   return actions.requestGet(types.QUERY_FOLLOW_UP_READ_LIST_HTTP, '/nurse/follow-up/patient/record?index='
     + index + '&number=' + number + '&patient_replied=""&nurse_read=YES&&follow_up_id=' + followUpId, token);
+}
+
+export const clearFollowUpList = () => {
+  return {type: types.CLEAR_FOLLOW_UP_LIST};
 }
 
 export const queryTemplateList = (token, index, number) => {

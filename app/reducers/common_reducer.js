@@ -70,3 +70,11 @@ export const getDate = (date) => {
   }
 }
 
+
+export const parsePatientGender = (gender) => {
+  return gender === 'MALE' ? '男' : (gender === 'FEMALE' ? '女' : '保密');
+}
+
+export const parsePatientTitle = (patient) => {
+  return patient.name + ' ( ' + parsePatientGender(patient.gender) + ', ' + patient.age + ' 岁 )';
+}

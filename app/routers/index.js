@@ -40,6 +40,7 @@ import NewFollowUpContainer from '../features/followup/containers/new_follow_up_
 import TemplateCategoryContainer from '../features/followup/containers/template_category_container';
 import TemplateDetailContainer from '../features/followup/containers/template_detail_container';
 import NewQuestionFollowUpContainer from '../features/followup/containers/new_question_follow_up_container'
+import FollowUpPatientListContainer from '../features/followup/containers/follow_up_patient_list_conatiner';
 
 export const Root = StackNavigator({
   Main: {screen: MainContainer, path: 'main'},
@@ -80,7 +81,7 @@ export const Root = StackNavigator({
   TemplateCategory: {screen: TemplateCategoryContainer},
   TemplateDetail: {screen: TemplateDetailContainer},
   NewQuestionFollowUp: {screen: NewQuestionFollowUpContainer},
-
+  FollowUpPatientList: {screen: FollowUpPatientListContainer},
 }, {
   initialRouteName: 'Login',
 });

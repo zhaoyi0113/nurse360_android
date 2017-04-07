@@ -94,7 +94,7 @@ export default class Patient extends React.Component {
         }>
         <Image style={{height:150,width:Dimensions.get('window').width,resizeMode:'cover'}}
                source={require('../../../images/home/headIm.png')}/>
-        <Function goToVisitRecord={()=>navigate('PatientVisitList')} addPatient={this._addPatient.bind(this)}/>
+        <Function goToFollowUpList={()=>navigate('FollowUpPatientList')} goToVisitRecord={()=>navigate('PatientVisitList')} addPatient={this._addPatient.bind(this)}/>
         <View style={{flex:1}}>
           <CommonTableHeader title='院内患者' more='更多'
                              clickMore={()=>navigate('PatientList', {internal: true})}/>
@@ -151,7 +151,7 @@ class Function extends React.Component {
         this.props.goToUserCourse();
         break;
       case 2:
-        this.props.goToVisitRecord();
+        this.props.goToFollowUpList();
         break;
     }
   }

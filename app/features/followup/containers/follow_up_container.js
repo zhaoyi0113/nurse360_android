@@ -21,6 +21,10 @@ class FollowUpContainer extends React.Component {
     this.props.queryFollowUpReadList(this.props.token, patient.followUpId);
   }
 
+  componentWillUnmount(){
+    this.props.clearFollowUpList();
+  }
+
   render() {
     let {patient} = this.props.navigation.state.params;
     return (<FollowUp patient={patient}
@@ -46,6 +50,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     queryFollowUpReadList: (token, followUpId, index = 0, number = 3) => {
       return dispatch(actions.queryFollowUpReadList(token, followUpId, index, number));
+    },
+    clearFollowUpList: () => {
+      return dispatch(actions.clearFollowUpList());
     }
   }
 }
