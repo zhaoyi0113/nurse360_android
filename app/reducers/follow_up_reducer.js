@@ -20,6 +20,8 @@ export const FollowUpReducer = (state = {}, action) => {
       return {...state, templateCategoryItems: undefined};
     case types.CLEAR_FOLLOW_UP_LIST:
       return {...state, unreadList: undefined, readList: undefined};
+    case types.QUERY_QUESTION_LIST_HTTP + types.SUCCESS:
+      return {...state, questionList: action.payload.data};
     default:
       return state;
   }

@@ -53,3 +53,25 @@ export const sendTemplate = (token, followUpId, followUpType, consultationId, qu
     questionnaire_id: questionnaireId
   }, token);
 }
+
+// 获得问题分类
+export const queryQuestionList = (token) => {
+  return actions.requestGet(types.QUERY_QUESTION_LIST_HTTP, '/nurse/consultation/category', token);
+}
+
+// 推送问卷
+export const sendQuestionnaire = (token, followUpId, followUpType, consultationId, questionnaireId) => {
+  const data = {
+    follow_up_id: followUpId,
+    follow_up_type: followUpType,
+    consultation_id: consultationId,
+    questionnaire_id: questionnaireId,
+  };
+  return actions.requestPost(types.SEND_QUESTIONAIRE_HTTP, '', data, token);
+}
+
+// 发送随访问题
+export const sendFollowUp = (token, userId, desc, patientId, categoryId) => {
+  const data = {user_id: userId, follow_up_description: desc, patient_id: patientId, category_id: categoryId};
+  return actions.requestPost(types.SEND_FOLLOW_UP_HTTP, '/nurse/consultation/follow-up', data, token);
+}
