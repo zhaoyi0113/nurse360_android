@@ -14,6 +14,7 @@ import CommonTableHeader from '../../../components/common_table_header';
 import CommonRowCell from '../../../components/common_row_cell';
 import {colors} from '../../../constants';
 import BarcodeScanner from 'react-native-barcodescanner';
+import ManualNavBar from '../../../components/manual_nav_bar';
 
 export default class Patient extends React.Component {
 
@@ -66,6 +67,7 @@ export default class Patient extends React.Component {
   _barcodeReceived(e) {
     console.log('scan result:', e);
     this.setState({showBarScanner: false});
+
   }
 
 
@@ -73,6 +75,7 @@ export default class Patient extends React.Component {
     const {navigate} = this.props.navigation;
     if (this.state.showBarScanner) {
       return (<View style={{flex:1}}>
+        <ManualNavBar clickLeft={()=>this.setState({showBarScanner:false})}/>
         <BarcodeScanner
           onBarCodeRead={this._barcodeReceived.bind(this)}
           style={{ flex: 1 }}

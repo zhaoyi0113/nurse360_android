@@ -68,5 +68,6 @@ export const queryPatientVisitList = (token, userId, patientId, index, number) =
 }
 
 export const addPatient = (token, userId, patientId) => {
-
+  const data = {user_id: userId, patient_id: patientId}
+  return commonActions.requestPost(types.ADD_FOLLOUP_PATIENT_HTTP, '/nurse/follow-up/patient', data, token);
 }

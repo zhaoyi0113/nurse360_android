@@ -26,8 +26,8 @@ class PatientContainer extends Component {
     setTimeout(() => this._refresh(), renderDelayTime);
   }
 
-  showHideTabbar(show){
-    PatientContainer.navigationOptions.tabBar.visible=show;
+  showHideTabbar(show) {
+    PatientContainer.navigationOptions.tabBar.visible = show;
     this.update();
   }
 
@@ -37,13 +37,17 @@ class PatientContainer extends Component {
     promises.push(this.props.queryExternalPatient(this.props.token, 0, 2));
     const that = this;
     Promise.all(promises).then((v) => {
-        that && that.patient && that.patient._endRefresh();
+      that && that.patient && that.patient._endRefresh();
     }).catch(() => that.patient && that.patient._endRefresh());
 
   }
 
-  update(){
+  update() {
     this.forceUpdate();
+  }
+
+  _addPatient(patient){
+    return this.props.addPatient(this.props.token, patient.patient.userId, patient.patient.patientId);
   }
 
   render() {
@@ -52,6 +56,7 @@ class PatientContainer extends Component {
                      update={this.update.bind(this)}
                      refresh={this._refresh.bind(this)}
                      showHideTabbar={this.showHideTabbar.bind(this)}
+                     addPatient={this._addPatient.bind(this)}
                      ref={(patient)=>this.patient=patient}
                      internalPatients={this.props.internalPatients}
                      externalPatients={this.props.externalPatients}/>);
@@ -74,6 +79,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     queryExternalPatient: (token, index, number) => {
       return dispatch(actions.queryExternalPatient(token, index, number));
+    },
+    addPatient: (token, userId, patientId) => {
+      return dispatch(actions.addPatient(token, userId, patientId));
     }
   }
 }

@@ -3,8 +3,10 @@ import Config from "react-native-config";
 import RNGRP from "react-native-get-real-path";
 
 export const uploadImage = (uri, httpUri, token, data) => {
-  return new Promise((resolve, reject)=>{
+  return new Promise((resolve, reject) => {
+    console.log('upload ', uri)
     RNGRP.getRealPathFromURI(uri).then(filePath => {
+        console.log('get file path ', filePath);
         const fileName = filePath.split('/').pop(-1);
         const obj = {
           uploadUrl: Config.API_URL + httpUri,
