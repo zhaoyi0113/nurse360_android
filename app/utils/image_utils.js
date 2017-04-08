@@ -4,7 +4,6 @@ import RNGRP from "react-native-get-real-path";
 
 export const uploadImage = (uri, httpUri, token, data) => {
   return new Promise((resolve, reject)=>{
-    console.log('xxxx:', data)
     RNGRP.getRealPathFromURI(uri).then(filePath => {
         const fileName = filePath.split('/').pop(-1);
         const obj = {
@@ -14,9 +13,7 @@ export const uploadImage = (uri, httpUri, token, data) => {
             'Accept': 'application/json',
             'ACCESS_TOKEN': token,
           },
-          fields: {
-            data,
-          },
+          fields: data,
           files: [
             {
               filename: fileName, // require, file name
@@ -32,10 +29,7 @@ export const uploadImage = (uri, httpUri, token, data) => {
             console.error('get error:', err);
             reject(err);
           }
-          uploadedCount++;
-          if (uploadedCount === imageLength) {
-            resolve(recordId);
-          }
+          resolve();
         });
       }
     )

@@ -32,7 +32,7 @@ class NewQuestionFollowUpContainer extends React.Component {
         images.map(image => {
           ps.push(uploadImage(image.source.uri, '/nurse/consultation/follow-up/image', this.props.token, {
             consultation_id: v.payload.data.id + '',
-            image_name: ''
+            image_name: '  '
           }));
         });
         return Promise.all(ps);
