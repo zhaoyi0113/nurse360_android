@@ -20,7 +20,7 @@ export default class TemplateCategory extends React.Component {
   }
 
   render() {
-    let {templateCategoryItems, navigation} = this.props;
+    let {templateCategoryItems, navigation, patient} = this.props;
 
     return (<ScrollView style={{flex:1, backgroundColor: colors.bkColor}}
                         refreshControl={<RefreshControl
@@ -37,7 +37,7 @@ export default class TemplateCategory extends React.Component {
             <CommonRowCell title={template.title}
                            hasRead='YES'
                            description={template.description}
-                           onClick={()=>navigation.navigate('TemplateDetail', {template:template, submit:true})}
+                           onClick={()=>navigation.navigate('TemplateDetail', {template:template, submit:true, patient})}
                            headTitle={template.title.split('')[0]} />
           </View>);
         })

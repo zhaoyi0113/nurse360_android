@@ -20,7 +20,6 @@ class TemplateDetailContainer extends React.Component {
 
   componentDidMount() {
     const {template, submit} = this.props.navigation.state.params;
-    console.log('xxx:', template, submit)
     const id = !submit ? template.followUpId : template.id;
     this.props.queryTemplateDetail(this.props.token, id);
   }
@@ -30,12 +29,19 @@ class TemplateDetailContainer extends React.Component {
   }
 
   _submitTemplate() {
-
+    const {patient, template} = this.props.navigation.state.params;
+    console.log('send template ', patient);
+    this.props.sendFollowUp(this.props.token, patient.userId, '', patient.patientId, template.id)
+      .then(v => {
+        console.log('send follow up resposne ', v);
+        this.props.sendQuestionnaire(this.props.token, patient.followUpId, 'QUESTIONNAIRE', v.payload.data.id, template.id);
+      });
   }
 
   render() {
-    const {submit} = this.props.navigation.state.params;
+    const {submit, patient} = this.props.navigation.state.params;
     return <TemplateDetail submit={submit} template={this.props.templateDetail}
+                           patient={patient}
                            submitTemplate={this._submitTemplate.bind(this)}/>
   }
 
@@ -56,8 +62,11 @@ const mapDispatchToProps = (dispatch) => {
     clearTemplateDetail: () => {
       return dispatch(actions.clearTemplateDetail());
     },
-    sendTemplate: (token, followUpId, followUpType, consultationId, questionnaireId) => {
-      return dispatch(actions.sendTemplate(token, followUpId, followUpType, consultationId, questionnaireId));
+    sendQuestionnaire: (token, followUpId, followUpType, consultationId, questionnaireId) => {
+      return dispatch(actions.sendQuestionnaire(token, followUpId, followUpType, consultationId, questionnaireId));
+    },
+    sendFollowUp: (token, userId, desc, patientId, categoryId) => {
+      return dispatch(actions.sendFollowUp(token, userId, desc, patientId, categoryId));
     }
   }
 }

@@ -14,8 +14,8 @@ const Separator = ({title}) => {
   </View>);
 }
 
-const FollowUpList = ({list, navigation}) => {
-  return (<View>
+const FollowUpList = ({list, navigation, patient}) => {
+  return (<View style={{flex:1}}>
     {
       list.length === 0 ?
         <Text style={{color: colors.lightTextColor, alignSelf: 'center', marginTop: 10}}>暂无随访记录</Text> : null
@@ -23,13 +23,16 @@ const FollowUpList = ({list, navigation}) => {
     {
       list.map((followUp, i) => {
         let {followUpContent} = followUp;
-        return (<View key={i} style={{flex:1, backgroundColor: 'white', marginBottom: margin}}>
+        const bk = followUp.hasRead === 'YES' ? 'white' : colors.bkColor;
+        return (<View key={i} style={{flex:1, backgroundColor: bk, marginBottom: margin}}>
           <CommonRowCell title={followUpContent.title}
                          hasRead={followUp.nurseRead}
                          description={followUpContent.description || followUpContent.diseaseDescription}
                          onClick={()=>{
                            if(followUp.followUpType === 'QUESTIONNAIRE'){
-                            navigation.navigate('TemplateDetail', {template:followUp, submit:false, title: '问卷详情'})
+                            navigation.navigate('TemplateDetail', {template:followUp, submit:false, title: '问卷详情'});
+                           } else if(followUp.followUpType === 'CONSULTATION'){
+                             navigation.navigate('QuestionDetail', {followUp, patient});
                            }
                          }}
                          showNextIcon={false}
@@ -56,9 +59,9 @@ export default class FollowUp extends React.Component {
       </TouchableHighlight>
       <ScrollView>
         <Separator title="未读回复"/>
-        <FollowUpList list={unreadList} navigation={navigation}/>
+        <FollowUpList list={unreadList} navigation={navigation} patient={patient}/>
         <Separator title="已推送"/>
-        <FollowUpList list={readList} navigation={navigation}/>
+        <FollowUpList list={readList} navigation={navigation} patient={patient}/>
       </ScrollView>
     </View>);
   }

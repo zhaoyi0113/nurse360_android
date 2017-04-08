@@ -30,7 +30,7 @@ export default class CommonRowCell extends React.Component {
         </View>
       </TouchableWithoutFeedback>
       {showNextIcon ? <Image style={styles.next} source={require('../images/next_gray.png')}/>
-        : nextText ? <Text style={{color: colors.labelColor}}>{nextText}</Text> : null}
+        : nextText ? <Text style={{color: colors.labelColor, marginRight:5, fontSize: FontSize.small}}>{nextText}</Text> : null}
     </View>);
   }
 

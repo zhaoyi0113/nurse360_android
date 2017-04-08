@@ -87,8 +87,8 @@ export default class NewQuestionFollowUp extends React.Component {
           <Button title='推送' onPress={this._submit.bind(this)} disabled={!this._enableSubmit()}/>
         </View>
       </View>
-    );
-}
+    )
+  }
 
 }
 
