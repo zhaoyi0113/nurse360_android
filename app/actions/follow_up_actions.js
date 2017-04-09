@@ -65,3 +65,9 @@ export const sendFollowUp = (token, userId, desc, patientId, categoryId) => {
   const data = {user_id: userId, follow_up_description: desc, patient_id: patientId, category_id: categoryId};
   return actions.requestPost(types.SEND_FOLLOW_UP_HTTP, '/nurse/consultation/follow-up', data, token);
 }
+
+// 获得问题详情
+export const queryQuestionDetail = (token, consultationId) => {
+  return actions.requestGet(types.QUERY_QUESTION_DETAIL_HTTP, '/nurse/consultation?consultation_id=' + consultationId, token);
+}
+

@@ -42,7 +42,7 @@ export default class FollowUpPatientList extends React.Component {
                            hasRead='YES'
                            description={patient.mobile}
                            image={image}
-                           onClick={()=>navigation.navigate('FollowUpContainer', {p})}
+                           onClick={()=>navigation.navigate('FollowUpContainer', {patient: p})}
             />
           </View>);
         })

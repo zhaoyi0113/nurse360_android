@@ -3,7 +3,7 @@ import * as types from "../actions/action_types";
 export const FollowUpReducer = (state = {}, action) => {
   switch (action.type) {
     case types.QUERY_FOLLOW_UP_PATIENT_LIST_HTTP + types.SUCCESS:
-      return {...state, patientList: action.payload.data};
+      return {...state, patientList: parsePatients(action.payload.data)};
     case types.QUERY_FOLLOW_UP_UNREAD_LIST_HTTP + types.SUCCESS:
       return {...state, unreadList: parseFollowUps(action.payload.data)};
     case types.QUERY_FOLLOW_UP_READ_LIST_HTTP + types.SUCCESS:
@@ -25,6 +25,13 @@ export const FollowUpReducer = (state = {}, action) => {
     default:
       return state;
   }
+}
+
+const parsePatients = (patients) => {
+  return patients.map(p=>{
+    p.followUpId = p.id;
+    return p;
+  });
 }
 
 const parseTemplates = (templates) => {

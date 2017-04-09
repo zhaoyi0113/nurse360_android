@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 
 import QuestionDetail from '../components/question_detail';
 import {header} from '../../../components/navigation_header';
+import * as actions from '../../../actions/follow_up_actions';
 
 class QuestionDetailContainer extends React.Component {
 
@@ -12,6 +13,11 @@ class QuestionDetailContainer extends React.Component {
     cardStack: {
       gesturesEnabled: true
     }
+  }
+
+  componentDidMount() {
+    const {followUp} = this.props.navigation.state.params;
+    this.props.queryQuestionDetail(this.props.token, followUp.followUpContent.id);
   }
 
   render() {
@@ -28,7 +34,11 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {}
+  return {
+    queryQuestionDetail: (token, consultationId) => {
+      return dispatch(actions.queryQuestionDetail(token, consultationId));
+    }
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuestionDetailContainer);

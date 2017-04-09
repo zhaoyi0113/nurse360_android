@@ -8,8 +8,8 @@ import ImageSelector from '../../../components/image_selector';
 
 const QuestionDescription = ({description, images}) => {
   const showImages = images && images.map(image => {
-    return {source: {uri: image}}
-  });
+      return {source: {uri: image}}
+    });
   return (<View style={{backgroundColor: 'white', marginHorizontal: margin}}>
     <Text style={{marginHorizontal: margin}}>{description}</Text>
     <ImageSelector images={showImages} enableSelect={false}/>
@@ -27,9 +27,11 @@ const Talks = ({talks}) => {
             <Image style={{width:30, height:30, borderRadius:15, margin: margin}} source={image}/>
             <Text
               style={{color: colors.labelColor, borderWidth:1,marginHorizontal:margin, borderColor: colors.labelColor,
+               borderRadius: 5,
                fontSize: FontSize.small, textAlign:'center'}}>{talk.nurse.properties.info_extension.jobTitle}</Text>
           </View>
-          <Text style={{flex:1, backgroundColor: 'white', textAlignVertical:'center', paddingLeft:margin}}>{talk.talkContent}</Text>
+          <Text
+            style={{flex:1, backgroundColor: 'white', textAlignVertical:'center', paddingLeft:margin}}>{talk.talkContent}</Text>
         </View>
       })
     }
@@ -38,7 +40,8 @@ const Talks = ({talks}) => {
 
 export default class QuestionDetail extends React.Component {
 
-  _submit(){}
+  _submit() {
+  }
 
   render() {
     const {patient, followUp, nurseInfo} = this.props;
@@ -46,7 +49,7 @@ export default class QuestionDetail extends React.Component {
     return (<View style={{flex:1}}>
       <ScrollView style={{flex:1, backgroundColor: colors.bkColor}}>
         <NurseHeader nurseInfo={nurseInfo}/>
-        <Text style={{margin: margin, color: colors.lightTextColor}}>问题描述</Text>
+        <Text style={{margin: margin, color: colors.lightTextColor, borderRadius: 5}}>问题描述</Text>
         <QuestionDescription description={followUp.followUpContent.diseaseDescription}
                              images={followUp.followUpContent.imagesUrl}/>
         <Text style={{margin: margin, color: colors.lightTextColor}}>问题答复</Text>
@@ -55,8 +58,6 @@ export default class QuestionDetail extends React.Component {
             ? <Talks talks={followUp.followUpContent.talks}/>
             : <Text style={{backgroundColor: 'white', margin: margin, textAlign: 'center'}}>暂无答复</Text>
         }
-
-
       </ScrollView>
       <View style={{margin: margin, borderRadius: 5}}><Button title='回复' onPress={this._submit.bind(this)}/></View>
     </View>);
