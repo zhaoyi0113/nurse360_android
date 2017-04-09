@@ -69,7 +69,7 @@ export default class ImageSelector extends React.Component {
     }
 
     images = images.concat(this.state.images);
-    if (images.length < 9) {
+    if (images.length < 9 && this.props.enableSelect) {
       images.push({id: -1, source: require('../images/user/mustaddpic.png')});
     }
     let left = 0;
@@ -124,3 +124,11 @@ const styles = StyleSheet.create({
     width: Dimensions.get('window').width / 3.5,
   }
 })
+
+ImageSelector.propTypes = {
+  enableSelect: React.PropTypes.bool,
+}
+
+ImageSelector.defaultProps = {
+  enableSelect: true,
+}

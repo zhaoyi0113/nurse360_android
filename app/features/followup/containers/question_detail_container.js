@@ -15,20 +15,20 @@ class QuestionDetailContainer extends React.Component {
   }
 
   render() {
-    return (<QuestionDetail/>);
+    const {followUp, patient} = this.props.navigation.state.params;
+    return (<QuestionDetail patient={patient} followUp={followUp} nurseInfo={this.props.userInfo}/>);
   }
 }
 
 const mapStateToProps = (state) => {
   return {
     token: state.login.token,
+    userInfo: state.user.userInfo,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {
-
-  }
+  return {}
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuestionDetailContainer);
