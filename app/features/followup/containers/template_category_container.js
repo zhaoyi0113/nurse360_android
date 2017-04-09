@@ -33,10 +33,11 @@ class TemplateCategoryContainer extends React.Component {
 
   render() {
     const {templateCategoryItems, navigation} = this.props;
-    const {patient, submit} = this.props.navigation.state.params;
+    const {patient, submit, loadReadFollowUpList} = this.props.navigation.state.params;
     return (
       <TemplateCategory
         ref={t=>this.template=t}
+        loadReadFollowUpList={loadReadFollowUpList}
         templateCategoryItems={templateCategoryItems} navigation={navigation} patient={patient}
         refresh={this._refresh.bind(this)}/>)
   }

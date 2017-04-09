@@ -29,12 +29,12 @@ class TemplateDetailContainer extends React.Component {
   }
 
   _submitTemplate() {
-    const {patient, template} = this.props.navigation.state.params;
+    const {patient, template, loadReadFollowUpList} = this.props.navigation.state.params;
     console.log('send template ', patient);
-    this.props.sendFollowUp(this.props.token, patient.userId, '', patient.patientId, template.id)
-      .then(v => {
-        console.log('send follow up resposne ', v);
-        this.props.sendQuestionnaire(this.props.token, patient.followUpId, 'QUESTIONNAIRE', v.payload.data.id, template.id);
+    this.props.sendQuestionnaire(this.props.token, patient.followUpId, 'QUESTIONNAIRE', 0, template.id)
+      .then(v=>{
+        loadReadFollowUpList();
+        this.props.navigation.goBack();
       });
   }
 

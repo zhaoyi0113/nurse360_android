@@ -47,10 +47,10 @@ const FollowUpList = ({list, navigation, patient}) => {
 export default class FollowUp extends React.Component {
 
   render() {
-    let {patient, readList, unreadList, navigation} = this.props;
+    let {patient, readList, unreadList, navigation, loadReadFollowUpList, loadUnreadFollowUpList} = this.props;
     return (<View style={{backgroundColor: colors.bkColor, flex:1}}>
       <TouchableHighlight underlayColor={colors.underlayColor}
-                          onPress={()=> navigation.navigate('NewFollowUp', {patient})}>
+                          onPress={()=> navigation.navigate('NewFollowUp', {patient, loadReadFollowUpList, loadUnreadFollowUpList})}>
         <View style={{backgroundColor: 'white', alignItems: 'center'}}>
           <Image style={{height:30, width:30, marginVertical: 5}}
                  source={require('../../../images/patient/addPat.png')}/>

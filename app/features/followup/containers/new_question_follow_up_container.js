@@ -22,12 +22,13 @@ class NewQuestionFollowUpContainer extends React.Component {
   }
 
   _submit(category, desc, images) {
-    const {patient} = this.props.navigation.state.params;
+    const {patient, loadReadFollowUpList} = this.props.navigation.state.params;
     this.props.sendFollowUp(this.props.token, patient.userId, desc, patient.patientId, category.id)
       .then(v => {
         console.log('send follow up response ', v);
         console.log('send images:', images);
         const ps = [];
+        ps.push(this.props.sendQuestionnaire(this.props.token, patient.followUpId, 'CONSULTATION',v.payload.data.id));
         this.props.requestWaitingIndicator(true);
         images.map(image => {
           ps.push(uploadImage(image.source.uri, '/nurse/consultation/follow-up/image', this.props.token, {
@@ -38,6 +39,8 @@ class NewQuestionFollowUpContainer extends React.Component {
         return Promise.all(ps);
       })
       .then(v => {
+        // update table list
+        loadReadFollowUpList();
         this.props.requestWaitingIndicator(false);
         this.props.navigation.goBack();
       })
@@ -70,8 +73,14 @@ const mapDispatchToProps = (dispatch) => {
     sendFollowUp: (token, userId, desc, patientId, categoryId) => {
       return dispatch(actions.sendFollowUp(token, userId, desc, patientId, categoryId));
     },
+    sendQuestionnaire: (token, followUpId, followUpType, consultationId)=>{
+      return dispatch(actions.sendQuestionnaire(token, followUpId, followUpType, consultationId, 0));
+    },
     requestWaitingIndicator: (waiting) => {
       return dispatch(commonActions.requestWaitingIndicator(waiting));
+    },
+    queryFollowUpUnReadList: (token, followUpId, index = 0, number = 3) => {
+      return dispatch(actions.queryFollowUpUnReadList(token, followUpId, index, number));
     }
   }
 }

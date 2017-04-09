@@ -19,8 +19,11 @@ class NewFollowUpContainer extends React.Component {
   }
 
   render() {
-    let {patient} = this.props.navigation.state.params;
-    return (<NewFollowUp templateList={this.props.templateList} navigation={this.props.navigation} patient={patient}/>);
+    let {patient, loadReadFollowUpList, loadUnreadFollowUpList} = this.props.navigation.state.params;
+    return (<NewFollowUp templateList={this.props.templateList} navigation={this.props.navigation}
+                         loadReadFollowUpList={loadReadFollowUpList}
+                         loadUnreadFollowUpList={loadUnreadFollowUpList}
+                         patient={patient}/>);
   }
 }
 

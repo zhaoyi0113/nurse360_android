@@ -7,7 +7,7 @@ import NurseHeader from '../components/nurse_header';
 import ImageSelector from '../../../components/image_selector';
 
 const QuestionDescription = ({description, images}) => {
-  const showImages = images.map(image => {
+  const showImages = images && images.map(image => {
     return {source: {uri: image}}
   });
   return (<View style={{backgroundColor: 'white', marginHorizontal: margin}}>
@@ -17,7 +17,6 @@ const QuestionDescription = ({description, images}) => {
 }
 
 const Talks = ({talks}) => {
-  console.log('xxx:', talks);
   return (<View>
     {
       talks.map((talk, i) => {

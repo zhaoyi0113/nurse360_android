@@ -16,19 +16,30 @@ class FollowUpContainer extends React.Component {
   }
 
   componentDidMount() {
-    let {patient} = this.props.navigation.state.params;
-    this.props.queryFollowUpUnReadList(this.props.token, patient.followUpId);
-    this.props.queryFollowUpReadList(this.props.token, patient.followUpId);
+    this._loadReadFollowUpList(0, 3);
+    this._loadUnreadFollowUpList(0, 3);
   }
 
-  componentWillUnmount(){
+  componentWillUnmount() {
     this.props.clearFollowUpList();
+  }
+
+  _loadReadFollowUpList(index, number) {
+    let {patient} = this.props.navigation.state.params;
+    this.props.queryFollowUpReadList(this.props.token, patient.followUpId, index, number);
+  }
+
+  _loadUnreadFollowUpList(index, number) {
+    let {patient} = this.props.navigation.state.params;
+    this.props.queryFollowUpUnReadList(this.props.token, patient.followUpId, index, number);
   }
 
   render() {
     let {patient} = this.props.navigation.state.params;
     return (<FollowUp patient={patient}
                       unreadList={this.props.unreadList}
+                      loadReadFollowUpList={this._loadReadFollowUpList.bind(this)}
+                      loadUnreadFollowUpList={this._loadUnreadFollowUpList.bind(this)}
                       readList={this.props.readList}
                       navigation={this.props.navigation}/>);
   }

@@ -64,8 +64,8 @@ export default class NewQuestionFollowUp extends React.Component {
 
   _submit() {
     const selectedQuestion = this.state.questionList.filter(q => q.select);
-
-    this.props.submit(selectedQuestion, this.state.content, this.imageSelector.state.images);
+    console.log('selected question ', selectedQuestion);
+    this.props.submit(selectedQuestion[0], this.state.content, this.imageSelector.state.images);
   }
 
   render() {
