@@ -22,13 +22,15 @@ export const FollowUpReducer = (state = {}, action) => {
       return {...state, unreadList: undefined, readList: undefined};
     case types.QUERY_QUESTION_LIST_HTTP + types.SUCCESS:
       return {...state, questionList: action.payload.data};
+    case types.QUERY_QUESTION_DETAIL_HTTP + types.SUCCESS:
+      return {...state, questionDetail: action.payload.data};
     default:
       return state;
   }
 }
 
 const parsePatients = (patients) => {
-  return patients.map(p=>{
+  return patients.map(p => {
     p.followUpId = p.id;
     return p;
   });

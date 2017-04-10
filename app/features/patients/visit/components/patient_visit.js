@@ -25,7 +25,7 @@ export default class PatientVisit extends React.Component {
     return (<View style={{flex:1, backgroundColor: colors.bkColor}}>
       <TouchableHighlight
         underlayColor={colors.underlayColor}
-        onPress={()=> navigation.navigate('VisitContainer', {order: {id:0, patient: patient, userId: patient.userId}})}
+        onPress={()=> navigation.navigate('VisitContainer', {order: {id:0, patient: patient.patient, userId: patient.userId}})}
         style={{backgroundColor: 'white', flexDirection: 'column', marginHorizontal: 10}}>
         <View style={{alignItems:'center',}}>
           <Image style={{width:40,height:40,marginTop: 10}} source={require('../../../../images/patient/addPat.png')}/>
