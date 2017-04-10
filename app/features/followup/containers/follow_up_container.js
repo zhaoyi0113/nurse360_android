@@ -36,11 +36,13 @@ class FollowUpContainer extends React.Component {
 
   render() {
     let {patient} = this.props.navigation.state.params;
+    const unreadList = this.props.unreadList.splice(0, 3);
+    const readList = this.props.readList.splice(0, 3);
     return (<FollowUp patient={patient}
-                      unreadList={this.props.unreadList}
+                      unreadList={unreadList}
                       loadReadFollowUpList={this._loadReadFollowUpList.bind(this)}
                       loadUnreadFollowUpList={this._loadUnreadFollowUpList.bind(this)}
-                      readList={this.props.readList}
+                      readList={readList}
                       navigation={this.props.navigation}/>);
   }
 
@@ -66,6 +68,16 @@ const mapDispatchToProps = (dispatch) => {
       return dispatch(actions.clearFollowUpList());
     }
   }
+}
+
+FollowUpContainer.propTypes = {
+  readList: React.PropTypes.array,
+  unreadList: React.PropTypes.array,
+}
+
+FollowUpContainer.defaultProps = {
+  readList: [],
+  unreadList: [],
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(FollowUpContainer);

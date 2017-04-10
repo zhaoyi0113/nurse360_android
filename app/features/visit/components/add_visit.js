@@ -98,7 +98,7 @@ export default class AddVisit extends React.Component {
     const {order} = this.props;
     const serviceIds = _.map(this.state.diagnosticItems, 'id');
     const visit = {
-      'user_id': order.userId, 'patient_id': order.patient.id, 'service_item_ids': serviceIds.join(),
+      'user_id': order.userId, 'patient_id': order.patient.id, 'service_item_ids': serviceIds.join()+'',
       'visit_record': this.state.record, 'order_id': order.id, 'address': this.state.address
     };
     return this.props.addVisit(visit);

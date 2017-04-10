@@ -1,11 +1,14 @@
 import * as types from './action_types';
 import * as commonActions from './common_actions';
+import queryString from 'query-string';
 
 export const queryVisitItems = (token) => {
   return commonActions.requestGet(types.GET_VISIT_ITEMS_HTTP, '/nurse/visit/patient/service/item', token);
 }
 
 export const addVisit = (token, visit) => {
+  console.log("xxxx:", visit);
+  console.log("XXXX:", queryString.stringify(visit));
   return commonActions.requestPost(types.ADD_VISIT_HTTP, '/nurse/visit/patient', visit, token);
 }
 
