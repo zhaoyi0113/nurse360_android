@@ -1,8 +1,8 @@
 import React from 'react';
-import {View, Text, Image, ScrollView, Button} from 'react-native';
+import {View, Text, Image, ScrollView, Button, StyleSheet} from 'react-native';
 
 import {colors, margin, FontSize} from '../../../constants';
-import {getDate} from '../../../reducers/common_reducer';
+import {getDate, getTime} from '../../../reducers/common_reducer';
 import NurseHeader from '../components/nurse_header';
 import ImageSelector from '../../../components/image_selector';
 
@@ -21,8 +21,17 @@ const Talks = ({talks}) => {
     {
       talks.map((talk, i) => {
         const image = talk.nurse.profilePhotoUrl ? {uri: talk.nurse.profilePhotoUrl} : require('../../../images/user/default_header.png');
+        let imagesUrl = talk.imagesUrl && talk.imagesUrl.map(url => {
+            return {source: {uri: url}}
+          });
+        const imageStyle = StyleSheet.create({image:{
+          margin: 5,
+          resizeMode: 'contain',
+          height: 80,
+          width:80,
+        }});
 
-        return <View key={i} style={{flexDirection: 'row'}}>
+        return <View key={i} style={{flexDirection: 'row', margin:margin}}>
           <View>
             <Image style={{width:30, height:30, borderRadius:15, margin: margin}} source={image}/>
             <Text
@@ -30,8 +39,12 @@ const Talks = ({talks}) => {
                borderRadius: 5,
                fontSize: FontSize.small, textAlign:'center'}}>{talk.nurse.properties.info_extension.jobTitle}</Text>
           </View>
-          <Text
-            style={{flex:1, backgroundColor: 'white', textAlignVertical:'center', paddingLeft:margin}}>{talk.talkContent}</Text>
+          <View style={{flex:1, backgroundColor: 'white'}}>
+            <Text
+              style={{flex:1, backgroundColor: 'white', textAlignVertical:'center', paddingLeft:margin}}>
+              {talk.talkContent}</Text>
+            {imagesUrl ? <ImageSelector enableSelect={false} images={imagesUrl} imageStyle={imageStyle.image}/> : null}
+          </View>
         </View>
       })
     }
@@ -41,21 +54,24 @@ const Talks = ({talks}) => {
 export default class QuestionDetail extends React.Component {
 
   _submit() {
+    const {followUp, replyQuestion} = this.props;
+    this.props.navigation.navigate('QuestionReply', {followUp, replyQuestion});
   }
 
   render() {
-    const {patient, followUp, nurseInfo} = this.props;
-
-    return (<View style={{flex:1}}>
+    const {followUp, nurseInfo} = this.props;
+    return (<View style={{flex:1, backgroundColor: colors.bkColor}}>
       <ScrollView style={{flex:1, backgroundColor: colors.bkColor}}>
+        <Text
+          style={{width:150, alignSelf: 'center', borderRadius: 10,  textAlign:'center', backgroundColor: 'lightgray'}}>{getTime(followUp.time)}</Text>
         <NurseHeader nurseInfo={nurseInfo}/>
         <Text style={{margin: margin, color: colors.lightTextColor, borderRadius: 5}}>问题描述</Text>
-        <QuestionDescription description={followUp.followUpContent.diseaseDescription}
-                             images={followUp.followUpContent.imagesUrl}/>
+        <QuestionDescription description={followUp.diseaseDescription}
+                             images={followUp.imagesUrl}/>
         <Text style={{margin: margin, color: colors.lightTextColor}}>问题答复</Text>
         {
-          followUp.followUpContent && followUp.followUpContent.talks && followUp.followUpContent.talks.length > 0
-            ? <Talks talks={followUp.followUpContent.talks}/>
+          followUp.talks && followUp.talks.length > 0
+            ? <Talks talks={followUp.talks}/>
             : <Text style={{backgroundColor: 'white', margin: margin, textAlign: 'center'}}>暂无答复</Text>
         }
       </ScrollView>
@@ -72,5 +88,5 @@ QuestionDetail.propTypes = {
 
 QuestionDetail.defaultProps = {
   nurseInfo: {},
-  followUp: {followUpContent: {}}
+  followUp: {talks: []}
 }

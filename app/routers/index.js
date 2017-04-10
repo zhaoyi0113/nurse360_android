@@ -43,6 +43,7 @@ import NewQuestionFollowUpContainer from '../features/followup/containers/new_qu
 import FollowUpPatientListContainer from '../features/followup/containers/follow_up_patient_list_conatiner';
 import QuestionDetailContainer from '../features/followup/containers/question_detail_container';
 import FollowUpListContainer from '../features/followup/containers/follow_up_list_container';
+import QuestionReply from '../features/followup/components/question_reply';
 
 export const Root = StackNavigator({
   Main: {screen: MainContainer, path: 'main'},
@@ -86,6 +87,7 @@ export const Root = StackNavigator({
   FollowUpPatientList: {screen: FollowUpPatientListContainer},
   QuestionDetail: {screen: QuestionDetailContainer},
   FollowUpList: {screen: FollowUpListContainer},
+  QuestionReply: {screen: QuestionReply},
 }, {
   initialRouteName: 'Login',
 });

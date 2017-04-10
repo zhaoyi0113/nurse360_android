@@ -21,7 +21,6 @@ export default class PatientDetail extends React.Component {
     const {patient} = this.props.navigation.state.params;
     const name = patient.patient.name + '  (  ' + patient.patient.genderText + ', ' + patient.patient.age + '岁 )';
     const desc = patient.patient.mobile;
-    console.log('xxxxx:', patient);
     return (<View style={{flex:1, backgroundColor: colors.bkColor}}>
       <CommonRowCell title={name} description={desc}
                      hasRead='YES'

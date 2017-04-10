@@ -24,6 +24,8 @@ export const FollowUpReducer = (state = {}, action) => {
       return {...state, questionList: action.payload.data};
     case types.QUERY_QUESTION_DETAIL_HTTP + types.SUCCESS:
       return {...state, questionDetail: action.payload.data};
+    case types.CLEAR_QUESTION_DETAIL:
+      return {...state, questionDetail: undefined};
     default:
       return state;
   }

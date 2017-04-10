@@ -71,3 +71,12 @@ export const queryQuestionDetail = (token, consultationId) => {
   return actions.requestGet(types.QUERY_QUESTION_DETAIL_HTTP, '/nurse/consultation?consultation_id=' + consultationId, token);
 }
 
+export const clearQuestionDetail = () => {
+  return {type: types.CLEAR_QUESTION_DETAIL};
+}
+
+// 回复随访问题
+export const replyQuestion = (token, consultationId, content) => {
+  const data = {consultation_id: consultationId, talk_content: content};
+  return actions.requestPost(types.REPLY_QUESTION_HTTP, '/nurse/consultation/talk', data, token);
+}

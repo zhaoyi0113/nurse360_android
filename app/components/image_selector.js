@@ -63,8 +63,11 @@ export default class ImageSelector extends React.Component {
   }
 
   render() {
+
+    const imageStyle = this.props.imageStyle ? this.props.imageStyle : styles.image;
+
     let images = [];
-    if(this.props.images && this.props.images.length> 0){
+    if (this.props.images && this.props.images.length > 0) {
       images = this.props.images.slice(0);
     }
 
@@ -82,6 +85,8 @@ export default class ImageSelector extends React.Component {
     const newImages = images.reduce((accu, value, index) => {
       return ((index % 3) === 0 ? accu.push([value]) : accu[accu.length - 1].push(value)) && accu;
     }, []);
+
+
     return (<View style={styles.container}>
       {
         newImages.map((images, i) => {
@@ -92,7 +97,7 @@ export default class ImageSelector extends React.Component {
                   return <TouchableHighlight key={i} underlayColor='lightgray' style={{flex:0.3, margin:5}}
                                              onPress={()=> this._showImagePicker()}>
                     <View>
-                      <Image style={styles.image} source={image.source}/>
+                      <Image style={imageStyle} source={image.source}/>
                     </View>
                   </TouchableHighlight>
                 } else if (image.id === -2) {
@@ -100,7 +105,7 @@ export default class ImageSelector extends React.Component {
                 }
                 return <ImageWithIcon key={i} source={image.source} showIcon={image.canDelete}
                                       clickIcon={()=>this._removeImage(image)}
-                                      imageStyle={styles.image} icon={require('../images/deletePics.png')}/>
+                                      imageStyle={imageStyle} icon={require('../images/deletePics.png')}/>
               })
             }
           </View>
@@ -131,4 +136,5 @@ ImageSelector.propTypes = {
 
 ImageSelector.defaultProps = {
   enableSelect: true,
+
 }
