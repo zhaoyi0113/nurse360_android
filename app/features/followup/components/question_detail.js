@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text, Image, ScrollView, Button, StyleSheet} from 'react-native';
 
 import {colors, margin, FontSize} from '../../../constants';
-import {getDate, getTime} from '../../../reducers/common_reducer';
+import {getTime} from '../../../reducers/common_reducer';
 import NurseHeader from '../components/nurse_header';
 import ImageSelector from '../../../components/image_selector';
 

@@ -57,11 +57,7 @@ export default class Patient extends React.Component {
   }
 
   _addPatient() {
-    // this.props.navigation.navigate('BarcodeScanner', {goBack: ()=>this.props.update()});
     this.setState({showBarScanner: true});
-    // this.props.showHideTabbar(false);
-    // console.log(this.props.navigation);
-
   }
 
   _barcodeReceived(e) {
@@ -148,10 +144,10 @@ class Function extends React.Component {
   _clickFunction(f) {
     switch (f.id) {
       case 0:
-        this.props.addPatient();
+        // this.props.addPatient();
         break;
       case 1:
-        this.props.goToUserCourse();
+        // this.props.goToUserCourse();
         break;
       case 2:
         this.props.goToFollowUpList();
